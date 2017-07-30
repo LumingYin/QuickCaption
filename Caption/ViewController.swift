@@ -79,8 +79,11 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     func generateSRTFromArray() {
         var srtString = ""
         for i in 0..<arrayForCaption.count {
-            print(arrayForCaption[i])
+            srtString = srtString + "\(i+1)" + "\(arrayForCaption[i])"
+//            print(\(i + 1))
+//            print(arrayForCaption[i])
         }
+        print(srtString)
     }
     
     
@@ -181,7 +184,33 @@ class CaptionLine: CustomStringConvertible {
         let st = CMTimeGetSeconds(start)
         let en = CMTimeGetSeconds(end)
         
-        return "\(cap)\n\(st) --> \(en)"
+        let stringStart = secondFloatToString(float: st)
+        let stringEnd = secondFloatToString(float: en)
+        
+        return "\(stringStart) --> \(stringEnd)\n\(cap)"
+    }
+    
+    func secondFloatToString(float: Float64) -> String {
+        var second = float
+        
+        var hours: Int = 0
+        var minutes: Int = 0
+        var seconds: Int = 0
+        var milliseconds: Int = 0
+        
+        hours = Int(second / Float64(3600))
+        second = second - Float64(hours * 3600)
+        
+        minutes = Int(second / Float64(60))
+        second = second - Float64(minutes * 60)
+        
+        seconds = Int(second)
+        second = second - Float64(seconds)
+        
+        milliseconds = Int(second * 1000)
+        
+//        var string = NSString(format:"%.2f", avgTemp)
+        return "\(hours):\(minutes):\(seconds),\(milliseconds)"
     }
     
     
