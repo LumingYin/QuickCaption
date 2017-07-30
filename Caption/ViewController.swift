@@ -29,31 +29,22 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
     
     @IBAction func saveSRTToDisk(_ sender: Any) {
-        let file = "result.srt"
         let text = generateSRTFromArray()
         
         guard let origonalVideoName = self.videoURL?.lastPathComponent else {
             return
         }
-        var ogVN = (origonalVideoName as NSString).deletingPathExtension
-        let newSubtitleName = "\(ogVN)_sub.srt"
+        let ogVN = (origonalVideoName as NSString).deletingPathExtension
+        let newSubtitleName = "\(ogVN).srt"
         
-        let newPath = self.videoURL?.deletingLastPathComponent().appendingPathComponent(newSubtitleName)
-        
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let path = dir.appendingPathComponent(file)
-            do {
-                try text.write(to: path, atomically: false, encoding: String.Encoding.utf8)
-            }
-            catch {/* error handling here */}
-            
-            //reading
-            do {
-                let text2 = try String(contentsOf: path, encoding: String.Encoding.utf8)
-            }
-            catch {/* error handling here */}
+        guard let newPath = self.videoURL?.deletingLastPathComponent().appendingPathComponent(newSubtitleName) else {
+            return
         }
-
+        
+        do {
+            try text.write(to: newPath, atomically: false, encoding: String.Encoding.utf8)
+        }
+        catch {/* error handling here */}
     }
     
     func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
