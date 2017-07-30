@@ -79,7 +79,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     func generateSRTFromArray() {
         var srtString = ""
         for i in 0..<arrayForCaption.count {
-            srtString = srtString + "\(i+1)" + "\(arrayForCaption[i])"
+            srtString = srtString + "\(i+1)\n\(arrayForCaption[i])\n\n"
 //            print(\(i + 1))
 //            print(arrayForCaption[i])
         }
@@ -209,7 +209,7 @@ class CaptionLine: CustomStringConvertible {
         
         milliseconds = Int(second * 1000)
         
-        let string = NSString(format:"%.2f:%.2f:%.2f,%.3f", hours, minutes, seconds, milliseconds)
+        let string = NSString(format:"%.2d:%.2d:%.2d,%.3d", hours, minutes, seconds, milliseconds)
         
 //        return "\(hours):\(minutes):\(seconds),\(milliseconds)"
         return string as String
