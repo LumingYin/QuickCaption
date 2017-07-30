@@ -671,7 +671,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="4508D74B-75AF-42FD-9081-7925C412123F" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="regular" id="XZv-AK-9Ie">
+                        <toolbar key="toolbar" implicitIdentifier="4508D74B-75AF-42FD-9081-7925C412123F" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconOnly" sizeMode="regular" id="XZv-AK-9Ie">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="SIQ-mL-Tom"/>
                                 <toolbarItem implicitItemIdentifier="F6A823BE-D2DC-49C0-87A0-26A8577C8F5D" label="Custom View" paletteLabel="Custom View" id="nZs-lk-s2l">
