@@ -209,8 +209,10 @@ class CaptionLine: CustomStringConvertible {
         
         milliseconds = Int(second * 1000)
         
-//        var string = NSString(format:"%.2f", avgTemp)
-        return "\(hours):\(minutes):\(seconds),\(milliseconds)"
+        let string = NSString(format:"%.2f:%.2f:%.2f,%.3f", hours, minutes, seconds, milliseconds)
+        
+//        return "\(hours):\(minutes):\(seconds),\(milliseconds)"
+        return string as String
     }
     
     
