@@ -11,20 +11,49 @@ import AVKit
 import AVFoundation
 
 class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextViewDelegate {
-    @IBOutlet weak var tableView: NSTableView!
+//    @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
     var player: AVPlayer?
+    var videoURL: URL?
     @IBOutlet var transcribeTextView: NSTextView!
     
     var arrayForCaption: [CaptionLine] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+//        tableView.delegate = self
+//        tableView.dataSource = self
         transcribeTextView.delegate = self
         transcribeTextView.isAutomaticSpellingCorrectionEnabled = false
+    }
+    
+    @IBAction func saveSRTToDisk(_ sender: Any) {
+        let file = "result.srt"
+        let text = generateSRTFromArray()
+        
+        guard let origonalVideoName = self.videoURL?.lastPathComponent else {
+            return
+        }
+        var ogVN = (origonalVideoName as NSString).deletingPathExtension
+        let newSubtitleName = "\(ogVN)_sub.srt"
+        
+        let newPath = self.videoURL?.deletingLastPathComponent().appendingPathComponent(newSubtitleName)
+        
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let path = dir.appendingPathComponent(file)
+            do {
+                try text.write(to: path, atomically: false, encoding: String.Encoding.utf8)
+            }
+            catch {/* error handling here */}
+            
+            //reading
+            do {
+                let text2 = try String(contentsOf: path, encoding: String.Encoding.utf8)
+            }
+            catch {/* error handling here */}
+        }
+
     }
     
     func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
@@ -76,7 +105,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         generateSRTFromArray()
     }
     
-    func generateSRTFromArray() {
+    func generateSRTFromArray() -> String {
         var srtString = ""
         for i in 0..<arrayForCaption.count {
             srtString = srtString + "\(i+1)\n\(arrayForCaption[i])\n\n"
@@ -84,6 +113,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
 //            print(arrayForCaption[i])
         }
         print(srtString)
+        return srtString
     }
     
     
@@ -99,7 +129,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     @IBAction func openFile(_ sender: Any) {
         let dialog = NSOpenPanel();
         
-        dialog.title                   = "Choose a .txt file";
+        dialog.title                   = "Choose a video file";
         dialog.showsResizeIndicator    = true;
         dialog.showsHiddenFiles        = false;
         dialog.canChooseDirectories    = true;
@@ -117,6 +147,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
 
     func playVideo(_ videoURL: URL) {
+        self.videoURL = videoURL
         player = AVPlayer(url: videoURL)
         playerView.player = player
         player?.play()
@@ -127,7 +158,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
 //        player?.currentTime()
 //        let cap = CaptionLine(caption: "", startingTime: nil, endingTime: nil)
 //        arrayForCaption.append(cap)
-        tableView.reloadData()
+//        tableView.reloadData()
 //        let videoURL: NSURL = NSBundle.mainBundle().URLForResource("Para1_2", withExtension: "mp4")!
 //        let player = AVPlayer(URL: videoURL)
 //        playerLayer = AVPlayerLayer(player: player)
@@ -213,6 +244,15 @@ class CaptionLine: CustomStringConvertible {
         
 //        return "\(hours):\(minutes):\(seconds),\(milliseconds)"
         return string as String
+    }
+    
+    
+}
+
+class CaptionWindowController: NSWindowController {
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        window?.titleVisibility = .hidden
     }
     
     
