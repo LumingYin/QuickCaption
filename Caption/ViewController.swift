@@ -29,6 +29,10 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
     
     @IBAction func saveSRTToDisk(_ sender: Any) {
+        saveSRT()
+    }
+    
+    func saveSRT() {
         let text = generateSRTFromArray()
         
         guard let origonalVideoName = self.videoURL?.lastPathComponent else {
@@ -43,9 +47,23 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         
         do {
             try text.write(to: newPath, atomically: false, encoding: String.Encoding.utf8)
+            _ = dialogOKCancel(question: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).")
         }
-        catch {/* error handling here */}
+        catch {
+            _ = dialogOKCancel(question: "Saved failed!", text: "Save has failed.")
+        }
     }
+    
+    func dialogOKCancel(question: String, text: String) -> Bool {
+        let alert = NSAlert()
+        alert.messageText = question
+        alert.informativeText = text
+        alert.alertStyle = NSAlertStyle.warning
+        alert.addButton(withTitle: "OK")
+//        alert.addButton(withTitle: "Cancel")
+        return alert.runModal() == NSAlertFirstButtonReturn
+    }
+
     
     func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
         
@@ -92,9 +110,6 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
     
     
-    @IBAction func generatePressed(_ sender: Any) {
-        generateSRTFromArray()
-    }
     
     func generateSRTFromArray() -> String {
         var srtString = ""
@@ -130,6 +145,8 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         
         if (dialog.runModal() == NSModalResponseOK) {
             if let result = dialog.url {
+                saveSRT()
+                arrayForCaption = []
                 playVideo(result)
             }
         } else {
