@@ -12,6 +12,7 @@ import AVFoundation
 
 class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextViewDelegate {
 
+//    @IBOutlet weak var transcribeTextField: NSTextField!
     @IBOutlet weak var resultTableView: NSTableView!
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
@@ -27,6 +28,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         transcribeTextView.isAutomaticSpellingCorrectionEnabled = false
         resultTableView.delegate = self
         resultTableView.dataSource = self
+//        transcribeTextField.delegate = self
     }
     
     @IBAction func saveSRTToDisk(_ sender: Any) {
@@ -61,17 +63,44 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         alert.informativeText = text
         alert.alertStyle = NSAlertStyle.warning
         alert.addButton(withTitle: "OK")
-//        alert.addButton(withTitle: "Cancel")
         return alert.runModal() == NSAlertFirstButtonReturn
     }
 
     
+//    override func controlTextDidChange(_ obj: Notification) {
+//        print(obj)
+//        guard let textField = obj.object as? NSTextField else { return }
+//        print("CARE DID CHANGE: \(textField.stringValue)")
+//        if textField.stringValue.count == 1 {
+//            player?.pause()
+//            if let last = arrayForCaption.last {
+//                last.endingTime = player?.currentTime()
+//            }
+//        }
+//    }
+//
+//
+//    @IBAction func captionTextFieldDidChange(_ sender: NSTextField) {
+//        print(sender.stringValue)
+//
+//        player?.play()
+//        if let last = arrayForCaption.last {
+//            last.caption = sender.stringValue
+//        }
+//        sender.stringValue = ""
+//
+//        let new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
+//        arrayForCaption.append(new)
+//
+//        self.resultTableView.reloadData()
+//    }
+    
     func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
-        
+
         // play 上一个结束了
         // pause 下一个开始？
         print("\(String(describing: replacementString))")
-        
+
         if transcribeTextView.string == "" {
             player?.pause()
             if let last = arrayForCaption.last {
@@ -99,12 +128,12 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
 
             let new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
             arrayForCaption.append(new)
-            
+//            transcribeTextView.string = ""
+
             self.resultTableView.reloadData()
         }
         return true
     }
-    
     
     
     func generateSRTFromArray() -> String {
@@ -116,9 +145,6 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         return srtString
     }
     
-    
-    func textDidChange(_ notification: Notification) {
-    }
 
     override var representedObject: Any? {
         didSet {
