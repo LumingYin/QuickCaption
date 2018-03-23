@@ -21,6 +21,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     var videoURL: URL?
     var arrayForCaption: [CaptionLine] = []
     
+    //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         resultTableView.delegate = self
@@ -28,6 +29,110 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         transcribeTextField.delegate = self
     }
     
+    // MARK: - TextField Controls
+    func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
+        player?.pause()
+        if let last = arrayForCaption.last {
+            last.endingTime = player?.currentTime()
+        }
+
+        return true
+    }
+
+    @IBAction func captionTextFieldDidChange(_ sender: NSTextField) {
+        if (sender == transcribeTextField) {
+            player?.play()
+            if let last = arrayForCaption.last {
+                last.caption = sender.stringValue
+            }
+            sender.stringValue = ""
+            
+            let new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
+            arrayForCaption.append(new)
+            
+            self.resultTableView.reloadData()
+            if resultTableView.numberOfRows > 0 {
+                self.resultTableView.scrollRowToVisible(resultTableView.numberOfRows - 1)
+            }
+        }
+    }
+    
+    
+    // MARK: - Buttons and IBActions
+    @IBAction func openFile(_ sender: Any) {
+        let dialog = NSOpenPanel();
+        
+        dialog.title                   = "Choose a video file";
+        dialog.showsResizeIndicator    = true;
+        dialog.showsHiddenFiles        = false;
+        dialog.canChooseDirectories    = true;
+        dialog.canCreateDirectories    = true;
+        dialog.allowsMultipleSelection = false;
+        dialog.allowedFileTypes        = ["mov", "mp4", "m4v", "ts", "mpg", "mpeg", "hevc", "mp3", "m4a"];
+        
+        if (dialog.runModal() == NSModalResponseOK) {
+            if let result = dialog.url {
+                saveSRT()
+                arrayForCaption = []
+                self.timeLabel.stringValue = "\(result.lastPathComponent)"
+                playVideo(result)
+            }
+        } else {
+            return
+        }
+    }
+    
+    @IBAction func queryTime(_ sender: Any) {
+        let time = player?.currentTime().value
+        let second = player?.currentTime().seconds
+        let scale = player?.currentTime().timescale
+        self.timeLabel.stringValue = "\(time ?? kCMTimeZero.value), \(second ?? 0.0), \(scale ?? CMTimeScale(kCMTimeMaxTimescale))"
+    }
+
+    func playVideo(_ videoURL: URL) {
+        self.videoURL = videoURL
+        player = AVPlayer(url: videoURL)
+        playerView.player = player
+        player?.play()
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
+            let cap = CaptionLine(caption: "", startingTime: self.player?.currentTime(), endingTime: nil)
+            self.arrayForCaption.append(cap)
+        }
+    }
+    
+    // MARK: - Table View Delegate/Data Source
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return arrayForCaption.count
+    }
+    
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.make(withIdentifier: "tableCell", owner: self) as? NSTableCellView
+        let correspondingCaption = arrayForCaption[row]
+        if tableColumn?.title == "Start Time" {
+            cell?.textField?.stringValue = "\(correspondingCaption.startingTimeString)"
+        } else if tableColumn?.title == "End Time" {
+            cell?.textField?.stringValue = "\(correspondingCaption.endingTimeString)"
+        } else {
+            if let cap = correspondingCaption.caption {
+                cell?.textField?.stringValue = cap
+            } else {
+                cell?.textField?.stringValue = ""
+            }
+        }
+        return cell
+    }
+    
+    // MARK: - Persistence
+    func generateSRTFromArray() -> String {
+        var srtString = ""
+        for i in 0..<arrayForCaption.count {
+            srtString = srtString + "\(i+1)\n\(arrayForCaption[i])\n\n"
+        }
+        print(srtString)
+        return srtString
+    }
+
     @IBAction func saveSRTToDisk(_ sender: Any) {
         saveSRT()
     }
@@ -61,113 +166,6 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         alert.alertStyle = NSAlertStyle.warning
         alert.addButton(withTitle: "OK")
         return alert.runModal() == NSAlertFirstButtonReturn
-    }
-
-    
-    func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
-        player?.pause()
-        if let last = arrayForCaption.last {
-            last.endingTime = player?.currentTime()
-        }
-
-        return true
-    }
-    
-
-    @IBAction func captionTextFieldDidChange(_ sender: NSTextField) {
-        print(sender.stringValue)
-
-        player?.play()
-        if let last = arrayForCaption.last {
-            last.caption = sender.stringValue
-        }
-        sender.stringValue = ""
-
-        let new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
-        arrayForCaption.append(new)
-
-        self.resultTableView.reloadData()
-        if resultTableView.numberOfRows > 0 {
-            self.resultTableView.scrollRowToVisible(resultTableView.numberOfRows - 1)
-        }
-    }
-    
-    func generateSRTFromArray() -> String {
-        var srtString = ""
-        for i in 0..<arrayForCaption.count {
-            srtString = srtString + "\(i+1)\n\(arrayForCaption[i])\n\n"
-        }
-        print(srtString)
-        return srtString
-    }
-    
-
-    override var representedObject: Any? {
-        didSet {
-        }
-    }
-
-    @IBAction func openFile(_ sender: Any) {
-        let dialog = NSOpenPanel();
-        
-        dialog.title                   = "Choose a video file";
-        dialog.showsResizeIndicator    = true;
-        dialog.showsHiddenFiles        = false;
-        dialog.canChooseDirectories    = true;
-        dialog.canCreateDirectories    = true;
-        dialog.allowsMultipleSelection = false;
-        dialog.allowedFileTypes        = ["mov", "mp4", "m4v", "ts", "mpg", "mpeg", "hevc", "mp3", "m4a"];
-        
-        if (dialog.runModal() == NSModalResponseOK) {
-            if let result = dialog.url {
-                saveSRT()
-                arrayForCaption = []
-                self.timeLabel.stringValue = "\(result.lastPathComponent)"
-                playVideo(result)
-            }
-        } else {
-            return
-        }
-    }
-
-    func playVideo(_ videoURL: URL) {
-        self.videoURL = videoURL
-        player = AVPlayer(url: videoURL)
-        playerView.player = player
-        player?.play()
-        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
-            let cap = CaptionLine(caption: "", startingTime: self.player?.currentTime(), endingTime: nil)
-            self.arrayForCaption.append(cap)
-        }
-    }
-    
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrayForCaption.count
-    }
-    
-
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.make(withIdentifier: "tableCell", owner: self) as? NSTableCellView
-        let correspondingCaption = arrayForCaption[row]
-        if tableColumn?.title == "Start Time" {
-            cell?.textField?.stringValue = "\(correspondingCaption.startingTimeString)"
-        } else if tableColumn?.title == "End Time" {
-            cell?.textField?.stringValue = "\(correspondingCaption.endingTimeString)"
-        } else {
-            if let cap = correspondingCaption.caption {
-                cell?.textField?.stringValue = cap
-            } else {
-                cell?.textField?.stringValue = ""
-            }
-        }
-        return cell
-    }
-    
-    @IBAction func queryTime(_ sender: Any) {
-        let time = player?.currentTime().value
-        let second = player?.currentTime().seconds
-        let scale = player?.currentTime().timescale
-        self.timeLabel.stringValue = "\(time ?? kCMTimeZero.value), \(second ?? 0.0), \(scale ?? CMTimeScale(kCMTimeMaxTimescale))"
     }
 }
 
