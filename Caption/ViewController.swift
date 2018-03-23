@@ -10,25 +10,25 @@ import Cocoa
 import AVKit
 import AVFoundation
 
-class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextViewDelegate {
+class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
 
-//    @IBOutlet weak var transcribeTextField: NSTextField!
+    @IBOutlet weak var transcribeTextField: NSTextField!
     @IBOutlet weak var resultTableView: NSTableView!
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
     var player: AVPlayer?
     var videoURL: URL?
-    @IBOutlet var transcribeTextView: NSTextView!
+//    @IBOutlet var transcribeTextView: NSTextView!
     
     var arrayForCaption: [CaptionLine] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        transcribeTextView.delegate = self
-        transcribeTextView.isAutomaticSpellingCorrectionEnabled = false
+//        transcribeTextView.delegate = self
+//        transcribeTextView.isAutomaticSpellingCorrectionEnabled = false
         resultTableView.delegate = self
         resultTableView.dataSource = self
-//        transcribeTextField.delegate = self
+        transcribeTextField.delegate = self
     }
     
     @IBAction func saveSRTToDisk(_ sender: Any) {
@@ -67,73 +67,83 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
 
     
-//    override func controlTextDidChange(_ obj: Notification) {
+    override func controlTextDidChange(_ obj: Notification) {
 //        print(obj)
 //        guard let textField = obj.object as? NSTextField else { return }
-//        print("CARE DID CHANGE: \(textField.stringValue)")
-//        if textField.stringValue.count == 1 {
+//        print("CARE DID CHANGE: \(textField.stringValue.count) \(textField.stringValue)")
+//        if textField.stringValue.count > 0 {
 //            player?.pause()
 //            if let last = arrayForCaption.last {
 //                last.endingTime = player?.currentTime()
 //            }
 //        }
-//    }
-//
-//
-//    @IBAction func captionTextFieldDidChange(_ sender: NSTextField) {
-//        print(sender.stringValue)
-//
-//        player?.play()
-//        if let last = arrayForCaption.last {
-//            last.caption = sender.stringValue
-//        }
-//        sender.stringValue = ""
-//
-//        let new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
-//        arrayForCaption.append(new)
-//
-//        self.resultTableView.reloadData()
-//    }
+    }
     
-    func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
-
-        // play 上一个结束了
-        // pause 下一个开始？
-        print("\(String(describing: replacementString))")
-
-        if transcribeTextView.string == "" {
-            player?.pause()
-            if let last = arrayForCaption.last {
-                last.endingTime = player?.currentTime()
-            }
-        } else {
-            let breakDict = transcribeTextView.string?.components(separatedBy: "\n")
-            if let lastLine = breakDict?.last {
-                if lastLine == "" && replacementString != "" {
-                    player?.pause()
-                    if let last = arrayForCaption.last {
-                        last.endingTime = player?.currentTime()
-                    }
-                }
-            }
+    
+    func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
+        player?.pause()
+        if let last = arrayForCaption.last {
+            last.endingTime = player?.currentTime()
         }
-        if (replacementString == "\n") {
-            player?.play()
-            if let last = arrayForCaption.last {
-                let breakDict = transcribeTextView.string?.components(separatedBy: "\n")
-                if let lastLine = breakDict?.last {
-                    last.caption = lastLine
-                }
-            }
 
-            let new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
-            arrayForCaption.append(new)
-//            transcribeTextView.string = ""
-
-            self.resultTableView.reloadData()
-        }
+//        print("shouldbeginediting")
         return true
     }
+    
+
+    @IBAction func captionTextFieldDidChange(_ sender: NSTextField) {
+        print(sender.stringValue)
+
+        player?.play()
+        if let last = arrayForCaption.last {
+            last.caption = sender.stringValue
+        }
+        sender.stringValue = ""
+
+        let new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
+        arrayForCaption.append(new)
+
+        self.resultTableView.reloadData()
+    }
+    
+//    func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
+//
+//        // play 上一个结束了
+//        // pause 下一个开始？
+//        print("\(String(describing: replacementString))")
+//
+//
+//        if (replacementString == "\n") {
+//            player?.play()
+//            if let last = arrayForCaption.last {
+//                if let lastLine = transcribeTextView.string {
+//                    last.caption = lastLine
+//                }
+//            }
+//
+//            let new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
+//            arrayForCaption.append(new)
+//            transcribeTextView.string = ""
+//
+//            self.resultTableView.reloadData()
+//        } else if transcribeTextView.string == "" {
+//            player?.pause()
+//            if let last = arrayForCaption.last {
+//                last.endingTime = player?.currentTime()
+//            }
+//        } else {
+//            if let lastLine = transcribeTextView.string {
+//                if lastLine == "" && replacementString != "" {
+//                    player?.pause()
+//                    if let last = arrayForCaption.last {
+//                        last.endingTime = player?.currentTime()
+//                    }
+//                }
+//            }
+//        }
+//
+//        return true
+//    }
     
     
     func generateSRTFromArray() -> String {
