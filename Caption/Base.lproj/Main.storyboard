@@ -803,7 +803,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="tableCell" id="T9S-c5-dJq">
+                                                        <tableCellView identifier="StartTimeCell" id="T9S-c5-dJq">
                                                             <rect key="frame" x="1" y="1" width="94" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -836,7 +836,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="tableCell" id="BRU-zu-g0w">
+                                                        <tableCellView identifier="EndTimeCell" id="BRU-zu-g0w">
                                                             <rect key="frame" x="98" y="1" width="92" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -869,7 +869,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="tableCell" id="6HP-hq-U3e">
+                                                        <tableCellView identifier="CaptionCell" id="6HP-hq-U3e">
                                                             <rect key="frame" x="193" y="1" width="283" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>

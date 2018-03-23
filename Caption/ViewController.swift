@@ -57,18 +57,17 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         }
     }
     
-    
     // MARK: - Buttons and IBActions
     @IBAction func openFile(_ sender: Any) {
-        let dialog = NSOpenPanel();
+        let dialog = NSOpenPanel()
         
-        dialog.title                   = "Choose a video file";
-        dialog.showsResizeIndicator    = true;
-        dialog.showsHiddenFiles        = false;
-        dialog.canChooseDirectories    = true;
-        dialog.canCreateDirectories    = true;
-        dialog.allowsMultipleSelection = false;
-        dialog.allowedFileTypes        = ["mov", "mp4", "m4v", "ts", "mpg", "mpeg", "hevc", "mp3", "m4a"];
+        dialog.title                   = "Choose a video file"
+        dialog.showsResizeIndicator    = true
+        dialog.showsHiddenFiles        = false
+        dialog.canChooseDirectories    = true
+        dialog.canCreateDirectories    = true
+        dialog.allowsMultipleSelection = false
+        dialog.allowedFileTypes        = ["mov", "mp4", "m4v", "ts", "mpg", "mpeg", "hevc", "mp3", "m4a"]
         
         if (dialog.runModal() == NSModalResponseOK) {
             if let result = dialog.url {
@@ -107,13 +106,17 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.make(withIdentifier: "tableCell", owner: self) as? NSTableCellView
+        var cell: NSTableCellView?
+        
         let correspondingCaption = arrayForCaption[row]
         if tableColumn?.title == "Start Time" {
+            cell = tableView.make(withIdentifier: "StartTimeCell", owner: self) as? NSTableCellView
             cell?.textField?.stringValue = "\(correspondingCaption.startingTimeString)"
         } else if tableColumn?.title == "End Time" {
+            cell = tableView.make(withIdentifier: "EndTimeCell", owner: self) as? NSTableCellView
             cell?.textField?.stringValue = "\(correspondingCaption.endingTimeString)"
         } else {
+            cell = tableView.make(withIdentifier: "CaptionCell", owner: self) as? NSTableCellView
             if let cap = correspondingCaption.caption {
                 cell?.textField?.stringValue = cap
             } else {
