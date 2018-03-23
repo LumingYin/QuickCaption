@@ -20,6 +20,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
+    
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        if flag == false {
+            
+            for window in sender.windows {
+                
+                if (window.delegate?.isKind(of: CaptionWindowController.self)) == true {
+                    window.makeKeyAndOrderFront(self)
+                }
+            }
+        }
+        
+        return true
+
+    }
+    
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return true
+    }
+    
 
 
 }

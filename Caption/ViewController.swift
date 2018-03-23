@@ -141,7 +141,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         dialog.canChooseDirectories    = true;
         dialog.canCreateDirectories    = true;
         dialog.allowsMultipleSelection = false;
-        dialog.allowedFileTypes        = ["mov", "mp4", "m4v"];
+        dialog.allowedFileTypes        = ["mov", "mp4", "m4v", "ts", "mpg", "mpeg", "hevc"];
         
         if (dialog.runModal() == NSModalResponseOK) {
             if let result = dialog.url {
@@ -257,11 +257,11 @@ class CaptionLine: CustomStringConvertible {
     
 }
 
-class CaptionWindowController: NSWindowController {
+class CaptionWindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.titleVisibility = .hidden
+        self.window?.delegate = self
     }
-    
     
 }
