@@ -11,7 +11,8 @@ import AVKit
 import AVFoundation
 
 class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextViewDelegate {
-//    @IBOutlet weak var tableView: NSTableView!
+
+    @IBOutlet weak var resultTableView: NSTableView!
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
     var player: AVPlayer?
@@ -22,10 +23,10 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tableView.delegate = self
-//        tableView.dataSource = self
         transcribeTextView.delegate = self
         transcribeTextView.isAutomaticSpellingCorrectionEnabled = false
+        resultTableView.delegate = self
+        resultTableView.dataSource = self
     }
     
     @IBAction func saveSRTToDisk(_ sender: Any) {
@@ -69,16 +70,9 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         
         // play 上一个结束了
         // pause 下一个开始？
-        
         print("\(String(describing: replacementString))")
-//        if replacementString == "" {
-//            player?.pause()
-//        }
-        
         
         if transcribeTextView.string == "" {
-//            let cap = CaptionLine(caption: "", startingTime: player?.currentTime(), endingTime: nil)
-//            arrayForCaption.append(cap)
             player?.pause()
             if let last = arrayForCaption.last {
                 last.endingTime = player?.currentTime()
@@ -105,6 +99,8 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
 
             let new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
             arrayForCaption.append(new)
+            
+            self.resultTableView.reloadData()
         }
         return true
     }
@@ -115,8 +111,6 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         var srtString = ""
         for i in 0..<arrayForCaption.count {
             srtString = srtString + "\(i+1)\n\(arrayForCaption[i])\n\n"
-//            print(\(i + 1))
-//            print(arrayForCaption[i])
         }
         print(srtString)
         return srtString
@@ -124,7 +118,6 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     
     func textDidChange(_ notification: Notification) {
-//        transcribeTextView.
     }
 
     override var representedObject: Any? {
@@ -163,37 +156,28 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             let cap = CaptionLine(caption: "", startingTime: self.player?.currentTime(), endingTime: nil)
             self.arrayForCaption.append(cap)
         }
-//        player?.currentTime()
-//        let cap = CaptionLine(caption: "", startingTime: nil, endingTime: nil)
-//        arrayForCaption.append(cap)
-//        tableView.reloadData()
-//        let videoURL: NSURL = NSBundle.mainBundle().URLForResource("Para1_2", withExtension: "mp4")!
-//        let player = AVPlayer(URL: videoURL)
-//        playerLayer = AVPlayerLayer(player: player)
-//        playerLayer!.frame = self.view!.bounds
-//        self.view!.layer.addSublayer(playerLayer!)
-//        player.play()
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         return arrayForCaption.count
     }
     
-//    func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-//        <#code#>
-//    }
-    
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        if tableColumn?.title == "Time" {
-            let cell = tableView.make(withIdentifier: "TimeCellView", owner: self) as? NSTableCellView
-            cell?.textField?.stringValue = "time"
-            return cell
 
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.make(withIdentifier: "tableCell", owner: self) as? NSTableCellView
+        let correspondingCaption = arrayForCaption[row]
+        if tableColumn?.title == "Start Time" {
+            cell?.textField?.stringValue = "\(correspondingCaption.startingTimeString)"
+        } else if tableColumn?.title == "End Time" {
+            cell?.textField?.stringValue = "\(correspondingCaption.endingTimeString)"
         } else {
-            let cell = tableView.make(withIdentifier: "ContentCellView", owner: self) as? NSTableCellView
-            cell?.textField?.stringValue = "abncd"
-            return cell
+            if let cap = correspondingCaption.caption {
+                cell?.textField?.stringValue = cap
+            } else {
+                cell?.textField?.stringValue = ""
+            }
         }
+        return cell
     }
     
     @IBAction func queryTime(_ sender: Any) {
@@ -214,6 +198,23 @@ class CaptionLine: CustomStringConvertible {
         self.startingTime = startingTime
         self.endingTime = endingTime
     }
+    
+    var startingTimeString: String {
+        guard let start = startingTime else {
+            return ""
+        }
+        let st = CMTimeGetSeconds(start)
+        return secondFloatToString(float: st)
+    }
+    
+    var endingTimeString: String {
+        guard let end = endingTime else {
+            return ""
+        }
+        let en = CMTimeGetSeconds(end)
+        return secondFloatToString(float: en)
+    }
+    
     
     var description: String {
         guard let cap = caption, let start = startingTime, let end = endingTime else {
@@ -249,8 +250,6 @@ class CaptionLine: CustomStringConvertible {
         milliseconds = Int(second * 1000)
         
         let string = NSString(format:"%.2d:%.2d:%.2d,%.3d", hours, minutes, seconds, milliseconds)
-        
-//        return "\(hours):\(minutes):\(seconds),\(milliseconds)"
         return string as String
     }
     
