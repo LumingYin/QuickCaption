@@ -87,6 +87,9 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         arrayForCaption.append(new)
 
         self.resultTableView.reloadData()
+        if resultTableView.numberOfRows > 0 {
+            self.resultTableView.scrollRowToVisible(resultTableView.numberOfRows - 1)
+        }
     }
     
     func generateSRTFromArray() -> String {
@@ -113,12 +116,13 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         dialog.canChooseDirectories    = true;
         dialog.canCreateDirectories    = true;
         dialog.allowsMultipleSelection = false;
-        dialog.allowedFileTypes        = ["mov", "mp4", "m4v", "ts", "mpg", "mpeg", "hevc"];
+        dialog.allowedFileTypes        = ["mov", "mp4", "m4v", "ts", "mpg", "mpeg", "hevc", "mp3", "m4a"];
         
         if (dialog.runModal() == NSModalResponseOK) {
             if let result = dialog.url {
                 saveSRT()
                 arrayForCaption = []
+                self.timeLabel.stringValue = "\(result.lastPathComponent)"
                 playVideo(result)
             }
         } else {
