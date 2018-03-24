@@ -230,14 +230,13 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
     }
     
     func windowShouldClose(_ sender: Any) -> Bool {
-        if (player == nil) {
-            return true
-        }
         if let vc = self.contentViewController as? ViewController {
-            let response = vc.dialogTwoButton(question: "Save Captions?", text: "Would you like to save your captions before closing?")
-            print(response)
-            if response {
-                vc.saveSRT()
+            if (vc.player != nil) {
+                let response = vc.dialogTwoButton(question: "Save Captions?", text: "Would you like to save your captions before closing?")
+                print(response)
+                if response {
+                    vc.saveSRT()
+                }
             }
         }
         return true
