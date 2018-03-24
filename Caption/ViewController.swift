@@ -17,6 +17,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
     
+    var videoDescription: String = ""
     var player: AVPlayer?
     var videoURL: URL?
     var arrayForCaption: [CaptionLine] = []
@@ -88,7 +89,8 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             if let result = dialog.url {
                 saveSRT()
                 arrayForCaption = []
-                self.timeLabel.stringValue = "\(result.lastPathComponent)"
+                videoDescription = result.lastPathComponent
+//                self.timeLabel.stringValue = "\(result.lastPathComponent)"
                 playVideo(result)
             }
         } else {
@@ -111,6 +113,12 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
             let cap = CaptionLine(caption: "", startingTime: self.player?.currentTime(), endingTime: nil)
             self.arrayForCaption.append(cap)
+            
+            if let framerate = self.player?.currentItem?.tracks[0].assetTrack.nominalFrameRate {
+                self.videoDescription = "\(framerate)fps  |  \(self.videoDescription)"
+            }
+            self.timeLabel.stringValue = "\(self.videoDescription)"
+
         }
     }
     
