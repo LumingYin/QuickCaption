@@ -99,10 +99,13 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
     
     @IBAction func queryTime(_ sender: Any) {
+        if (player == nil) {
+            return
+        }
         let time = player?.currentTime().value
         let second = player?.currentTime().seconds
         let scale = player?.currentTime().timescale
-        self.timeLabel.stringValue = "\(time ?? kCMTimeZero.value), \(second ?? 0.0), \(scale ?? CMTimeScale(kCMTimeMaxTimescale))"
+        self.timeLabel.stringValue = "\(time ?? kCMTimeZero.value), \(second ?? 0.0), \(scale ?? CMTimeScale(kCMTimeMaxTimescale))  \(self.videoDescription)"
     }
 
     func playVideo(_ videoURL: URL) {
