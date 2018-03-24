@@ -127,11 +127,9 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         if tableColumn?.title == "Start Time" {
             cell = tableView.make(withIdentifier: "StartTimeCell", owner: self) as? NSTableCellView
             cell?.textField?.stringValue = "\(correspondingCaption.startingTimeString)"
-//            cell?.textField?.isEditable = true
         } else if tableColumn?.title == "End Time" {
             cell = tableView.make(withIdentifier: "EndTimeCell", owner: self) as? NSTableCellView
             cell?.textField?.stringValue = "\(correspondingCaption.endingTimeString)"
-//            cell?.textField?.isEditable = true
         } else {
             cell = tableView.make(withIdentifier: "CaptionCell", owner: self) as? NSTableCellView
             if let cap = correspondingCaption.caption {
@@ -209,80 +207,40 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         alert.addButton(withTitle: "OK")
         return alert.runModal() == NSAlertFirstButtonReturn
     }
+    
+    func dialogTwoButton(question: String, text: String) -> Bool {
+        let alert = NSAlert()
+        alert.messageText = question
+        alert.informativeText = text
+        alert.alertStyle = NSAlertStyle.warning
+        alert.addButton(withTitle: "Save")
+        alert.addButton(withTitle: "Don't Save")
+//        alert.buttons[1].becomeFirstResponder()
+        return alert.runModal() == NSAlertFirstButtonReturn
+    }
+
 }
 
-class CaptionLine: CustomStringConvertible {
-    var caption: String?
-    var startingTime: CMTime?
-    var endingTime: CMTime?
-    
-    init(caption: String?, startingTime: CMTime?, endingTime: CMTime?) {
-        self.caption = caption
-        self.startingTime = startingTime
-        self.endingTime = endingTime
-    }
-    
-    var startingTimeString: String {
-        guard let start = startingTime else {
-            return ""
-        }
-        let st = CMTimeGetSeconds(start)
-        return secondFloatToString(float: st)
-    }
-    
-    var endingTimeString: String {
-        guard let end = endingTime else {
-            return ""
-        }
-        let en = CMTimeGetSeconds(end)
-        return secondFloatToString(float: en)
-    }
-    
-    var description: String {
-        guard let cap = caption, let start = startingTime, let end = endingTime else {
-            return ""
-        }
-        
-        let st = CMTimeGetSeconds(start)
-        let en = CMTimeGetSeconds(end)
-        
-        let stringStart = secondFloatToString(float: st)
-        let stringEnd = secondFloatToString(float: en)
-        
-        return "\(stringStart) --> \(stringEnd)\n\(cap)"
-    }
-    
-    func secondFloatToString(float: Float64) -> String {
-        var second = float
-        
-        var hours: Int = 0
-        var minutes: Int = 0
-        var seconds: Int = 0
-        var milliseconds: Int = 0
-        
-        hours = Int(second / Float64(3600))
-        second = second - Float64(hours * 3600)
-        
-        minutes = Int(second / Float64(60))
-        second = second - Float64(minutes * 60)
-        
-        seconds = Int(second)
-        second = second - Float64(seconds)
-        
-        milliseconds = Int(second * 1000)
-        
-        let string = NSString(format:"%.2d:%.2d:%.2d,%.3d", hours, minutes, seconds, milliseconds)
-        return string as String
-    }
-    
-    
-}
 
 class CaptionWindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.titleVisibility = .hidden
         self.window?.delegate = self
+    }
+    
+    func windowShouldClose(_ sender: Any) -> Bool {
+        if (player == nil) {
+            return true
+        }
+        if let vc = self.contentViewController as? ViewController {
+            let response = vc.dialogTwoButton(question: "Save Captions?", text: "Would you like to save your captions before closing?")
+            print(response)
+            if response {
+                vc.saveSRT()
+            }
+        }
+        return true
     }
     
 }
