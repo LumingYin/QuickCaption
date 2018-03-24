@@ -31,25 +31,40 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     // MARK: - TextField Controls
     func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
-        player?.pause()
-        if let last = arrayForCaption.last {
-            last.endingTime = player?.currentTime()
+        if (player == nil) {
+            return true
         }
 
+        if (control == transcribeTextField) {
+            player?.pause()
+            if let last = arrayForCaption.last {
+                last.endingTime = player?.currentTime()
+            }
+        }
         return true
     }
 
     @IBAction func captionTextFieldDidChange(_ sender: NSTextField) {
+        if (player == nil) {
+            sender.stringValue = ""
+            _ = dialogOKCancel(question: "A video is required before adding captions.", text: "Please open a video first, then add captions to the video.")
+            return
+        }
         if (sender == transcribeTextField) {
             player?.play()
-            if let last = arrayForCaption.last {
-                last.caption = sender.stringValue
+            if sender.stringValue == "" {
+                if let last = arrayForCaption.last {
+                    last.startingTime = player?.currentTime()
+                }
+            } else {
+                if let last = arrayForCaption.last {
+                    last.caption = sender.stringValue
+                }
+                sender.stringValue = ""
+                
+                let new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
+                arrayForCaption.append(new)
             }
-            sender.stringValue = ""
-            
-            let new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
-            arrayForCaption.append(new)
-            
             self.resultTableView.reloadData()
             if resultTableView.numberOfRows > 0 {
                 self.resultTableView.scrollRowToVisible(resultTableView.numberOfRows - 1)
@@ -112,9 +127,11 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         if tableColumn?.title == "Start Time" {
             cell = tableView.make(withIdentifier: "StartTimeCell", owner: self) as? NSTableCellView
             cell?.textField?.stringValue = "\(correspondingCaption.startingTimeString)"
+//            cell?.textField?.isEditable = true
         } else if tableColumn?.title == "End Time" {
             cell = tableView.make(withIdentifier: "EndTimeCell", owner: self) as? NSTableCellView
             cell?.textField?.stringValue = "\(correspondingCaption.endingTimeString)"
+//            cell?.textField?.isEditable = true
         } else {
             cell = tableView.make(withIdentifier: "CaptionCell", owner: self) as? NSTableCellView
             if let cap = correspondingCaption.caption {
@@ -122,8 +139,20 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             } else {
                 cell?.textField?.stringValue = ""
             }
+            cell?.textField?.isEditable = true
         }
         return cell
+    }
+    
+    @IBAction func startingTimeChanged(_ sender: NSTextField) {
+    }
+    
+    @IBAction func endingTimeChanged(_ sender: NSTextField) {
+    }
+    
+    @IBAction func captionChanged(_ sender: NSTextField) {
+        let row = resultTableView.row(for: sender)
+        arrayForCaption[row].caption = sender.stringValue
     }
     
     // MARK: - Persistence
