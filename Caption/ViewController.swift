@@ -159,7 +159,10 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     func generateSRTFromArray() -> String {
         var srtString = ""
         for i in 0..<arrayForCaption.count {
-            srtString = srtString + "\(i+1)\n\(arrayForCaption[i])\n\n"
+            let str: String = arrayForCaption[i].description
+            if str.count > 0 {
+                srtString = srtString + "\(i+1)\n\(str)\n\n"
+            }
         }
         print(srtString)
         return srtString
@@ -170,6 +173,13 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
     
     func saveSRT() {
+        arrayForCaption.sort(by: { (this, that) -> Bool in
+            if let thisST = this.startingTime, let thatST = that.startingTime {
+                return thisST < thatST
+            }
+            return true
+        })
+
         let text = generateSRTFromArray()
         
         guard let origonalVideoName = self.videoURL?.lastPathComponent else {
@@ -227,7 +237,6 @@ class CaptionLine: CustomStringConvertible {
         let en = CMTimeGetSeconds(end)
         return secondFloatToString(float: en)
     }
-    
     
     var description: String {
         guard let cap = caption, let start = startingTime, let end = endingTime else {
