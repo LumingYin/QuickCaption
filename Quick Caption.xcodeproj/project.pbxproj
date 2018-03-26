@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3C48DF242065D80800AD29B6 /* CaptionLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C48DF232065D80800AD29B6 /* CaptionLine.swift */; };
+		3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7D2E582066F96100F5B22F /* FileCoordinator.swift */; };
+		3C7D2E5B2066FCEE00F5B22F /* Stryng.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7D2E5A2066FCEE00F5B22F /* Stryng.swift */; };
 		562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A68841F2D4F5E000E6B16 /* AppDelegate.swift */; };
 		562A68871F2D4F5E000E6B16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A68861F2D4F5E000E6B16 /* ViewController.swift */; };
 		562A68891F2D4F5E000E6B16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562A68881F2D4F5E000E6B16 /* Assets.xcassets */; };
@@ -18,7 +20,10 @@
 
 /* Begin PBXFileReference section */
 		3C48DF232065D80800AD29B6 /* CaptionLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionLine.swift; sourceTree = "<group>"; };
-		562A68811F2D4F5E000E6B16 /* Caption.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Caption.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C7D2E572066F7F600F5B22F /* Quick Caption.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Quick Caption.entitlements"; sourceTree = "<group>"; };
+		3C7D2E582066F96100F5B22F /* FileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCoordinator.swift; sourceTree = "<group>"; };
+		3C7D2E5A2066FCEE00F5B22F /* Stryng.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stryng.swift; sourceTree = "<group>"; };
+		562A68811F2D4F5E000E6B16 /* Quick Caption.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quick Caption.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		562A68841F2D4F5E000E6B16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		562A68861F2D4F5E000E6B16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		562A68881F2D4F5E000E6B16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -44,6 +49,7 @@
 		562A68781F2D4F5E000E6B16 = {
 			isa = PBXGroup;
 			children = (
+				3C7D2E572066F7F600F5B22F /* Quick Caption.entitlements */,
 				562A68831F2D4F5E000E6B16 /* Caption */,
 				562A68821F2D4F5E000E6B16 /* Products */,
 				562A68931F2D4FBE000E6B16 /* Frameworks */,
@@ -53,7 +59,7 @@
 		562A68821F2D4F5E000E6B16 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				562A68811F2D4F5E000E6B16 /* Caption.app */,
+				562A68811F2D4F5E000E6B16 /* Quick Caption.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -63,7 +69,9 @@
 			children = (
 				562A68841F2D4F5E000E6B16 /* AppDelegate.swift */,
 				562A68861F2D4F5E000E6B16 /* ViewController.swift */,
+				3C7D2E582066F96100F5B22F /* FileCoordinator.swift */,
 				3C48DF232065D80800AD29B6 /* CaptionLine.swift */,
+				3C7D2E5A2066FCEE00F5B22F /* Stryng.swift */,
 				562A68881F2D4F5E000E6B16 /* Assets.xcassets */,
 				562A688A1F2D4F5E000E6B16 /* Main.storyboard */,
 				562A688D1F2D4F5E000E6B16 /* Info.plist */,
@@ -83,9 +91,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		562A68801F2D4F5E000E6B16 /* Caption */ = {
+		562A68801F2D4F5E000E6B16 /* Quick Caption */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 562A68901F2D4F5E000E6B16 /* Build configuration list for PBXNativeTarget "Caption" */;
+			buildConfigurationList = 562A68901F2D4F5E000E6B16 /* Build configuration list for PBXNativeTarget "Quick Caption" */;
 			buildPhases = (
 				562A687D1F2D4F5E000E6B16 /* Sources */,
 				562A687E1F2D4F5E000E6B16 /* Frameworks */,
@@ -95,9 +103,9 @@
 			);
 			dependencies = (
 			);
-			name = Caption;
+			name = "Quick Caption";
 			productName = Caption;
-			productReference = 562A68811F2D4F5E000E6B16 /* Caption.app */;
+			productReference = 562A68811F2D4F5E000E6B16 /* Quick Caption.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -107,17 +115,23 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Bright;
 				TargetAttributes = {
 					562A68801F2D4F5E000E6B16 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 54362BT7G2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
-			buildConfigurationList = 562A687C1F2D4F5E000E6B16 /* Build configuration list for PBXProject "Caption" */;
+			buildConfigurationList = 562A687C1F2D4F5E000E6B16 /* Build configuration list for PBXProject "Quick Caption" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -130,7 +144,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				562A68801F2D4F5E000E6B16 /* Caption */,
+				562A68801F2D4F5E000E6B16 /* Quick Caption */,
 			);
 		};
 /* End PBXProject section */
@@ -152,6 +166,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */,
+				3C7D2E5B2066FCEE00F5B22F /* Stryng.swift in Sources */,
 				3C48DF242065D80800AD29B6 /* CaptionLine.swift in Sources */,
 				562A68871F2D4F5E000E6B16 /* ViewController.swift in Sources */,
 				562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */,
@@ -182,7 +198,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -190,7 +208,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -232,7 +254,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -240,7 +264,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -268,13 +296,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Quick Caption.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 54362BT7G2;
 				INFOPLIST_FILE = Caption/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dim.Caption;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -282,20 +312,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Quick Caption.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 54362BT7G2;
 				INFOPLIST_FILE = Caption/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dim.Caption;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		562A687C1F2D4F5E000E6B16 /* Build configuration list for PBXProject "Caption" */ = {
+		562A687C1F2D4F5E000E6B16 /* Build configuration list for PBXProject "Quick Caption" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				562A688E1F2D4F5E000E6B16 /* Debug */,
@@ -304,7 +336,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		562A68901F2D4F5E000E6B16 /* Build configuration list for PBXNativeTarget "Caption" */ = {
+		562A68901F2D4F5E000E6B16 /* Build configuration list for PBXNativeTarget "Quick Caption" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				562A68911F2D4F5E000E6B16 /* Debug */,

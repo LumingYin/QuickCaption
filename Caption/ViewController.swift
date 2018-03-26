@@ -17,6 +17,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
     
+    var fileData: FileData?
     var videoDescription: String = ""
     var player: AVPlayer?
     var videoURL: URL?
@@ -24,7 +25,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad() 
         resultTableView.delegate = self
         resultTableView.dataSource = self
         transcribeTextField.delegate = self
@@ -85,17 +86,17 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         dialog.allowsMultipleSelection = false
         dialog.allowedFileTypes        = ["mov", "mp4", "m4v", "ts", "mpg", "mpeg", "hevc", "mp3", "m4a"]
         
-        if (dialog.runModal() == NSModalResponseOK) {
-            if let result = dialog.url {
-                saveSRT()
-                arrayForCaption = []
-                videoDescription = result.lastPathComponent
-//                self.timeLabel.stringValue = "\(result.lastPathComponent)"
-                playVideo(result)
+        dialog.beginSheetModal(for: self.view.window!) { (result) in
+            if let result = dialog.url, let path = dialog.url?.path {
+                self.fileData = FileData(path: path)
+                NSFileCoordinator.addFilePresenter(self.fileData!)
+                self.saveSRT()
+                self.arrayForCaption = []
+                self.videoDescription = result.lastPathComponent
+                self.playVideo(result)
             }
-        } else {
-            return
         }
+        
     }
     
     @IBAction func queryTime(_ sender: Any) {
@@ -136,13 +137,13 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         
         let correspondingCaption = arrayForCaption[row]
         if tableColumn?.title == "Start Time" {
-            cell = tableView.make(withIdentifier: "StartTimeCell", owner: self) as? NSTableCellView
+            cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "StartTimeCell"), owner: self) as? NSTableCellView
             cell?.textField?.stringValue = "\(correspondingCaption.startingTimeString)"
         } else if tableColumn?.title == "End Time" {
-            cell = tableView.make(withIdentifier: "EndTimeCell", owner: self) as? NSTableCellView
+            cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "EndTimeCell"), owner: self) as? NSTableCellView
             cell?.textField?.stringValue = "\(correspondingCaption.endingTimeString)"
         } else {
-            cell = tableView.make(withIdentifier: "CaptionCell", owner: self) as? NSTableCellView
+            cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CaptionCell"), owner: self) as? NSTableCellView
             if let cap = correspondingCaption.caption {
                 cell?.textField?.stringValue = cap
             } else {
@@ -201,12 +202,22 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             return
         }
         
-        do {
-            try text.write(to: newPath, atomically: false, encoding: String.Encoding.utf8)
-            _ = dialogOKCancel(question: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).")
-        }
-        catch {
-            _ = dialogOKCancel(question: "Saved failed!", text: "Save has failed.")
+        if let fData = fileData, let url = fData.presentedItemURL {
+            var errorMain: NSError?
+            let coord = NSFileCoordinator(filePresenter: fData)
+            coord.coordinate(writingItemAt: url as URL, options: .forReplacing, error: &errorMain, byAccessor: { writeUrl in
+                print("Write File")
+                do {
+                    try text.write(toFile: writeUrl.path, atomically: true, encoding: String.Encoding.utf8)
+                    _ = dialogOKCancel(question: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).")
+
+                } catch {
+                    print("Error writing to file: \(error)")
+                    _ = dialogOKCancel(question: "Saved failed!", text: "Save has failed. \(error)")
+
+                }
+                return
+            })
         }
     }
     
@@ -214,20 +225,20 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         let alert = NSAlert()
         alert.messageText = question
         alert.informativeText = text
-        alert.alertStyle = NSAlertStyle.warning
+        alert.alertStyle = NSAlert.Style.warning
         alert.addButton(withTitle: "OK")
-        return alert.runModal() == NSAlertFirstButtonReturn
+        return alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
     }
     
     func dialogTwoButton(question: String, text: String) -> Bool {
         let alert = NSAlert()
         alert.messageText = question
         alert.informativeText = text
-        alert.alertStyle = NSAlertStyle.warning
+        alert.alertStyle = NSAlert.Style.warning
         alert.addButton(withTitle: "Save")
         alert.addButton(withTitle: "Don't Save")
 //        alert.buttons[1].becomeFirstResponder()
-        return alert.runModal() == NSAlertFirstButtonReturn
+        return alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
     }
 
 }
@@ -240,7 +251,7 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
         self.window?.delegate = self
     }
     
-    func windowShouldClose(_ sender: Any) -> Bool {
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
         if let vc = self.contentViewController as? ViewController {
             if (vc.player != nil) {
                 let response = vc.dialogTwoButton(question: "Save Captions?", text: "Would you like to save your captions before closing?")

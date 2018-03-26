@@ -40,6 +40,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
+    @IBAction func openVideoFile(_ sender: NSMenuItem) {
+        if let vc = NSApplication.shared.mainWindow?.contentViewController as? ViewController {
+            vc.openFile(self)
+        }
+    }
+    
+    @IBAction func saveSRTFile(_ sender: NSMenuItem) {
+        if let vc = NSApplication.shared.mainWindow?.contentViewController as? ViewController {
+            vc.saveSRT()
+        }
+
+    }
+    
+    
 
 
 }
