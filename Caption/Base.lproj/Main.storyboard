@@ -660,7 +660,7 @@
                                     <constraint firstAttribute="height" constant="270" id="zV0-3x-4f6"/>
                                 </constraints>
                             </avPlayerView>
-                            <stackView distribution="fillEqually" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fAe-iE-pj7">
+                            <stackView distribution="fillEqually" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="fAe-iE-pj7">
                                 <rect key="frame" x="20" y="258" width="480" height="22"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GBb-t6-7CT">

@@ -118,16 +118,18 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         player = AVPlayer(url: videoURL)
         playerView.player = player
         player?.play()
-        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
-            let cap = CaptionLine(caption: "", startingTime: self.player?.currentTime(), endingTime: nil)
-            self.arrayForCaption.append(cap)
-            
-            if let framerate = self.player?.currentItem?.tracks[0].assetTrack.nominalFrameRate {
-                self.videoDescription = "\(framerate)fps  |  \(self.videoDescription)"
-            }
-            self.timeLabel.stringValue = "\(self.videoDescription)"
-
+        Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateFirstCaption), userInfo: nil, repeats: false)
+    }
+    
+    @objc func updateFirstCaption() {
+        let cap = CaptionLine(caption: "", startingTime: self.player?.currentTime(), endingTime: nil)
+        self.arrayForCaption.append(cap)
+        
+        if let framerate = self.player?.currentItem?.tracks[0].assetTrack.nominalFrameRate {
+            self.videoDescription = "\(framerate)fps  |  \(self.videoDescription)"
         }
+        self.timeLabel.stringValue = "\(self.videoDescription)"
+
     }
     
     // MARK: - Table View Delegate/Data Source
