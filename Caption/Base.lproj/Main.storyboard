@@ -62,7 +62,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="Open Video…" keyEquivalent="o" id="IAo-SY-fd9">
+                                        <menuItem title="Open Video or Audio…" keyEquivalent="o" id="IAo-SY-fd9">
                                             <connections>
                                                 <action selector="openVideoFile:" target="Voe-Tx-rLC" id="kPS-GV-Ogy"/>
                                             </connections>
@@ -73,9 +73,15 @@
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
+                                        <menuItem title="Save SRT…" keyEquivalent="s" id="pxx-59-PXV">
                                             <connections>
                                                 <action selector="saveSRTFile:" target="Voe-Tx-rLC" id="jwM-0q-cGw"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Save TXT…" keyEquivalent="s" id="HAT-IQ-Cm1">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="saveTXTFile:" target="Voe-Tx-rLC" id="gM2-j9-f9C"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -658,7 +664,7 @@
                                 <rect key="frame" x="20" y="258" width="480" height="22"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GBb-t6-7CT">
-                                        <rect key="frame" x="0.0" y="-2" width="155" height="25"/>
+                                        <rect key="frame" x="0.0" y="-2" width="114" height="25"/>
                                         <buttonCell key="cell" type="roundTextured" title="Open Video" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="mp4-tM-Pc8">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -668,7 +674,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sob-Q9-idm">
-                                        <rect key="frame" x="163" y="-2" width="154" height="25"/>
+                                        <rect key="frame" x="122" y="-2" width="114" height="25"/>
                                         <buttonCell key="cell" type="roundTextured" title="Update Time" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="ATJ-pa-En7">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -678,7 +684,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b6y-BM-OdC">
-                                        <rect key="frame" x="325" y="-2" width="155" height="25"/>
+                                        <rect key="frame" x="244" y="-2" width="114" height="25"/>
                                         <buttonCell key="cell" type="roundTextured" title="Save SRT" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="JNb-Al-AnF">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -687,13 +693,25 @@
                                             <action selector="saveSRTToDisk:" target="XfG-lQ-9wD" id="AdN-4V-UEK"/>
                                         </connections>
                                     </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NS3-xM-gC6">
+                                        <rect key="frame" x="366" y="-2" width="114" height="25"/>
+                                        <buttonCell key="cell" type="roundTextured" title="Save TXT" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="fKx-7s-EnQ">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="saveTXTToDisk:" target="XfG-lQ-9wD" id="GjW-T9-oib"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>

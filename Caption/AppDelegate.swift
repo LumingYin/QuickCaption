@@ -11,8 +11,6 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
     }
@@ -48,14 +46,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func saveSRTFile(_ sender: NSMenuItem) {
         if let vc = NSApplication.shared.mainWindow?.contentViewController as? ViewController {
-            vc.saveSRT()
+            vc.saveToDisk(.srt)
         }
-
+    }
+    @IBAction func saveTXTFile(_ sender: Any) {
+        if let vc = NSApplication.shared.mainWindow?.contentViewController as? ViewController {
+            vc.saveToDisk(.txt)
+        }
     }
     
-    
-
-
 }
 
 

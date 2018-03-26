@@ -40,19 +40,72 @@
 				<string>m4v</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>MPEG-4 File</string>
+			<string>MPEG-4 Movie</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
+				<string>mp3</string>
+				<string>mpeg3</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>MPEG-3 Audio</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>m4a</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>MPEG-4 Audio</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>mpg</string>
+				<string>mpeg</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>MPEG Video</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>ts</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>MPEG-2 Transport Stream</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>mov</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>QuickTime Movie</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>ass</string>
 				<string>sub</string>
 				<string>srt</string>
 				<string>txt</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>SRT File</string>
+			<string>Subtitle File</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>NSIsRelatedItemType</key>

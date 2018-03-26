@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3C48DF242065D80800AD29B6 /* CaptionLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C48DF232065D80800AD29B6 /* CaptionLine.swift */; };
 		3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7D2E582066F96100F5B22F /* FileCoordinator.swift */; };
-		3C7D2E5B2066FCEE00F5B22F /* Stryng.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7D2E5A2066FCEE00F5B22F /* Stryng.swift */; };
 		562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A68841F2D4F5E000E6B16 /* AppDelegate.swift */; };
 		562A68871F2D4F5E000E6B16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A68861F2D4F5E000E6B16 /* ViewController.swift */; };
 		562A68891F2D4F5E000E6B16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562A68881F2D4F5E000E6B16 /* Assets.xcassets */; };
@@ -22,7 +21,6 @@
 		3C48DF232065D80800AD29B6 /* CaptionLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionLine.swift; sourceTree = "<group>"; };
 		3C7D2E572066F7F600F5B22F /* Quick Caption.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Quick Caption.entitlements"; sourceTree = "<group>"; };
 		3C7D2E582066F96100F5B22F /* FileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCoordinator.swift; sourceTree = "<group>"; };
-		3C7D2E5A2066FCEE00F5B22F /* Stryng.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stryng.swift; sourceTree = "<group>"; };
 		562A68811F2D4F5E000E6B16 /* Quick Caption.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quick Caption.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		562A68841F2D4F5E000E6B16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		562A68861F2D4F5E000E6B16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +69,6 @@
 				562A68861F2D4F5E000E6B16 /* ViewController.swift */,
 				3C7D2E582066F96100F5B22F /* FileCoordinator.swift */,
 				3C48DF232065D80800AD29B6 /* CaptionLine.swift */,
-				3C7D2E5A2066FCEE00F5B22F /* Stryng.swift */,
 				562A68881F2D4F5E000E6B16 /* Assets.xcassets */,
 				562A688A1F2D4F5E000E6B16 /* Main.storyboard */,
 				562A688D1F2D4F5E000E6B16 /* Info.plist */,
@@ -167,7 +164,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */,
-				3C7D2E5B2066FCEE00F5B22F /* Stryng.swift in Sources */,
 				3C48DF242065D80800AD29B6 /* CaptionLine.swift in Sources */,
 				562A68871F2D4F5E000E6B16 /* ViewController.swift in Sources */,
 				562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */,
@@ -303,7 +299,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dim.Caption;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -319,7 +315,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dim.Caption;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

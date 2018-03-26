@@ -22,6 +22,10 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     var player: AVPlayer?
     var videoURL: URL?
     var arrayForCaption: [CaptionLine] = []
+    enum FileType {
+        case srt
+        case txt
+    }
     
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
@@ -84,13 +88,13 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         dialog.canChooseDirectories    = true
         dialog.canCreateDirectories    = true
         dialog.allowsMultipleSelection = false
-        dialog.allowedFileTypes        = ["mov", "mp4", "m4v", "ts", "mpg", "mpeg", "hevc", "mp3", "m4a"]
+        dialog.allowedFileTypes        = ["mp4", "mpeg4", "m4v", "ts", "mpg", "mpeg", "mp3", "mpeg3", "m4a", "mov"]
         
         dialog.beginSheetModal(for: self.view.window!) { (result) in
             if let result = dialog.url, let path = dialog.url?.path {
                 self.fileData = FileData(path: path)
                 NSFileCoordinator.addFilePresenter(self.fileData!)
-                self.saveSRT()
+                self.saveToDisk(.srt)
                 self.arrayForCaption = []
                 self.videoDescription = result.lastPathComponent
                 self.playVideo(result)
@@ -177,12 +181,30 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         print(srtString)
         return srtString
     }
+    
+    func generateTXTFromArray() -> String {
+        var txtString = ""
+        for i in 0..<arrayForCaption.count {
+            if let str: String = arrayForCaption[i].caption {
+                if str.count > 0 {
+                    txtString = txtString + "\(str)\n"
+                }
+            }
+        }
+        print(txtString)
+        return txtString
+    }
 
-    @IBAction func saveSRTToDisk(_ sender: Any) {
-        saveSRT()
+    
+    @IBAction func saveTXTToDisk(_ sender: Any) {
+        saveToDisk(.txt)
     }
     
-    func saveSRT() {
+    @IBAction func saveSRTToDisk(_ sender: Any) {
+        saveToDisk(.srt)
+    }
+    
+    func saveToDisk(_ type: FileType) {
         arrayForCaption.sort(by: { (this, that) -> Bool in
             if let thisST = this.startingTime, let thatST = that.startingTime {
                 return thisST < thatST
@@ -190,19 +212,41 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             return true
         })
 
-        let text = generateSRTFromArray()
+        var text = "Export is unsuccessful."
+        
+        if let fData = fileData {
+            if type == .srt {
+                text = generateSRTFromArray()
+                fData.ext = "srt"
+                NSFileCoordinator.removeFilePresenter(fData)
+                NSFileCoordinator.addFilePresenter(fData)
+                print(fData.ext)
+            } else if type == .txt {
+                text = generateTXTFromArray()
+                fData.ext = "txt"
+                NSFileCoordinator.removeFilePresenter(fData)
+                NSFileCoordinator.addFilePresenter(fData)
+                print(fData.ext)
+            }
+
+        }
         
         guard let origonalVideoName = self.videoURL?.lastPathComponent else {
             return
         }
         let ogVN = (origonalVideoName as NSString).deletingPathExtension
-        let newSubtitleName = "\(ogVN).srt"
         
+        var newSubtitleName = "\(ogVN).srt"
+        if (type == .txt) {
+            newSubtitleName = "\(ogVN).txt"
+        }
+
         guard let newPath = self.videoURL?.deletingLastPathComponent().appendingPathComponent(newSubtitleName) else {
             return
         }
         
         if let fData = fileData, let url = fData.presentedItemURL {
+
             var errorMain: NSError?
             let coord = NSFileCoordinator(filePresenter: fData)
             coord.coordinate(writingItemAt: url as URL, options: .forReplacing, error: &errorMain, byAccessor: { writeUrl in
@@ -237,7 +281,6 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         alert.alertStyle = NSAlert.Style.warning
         alert.addButton(withTitle: "Save")
         alert.addButton(withTitle: "Don't Save")
-//        alert.buttons[1].becomeFirstResponder()
         return alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
     }
 
@@ -257,7 +300,7 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
                 let response = vc.dialogTwoButton(question: "Save Captions?", text: "Would you like to save your captions before closing?")
                 print(response)
                 if response {
-                    vc.saveSRT()
+                    vc.saveToDisk(.srt)
                 }
             }
         }
