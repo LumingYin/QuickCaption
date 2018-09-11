@@ -110,7 +110,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         let time = player?.currentTime().value
         let second = player?.currentTime().seconds
         let scale = player?.currentTime().timescale
-        self.timeLabel.stringValue = "\(time ?? kCMTimeZero.value), \(second ?? 0.0), \(scale ?? CMTimeScale(kCMTimeMaxTimescale))  \(self.videoDescription)"
+        self.timeLabel.stringValue = "\(time ?? CMTime.zero.value), \(second ?? 0.0), \(scale ?? CMTimeScale(kCMTimeMaxTimescale))  \(self.videoDescription)"
     }
 
     func playVideo(_ videoURL: URL) {
@@ -125,7 +125,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         let cap = CaptionLine(caption: "", startingTime: self.player?.currentTime(), endingTime: nil)
         self.arrayForCaption.append(cap)
         
-        if let framerate = self.player?.currentItem?.tracks[0].assetTrack.nominalFrameRate {
+        if let framerate = self.player?.currentItem?.tracks[0].assetTrack?.nominalFrameRate {
             self.videoDescription = "\(framerate)fps  |  \(self.videoDescription)"
         }
         self.timeLabel.stringValue = "\(self.videoDescription)"
