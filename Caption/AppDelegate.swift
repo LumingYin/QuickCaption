@@ -8,12 +8,14 @@
 
 import Cocoa
 import LetsMove
+import Sparkle
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         PFMoveToApplicationsFolderIfNecessary()
+        SUUpdater.shared()?.checkForUpdatesInBackground()
         // Insert code here to initialize your application
     }
 
