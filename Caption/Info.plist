@@ -100,9 +100,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2019.02.17</string>
+	<string>2019.02.18</string>
 	<key>CFBundleVersion</key>
-	<string>20190217</string>
+	<string>2019.02.18</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
@@ -115,6 +115,10 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUAutomaticallyUpdate</key>
+	<true/>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
 	<key>SUFeedURL</key>
 	<string>https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/appcast.xml</string>
 	<key>SUPublicEDKey</key>

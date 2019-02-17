@@ -10,9 +10,9 @@
 		324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324971D122190D1C00562223 /* CaptionWindowController.swift */; };
 		324971D42219244700562223 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 324971D32219244700562223 /* Sparkle.framework */; };
 		324971D62219246C00562223 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 324971D32219244700562223 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		324971D8221927FE00562223 /* LetsMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 324971D7221927FE00562223 /* LetsMove.framework */; };
-		324971D92219280600562223 /* LetsMove.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 324971D7221927FE00562223 /* LetsMove.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		324971DB221929C000562223 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 324971DA221929C000562223 /* Security.framework */; };
+		324971DD22192FAF00562223 /* LetsMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 324971DC22192FAF00562223 /* LetsMove.framework */; };
+		324971DE22192FCF00562223 /* LetsMove.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 324971DC22192FAF00562223 /* LetsMove.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C43B6942068A7A000219EF6 /* film.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3C43B6932068A7A000219EF6 /* film.icns */; };
 		3C48DF242065D80800AD29B6 /* CaptionLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C48DF232065D80800AD29B6 /* CaptionLine.swift */; };
 		3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7D2E582066F96100F5B22F /* FileCoordinator.swift */; };
@@ -31,7 +31,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				324971D92219280600562223 /* LetsMove.framework in CopyFiles */,
+				324971DE22192FCF00562223 /* LetsMove.framework in CopyFiles */,
 				324971D62219246C00562223 /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -41,8 +41,8 @@
 /* Begin PBXFileReference section */
 		324971D122190D1C00562223 /* CaptionWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionWindowController.swift; sourceTree = "<group>"; };
 		324971D32219244700562223 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Caption/Sparkle.framework; sourceTree = SOURCE_ROOT; };
-		324971D7221927FE00562223 /* LetsMove.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LetsMove.framework; path = Caption/LetsMove.framework; sourceTree = SOURCE_ROOT; };
 		324971DA221929C000562223 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		324971DC22192FAF00562223 /* LetsMove.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LetsMove.framework; path = Caption/LetsMove.framework; sourceTree = SOURCE_ROOT; };
 		3C43B6932068A7A000219EF6 /* film.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = film.icns; sourceTree = "<group>"; };
 		3C48DF232065D80800AD29B6 /* CaptionLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionLine.swift; sourceTree = "<group>"; };
 		3C7D2E572066F7F600F5B22F /* Quick Caption.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Quick Caption.entitlements"; sourceTree = "<group>"; };
@@ -62,9 +62,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				324971DD22192FAF00562223 /* LetsMove.framework in Frameworks */,
 				324971DB221929C000562223 /* Security.framework in Frameworks */,
 				562A68971F2D4FC1000E6B16 /* AVKit.framework in Frameworks */,
-				324971D8221927FE00562223 /* LetsMove.framework in Frameworks */,
 				324971D42219244700562223 /* Sparkle.framework in Frameworks */,
 				562A68951F2D4FBE000E6B16 /* AVFoundation.framework in Frameworks */,
 			);
@@ -110,8 +110,8 @@
 		562A68931F2D4FBE000E6B16 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				324971DC22192FAF00562223 /* LetsMove.framework */,
 				324971DA221929C000562223 /* Security.framework */,
-				324971D7221927FE00562223 /* LetsMove.framework */,
 				324971D32219244700562223 /* Sparkle.framework */,
 				562A68961F2D4FC1000E6B16 /* AVKit.framework */,
 				562A68941F2D4FBE000E6B16 /* AVFoundation.framework */,
