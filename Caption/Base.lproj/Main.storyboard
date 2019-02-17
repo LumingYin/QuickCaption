@@ -663,7 +663,7 @@
                                 <rect key="frame" x="20" y="258" width="480" height="22"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GBb-t6-7CT">
-                                        <rect key="frame" x="-0.5" y="-1" width="87" height="23"/>
+                                        <rect key="frame" x="-0.5" y="-1" width="115" height="23"/>
                                         <buttonCell key="cell" type="roundTextured" title="Open Video" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="mp4-tM-Pc8">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -673,7 +673,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sob-Q9-idm">
-                                        <rect key="frame" x="93.5" y="-1" width="92" height="23"/>
+                                        <rect key="frame" x="121.5" y="-1" width="115" height="23"/>
                                         <buttonCell key="cell" type="roundTextured" title="Update Time" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="ATJ-pa-En7">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -683,7 +683,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b6y-BM-OdC">
-                                        <rect key="frame" x="192.5" y="-1" width="88" height="23"/>
+                                        <rect key="frame" x="243.5" y="-1" width="115" height="23"/>
                                         <buttonCell key="cell" type="roundTextured" title="Save SRT" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="JNb-Al-AnF">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -692,18 +692,8 @@
                                             <action selector="saveSRTToDisk:" target="XfG-lQ-9wD" id="AdN-4V-UEK"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cwd-0i-vGg">
-                                        <rect key="frame" x="287.5" y="-1" width="99" height="23"/>
-                                        <buttonCell key="cell" type="roundTextured" title="Save FCPXML" bezelStyle="texturedRounded" alignment="center" enabled="NO" borderStyle="border" inset="2" id="uqc-NM-9nS">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="saveFCPXMLToDisk:" target="XfG-lQ-9wD" id="Rhx-Zp-m36"/>
-                                        </connections>
-                                    </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NS3-xM-gC6">
-                                        <rect key="frame" x="393.5" y="-1" width="87" height="23"/>
+                                        <rect key="frame" x="365.5" y="-1" width="115" height="23"/>
                                         <buttonCell key="cell" type="roundTextured" title="Save TXT" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="fKx-7s-EnQ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -718,10 +708,8 @@
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
-                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
