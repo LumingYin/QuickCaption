@@ -2,17 +2,9 @@
 <channel>
 <title>Quick Caption</title>
 <item>
-<title>2019.02.18</title>
-<pubDate>Sun, 17 Feb 2019 01:02:52 -0500</pubDate>
+<title>2019.02.18.2</title>
+<pubDate>Sun, 17 Feb 2019 02:11:41 -0500</pubDate>
 <sparkle:minimumSystemVersion>10.10</sparkle:minimumSystemVersion>
-<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption%202019.02.18.dmg" sparkle:version="2019.02.18" sparkle:shortVersionString="2019.02.18" length="4584489" type="application/octet-stream" sparkle:edSignature="ZXeIAJUJrwCo4wqIt0eNv3fDKzmoNJhxJLvvDKZ6+MYJIGtJtrN5SGDmFjcYDpfFV4V2X1ojXHFQ93Vtm/0HBA=="/>
+<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption%202019.02.18.2.dmg" sparkle:version="2019.02.18.2" sparkle:shortVersionString="2019.02.18.2" length="4625465" type="application/octet-stream" sparkle:edSignature="mozbc8uBjwhBi3mMJdzObatpfJRXY4vZJOnwQp3BbzLLIQd1aiRHgwEkXZXfjnp5MyfCvxOAcwtSj2/AzeaQAw=="/>
 </item>
-<item>
-<title>2019.02.18.1</title>
-<pubDate>Sun, 17 Feb 2019 01:31:43 -0500</pubDate>
-<sparkle:minimumSystemVersion>10.10</sparkle:minimumSystemVersion>
-<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption%202019.02.18.1.dmg" sparkle:version="2019.02.18.1" sparkle:shortVersionString="2019.02.18.1" length="4624754" type="application/octet-stream" sparkle:edSignature="bon6NdbgolsmUObBQlLcAvcM+5qyHx+PKqZELvYMv0LYnS9ufdlkKzNWVAdC0TLP30doXtD0qJTALTviNBjjAQ=="/>
-</item>
-
-
 </channel></rss>

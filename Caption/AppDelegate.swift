@@ -16,11 +16,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         PFMoveToApplicationsFolderIfNecessary()
         SUUpdater.shared()?.checkForUpdatesInBackground()
-        // Insert code here to initialize your application
+        UserDefaults.standard.set(true, forKey: "SUAutomaticallyUpdate")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        UserDefaults.standard.set(true, forKey: "SUAutomaticallyUpdate")
     }
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
