@@ -68,8 +68,12 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
                     last.caption = sender.stringValue
                 }
                 sender.stringValue = ""
-                
-                let new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
+                var new: CaptionLine!
+                if let lastEndingTime = arrayForCaption.last?.endingTime {
+                    new = CaptionLine.init(caption: "", startingTime: lastEndingTime, endingTime: nil)
+                } else {
+                    new = CaptionLine.init(caption: "", startingTime: player?.currentTime(), endingTime: nil)
+                }
                 arrayForCaption.append(new)
             }
             self.resultTableView.reloadData()
@@ -209,7 +213,9 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             <project name="Caption 1080p 30fps" uid="2E89EF28-11F8-4AD8-8196-0C86E95EACD5" modDate="2019-02-16 18:17:23 -0500">
                 <sequence duration="\(totalDurationSeconds)s" format="r1" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
                     <spine>
-                        <gap name="Gap" offset="0s" duration="\(totalDurationSeconds)s" start="3600s">
+                        <gap name="Gap" offset="0s" duration="\(totalDurationSeconds)s" start="0s">
+        <spine lane="1" offset="0s">
+
 """
 
         var templateB = ""
@@ -219,8 +225,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             if let str: String = line.caption {
                 if str.count > 0 {
                     templateB += """
-                    <spine lane="1" offset="\(line.startingTimeSecondsOff3600String)">
-                        <title name="\(str)" offset="0s" ref="r2" duration="\(line.durationTimeSecondsString)" start="3600s">
+                        <title name="\(str)" offset="0s" ref="r2" duration="\(line.durationTimeSecondsString)" start="\(line.startingTimeSecondsString)">
                             <param name="Position" key="9999/999166631/999166633/1/100/101" value="0.5 -370.516"/>
                             <param name="Flatten" key="9999/999166631/999166633/2/351" value="1"/>
                             <param name="Alignment" key="9999/999166631/999166633/2/354/999169573/401" value="1 (Center)"/>
@@ -235,7 +240,6 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
                                 <text-style font="Helvetica" fontSize="45" fontFace="Regular" fontColor="1 1 1 1" shadowColor="0 0 0 0.6097" shadowOffset="4 315" shadowBlurRadius="2.24" alignment="center"/>
                             </text-style-def>
                         </title>
-                    </spine>
                     """
                 }
             }
@@ -243,6 +247,8 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
 
 
         let templateC = """
+                    </spine>
+
                         </gap>
                     </spine>
                 </sequence>

@@ -694,7 +694,7 @@
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cwd-0i-vGg">
                                         <rect key="frame" x="287.5" y="-1" width="99" height="23"/>
-                                        <buttonCell key="cell" type="roundTextured" title="Save FCPXML" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="uqc-NM-9nS">
+                                        <buttonCell key="cell" type="roundTextured" title="Save FCPXML" bezelStyle="texturedRounded" alignment="center" enabled="NO" borderStyle="border" inset="2" id="uqc-NM-9nS">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
