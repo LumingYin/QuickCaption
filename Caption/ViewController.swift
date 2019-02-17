@@ -394,24 +394,3 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
 }
 
 
-class CaptionWindowController: NSWindowController, NSWindowDelegate {
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        window?.titleVisibility = .hidden
-        self.window?.delegate = self
-    }
-    
-    func windowShouldClose(_ sender: NSWindow) -> Bool {
-        if let vc = self.contentViewController as? ViewController {
-            if (vc.player != nil) {
-                let response = vc.dialogTwoButton(question: "Save Captions?", text: "Would you like to save your captions before closing?")
-                print(response)
-                if response {
-                    vc.saveToDisk(.srt)
-                }
-            }
-        }
-        return true
-    }
-    
-}

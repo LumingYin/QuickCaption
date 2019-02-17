@@ -23,7 +23,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if flag == false {
             
             for window in sender.windows {
-                
                 if (window.delegate?.isKind(of: CaptionWindowController.self)) == true {
                     window.makeKeyAndOrderFront(self)
                 }
@@ -37,7 +36,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
     }
-    
+
+    @IBAction func openNewWindow(_ sender: Any) {
+        if #available(OSX 10.13, *) {
+            guard let captionWindowController = NSStoryboard.main?.instantiateController(withIdentifier: "mainWindow") as? CaptionWindowController else {
+                return
+            }
+            captionWindowController.shouldCascadeWindows = true
+            captionWindowController.showWindow(self)
+
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+
     @IBAction func openVideoFile(_ sender: NSMenuItem) {
         if let vc = NSApplication.shared.mainWindow?.contentViewController as? ViewController {
             vc.openFile(self)

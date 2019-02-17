@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324971D122190D1C00562223 /* CaptionWindowController.swift */; };
 		3C43B6942068A7A000219EF6 /* film.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3C43B6932068A7A000219EF6 /* film.icns */; };
 		3C48DF242065D80800AD29B6 /* CaptionLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C48DF232065D80800AD29B6 /* CaptionLine.swift */; };
 		3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7D2E582066F96100F5B22F /* FileCoordinator.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		324971D122190D1C00562223 /* CaptionWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionWindowController.swift; sourceTree = "<group>"; };
 		3C43B6932068A7A000219EF6 /* film.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = film.icns; sourceTree = "<group>"; };
 		3C48DF232065D80800AD29B6 /* CaptionLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionLine.swift; sourceTree = "<group>"; };
 		3C7D2E572066F7F600F5B22F /* Quick Caption.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Quick Caption.entitlements"; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				3C43B6932068A7A000219EF6 /* film.icns */,
 				562A68841F2D4F5E000E6B16 /* AppDelegate.swift */,
 				562A68861F2D4F5E000E6B16 /* ViewController.swift */,
+				324971D122190D1C00562223 /* CaptionWindowController.swift */,
 				3C7D2E582066F96100F5B22F /* FileCoordinator.swift */,
 				3C48DF232065D80800AD29B6 /* CaptionLine.swift */,
 				562A68881F2D4F5E000E6B16 /* Assets.xcassets */,
@@ -174,6 +177,7 @@
 				3C48DF242065D80800AD29B6 /* CaptionLine.swift in Sources */,
 				562A68871F2D4F5E000E6B16 /* ViewController.swift in Sources */,
 				562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */,
+				324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
