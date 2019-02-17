@@ -20,7 +20,23 @@ class CaptionLine: CustomStringConvertible {
         self.startingTime = startingTime
         self.endingTime = endingTime
     }
-    
+
+    var startingTimeSecondsString: String {
+        guard let start = startingTime else {
+            return "0s"
+        }
+        let st = CMTimeGetSeconds(start)
+        return "\(st)s"
+    }
+
+    var endingTimeSecondsString: String {
+        guard let end = endingTime else {
+            return "0s"
+        }
+        let en = CMTimeGetSeconds(end)
+        return "\(en)s"
+    }
+
     var startingTimeString: String {
         guard let start = startingTime else {
             return ""
@@ -36,7 +52,14 @@ class CaptionLine: CustomStringConvertible {
         let en = CMTimeGetSeconds(end)
         return secondFloatToString(float: en)
     }
-    
+
+//    var fcpXMLSpineTitleDescription: String {
+//        guard let cap = caption, let start = startingTime, let end = endingTime else {
+//            return ""
+//        }
+//        return ""
+//    }
+
     var description: String {
         guard let cap = caption, let start = startingTime, let end = endingTime else {
             return ""
