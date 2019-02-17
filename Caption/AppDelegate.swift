@@ -44,11 +44,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             captionWindowController.shouldCascadeWindows = true
             captionWindowController.showWindow(self)
-
         } else {
-            // Fallback on earlier versions
         }
     }
+
+    @IBAction func openNewTab(_ sender: Any) {
+        if #available(OSX 10.13, *) {
+            guard let captionWindowController = NSStoryboard.main?.instantiateController(withIdentifier: "mainWindow") as? CaptionWindowController else {
+                return
+            }
+            NSApplication.shared.mainWindow?.addTabbedWindow(captionWindowController.window!, ordered: .above)
+            captionWindowController.shouldCascadeWindows = true
+            captionWindowController.showWindow(self)
+        } else {
+        }
+    }
+
 
     @IBAction func openVideoFile(_ sender: NSMenuItem) {
         if let vc = NSApplication.shared.mainWindow?.contentViewController as? ViewController {
