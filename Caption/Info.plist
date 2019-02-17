@@ -101,6 +101,7 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
+				<string>fcpxml</string>
 				<string>ass</string>
 				<string>sub</string>
 				<string>srt</string>

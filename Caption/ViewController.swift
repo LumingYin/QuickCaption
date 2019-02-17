@@ -25,6 +25,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     enum FileType {
         case srt
         case txt
+        case fcpXML
     }
     
     //MARK: - View Controller Lifecycle
@@ -185,21 +186,30 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
 
     func generateFCPXMLFromArray() -> String {
+        guard let totalDuration = player?.currentItem?.asset.duration, let asset = player?.currentItem?.asset else {
+            return ""
+        }
+        let tracks = asset.tracks(withMediaType: .video)
+        guard let fps = tracks.first?.nominalFrameRate else {
+            return ""
+        }
+        let frameDurationSeconds = 1 / fps
+        let totalDurationSeconds = CMTimeGetSeconds(totalDuration)
         let templateA = """
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fcpxml>
 
 <fcpxml version="1.8">
     <resources>
-        <format id="r1" name="FFVideoFormat1080p30" frameDuration="100/3000s" width="1920" height="1080" colorSpace="1-1-1 (Rec. 709)"/>
+        <format id="r1" name="FFVideoFormat1080p30" frameDuration="\(frameDurationSeconds)s" width="1920" height="1080" colorSpace="1-1-1 (Rec. 709)"/>
         <effect id="r2" name="Basic Title" uid=".../Titles.localized/Bumper:Opener.localized/Basic Title.localized/Basic Title.moti"/>
     </resources>
     <library location="file:///Volumes/Data/Movies/Library.fcpbundle/">
         <event name="2-16-19" uid="70DAF714-AC1D-4046-BEBC-0D778C57B48E">
             <project name="Caption 1080p 30fps" uid="2E89EF28-11F8-4AD8-8196-0C86E95EACD5" modDate="2019-02-16 18:17:23 -0500">
-                <sequence duration="30100/3000s" format="r1" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
+                <sequence duration="\(totalDurationSeconds)s" format="r1" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
                     <spine>
-                        <gap name="Gap" offset="0s" duration="30100/3000s" start="3600s">
+                        <gap name="Gap" offset="0s" duration="\(totalDurationSeconds)s" start="3600s">
 """
 
         var templateB = ""
@@ -209,8 +219,8 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             if let str: String = line.caption {
                 if str.count > 0 {
                     templateB += """
-                    <spine lane="1" offset="3600s">
-                        <title name="\(str)" offset="0s" ref="r2" duration="5600/3000s" start="3600s">
+                    <spine lane="1" offset="\(line.startingTimeSecondsOff3600String)">
+                        <title name="\(str)" offset="0s" ref="r2" duration="\(line.durationTimeSecondsString)" start="3600s">
                             <param name="Position" key="9999/999166631/999166633/1/100/101" value="0.5 -370.516"/>
                             <param name="Flatten" key="9999/999166631/999166633/2/351" value="1"/>
                             <param name="Alignment" key="9999/999166631/999166633/2/354/999169573/401" value="1 (Center)"/>
@@ -219,9 +229,9 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
                             <param name="Distance" key="9999/999166631/999166633/5/999166635/21/27" value="4"/>
                             <param name="Blur" key="9999/999166631/999166633/5/999166635/21/75" value="1.12 1.12"/>
                             <text>
-                                <text-style ref="ts\(i)">\(str)</text-style>
+                                <text-style ref="ts\(i + 1)">\(str)</text-style>
                             </text>
-                            <text-style-def id="ts\(i)">
+                            <text-style-def id="ts\(i + 1)">
                                 <text-style font="Helvetica" fontSize="45" fontFace="Regular" fontColor="1 1 1 1" shadowColor="0 0 0 0.6097" shadowOffset="4 315" shadowBlurRadius="2.24" alignment="center"/>
                             </text-style-def>
                         </title>
@@ -283,6 +293,10 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         saveToDisk(.srt)
     }
     
+    @IBAction func saveFCPXMLToDisk(_ sender: Any) {
+        saveToDisk(.fcpXML)
+    }
+
     func saveToDisk(_ type: FileType) {
         arrayForCaption.sort(by: { (this, that) -> Bool in
             if let thisST = this.startingTime, let thatST = that.startingTime {
@@ -306,8 +320,13 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
                 NSFileCoordinator.removeFilePresenter(fData)
                 NSFileCoordinator.addFilePresenter(fData)
                 print(fData.ext)
+            } else if type == .fcpXML {
+                text = generateFCPXMLFromArray()
+                fData.ext = "fcpxml"
+                NSFileCoordinator.removeFilePresenter(fData)
+                NSFileCoordinator.addFilePresenter(fData)
+                print(fData.ext)
             }
-
         }
         
         guard let origonalVideoName = self.videoURL?.lastPathComponent else {
@@ -318,6 +337,9 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         var newSubtitleName = "\(ogVN).srt"
         if (type == .txt) {
             newSubtitleName = "\(ogVN).txt"
+        }
+        if (type == .fcpXML) {
+            newSubtitleName = "\(ogVN).fcpxml"
         }
 
         guard let newPath = self.videoURL?.deletingLastPathComponent().appendingPathComponent(newSubtitleName) else {

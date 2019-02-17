@@ -21,11 +21,11 @@ class CaptionLine: CustomStringConvertible {
         self.endingTime = endingTime
     }
 
-    var startingTimeSecondsString: String {
+    var startingTimeSecondsOff3600String: String {
         guard let start = startingTime else {
             return "0s"
         }
-        let st = CMTimeGetSeconds(start)
+        let st = CMTimeGetSeconds(start) + 3600
         return "\(st)s"
     }
 
@@ -36,6 +36,16 @@ class CaptionLine: CustomStringConvertible {
         let en = CMTimeGetSeconds(end)
         return "\(en)s"
     }
+
+    var durationTimeSecondsString: String {
+        guard let start = startingTime, let end = endingTime else {
+            return "0s"
+        }
+        let st = CMTimeGetSeconds(start)
+        let en = CMTimeGetSeconds(end)
+        return "\(en - st)s"
+    }
+
 
     var startingTimeString: String {
         guard let start = startingTime else {
