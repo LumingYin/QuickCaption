@@ -1,6 +1,7 @@
-# Quick Caption
-
+## Quick Caption
 Quick Caption is your one-stop solution to transcribe video or audio clips, then automatically apply timecode throughout the transcription process, and generate either a .SRT subtitle file or a .TXT transcription file.
+
+[Download Quick Caption](https://github.com/LumingYin/Caption/releases/latest)
 
 ![](https://raw.githubusercontent.com/LumingYin/Caption/master/screenshot.jpg "Screenshot of Quick Caption")
 
@@ -17,3 +18,6 @@ Quickly transcribe your video:
 Export:
 - Export into .SRT format to distribute your created caption alongside with your video or through the web
 - Export into .TXT format for a plain-text transcript
+
+Dark Mode:
+- Quick Caption is now updated to support Dark Mode on macOS Mojave.
