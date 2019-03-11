@@ -19,7 +19,11 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
     var fileData: FileData?
-    var episode: EpisodeProject!
+    var episode: EpisodeProject! {
+        didSet {
+            
+        }
+    }
 
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {

@@ -813,15 +813,13 @@
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YL2-35-kpe">
                                                                             <rect key="frame" x="177" y="9" width="85" height="48"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="85" id="h1H-Jp-tyX"/>
+                                                                                <constraint firstAttribute="height" constant="48" id="gD2-l0-h5z"/>
+                                                                                <constraint firstAttribute="width" constant="85" id="u3w-Mr-lZx"/>
                                                                             </constraints>
-                                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSAdvanced" id="Fg1-01-AYg"/>
+                                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="bunny" id="Fg1-01-AYg"/>
                                                                         </imageView>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8h0-Sb-5z1">
-                                                                            <rect key="frame" x="13" y="34" width="158" height="19"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="19" id="fQA-Ol-uMF"/>
-                                                                            </constraints>
+                                                                            <rect key="frame" x="13" y="33" width="146" height="18"/>
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Video File Name.mp4" id="NbH-o3-CnA">
                                                                                 <font key="font" metaFont="systemMedium" size="14"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -829,10 +827,7 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xoj-mN-yXG">
-                                                                            <rect key="frame" x="13" y="13" width="158" height="19"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="19" id="arV-ed-sKk"/>
-                                                                            </constraints>
+                                                                            <rect key="frame" x="13" y="13" width="77" height="16"/>
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Feb 12, 2019" id="xsh-bU-jEg">
                                                                                 <font key="font" metaFont="system" size="12"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -841,15 +836,12 @@
                                                                         </textField>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="8h0-Sb-5z1" firstAttribute="top" secondItem="XBe-5u-d4N" secondAttribute="top" constant="13" id="1fY-l4-Lqg"/>
-                                                                        <constraint firstItem="8h0-Sb-5z1" firstAttribute="leading" secondItem="XBe-5u-d4N" secondAttribute="leading" constant="15" id="5C5-K8-PSx"/>
-                                                                        <constraint firstItem="YL2-35-kpe" firstAttribute="leading" secondItem="xoj-mN-yXG" secondAttribute="trailing" constant="8" symbolic="YES" id="Cxl-UB-Hxm"/>
-                                                                        <constraint firstItem="xoj-mN-yXG" firstAttribute="top" secondItem="8h0-Sb-5z1" secondAttribute="bottom" constant="2" id="GIT-ch-Rdp"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="YL2-35-kpe" secondAttribute="trailing" constant="11" id="Hhh-5K-B8J"/>
-                                                                        <constraint firstItem="YL2-35-kpe" firstAttribute="leading" secondItem="8h0-Sb-5z1" secondAttribute="trailing" constant="8" symbolic="YES" id="SiP-PY-xAr"/>
-                                                                        <constraint firstItem="YL2-35-kpe" firstAttribute="top" secondItem="XBe-5u-d4N" secondAttribute="top" constant="9" id="WZp-LI-LAm"/>
-                                                                        <constraint firstItem="YL2-35-kpe" firstAttribute="centerY" secondItem="XBe-5u-d4N" secondAttribute="centerY" id="nze-Qq-Alf"/>
-                                                                        <constraint firstItem="8h0-Sb-5z1" firstAttribute="leading" secondItem="xoj-mN-yXG" secondAttribute="leading" id="weM-SS-MX9"/>
+                                                                        <constraint firstItem="8h0-Sb-5z1" firstAttribute="leading" secondItem="XBe-5u-d4N" secondAttribute="leading" constant="15" id="3D4-ve-ozx"/>
+                                                                        <constraint firstItem="xoj-mN-yXG" firstAttribute="leading" secondItem="XBe-5u-d4N" secondAttribute="leading" constant="15" id="EzL-S4-fyu"/>
+                                                                        <constraint firstItem="8h0-Sb-5z1" firstAttribute="top" secondItem="XBe-5u-d4N" secondAttribute="top" constant="15" id="Hnt-9Z-WIY"/>
+                                                                        <constraint firstItem="YL2-35-kpe" firstAttribute="centerY" secondItem="XBe-5u-d4N" secondAttribute="centerY" id="f8r-I5-jlf"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="YL2-35-kpe" secondAttribute="trailing" constant="11" id="hYs-Qh-dgw"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="xoj-mN-yXG" secondAttribute="bottom" constant="13" id="omT-Yv-ngM"/>
                                                                     </constraints>
                                                                     <connections>
                                                                         <outlet property="episodePreview" destination="YL2-35-kpe" id="EQN-eQ-9T0"/>
@@ -1720,10 +1712,10 @@
     </scenes>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="NSAdvanced" width="32" height="32"/>
         <image name="NSIChatTheaterTemplate" width="15" height="13"/>
         <image name="NSPathTemplate" width="16" height="10"/>
         <image name="NSShareTemplate" width="11" height="16"/>
+        <image name="bunny" width="310" height="174"/>
         <image name="file_fcpxml" width="174" height="185"/>
         <image name="file_srt" width="175" height="184"/>
         <image name="file_txt" width="175" height="184"/>
