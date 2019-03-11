@@ -16,12 +16,12 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        // Do view setup here.
     }
 
     func addNewProject() {
         episodeProjects.append(EpisodeProject())
         tableView.reloadData()
+        tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -31,6 +31,21 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             return view
         }
         return nil
+    }
+
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        if tableView.selectedRow < 0 {
+            return
+        }
+        let project = episodeProjects[tableView.selectedRow]
+        print("Selected: \(project)")
+    }
+
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        if row < 0 {
+            return false
+        }
+        return true
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {

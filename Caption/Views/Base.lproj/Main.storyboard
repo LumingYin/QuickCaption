@@ -906,7 +906,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="WhH-E3-1w2">
-                                <rect key="frame" x="0.0" y="150" width="520" height="62"/>
+                                <rect key="frame" x="0.0" y="230" width="520" height="62"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dcv-fO-TIm">
                                         <rect key="frame" x="10" y="23" width="136" height="17"/>
@@ -1086,31 +1086,31 @@
                                 </constraints>
                             </customView>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEG-SY-Hn2">
-                                <rect key="frame" x="0.0" y="0.0" width="520" height="150"/>
+                                <rect key="frame" x="0.0" y="0.0" width="520" height="230"/>
                                 <clipView key="contentView" id="k0n-uO-2Ef">
-                                    <rect key="frame" x="1" y="1" width="503" height="133"/>
+                                    <rect key="frame" x="1" y="1" width="503" height="213"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mHu-9K-0O1">
-                                            <rect key="frame" x="0.0" y="-2513" width="520" height="130"/>
+                                            <rect key="frame" x="0.0" y="-2433" width="520" height="130"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         </customView>
                                     </subviews>
                                 </clipView>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="V95-Hy-NGv"/>
+                                    <constraint firstAttribute="height" constant="230" id="V95-Hy-NGv"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="wxD-Wq-Vsv">
-                                    <rect key="frame" x="1" y="134" width="503" height="15"/>
+                                    <rect key="frame" x="1" y="214" width="503" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="Ilf-GR-hhe">
-                                    <rect key="frame" x="504" y="1" width="15" height="133"/>
+                                    <rect key="frame" x="504" y="1" width="15" height="213"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <avPlayerView controlsStyle="inline" translatesAutoresizingMaskIntoConstraints="NO" id="MMG-zt-4ZZ">
-                                <rect key="frame" x="0.0" y="212" width="520" height="274"/>
+                                <rect key="frame" x="0.0" y="292" width="520" height="194"/>
                             </avPlayerView>
                         </subviews>
                         <constraints>
