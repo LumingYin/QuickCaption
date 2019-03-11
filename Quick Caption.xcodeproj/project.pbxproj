@@ -18,6 +18,11 @@
 		321DC3F0223611F00038C8FB /* ResizableInputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3EF223611F00038C8FB /* ResizableInputContainerView.swift */; };
 		321DC3F5223615E90038C8FB /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3F4223615E90038C8FB /* MainSplitViewController.swift */; };
 		321DC3F722361E3D0038C8FB /* CaptionExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3F622361E3D0038C8FB /* CaptionExportViewController.swift */; };
+		321DC3F92236216B0038C8FB /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3F82236216B0038C8FB /* Helper.swift */; };
+		321DC3FB223622BC0038C8FB /* CaptionLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3FA223622BC0038C8FB /* CaptionLine.swift */; };
+		321DC3FD223623500038C8FB /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3FC223623500038C8FB /* Exporter.swift */; };
+		321DC3FF223624B10038C8FB /* EpisodeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3FE223624B10038C8FB /* EpisodeProject.swift */; };
+		321DC401223629030038C8FB /* SidebarEpisodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC400223629030038C8FB /* SidebarEpisodeTableCellView.swift */; };
 		323EE3BB2219439F00CC22B3 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B52219439F00CC22B3 /* AppCenter.framework */; };
 		323EE3BC2219439F00CC22B3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B62219439F00CC22B3 /* Sparkle.framework */; };
 		323EE3BD2219439F00CC22B3 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */; };
@@ -28,7 +33,6 @@
 		324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324971D122190D1C00562223 /* CaptionWindowController.swift */; };
 		324971DB221929C000562223 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 324971DA221929C000562223 /* Security.framework */; };
 		3C43B6942068A7A000219EF6 /* film.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3C43B6932068A7A000219EF6 /* film.icns */; };
-		3C48DF242065D80800AD29B6 /* CaptionLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C48DF232065D80800AD29B6 /* CaptionLine.swift */; };
 		3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7D2E582066F96100F5B22F /* FileCoordinator.swift */; };
 		562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A68841F2D4F5E000E6B16 /* AppDelegate.swift */; };
 		562A68871F2D4F5E000E6B16 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A68861F2D4F5E000E6B16 /* MovieViewController.swift */; };
@@ -64,6 +68,11 @@
 		321DC3EF223611F00038C8FB /* ResizableInputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableInputContainerView.swift; sourceTree = "<group>"; };
 		321DC3F4223615E90038C8FB /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		321DC3F622361E3D0038C8FB /* CaptionExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionExportViewController.swift; sourceTree = "<group>"; };
+		321DC3F82236216B0038C8FB /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		321DC3FA223622BC0038C8FB /* CaptionLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionLine.swift; sourceTree = "<group>"; };
+		321DC3FC223623500038C8FB /* Exporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
+		321DC3FE223624B10038C8FB /* EpisodeProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeProject.swift; sourceTree = "<group>"; };
+		321DC400223629030038C8FB /* SidebarEpisodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarEpisodeTableCellView.swift; sourceTree = "<group>"; };
 		323EE3B52219439F00CC22B3 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Caption/Frameworks/AppCenter.framework; sourceTree = "<group>"; };
 		323EE3B62219439F00CC22B3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Caption/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Caption/Frameworks/AppCenterCrashes.framework; sourceTree = "<group>"; };
@@ -72,7 +81,6 @@
 		324971D122190D1C00562223 /* CaptionWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionWindowController.swift; sourceTree = "<group>"; };
 		324971DA221929C000562223 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3C43B6932068A7A000219EF6 /* film.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = film.icns; sourceTree = "<group>"; };
-		3C48DF232065D80800AD29B6 /* CaptionLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionLine.swift; sourceTree = "<group>"; };
 		3C7D2E572066F7F600F5B22F /* Quick Caption.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Quick Caption.entitlements"; sourceTree = "<group>"; };
 		3C7D2E582066F96100F5B22F /* FileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCoordinator.swift; sourceTree = "<group>"; };
 		562A68811F2D4F5E000E6B16 /* Quick Caption.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quick Caption.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				562A688A1F2D4F5E000E6B16 /* Main.storyboard */,
+				321DC400223629030038C8FB /* SidebarEpisodeTableCellView.swift */,
 				321DC3F622361E3D0038C8FB /* CaptionExportViewController.swift */,
 				321DC3F4223615E90038C8FB /* MainSplitViewController.swift */,
 				562A68861F2D4F5E000E6B16 /* MovieViewController.swift */,
@@ -135,7 +144,9 @@
 			isa = PBXGroup;
 			children = (
 				3C7D2E582066F96100F5B22F /* FileCoordinator.swift */,
-				3C48DF232065D80800AD29B6 /* CaptionLine.swift */,
+				321DC3FC223623500038C8FB /* Exporter.swift */,
+				321DC3FA223622BC0038C8FB /* CaptionLine.swift */,
+				321DC3FE223624B10038C8FB /* EpisodeProject.swift */,
 				321DC3C32235FE650038C8FB /* Caption.xcdatamodeld */,
 			);
 			path = Model;
@@ -145,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				562A68841F2D4F5E000E6B16 /* AppDelegate.swift */,
+				321DC3F82236216B0038C8FB /* Helper.swift */,
 				3C43B6932068A7A000219EF6 /* film.icns */,
 				562A68881F2D4F5E000E6B16 /* Assets.xcassets */,
 				562A688D1F2D4F5E000E6B16 /* Info.plist */,
@@ -284,13 +296,17 @@
 			files = (
 				3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */,
 				321DC3F722361E3D0038C8FB /* CaptionExportViewController.swift in Sources */,
+				321DC401223629030038C8FB /* SidebarEpisodeTableCellView.swift in Sources */,
 				321DC3D222360F410038C8FB /* FontViewController.swift in Sources */,
-				3C48DF242065D80800AD29B6 /* CaptionLine.swift in Sources */,
 				562A68871F2D4F5E000E6B16 /* MovieViewController.swift in Sources */,
 				321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */,
 				321DC3F5223615E90038C8FB /* MainSplitViewController.swift in Sources */,
+				321DC3FB223622BC0038C8FB /* CaptionLine.swift in Sources */,
+				321DC3FF223624B10038C8FB /* EpisodeProject.swift in Sources */,
 				321DC3F0223611F00038C8FB /* ResizableInputContainerView.swift in Sources */,
+				321DC3F92236216B0038C8FB /* Helper.swift in Sources */,
 				562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */,
+				321DC3FD223623500038C8FB /* Exporter.swift in Sources */,
 				321DC3CE22360ADC0038C8FB /* SidebarViewController.swift in Sources */,
 				321DC3D022360F310038C8FB /* SubtitlesViewController.swift in Sources */,
 				321DC3D4223610750038C8FB /* SideTabViewController.swift in Sources */,

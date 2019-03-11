@@ -16,9 +16,37 @@ import AppCenterCrashes
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    static func sourceListVC() -> SidebarViewController? {
+        if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController, let sourceListVC = splitVC.splitViewItems[0].viewController as? SidebarViewController {
+            return sourceListVC
+        }
+        return nil
+    }
+
     static func movieVC() -> MovieViewController? {
         if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController, let movieVC = splitVC.splitViewItems[1].viewController as? MovieViewController {
             return movieVC
+        }
+        return nil
+    }
+
+    static func sideTabVC() -> SideTabViewController? {
+        if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController, let tabVC = splitVC.splitViewItems[2].viewController as? SideTabViewController {
+            return tabVC
+        }
+        return nil
+    }
+
+    static func subtitleVC() -> SubtitlesViewController? {
+        if let tabVC = AppDelegate.sideTabVC(), let subVC = tabVC.tabViewItems[0].viewController as? SubtitlesViewController {
+            return subVC
+        }
+        return nil
+    }
+
+    static func fontVC() -> FontViewController? {
+        if let tabVC = AppDelegate.sideTabVC(), let fontVC = tabVC.tabViewItems[1].viewController as? FontViewController {
+            return fontVC
         }
         return nil
     }

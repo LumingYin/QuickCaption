@@ -33,8 +33,8 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
 
     func windowShouldClose(_ sender: NSWindow) -> Bool {
         if let vc = self.contentViewController as? MovieViewController {
-            if (vc.player != nil) {
-                let response = vc.dialogTwoButton(question: "Save Captions?", text: "Would you like to save your captions before closing?")
+            if (vc.episode.player != nil) {
+                let response = Helper.dialogTwoButton(question: "Save Captions?", text: "Would you like to save your captions before closing?")
                 print(response)
                 if response {
                     vc.saveToDisk(.srt)
@@ -49,6 +49,7 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
     }
 
     @IBAction func addNewProjectClicked(_ sender: Any) {
+        AppDelegate.sourceListVC()?.addNewProject()
     }
 
     @IBAction func importVideoFootageClicked(_ sender: Any) {
