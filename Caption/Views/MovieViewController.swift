@@ -12,7 +12,7 @@ import AVFoundation
 import AppCenter
 import AppCenterAnalytics
 
-class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
+class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
 
     @IBOutlet weak var transcribeTextField: NSTextField!
     @IBOutlet weak var resultTableView: NSTableView!

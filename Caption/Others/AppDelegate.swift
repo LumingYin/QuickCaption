@@ -76,18 +76,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     @IBAction func openVideoFile(_ sender: NSMenuItem) {
-        if let vc = NSApplication.shared.mainWindow?.contentViewController as? ViewController {
+        if let vc = NSApplication.shared.mainWindow?.contentViewController as? MovieViewController {
             vc.openFile(self)
         }
     }
     
     @IBAction func saveSRTFile(_ sender: NSMenuItem) {
-        if let vc = NSApplication.shared.mainWindow?.contentViewController as? ViewController {
+        if let vc = NSApplication.shared.mainWindow?.contentViewController as? MovieViewController {
             vc.saveToDisk(.srt)
         }
     }
     @IBAction func saveTXTFile(_ sender: Any) {
-        if let vc = NSApplication.shared.mainWindow?.contentViewController as? ViewController {
+        if let vc = NSApplication.shared.mainWindow?.contentViewController as? MovieViewController {
             vc.saveToDisk(.txt)
         }
     }
