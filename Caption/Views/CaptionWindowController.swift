@@ -64,6 +64,9 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
     }
 
     @IBAction func contentSettingsSidebarClicked(_ sender: NSSegmentedControl) {
+        if sender.selectedSegment < 2 {
+            AppDelegate.sideTabVC()?.tabView.selectTabViewItem(at: sender.indexOfSelectedItem)
+        }
     }
 
 }
