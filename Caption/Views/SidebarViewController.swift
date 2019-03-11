@@ -18,6 +18,13 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         tableView.dataSource = self
     }
 
+    override func viewDidAppear() {
+        if (episodeProjects.count == 0) {
+            addNewProject()
+            updateSelectRow(index: 0)
+        }
+    }
+
     func addNewProject() {
         episodeProjects.append(EpisodeProject())
         tableView.reloadData()
@@ -34,10 +41,17 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
 
     func tableViewSelectionDidChange(_ notification: Notification) {
-        if tableView.selectedRow < 0 {
+        updateSelectRow(index: tableView.selectedRow)
+    }
+
+    func updateSelectRow(index: Int) {
+        if index < 0 {
             return
         }
-        let project = episodeProjects[tableView.selectedRow]
+        let project = episodeProjects[index]
+        AppDelegate.movieVC()?.episode = project
+        AppDelegate.subtitleVC()?.episode = project
+        AppDelegate.subtitleVC()?.configurateSubtitleVC()
         print("Selected: \(project)")
     }
 

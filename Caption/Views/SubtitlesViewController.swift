@@ -23,7 +23,6 @@ class SubtitlesViewController: NSViewController, NSTableViewDelegate, NSTableVie
         self.resultTableView.delegate = self
         self.resultTableView.dataSource = self
         transcribeTextField.delegate = self
-        episode = AppDelegate.movieVC()?.episode
     }
 
     // MARK: - TextField Controls
