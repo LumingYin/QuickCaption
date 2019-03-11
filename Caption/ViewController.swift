@@ -9,6 +9,8 @@
 import Cocoa
 import AVKit
 import AVFoundation
+import AppCenter
+import AppCenterAnalytics
 
 class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
 
@@ -103,6 +105,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
                 self.arrayForCaption = []
                 self.videoDescription = result.lastPathComponent
                 self.playVideo(result)
+                MSAnalytics.trackEvent("New file opened", withProperties: ["Name": (path as NSString).lastPathComponent])
             }
         }
         

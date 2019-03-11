@@ -9,14 +9,24 @@
 import Cocoa
 import LetsMove
 import Sparkle
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        #if DEBUG
+        #else
         PFMoveToApplicationsFolderIfNecessary()
+        #endif
         SUUpdater.shared()?.checkForUpdatesInBackground()
         UserDefaults.standard.set(true, forKey: "SUAutomaticallyUpdate")
+        MSAppCenter.start("c5be1193-d482-4d0e-99a9-b5901f40d6f3", withServices:[
+            MSAnalytics.self,
+            MSCrashes.self,
+            ])
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
