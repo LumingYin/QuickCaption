@@ -12,6 +12,10 @@
 		321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */; };
 		321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C92236037C0038C8FB /* SamplesExtractor.swift */; };
 		321DC3CE22360ADC0038C8FB /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3CD22360ADC0038C8FB /* SidebarViewController.swift */; };
+		321DC3D022360F310038C8FB /* SubtitlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3CF22360F310038C8FB /* SubtitlesViewController.swift */; };
+		321DC3D222360F410038C8FB /* FontViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3D122360F410038C8FB /* FontViewController.swift */; };
+		321DC3D4223610750038C8FB /* SideTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3D3223610750038C8FB /* SideTabViewController.swift */; };
+		321DC3F0223611F00038C8FB /* ResizableInputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3EF223611F00038C8FB /* ResizableInputContainerView.swift */; };
 		323EE3BB2219439F00CC22B3 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B52219439F00CC22B3 /* AppCenter.framework */; };
 		323EE3BC2219439F00CC22B3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B62219439F00CC22B3 /* Sparkle.framework */; };
 		323EE3BD2219439F00CC22B3 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */; };
@@ -52,6 +56,10 @@
 		321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveFormDrawer.swift; sourceTree = "<group>"; };
 		321DC3C92236037C0038C8FB /* SamplesExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesExtractor.swift; sourceTree = "<group>"; };
 		321DC3CD22360ADC0038C8FB /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
+		321DC3CF22360F310038C8FB /* SubtitlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesViewController.swift; sourceTree = "<group>"; };
+		321DC3D122360F410038C8FB /* FontViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontViewController.swift; sourceTree = "<group>"; };
+		321DC3D3223610750038C8FB /* SideTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideTabViewController.swift; sourceTree = "<group>"; };
+		321DC3EF223611F00038C8FB /* ResizableInputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableInputContainerView.swift; sourceTree = "<group>"; };
 		323EE3B52219439F00CC22B3 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Caption/Frameworks/AppCenter.framework; sourceTree = "<group>"; };
 		323EE3B62219439F00CC22B3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Caption/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Caption/Frameworks/AppCenterCrashes.framework; sourceTree = "<group>"; };
@@ -131,8 +139,12 @@
 				3C7D2E582066F96100F5B22F /* FileCoordinator.swift */,
 				3C48DF232065D80800AD29B6 /* CaptionLine.swift */,
 				321DC3CD22360ADC0038C8FB /* SidebarViewController.swift */,
+				321DC3CF22360F310038C8FB /* SubtitlesViewController.swift */,
+				321DC3D122360F410038C8FB /* FontViewController.swift */,
 				562A68881F2D4F5E000E6B16 /* Assets.xcassets */,
 				562A688A1F2D4F5E000E6B16 /* Main.storyboard */,
+				321DC3D3223610750038C8FB /* SideTabViewController.swift */,
+				321DC3EF223611F00038C8FB /* ResizableInputContainerView.swift */,
 				562A688D1F2D4F5E000E6B16 /* Info.plist */,
 				321DC3C32235FE650038C8FB /* Caption.xcdatamodeld */,
 			);
@@ -241,11 +253,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */,
+				321DC3D222360F410038C8FB /* FontViewController.swift in Sources */,
 				3C48DF242065D80800AD29B6 /* CaptionLine.swift in Sources */,
 				562A68871F2D4F5E000E6B16 /* ViewController.swift in Sources */,
 				321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */,
+				321DC3F0223611F00038C8FB /* ResizableInputContainerView.swift in Sources */,
 				562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */,
 				321DC3CE22360ADC0038C8FB /* SidebarViewController.swift in Sources */,
+				321DC3D022360F310038C8FB /* SubtitlesViewController.swift in Sources */,
+				321DC3D4223610750038C8FB /* SideTabViewController.swift in Sources */,
 				321DC3CA2236037C0038C8FB /* ExampleViewController.swift in Sources */,
 				321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */,
 				321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */,
