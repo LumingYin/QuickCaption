@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C32235FE650038C8FB /* Caption.xcdatamodeld */; };
 		323EE3BB2219439F00CC22B3 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B52219439F00CC22B3 /* AppCenter.framework */; };
 		323EE3BC2219439F00CC22B3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B62219439F00CC22B3 /* Sparkle.framework */; };
 		323EE3BD2219439F00CC22B3 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */; };
@@ -42,6 +43,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		321DC3C42235FE650038C8FB /* Caption.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Caption.xcdatamodel; sourceTree = "<group>"; };
 		323EE3B52219439F00CC22B3 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Caption/Frameworks/AppCenter.framework; sourceTree = "<group>"; };
 		323EE3B62219439F00CC22B3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Caption/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Caption/Frameworks/AppCenterCrashes.framework; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				562A68881F2D4F5E000E6B16 /* Assets.xcassets */,
 				562A688A1F2D4F5E000E6B16 /* Main.storyboard */,
 				562A688D1F2D4F5E000E6B16 /* Info.plist */,
+				321DC3C32235FE650038C8FB /* Caption.xcdatamodeld */,
 			);
 			path = Caption;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				3C48DF242065D80800AD29B6 /* CaptionLine.swift in Sources */,
 				562A68871F2D4F5E000E6B16 /* ViewController.swift in Sources */,
 				562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */,
+				321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */,
 				324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,7 +367,7 @@
 				);
 				INFOPLIST_FILE = Caption/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dim.Caption;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -387,7 +391,7 @@
 				);
 				INFOPLIST_FILE = Caption/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dim.Caption;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -417,6 +421,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		321DC3C32235FE650038C8FB /* Caption.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				321DC3C42235FE650038C8FB /* Caption.xcdatamodel */,
+			);
+			currentVersion = 321DC3C42235FE650038C8FB /* Caption.xcdatamodel */;
+			path = Caption.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 562A68791F2D4F5E000E6B16 /* Project object */;
 }
