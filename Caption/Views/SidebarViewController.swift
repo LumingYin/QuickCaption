@@ -25,5 +25,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 66
     }
+
+    
     
 }

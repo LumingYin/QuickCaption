@@ -16,6 +16,13 @@ import AppCenterCrashes
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    static func movieVC() -> MovieViewController? {
+        if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController, let movieVC = splitVC.splitViewItems[1].viewController as? MovieViewController {
+            return movieVC
+        }
+        return nil
+    }
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         #if DEBUG
         #else
@@ -76,20 +83,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     @IBAction func openVideoFile(_ sender: NSMenuItem) {
-        if let vc = NSApplication.shared.mainWindow?.contentViewController as? MovieViewController {
-            vc.openFile(self)
-        }
+        AppDelegate.movieVC()?.openFile(self)
     }
     
     @IBAction func saveSRTFile(_ sender: NSMenuItem) {
-        if let vc = NSApplication.shared.mainWindow?.contentViewController as? MovieViewController {
-            vc.saveToDisk(.srt)
-        }
+        AppDelegate.movieVC()?.saveToDisk(.srt)
     }
+    
     @IBAction func saveTXTFile(_ sender: Any) {
-        if let vc = NSApplication.shared.mainWindow?.contentViewController as? MovieViewController {
-            vc.saveToDisk(.txt)
-        }
+        AppDelegate.movieVC()?.saveToDisk(.txt)
     }
 
 

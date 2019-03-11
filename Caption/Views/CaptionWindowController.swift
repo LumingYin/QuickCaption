@@ -9,6 +9,8 @@
 import Cocoa
 
 class CaptionWindowController: NSWindowController, NSWindowDelegate {
+    weak var splitViewController: MainSplitViewController!
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         shouldCascadeWindows = true
@@ -24,6 +26,9 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
         window?.titleVisibility = .hidden
         self.window?.delegate = self
         shouldCascadeWindows = true
+        if let svc = contentViewController as? MainSplitViewController {
+            self.splitViewController = svc
+        }
     }
 
     func windowShouldClose(_ sender: NSWindow) -> Bool {
@@ -37,6 +42,27 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
             }
         }
         return true
+    }
+
+    @IBAction func toggleSidebarList(_ sender: Any) {
+        splitViewController.splitViewItems[0].isCollapsed = !splitViewController.splitViewItems[0].isCollapsed
+    }
+
+    @IBAction func addNewProjectClicked(_ sender: Any) {
+    }
+
+    @IBAction func importVideoFootageClicked(_ sender: Any) {
+        let movieVC = splitViewController.splitViewItems[1].viewController as! MovieViewController
+        movieVC.openFile(self)
+    }
+
+    @IBAction func shareResultsButtonClicked(_ sender: NSButton) {
+        if let vc = storyboard?.instantiateController(withIdentifier: "ExportCaptions") as? NSViewController {
+            self.contentViewController?.present(vc, asPopoverRelativeTo: sender.bounds, of: sender, preferredEdge: NSRectEdge.maxY, behavior: .transient)
+        }
+    }
+
+    @IBAction func contentSettingsSidebarClicked(_ sender: NSSegmentedControl) {
     }
 
 }
