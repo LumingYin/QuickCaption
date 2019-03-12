@@ -15,6 +15,9 @@ import AppCenterCrashes
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    @IBOutlet weak var darkMenuItem: NSMenuItem!
+    @IBOutlet weak var lightMenuItem: NSMenuItem!
+    @IBOutlet weak var followSystemMenuItem: NSMenuItem!
 
     static func sourceListVC() -> SidebarViewController? {
         if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController, let sourceListVC = splitVC.splitViewItems[0].viewController as? SidebarViewController {
@@ -49,6 +52,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return fontVC
         }
         return nil
+    }
+
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        if let pref = UserDefaults.standard.value(forKey: "AppearancePreference") as? Int {
+            if pref == 0 {
+                useDarkAppearance(self)
+            } else if pref == 1 {
+                useLightAppearance(self)
+            } else if pref == 2 {
+                followSystemAppearance(self)
+            }
+        } else {
+            useDarkAppearance(self)
+        }
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -120,6 +137,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func saveTXTFile(_ sender: Any) {
         AppDelegate.movieVC()?.saveToDisk(.txt)
+    }
+
+    @IBAction func useDarkAppearance(_ sender: Any) {
+        if #available(OSX 10.14, *) {
+            NSApp.appearance = NSAppearance(named: .darkAqua)
+            UserDefaults.standard.setValue(0, forKey: "AppearancePreference")
+            darkMenuItem.state = .on
+            lightMenuItem.state = .off
+            followSystemMenuItem.state = .off
+        }
+    }
+
+    @IBAction func useLightAppearance(_ sender: Any) {
+        if #available(OSX 10.14, *) {
+            NSApp.appearance = NSAppearance(named: .aqua)
+            UserDefaults.standard.setValue(1, forKey: "AppearancePreference")
+            darkMenuItem.state = .off
+            lightMenuItem.state = .on
+            followSystemMenuItem.state = .off
+        }
+    }
+
+    @IBAction func followSystemAppearance(_ sender: Any) {
+        if #available(OSX 10.14, *) {
+            NSApp.appearance = nil
+            UserDefaults.standard.setValue(2, forKey: "AppearancePreference")
+            darkMenuItem.state = .off
+            lightMenuItem.state = .off
+            followSystemMenuItem.state = .on
+        }
     }
 
 

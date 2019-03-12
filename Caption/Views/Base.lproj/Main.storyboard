@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.68" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment version="101200" identifier="macosx"/>
-        <plugIn identifier="com.apple.AVKitIBPlugin" version="14460.31"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.AVKitIBPlugin" version="14490.68"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.68"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -82,16 +82,23 @@
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Save SRT…" keyEquivalent="s" id="pxx-59-PXV">
-                                            <connections>
-                                                <action selector="saveSRTFile:" target="Voe-Tx-rLC" id="jwM-0q-cGw"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Save TXT…" keyEquivalent="s" id="HAT-IQ-Cm1">
-                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="saveTXTFile:" target="Voe-Tx-rLC" id="gM2-j9-f9C"/>
-                                            </connections>
+                                        <menuItem title="Export To" id="dfX-ue-SZc">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Export To" id="2Pg-4i-meh">
+                                                <items>
+                                                    <menuItem title="SRT…" keyEquivalent="s" id="pxx-59-PXV">
+                                                        <connections>
+                                                            <action selector="saveSRTFile:" target="Voe-Tx-rLC" id="jwM-0q-cGw"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="TXT…" keyEquivalent="s" id="HAT-IQ-Cm1">
+                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                                        <connections>
+                                                            <action selector="saveTXTFile:" target="Voe-Tx-rLC" id="gM2-j9-f9C"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
                                         </menuItem>
                                     </items>
                                 </menu>
@@ -561,6 +568,32 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
                                     <items>
+                                        <menuItem title="Appearance" id="SRd-gp-fOx">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Appearance" id="WyC-bM-jdc">
+                                                <items>
+                                                    <menuItem title="Dark" id="FHr-d1-Arm">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="useDarkAppearance:" target="Voe-Tx-rLC" id="DTL-Nd-yQr"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Light" id="zb5-SD-mIj">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="useLightAppearance:" target="Voe-Tx-rLC" id="Qcc-hM-Bb0"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Follow System Appearance" id="p2f-8Z-e6W">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="followSystemAppearance:" target="Voe-Tx-rLC" id="Sc4-n1-3Wg"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="UfG-bW-W0U"/>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
@@ -613,7 +646,13 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Quick_Caption" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Quick_Caption" customModuleProvider="target">
+                    <connections>
+                        <outlet property="darkMenuItem" destination="FHr-d1-Arm" id="usH-A6-gZu"/>
+                        <outlet property="followSystemMenuItem" destination="p2f-8Z-e6W" id="1dv-ko-hmp"/>
+                        <outlet property="lightMenuItem" destination="zb5-SD-mIj" id="WQM-Qe-hyW"/>
+                    </connections>
+                </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="Vsf-6z-eCN" customClass="SUUpdater"/>
             </objects>
@@ -828,7 +867,7 @@
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xoj-mN-yXG">
                                                                             <rect key="frame" x="13" y="13" width="77" height="16"/>
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Feb 12, 2019" id="xsh-bU-jEg">
-                                                                                <font key="font" metaFont="system" size="12"/>
+                                                                                <font key="font" metaFont="cellTitle"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -1181,13 +1220,13 @@
                                             <action selector="captionTextFieldDidChange:" target="b2M-Hl-zi7" id="cBg-T1-ybY"/>
                                         </connections>
                                     </textField>
-                                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JyG-MX-P3Y">
+                                    <scrollView autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JyG-MX-P3Y">
                                         <rect key="frame" x="20" y="60" width="160" height="380"/>
                                         <clipView key="contentView" id="bPV-sw-sJG">
                                             <rect key="frame" x="1" y="0.0" width="158" height="364"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="yJn-rO-Rfv" viewBased="YES" id="dEe-LC-xJc">
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" rowSizeStyle="automatic" headerView="yJn-rO-Rfv" viewBased="YES" id="dEe-LC-xJc">
                                                     <rect key="frame" x="0.0" y="0.0" width="205" height="339"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
