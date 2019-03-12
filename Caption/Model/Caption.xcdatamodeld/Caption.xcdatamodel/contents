@@ -17,7 +17,7 @@
         <attribute name="styleFontWeight" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnailURL" optional="YES" attributeType="URI" syncable="YES"/>
         <attribute name="videoDescription" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="videoDuration" optional="YES" syncable="YES"/>
+        <attribute name="videoDuration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="videoURL" optional="YES" attributeType="URI" syncable="YES"/>
         <relationship name="arrayForCaption" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CaptionLine" inverseName="episodeProject" inverseEntity="CaptionLine" syncable="YES"/>
     </entity>

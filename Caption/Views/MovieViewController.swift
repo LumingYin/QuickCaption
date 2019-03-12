@@ -15,7 +15,6 @@ import AppCenterAnalytics
 class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
-    var fileData: FileData?
     var episode: EpisodeProject! {
         didSet {
             
@@ -44,8 +43,6 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         
         dialog.beginSheetModal(for: self.view.window!) { (result) in
             if let result = dialog.url, let path = dialog.url?.path {
-                self.fileData = FileData(path: path)
-                NSFileCoordinator.addFilePresenter(self.fileData!)
 //                self.saveToDisk(.srt)
                 if self.episode == nil {
                     AppDelegate.sourceListVC()?.updateSelectRow(index: 0)
@@ -91,6 +88,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             }
             self.timeLabel.stringValue = "\(self.episode.framerate)fps  |  \(self.episode.videoDescription ?? "")"
             self.episode.creationDate = NSDate()
+            self.episode.videoDuration = Float(CMTimeGetSeconds((self.episode.player?.currentItem?.asset.duration)!))
         } else {
             self.episode.modifiedDate = NSDate()
         }
@@ -106,7 +104,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             let imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
             let thumbnail = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
             let desktopURL = FileManager.default.urls(for: .allLibrariesDirectory, in: .userDomainMask).first!
-            let destinationURL = desktopURL.appendingPathComponent("\(NSUUID().uuidString).png")
+            let destinationURL = desktopURL.appendingPathComponent("CaptionStudio").appendingPathComponent("\(NSUUID().uuidString).png")
             let result = thumbnail.pngWrite(to: destinationURL)
             print("Writing thumbnail: \(result)")
             self.episode.thumbnailURL = destinationURL
@@ -137,29 +135,19 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         })
 
         var text = "Export is unsuccessful."
+        var ext = ""
         
-        if let fData = fileData {
-            if type == .srt {
-                text = Exporter.generateSRTFromArray(arrayForCaption: copiedArray)
-                fData.ext = "srt"
-                NSFileCoordinator.removeFilePresenter(fData)
-                NSFileCoordinator.addFilePresenter(fData)
-                print(fData.ext)
-            } else if type == .txt {
-                text = Exporter.generateTXTFromArray(arrayForCaption: copiedArray)
-                fData.ext = "txt"
-                NSFileCoordinator.removeFilePresenter(fData)
-                NSFileCoordinator.addFilePresenter(fData)
-                print(fData.ext)
-            } else if type == .fcpXML {
-                text = Exporter.generateFCPXMLFromArray(player: episode.player, arrayForCaption: copiedArray)
-                fData.ext = "fcpxml"
-                NSFileCoordinator.removeFilePresenter(fData)
-                NSFileCoordinator.addFilePresenter(fData)
-                print(fData.ext)
-            }
+        if type == .srt {
+            text = Exporter.generateSRTFromArray(arrayForCaption: copiedArray)
+            ext = "srt"
+        } else if type == .txt {
+            text = Exporter.generateTXTFromArray(arrayForCaption: copiedArray)
+            ext = "txt"
+        } else if type == .fcpXML {
+            text = Exporter.generateFCPXMLFromArray(player: episode.player, arrayForCaption: copiedArray)
+            ext = "fcpxml"
         }
-        
+
         guard let origonalVideoName = self.episode.videoURL?.lastPathComponent else {
             return
         }
@@ -177,24 +165,15 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             return
         }
         
-        if let fData = fileData, let url = fData.presentedItemURL {
-
-            var errorMain: NSError?
-            let coord = NSFileCoordinator(filePresenter: fData)
-            coord.coordinate(writingItemAt: url as URL, options: .forReplacing, error: &errorMain, byAccessor: { writeUrl in
-                print("Write File")
-                do {
-                    try text.write(toFile: writeUrl.path, atomically: true, encoding: String.Encoding.utf8)
-                    _ = Helper.dialogOKCancel(question: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).")
-
-                } catch {
-                    print("Error writing to file: \(error)")
-                    _ = Helper.dialogOKCancel(question: "Saved failed!", text: "Save has failed. \(error)")
-
-                }
-                return
-            })
+        do {
+            try text.write(to: newPath, atomically: true, encoding: String.Encoding.utf8)
+            _ = Helper.dialogOKCancel(question: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).")
         }
+        catch {
+            print("Error writing to file: \(error)")
+            _ = Helper.dialogOKCancel(question: "Saved failed!", text: "Save has failed. \(error)")
+        }
+
     }
 
     func configurateMovieVC() {

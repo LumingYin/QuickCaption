@@ -22,12 +22,14 @@ extension EpisodeProject {
     @NSManaged public var thumbnailURL: URL?
     @NSManaged public var creationDate: NSDate?
     @NSManaged public var modifiedDate: NSDate?
-    @NSManaged public var styleFont: String?
-    @NSManaged public var attribute: String?
-    @NSManaged public var styleColor: String?
-    @NSManaged public var styleSize: String?
-    @NSManaged public var arrayForCaption: NSOrderedSet?
+    @NSManaged public var styleFontFamily: String?
+    @NSManaged public var styleFontWeight: String?
+    @NSManaged public var styleFontColor: String?
+    @NSManaged public var styleFontSize: String?
     @NSManaged public var framerate: Float
+    @NSManaged public var videoDuration: Float
+    @NSManaged public var styleFontShadow: Int16
+    @NSManaged public var arrayForCaption: NSOrderedSet?
 
 }
 

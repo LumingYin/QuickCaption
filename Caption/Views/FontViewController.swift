@@ -28,7 +28,7 @@ class FontViewController: NSViewController {
     func configurateFontVC() {
         self.videoName.stringValue = episode.videoURL?.lastPathComponent ?? ""
         self.videoPath.stringValue = episode.videoURL?.absoluteString ?? ""
-//        self.videoDurationField.stringValue = episode
+        self.videoDurationField.stringValue = "\(episode.videoDuration) seconds"
         self.videoFramerateField.stringValue = "\(episode.framerate) fps"
     }
 }

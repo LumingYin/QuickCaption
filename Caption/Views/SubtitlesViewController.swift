@@ -9,7 +9,7 @@
 import Cocoa
 import AVKit
 
-@objc class SubtitlesViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
+@objc class SubtitlesViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate, CaptionDetailTableCellViewDelegate {
 
     @IBOutlet weak var transcribeTextField: NSTextField!
     @IBOutlet weak var resultTableView: NSTableView!
@@ -97,6 +97,7 @@ import AVKit
                 cell.captionContentTextField?.stringValue = ""
             }
             cell.captionContentTextField?.isEditable = true
+            cell.delegate = self
             return cell
         }
         return nil
@@ -111,6 +112,15 @@ import AVKit
         let row = resultTableView.row(for: sender)
         if let ep = episode.arrayForCaption?.object(at: row) as? CaptionLine {
             ep.caption = sender.stringValue
+        }
+    }
+
+    func textFieldEdited(_ sender: Any) {
+        if let cell = sender as? CaptionDetailTableCellView {
+            let rowIndex = resultTableView.row(for: cell)
+            if let cl = episode.arrayForCaption?.object(at: rowIndex) as? CaptionLine {
+                cl.caption = cell.captionContentTextField.stringValue
+            }
         }
     }
 
