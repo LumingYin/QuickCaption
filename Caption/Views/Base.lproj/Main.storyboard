@@ -1251,12 +1251,11 @@
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="nd3-dy-dTb">
-                                                                            <rect key="frame" x="15" y="9" width="64" height="53"/>
+                                                                            <rect key="frame" x="18" y="39" width="225" height="22"/>
                                                                             <subviews>
-                                                                                <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="8" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="5U7-YS-Hgo">
-                                                                                    <rect key="frame" x="0.0" y="33" width="64" height="20"/>
-                                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                                    <view key="contentView" ambiguous="YES" id="9Ob-aM-umP">
+                                                                                <box boxType="custom" borderWidth="0.0" cornerRadius="8" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="5U7-YS-Hgo">
+                                                                                    <rect key="frame" x="0.0" y="1" width="64" height="20"/>
+                                                                                    <view key="contentView" id="9Ob-aM-umP">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="64" height="20"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                         <subviews>
@@ -1271,12 +1270,15 @@
                                                                                             </textField>
                                                                                         </subviews>
                                                                                     </view>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="64" id="MNJ-aS-XKE"/>
+                                                                                        <constraint firstAttribute="height" constant="20" id="dsk-Xi-hRl"/>
+                                                                                    </constraints>
                                                                                     <color key="fillColor" red="1" green="0.62352941176470589" blue="0.039215686274509803" alpha="0.65982614436619713" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </box>
-                                                                                <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="8" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="fd7-Z5-8iA">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="64" height="20"/>
-                                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                                    <view key="contentView" ambiguous="YES" id="Fmd-ZB-2Qe">
+                                                                                <box boxType="custom" borderWidth="0.0" cornerRadius="8" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="fd7-Z5-8iA">
+                                                                                    <rect key="frame" x="161" y="1" width="64" height="20"/>
+                                                                                    <view key="contentView" id="Fmd-ZB-2Qe">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="64" height="20"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                         <subviews>
@@ -1291,46 +1293,45 @@
                                                                                             </textField>
                                                                                         </subviews>
                                                                                     </view>
-                                                                                    <color key="fillColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="20" id="EzN-ba-bdr"/>
+                                                                                        <constraint firstAttribute="width" constant="64" id="osL-Z0-t6U"/>
+                                                                                    </constraints>
+                                                                                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                 </box>
-                                                                                <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="95L-WV-Fg3">
-                                                                                    <rect key="frame" x="30" y="18" width="5" height="17"/>
-                                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="jfr-H8-qNf">
+                                                                                    <rect key="frame" x="74" y="9" width="77" height="5"/>
                                                                                 </box>
                                                                             </subviews>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="53" id="X2l-fF-uOr"/>
-                                                                                <constraint firstAttribute="width" constant="64" id="tFv-aN-zzY"/>
+                                                                                <constraint firstItem="5U7-YS-Hgo" firstAttribute="leading" secondItem="nd3-dy-dTb" secondAttribute="leading" id="1Xc-SX-GwK"/>
+                                                                                <constraint firstItem="fd7-Z5-8iA" firstAttribute="centerY" secondItem="nd3-dy-dTb" secondAttribute="centerY" id="EVN-sf-cjw"/>
+                                                                                <constraint firstItem="5U7-YS-Hgo" firstAttribute="centerY" secondItem="nd3-dy-dTb" secondAttribute="centerY" id="GhN-XL-9qI"/>
+                                                                                <constraint firstItem="fd7-Z5-8iA" firstAttribute="leading" secondItem="jfr-H8-qNf" secondAttribute="trailing" constant="10" id="MZz-nT-fay"/>
+                                                                                <constraint firstItem="jfr-H8-qNf" firstAttribute="leading" secondItem="5U7-YS-Hgo" secondAttribute="trailing" constant="10" id="Y9z-bd-8rn"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="fd7-Z5-8iA" secondAttribute="trailing" id="ZPY-CS-fon"/>
+                                                                                <constraint firstAttribute="height" constant="22" id="gA6-ne-qn7"/>
+                                                                                <constraint firstItem="jfr-H8-qNf" firstAttribute="centerY" secondItem="nd3-dy-dTb" secondAttribute="centerY" id="phT-Ca-HHs"/>
                                                                             </constraints>
                                                                         </customView>
                                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KVT-AT-Xv2">
-                                                                            <rect key="frame" x="85" y="9" width="167" height="53"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Test Test Test Test Test Test Test Test Test Test Test Test " id="Wp3-jY-Hjj" customClass="VerticallyCenteredTextFieldCell" customModule="Quick_Caption" customModuleProvider="target">
+                                                                            <rect key="frame" x="15" y="9" width="231" height="22"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="Test Test Test " bezelStyle="round" id="Wp3-jY-Hjj" customClass="VerticallyCenteredTextFieldCell" customModule="Quick_Caption" customModuleProvider="target">
                                                                                 <font key="font" usesAppearanceFont="YES"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
-                                                                            <userDefinedRuntimeAttributes>
-                                                                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                                                    <color key="value" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                                                    <integer key="value" value="1"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                                    <integer key="value" value="8"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                            </userDefinedRuntimeAttributes>
                                                                         </textField>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="nd3-dy-dTb" secondAttribute="bottom" constant="9" id="2gs-sN-puv"/>
-                                                                        <constraint firstItem="KVT-AT-Xv2" firstAttribute="leading" secondItem="nd3-dy-dTb" secondAttribute="trailing" constant="8" id="8Ch-rY-UbO"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="KVT-AT-Xv2" secondAttribute="bottom" constant="9" id="L5N-cw-yZ0"/>
-                                                                        <constraint firstItem="nd3-dy-dTb" firstAttribute="top" secondItem="qNm-RX-BGX" secondAttribute="top" constant="9" id="ObD-hN-l3i"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="KVT-AT-Xv2" secondAttribute="trailing" constant="11" id="Qf2-VV-KGU"/>
-                                                                        <constraint firstItem="KVT-AT-Xv2" firstAttribute="top" secondItem="qNm-RX-BGX" secondAttribute="top" constant="9" id="dnP-Ly-RT9"/>
-                                                                        <constraint firstItem="nd3-dy-dTb" firstAttribute="leading" secondItem="qNm-RX-BGX" secondAttribute="leading" constant="15" id="hHl-uq-pkW"/>
+                                                                        <constraint firstItem="KVT-AT-Xv2" firstAttribute="centerX" secondItem="qNm-RX-BGX" secondAttribute="centerX" id="9hw-0B-rM3"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="nd3-dy-dTb" secondAttribute="trailing" constant="18" id="EUr-Z7-3J7"/>
+                                                                        <constraint firstItem="nd3-dy-dTb" firstAttribute="top" secondItem="qNm-RX-BGX" secondAttribute="top" constant="10" id="ShC-cf-QQC"/>
+                                                                        <constraint firstItem="KVT-AT-Xv2" firstAttribute="top" secondItem="nd3-dy-dTb" secondAttribute="bottom" constant="8" id="Yv6-41-9eL"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="KVT-AT-Xv2" secondAttribute="trailing" constant="15" id="bU7-1S-J29"/>
+                                                                        <constraint firstItem="KVT-AT-Xv2" firstAttribute="leading" secondItem="qNm-RX-BGX" secondAttribute="leading" constant="15" id="g78-0F-SaR"/>
+                                                                        <constraint firstItem="nd3-dy-dTb" firstAttribute="leading" secondItem="qNm-RX-BGX" secondAttribute="leading" constant="18" id="mdI-C2-1ip"/>
+                                                                        <constraint firstItem="nd3-dy-dTb" firstAttribute="centerX" secondItem="qNm-RX-BGX" secondAttribute="centerX" id="niN-UZ-I2u"/>
                                                                     </constraints>
                                                                     <connections>
                                                                         <outlet property="captionContentTextField" destination="KVT-AT-Xv2" id="EID-Fk-L6A"/>
