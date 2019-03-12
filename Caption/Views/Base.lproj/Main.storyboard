@@ -818,26 +818,26 @@
             <objects>
                 <viewController id="S31-PW-wUx" customClass="SidebarViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="AUM-Ze-UGz">
-                        <rect key="frame" x="0.0" y="0.0" width="220" height="342"/>
+                        <rect key="frame" x="0.0" y="0.0" width="286" height="342"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="u0T-gr-JWT">
-                                <rect key="frame" x="0.0" y="0.0" width="220" height="342"/>
+                                <rect key="frame" x="0.0" y="0.0" width="286" height="342"/>
                                 <subviews>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="68" horizontalPageScroll="10" verticalLineScroll="68" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXF-sl-roP">
-                                        <rect key="frame" x="0.0" y="0.0" width="220" height="342"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="286" height="342"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Fh6-f0-G83">
-                                            <rect key="frame" x="0.0" y="0.0" width="220" height="342"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="286" height="342"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="66" rowSizeStyle="automatic" viewBased="YES" id="yfo-s7-Mnb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="220" height="342"/>
+                                                <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="66" rowSizeStyle="automatic" viewBased="YES" id="yfo-s7-Mnb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="286" height="342"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="gridColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <tableColumns>
-                                                        <tableColumn width="217" minWidth="40" maxWidth="1000" id="xzf-la-39z">
+                                                        <tableColumn width="283" minWidth="40" maxWidth="1000" id="xzf-la-39z">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -851,41 +851,48 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="SidebarEpisodeTableCellView" id="XBe-5u-d4N" customClass="SidebarEpisodeTableCellView" customModule="Quick_Caption" customModuleProvider="target">
-                                                                    <rect key="frame" x="1" y="1" width="217" height="66"/>
+                                                                    <rect key="frame" x="1" y="1" width="283" height="66"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
+                                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="zGF-cO-9bT">
+                                                                            <rect key="frame" x="15" y="14" width="164" height="38"/>
+                                                                            <subviews>
+                                                                                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8h0-Sb-5z1">
+                                                                                    <rect key="frame" x="-2" y="20" width="270" height="18"/>
+                                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="A very long file name. A very long file name. " id="NbH-o3-CnA">
+                                                                                        <font key="font" metaFont="systemMedium" size="14"/>
+                                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                    </textFieldCell>
+                                                                                </textField>
+                                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xoj-mN-yXG">
+                                                                                    <rect key="frame" x="-2" y="2" width="112" height="16"/>
+                                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Feb 12, 2019" id="xsh-bU-jEg">
+                                                                                        <font key="font" metaFont="cellTitle"/>
+                                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                    </textFieldCell>
+                                                                                </textField>
+                                                                            </subviews>
+                                                                        </customView>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YL2-35-kpe">
-                                                                            <rect key="frame" x="121" y="9" width="85" height="48"/>
+                                                                            <rect key="frame" x="187" y="9" width="85" height="48"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="48" id="gD2-l0-h5z"/>
-                                                                                <constraint firstAttribute="width" constant="85" id="u3w-Mr-lZx"/>
+                                                                                <constraint firstAttribute="height" constant="48" id="teZ-2N-ECO"/>
+                                                                                <constraint firstAttribute="width" constant="85" id="v3T-1D-Mds"/>
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="bunny" id="Fg1-01-AYg"/>
                                                                         </imageView>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8h0-Sb-5z1">
-                                                                            <rect key="frame" x="13" y="33" width="146" height="18"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Video File Name.mp4" id="NbH-o3-CnA">
-                                                                                <font key="font" metaFont="systemMedium" size="14"/>
-                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                            </textFieldCell>
-                                                                        </textField>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xoj-mN-yXG">
-                                                                            <rect key="frame" x="13" y="13" width="77" height="16"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Feb 12, 2019" id="xsh-bU-jEg">
-                                                                                <font key="font" metaFont="cellTitle"/>
-                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                            </textFieldCell>
-                                                                        </textField>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="8h0-Sb-5z1" firstAttribute="leading" secondItem="XBe-5u-d4N" secondAttribute="leading" constant="15" id="3D4-ve-ozx"/>
-                                                                        <constraint firstItem="xoj-mN-yXG" firstAttribute="leading" secondItem="XBe-5u-d4N" secondAttribute="leading" constant="15" id="EzL-S4-fyu"/>
-                                                                        <constraint firstItem="8h0-Sb-5z1" firstAttribute="top" secondItem="XBe-5u-d4N" secondAttribute="top" constant="15" id="Hnt-9Z-WIY"/>
-                                                                        <constraint firstItem="YL2-35-kpe" firstAttribute="centerY" secondItem="XBe-5u-d4N" secondAttribute="centerY" id="f8r-I5-jlf"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="YL2-35-kpe" secondAttribute="trailing" constant="11" id="hYs-Qh-dgw"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="xoj-mN-yXG" secondAttribute="bottom" constant="13" id="omT-Yv-ngM"/>
+                                                                        <constraint firstItem="YL2-35-kpe" firstAttribute="leading" secondItem="zGF-cO-9bT" secondAttribute="trailing" constant="8" id="G1o-hc-QTX"/>
+                                                                        <constraint firstItem="YL2-35-kpe" firstAttribute="centerY" secondItem="XBe-5u-d4N" secondAttribute="centerY" id="QyF-TX-RJl"/>
+                                                                        <constraint firstItem="zGF-cO-9bT" firstAttribute="leading" secondItem="XBe-5u-d4N" secondAttribute="leading" constant="15" id="S7N-rb-iN2"/>
+                                                                        <constraint firstItem="zGF-cO-9bT" firstAttribute="centerY" secondItem="XBe-5u-d4N" secondAttribute="centerY" id="XJQ-C7-gWf"/>
+                                                                        <constraint firstItem="zGF-cO-9bT" firstAttribute="top" secondItem="XBe-5u-d4N" secondAttribute="top" constant="14" id="qKO-Ey-5um"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="YL2-35-kpe" secondAttribute="trailing" constant="11" id="yIX-jU-R2I"/>
                                                                     </constraints>
                                                                     <connections>
                                                                         <outlet property="episodePreview" destination="YL2-35-kpe" id="EQN-eQ-9T0"/>
@@ -933,7 +940,7 @@
                 </viewController>
                 <customObject id="u43-FF-6D2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1463" y="-402"/>
+            <point key="canvasLocation" x="1496" y="-402"/>
         </scene>
         <!--Movie View Controller-->
         <scene sceneID="hIz-AP-VOD">

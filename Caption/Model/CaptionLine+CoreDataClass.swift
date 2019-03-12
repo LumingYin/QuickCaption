@@ -56,6 +56,10 @@ public class CaptionLine: NSManagedObject {
     }
 
     func secondFloatToString(float: Float64) -> String {
+        if float.isNaN {
+            return ""
+        }
+        
         var second = float
 
         var hours: Int = 0

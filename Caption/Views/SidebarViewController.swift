@@ -40,8 +40,16 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SidebarEpisodeTableCellView"), owner: self) as? SidebarEpisodeTableCellView {
-            view.videoFileNameTextField.stringValue = "Some Name"
-            view.lastModifiedDateTextField.stringValue = "Some Time"
+            let episode = episodeProjects[row]
+            view.videoFileNameTextField.stringValue = episode.videoDescription ?? "Video Clip"
+            let formatter = DateFormatter.init()
+            formatter.dateFormat = "MMM dd, yyyy"
+            if let date = episode.modifiedDate as Date? {
+                view.lastModifiedDateTextField.stringValue = formatter.string(from: date)
+            }
+            if let url = episode.thumbnailURL, let image = NSImage(contentsOf: url) {
+                view.episodePreview?.image = image
+            }
             return view
         }
         return nil

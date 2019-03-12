@@ -22,6 +22,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         }
     }
 
+    var recentTimer: Timer?
+
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,21 +74,43 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         episode.player = AVPlayer(url: videoURL)
         playerView.player = episode.player
         episode.player?.play()
-        Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateFirstCaption), userInfo: nil, repeats: false)
+        recentTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateFirstCaption), userInfo: nil, repeats: false)
     }
 
     @objc func updateFirstCaption() {
-        let cap = CaptionLine(context: Helper.context!)
-        cap.caption = ""
-        cap.startingTime = Float(CMTimeGetSeconds((episode.player?.currentTime())!))
-        cap.endingTime = 0
+        if self.episode.arrayForCaption?.count ?? 0 <= 0 {
+            let cap = CaptionLine(context: Helper.context!)
+            cap.caption = ""
+            cap.startingTime = Float(CMTimeGetSeconds((episode.player?.currentTime())!))
+            cap.endingTime = 0
 
-        self.episode.addToArrayForCaption(cap)
-        
-        if let framerate = self.episode.player?.currentItem?.tracks[0].assetTrack?.nominalFrameRate {
-            self.episode.videoDescription = "\(framerate)fps  |  \(self.episode.videoDescription)"
+            self.episode.addToArrayForCaption(cap)
+
+            if let framerate = self.episode.player?.currentItem?.tracks[0].assetTrack?.nominalFrameRate {
+                self.episode.framerate = framerate
+            }
+            self.timeLabel.stringValue = "\(self.episode.framerate)fps  |  \(self.episode.videoDescription ?? "")"
+            self.episode.creationDate = NSDate()
+        } else {
+            self.episode.modifiedDate = NSDate()
         }
-        self.timeLabel.stringValue = "\(self.episode.videoDescription)"
+        self.populateThumbnail()
+    }
+
+    func populateThumbnail() {
+        if (self.episode.thumbnailURL == nil) {
+            let sourceURL = self.episode!.videoURL
+            let asset = AVAsset(url: sourceURL!)
+            let imageGenerator = AVAssetImageGenerator(asset: asset)
+            let time = CMTimeMake(value: 1, timescale: 1)
+            let imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
+            let thumbnail = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
+            let desktopURL = FileManager.default.urls(for: .allLibrariesDirectory, in: .userDomainMask).first!
+            let destinationURL = desktopURL.appendingPathComponent("\(NSUUID().uuidString).png")
+            let result = thumbnail.pngWrite(to: destinationURL)
+            print("Writing thumbnail: \(result)")
+            self.episode.thumbnailURL = destinationURL
+        }
     }
 
     @IBAction func saveTXTToDisk(_ sender: Any) {
@@ -174,6 +198,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     func configurateMovieVC() {
+        recentTimer?.invalidate()
         if let url = self.episode.videoURL {
             self.playVideo(url)
         } else {

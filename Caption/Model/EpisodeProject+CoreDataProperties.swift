@@ -27,6 +27,7 @@ extension EpisodeProject {
     @NSManaged public var styleColor: String?
     @NSManaged public var styleSize: String?
     @NSManaged public var arrayForCaption: NSOrderedSet?
+    @NSManaged public var framerate: Float
 
 }
 
