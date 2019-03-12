@@ -1514,6 +1514,11 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
+                                            <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OQR-T9-CG4">
+                                                <rect key="frame" x="126" y="93" width="262" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </colorWell>
                                         </subviews>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="B7h-9g-97J" customClass="ResizableInputContainerView" customModule="Quick_Caption" customModuleProvider="target">
@@ -1593,11 +1598,6 @@
                                             </textField>
                                         </subviews>
                                     </customView>
-                                    <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OQR-T9-CG4">
-                                        <rect key="frame" x="146" y="112" width="262" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </colorWell>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="UOl-JH-0lN" firstAttribute="trailing" secondItem="M0w-Qf-utE" secondAttribute="trailing" id="5bq-Z8-37H"/>
