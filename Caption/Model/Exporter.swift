@@ -15,7 +15,7 @@ enum FileType {
     case fcpXML
 }
 
-class Exporter {
+@objc class Exporter : NSObject {
     // MARK: - Persistence
     static func generateSRTFromArray(arrayForCaption: [CaptionLine]) -> String {
         var srtString = ""

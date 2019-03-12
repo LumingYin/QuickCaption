@@ -77,10 +77,24 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         episode.player?.play()
         Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateFirstCaption), userInfo: nil, repeats: false)
     }
-    
+
+    var context: NSManagedObjectContext? {
+        get {
+            if let context = (NSApp.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                return context
+            } else {
+                return nil
+            }
+        }
+    }
+
     @objc func updateFirstCaption() {
-        let cap = CaptionLine(caption: "", startingTime: self.episode.player?.currentTime(), endingTime: nil)
-        self.episode.arrayForCaption.append(cap)
+        let cap = CaptionLine(context: context!)
+        cap.caption = ""
+        cap.startingTime = Float(CMTimeGetSeconds((episode.player?.currentTime())!))
+        cap.endingTime = 0
+
+        self.episode.addToArrayForCaption(cap)
         
         if let framerate = self.episode.player?.currentItem?.tracks[0].assetTrack?.nominalFrameRate {
             self.episode.videoDescription = "\(framerate)fps  |  \(self.episode.videoDescription)"
@@ -104,30 +118,30 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         if episode == nil {
             return
         }
-        episode.arrayForCaption.sort(by: { (this, that) -> Bool in
-            if let thisST = this.startingTime, let thatST = that.startingTime {
-                return thisST < thatST
-            }
-            return true
+
+        guard var copiedArray = (episode.arrayForCaption?.array as? [CaptionLine]) else { return }
+
+        copiedArray.sort(by: { (this, that) -> Bool in
+            return this.startingTime < that.startingTime
         })
 
         var text = "Export is unsuccessful."
         
         if let fData = fileData {
             if type == .srt {
-                text = Exporter.generateSRTFromArray(arrayForCaption: episode.arrayForCaption)
+                text = Exporter.generateSRTFromArray(arrayForCaption: copiedArray)
                 fData.ext = "srt"
                 NSFileCoordinator.removeFilePresenter(fData)
                 NSFileCoordinator.addFilePresenter(fData)
                 print(fData.ext)
             } else if type == .txt {
-                text = Exporter.generateTXTFromArray(arrayForCaption: episode.arrayForCaption)
+                text = Exporter.generateTXTFromArray(arrayForCaption: copiedArray)
                 fData.ext = "txt"
                 NSFileCoordinator.removeFilePresenter(fData)
                 NSFileCoordinator.addFilePresenter(fData)
                 print(fData.ext)
             } else if type == .fcpXML {
-                text = Exporter.generateFCPXMLFromArray(player: episode.player, arrayForCaption: episode.arrayForCaption)
+                text = Exporter.generateFCPXMLFromArray(player: episode.player, arrayForCaption: copiedArray)
                 fData.ext = "fcpxml"
                 NSFileCoordinator.removeFilePresenter(fData)
                 NSFileCoordinator.addFilePresenter(fData)

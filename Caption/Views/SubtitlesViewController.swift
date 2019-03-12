@@ -9,7 +9,7 @@
 import Cocoa
 import AVKit
 
-class SubtitlesViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
+@objc class SubtitlesViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
 
     @IBOutlet weak var transcribeTextField: NSTextField!
     @IBOutlet weak var resultTableView: NSTableView!
@@ -33,11 +33,21 @@ class SubtitlesViewController: NSViewController, NSTableViewDelegate, NSTableVie
 
         if (control == transcribeTextField) {
             episode.player?.pause()
-            if let last = episode.arrayForCaption.last {
-                last.endingTime = episode.player?.currentTime()
+            if let last = episode.arrayForCaption?.lastObject as? CaptionLine, let time = episode.player?.currentTime() {
+                last.endingTime = Float(CMTimeGetSeconds(time))
             }
         }
         return true
+    }
+
+    var context: NSManagedObjectContext? {
+        get {
+            if let context = (NSApp.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                return context
+            } else {
+                return nil
+            }
+        }
     }
 
     @IBAction func captionTextFieldDidChange(_ sender: NSTextField) {
@@ -49,21 +59,27 @@ class SubtitlesViewController: NSViewController, NSTableViewDelegate, NSTableVie
         if (sender == transcribeTextField) {
             episode.player?.play()
             if sender.stringValue == "" {
-                if let last = episode.arrayForCaption.last {
-                    last.startingTime = episode.player?.currentTime()
+                if let last = episode.arrayForCaption?.lastObject as? CaptionLine, let time = episode.player?.currentTime() {
+                    last.startingTime = Float(CMTimeGetSeconds(time))
                 }
             } else {
-                if let last = episode.arrayForCaption.last {
+                if let last = episode.arrayForCaption?.lastObject as? CaptionLine {
                     last.caption = sender.stringValue
                 }
                 sender.stringValue = ""
                 var new: CaptionLine!
-                if let lastEndingTime = episode.arrayForCaption.last?.endingTime {
-                    new = CaptionLine.init(caption: "", startingTime: lastEndingTime, endingTime: nil)
+                if let lastEndingTime = (episode.arrayForCaption?.lastObject as? CaptionLine)?.endingTime {
+                    new = CaptionLine(context: context!)
+                    new.caption = ""
+                    new.startingTime = lastEndingTime
+                    new.endingTime = 0 // likely wrong
                 } else {
-                    new = CaptionLine.init(caption: "", startingTime: episode.player?.currentTime(), endingTime: nil)
+                    new = CaptionLine(context: context!)
+                    new.caption = ""
+                    new.startingTime = Float(CMTimeGetSeconds((episode.player?.currentTime())!))
+                    new.endingTime = 0 // likely wrong
                 }
-                episode.arrayForCaption.append(new)
+                episode.addToArrayForCaption(new)
             }
             self.resultTableView.reloadData()
             if resultTableView.numberOfRows > 0 {
@@ -74,16 +90,16 @@ class SubtitlesViewController: NSViewController, NSTableViewDelegate, NSTableVie
 
     // MARK: - Table View Delegate/Data Source
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return episode.arrayForCaption.count
+        return episode.arrayForCaption?.count ?? 0
     }
 
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CaptionCell"), owner: self) as? CaptionDetailTableCellView {
-            let correspondingCaption = episode.arrayForCaption[row]
-            cell.startTimeField?.stringValue = "\(correspondingCaption.startingTimeString)"
-            cell.endTimeField?.stringValue = "\(correspondingCaption.endingTimeString)"
-            if let cap = correspondingCaption.caption {
+            let correspondingCaption = episode.arrayForCaption?.object(at: row) as? CaptionLine
+            cell.startTimeField?.stringValue = "\(correspondingCaption!.startingTimeString)"
+            cell.endTimeField?.stringValue = "\(correspondingCaption!.endingTimeString)"
+            if let cap = correspondingCaption!.caption {
                 cell.captionContentTextField?.stringValue = cap
             } else {
                 cell.captionContentTextField?.stringValue = ""
@@ -101,7 +117,9 @@ class SubtitlesViewController: NSViewController, NSTableViewDelegate, NSTableVie
 
     @IBAction func captionChanged(_ sender: NSTextField) {
         let row = resultTableView.row(for: sender)
-        episode.arrayForCaption[row].caption = sender.stringValue
+        if let ep = episode.arrayForCaption?.object(at: row) as? CaptionLine {
+            ep.caption = sender.stringValue
+        }
     }
 
 }

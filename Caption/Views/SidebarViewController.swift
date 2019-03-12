@@ -25,8 +25,19 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         }
     }
 
+    var context: NSManagedObjectContext? {
+        get {
+            if let context = (NSApp.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                return context
+            } else {
+                return nil
+            }
+        }
+    }
+
+
     func addNewProject() {
-        episodeProjects.append(EpisodeProject())
+        episodeProjects.append(EpisodeProject(context: context!))
         tableView.reloadData()
         tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
     }
