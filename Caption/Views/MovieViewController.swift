@@ -178,6 +178,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             self.playVideo(url)
         } else {
             self.episode.player = AVPlayer()
+            self.playerView.player = self.episode.player
             print("Can't configurate movie VC")
         }
     }

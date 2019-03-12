@@ -55,6 +55,11 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         if index < 0 {
             return
         }
+        for project in episodeProjects {
+            if let player = project.player {
+                player.pause()
+            }
+        }
         let project = episodeProjects[index]
         AppDelegate.movieVC()?.episode = project
         AppDelegate.movieVC()?.configurateMovieVC()
