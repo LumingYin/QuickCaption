@@ -41,7 +41,7 @@ class SubtitlesViewController: NSViewController, NSTableViewDelegate, NSTableVie
     }
 
     @IBAction func captionTextFieldDidChange(_ sender: NSTextField) {
-        if (episode.player == nil) {
+        if (episode == nil || episode.player == nil) {
             sender.stringValue = ""
             _ = Helper.dialogOKCancel(question: "A video is required before adding captions.", text: "Please open a video first, then add captions to the video.")
             return
@@ -79,25 +79,23 @@ class SubtitlesViewController: NSViewController, NSTableViewDelegate, NSTableVie
 
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var cell: NSTableCellView?
-
-        let correspondingCaption = episode.arrayForCaption[row]
-        if tableColumn?.title == "Start Time" {
-            cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "StartTimeCell"), owner: self) as? NSTableCellView
-            cell?.textField?.stringValue = "\(correspondingCaption.startingTimeString)"
-        } else if tableColumn?.title == "End Time" {
-            cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "EndTimeCell"), owner: self) as? NSTableCellView
-            cell?.textField?.stringValue = "\(correspondingCaption.endingTimeString)"
-        } else {
-            cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CaptionCell"), owner: self) as? NSTableCellView
+        if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CaptionCell"), owner: self) as? CaptionDetailTableCellView {
+            let correspondingCaption = episode.arrayForCaption[row]
+            cell.startTimeField?.stringValue = "\(correspondingCaption.startingTimeString)"
+            cell.endTimeField?.stringValue = "\(correspondingCaption.endingTimeString)"
             if let cap = correspondingCaption.caption {
-                cell?.textField?.stringValue = cap
+                cell.captionContentTextField?.stringValue = cap
             } else {
-                cell?.textField?.stringValue = ""
+                cell.captionContentTextField?.stringValue = ""
             }
-            cell?.textField?.isEditable = true
+            cell.captionContentTextField?.isEditable = true
+            return cell
         }
-        return cell
+        return nil
+    }
+
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        return 71
     }
 
 

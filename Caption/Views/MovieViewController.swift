@@ -47,7 +47,10 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             if let result = dialog.url, let path = dialog.url?.path {
                 self.fileData = FileData(path: path)
                 NSFileCoordinator.addFilePresenter(self.fileData!)
-                self.saveToDisk(.srt)
+//                self.saveToDisk(.srt)
+                if self.episode == nil {
+                    AppDelegate.sourceListVC()?.updateSelectRow(index: 0)
+                }
                 self.episode.arrayForCaption = []
                 self.episode.videoDescription = result.lastPathComponent
                 self.playVideo(result)
