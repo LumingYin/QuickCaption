@@ -13,9 +13,6 @@ import AppCenter
 import AppCenterAnalytics
 
 class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
-
-    @IBOutlet weak var transcribeTextField: NSTextField!
-    @IBOutlet weak var resultTableView: NSTableView!
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
     var fileData: FileData?
@@ -78,18 +75,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateFirstCaption), userInfo: nil, repeats: false)
     }
 
-    var context: NSManagedObjectContext? {
-        get {
-            if let context = (NSApp.delegate as? AppDelegate)?.persistentContainer.viewContext {
-                return context
-            } else {
-                return nil
-            }
-        }
-    }
-
     @objc func updateFirstCaption() {
-        let cap = CaptionLine(context: context!)
+        let cap = CaptionLine(context: Helper.context!)
         cap.caption = ""
         cap.startingTime = Float(CMTimeGetSeconds((episode.player?.currentTime())!))
         cap.endingTime = 0
@@ -185,8 +172,15 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             })
         }
     }
-    
 
+    func configurateMovieVC() {
+        if let url = self.episode.videoURL {
+            self.playVideo(url)
+        } else {
+            self.episode.player = AVPlayer()
+            print("Can't configurate movie VC")
+        }
+    }
 }
 
 

@@ -23,6 +23,8 @@ import AVKit
         self.resultTableView.delegate = self
         self.resultTableView.dataSource = self
         transcribeTextField.delegate = self
+        self.resultTableView.reloadData()
+        self.transcribeTextField.stringValue = ""
     }
 
     // MARK: - TextField Controls
@@ -38,16 +40,6 @@ import AVKit
             }
         }
         return true
-    }
-
-    var context: NSManagedObjectContext? {
-        get {
-            if let context = (NSApp.delegate as? AppDelegate)?.persistentContainer.viewContext {
-                return context
-            } else {
-                return nil
-            }
-        }
     }
 
     @IBAction func captionTextFieldDidChange(_ sender: NSTextField) {
@@ -69,15 +61,15 @@ import AVKit
                 sender.stringValue = ""
                 var new: CaptionLine!
                 if let lastEndingTime = (episode.arrayForCaption?.lastObject as? CaptionLine)?.endingTime {
-                    new = CaptionLine(context: context!)
+                    new = CaptionLine(context: Helper.context!)
                     new.caption = ""
                     new.startingTime = lastEndingTime
-                    new.endingTime = 0 // likely wrong
+                    new.endingTime = lastEndingTime // this is likely wrong, although better than 0 for integrity
                 } else {
-                    new = CaptionLine(context: context!)
+                    new = CaptionLine(context: Helper.context!)
                     new.caption = ""
                     new.startingTime = Float(CMTimeGetSeconds((episode.player?.currentTime())!))
-                    new.endingTime = 0 // likely wrong
+                    new.endingTime = new.startingTime // this is likely wrong, although better than 0 for integrity
                 }
                 episode.addToArrayForCaption(new)
             }

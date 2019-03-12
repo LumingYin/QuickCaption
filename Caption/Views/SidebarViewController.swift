@@ -14,6 +14,13 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        do {
+            let fetchRequest: NSFetchRequest<EpisodeProject> = EpisodeProject.fetchRequest()
+//            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lastUpdated", ascending: false)]
+            episodeProjects = try Helper.context!.fetch(fetchRequest)
+        } catch {
+            print("Can't fetch persistence store with: \(error)")
+        }
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -25,19 +32,8 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         }
     }
 
-    var context: NSManagedObjectContext? {
-        get {
-            if let context = (NSApp.delegate as? AppDelegate)?.persistentContainer.viewContext {
-                return context
-            } else {
-                return nil
-            }
-        }
-    }
-
-
     func addNewProject() {
-        episodeProjects.append(EpisodeProject(context: context!))
+        episodeProjects.append(EpisodeProject(context: Helper.context!))
         tableView.reloadData()
         tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
     }
@@ -61,6 +57,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         }
         let project = episodeProjects[index]
         AppDelegate.movieVC()?.episode = project
+        AppDelegate.movieVC()?.configurateMovieVC()
         AppDelegate.subtitleVC()?.episode = project
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
         print("Selected: \(project)")

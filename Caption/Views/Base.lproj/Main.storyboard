@@ -82,17 +82,23 @@
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Save Everything" keyEquivalent="s" id="Vi3-xH-UAh">
+                                            <connections>
+                                                <action selector="saveEverything:" target="Voe-Tx-rLC" id="sTK-XA-WhG"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Export To" id="dfX-ue-SZc">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Export To" id="2Pg-4i-meh">
                                                 <items>
-                                                    <menuItem title="SRT…" keyEquivalent="s" id="pxx-59-PXV">
+                                                    <menuItem title="SRT…" id="pxx-59-PXV">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="saveSRTFile:" target="Voe-Tx-rLC" id="jwM-0q-cGw"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="TXT…" keyEquivalent="s" id="HAT-IQ-Cm1">
-                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                                    <menuItem title="TXT…" id="HAT-IQ-Cm1">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="saveTXTFile:" target="Voe-Tx-rLC" id="gM2-j9-f9C"/>
                                                         </connections>

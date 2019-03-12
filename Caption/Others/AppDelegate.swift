@@ -139,6 +139,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppDelegate.movieVC()?.saveToDisk(.txt)
     }
 
+    @IBAction func saveEverything(_ sender: Any) {
+        saveAction(nil)
+    }
+
     @IBAction func useDarkAppearance(_ sender: Any) {
         if #available(OSX 10.14, *) {
             NSApp.appearance = NSAppearance(named: .darkAqua)

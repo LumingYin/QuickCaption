@@ -30,5 +30,14 @@ class Helper: NSObject {
         return alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
     }
 
+    static var context: NSManagedObjectContext? {
+        get {
+            if let context = (NSApp.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                return context
+            } else {
+                return nil
+            }
+        }
+    }
 
 }
