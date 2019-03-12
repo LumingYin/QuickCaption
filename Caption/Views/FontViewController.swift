@@ -9,10 +9,26 @@
 import Cocoa
 
 class FontViewController: NSViewController {
+    weak var episode: EpisodeProject!
+    @IBOutlet weak var videoName: NSTextField!
+    @IBOutlet weak var videoPath: NSTextField!
+    @IBOutlet weak var videoDurationField: NSTextField!
+    @IBOutlet weak var videoFramerateField: NSTextField!
+
+    @IBOutlet weak var fontFamilyButton: NSPopUpButton!
+    @IBOutlet weak var fontWeightButton: NSPopUpButton!
+    @IBOutlet weak var fontSizeButton: NSPopUpButton!
+    @IBOutlet weak var fontShadowButton: NSPopUpButton!
+    @IBOutlet weak var fontColorButton: NSColorWell!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
     }
-    
+
+    func configurateFontVC() {
+        self.videoName.stringValue = episode.videoURL?.lastPathComponent ?? ""
+        self.videoPath.stringValue = episode.videoURL?.absoluteString ?? ""
+//        self.videoDurationField.stringValue = episode
+        self.videoFramerateField.stringValue = "\(episode.framerate) fps"
+    }
 }

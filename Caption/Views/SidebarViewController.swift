@@ -73,6 +73,8 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         AppDelegate.movieVC()?.configurateMovieVC()
         AppDelegate.subtitleVC()?.episode = project
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
+        AppDelegate.fontVC()?.episode = project
+        AppDelegate.fontVC()?.configurateFontVC()
         print("Selected: \(project)")
     }
 

@@ -7,20 +7,22 @@
         <relationship name="episodeProject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EpisodeProject" inverseName="arrayForCaption" inverseEntity="EpisodeProject" syncable="YES"/>
     </entity>
     <entity name="EpisodeProject" representedClassName="EpisodeProject" syncable="YES">
-        <attribute name="attribute" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="framerate" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="styleColor" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="styleFont" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="styleSize" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="styleFontColor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="styleFontFamily" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="styleFontShadow" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="styleFontSize" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="styleFontWeight" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnailURL" optional="YES" attributeType="URI" syncable="YES"/>
         <attribute name="videoDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoDuration" optional="YES" syncable="YES"/>
         <attribute name="videoURL" optional="YES" attributeType="URI" syncable="YES"/>
         <relationship name="arrayForCaption" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CaptionLine" inverseName="episodeProject" inverseEntity="CaptionLine" syncable="YES"/>
     </entity>
     <elements>
-        <element name="EpisodeProject" positionX="-63" positionY="-18" width="128" height="210"/>
+        <element name="EpisodeProject" positionX="-63" positionY="-18" width="128" height="240"/>
         <element name="CaptionLine" positionX="-63" positionY="0" width="128" height="105"/>
     </elements>
 </model>
