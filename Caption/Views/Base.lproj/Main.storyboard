@@ -1138,15 +1138,38 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mHu-9K-0O1">
-                                            <rect key="frame" x="0.0" y="-2431" width="2034" height="213"/>
+                                            <rect key="frame" x="0.0" y="-2431" width="591" height="213"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <subviews>
                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P2a-iw-9CG">
-                                                    <rect key="frame" x="54" y="71" width="475" height="64"/>
+                                                    <rect key="frame" x="8" y="75" width="521" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="DTT-i0-VKS"/>
                                                     <color key="contentTintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                 </imageView>
+                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K4d-N4-mRe">
+                                                    <rect key="frame" x="8" y="3" width="521" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                </customView>
+                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CWy-l4-FlO">
+                                                    <rect key="frame" x="8" y="147" width="521" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                </customView>
+                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K5C-Y2-cNb">
+                                                    <rect key="frame" x="8" y="0.0" width="19" height="213"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <subviews>
+                                                        <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="gTd-tF-LlQ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="2" height="213"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            <view key="contentView" ambiguous="YES" id="4xa-ch-QWB">
+                                                                <rect key="frame" x="0.0" y="0.0" width="2" height="213"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            </view>
+                                                            <color key="fillColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                                        </box>
+                                                    </subviews>
+                                                </customView>
                                             </subviews>
                                         </customView>
                                     </subviews>
@@ -1154,7 +1177,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="V95-Hy-NGv"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="wxD-Wq-Vsv">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.11267605633802817" horizontal="YES" id="wxD-Wq-Vsv">
                                     <rect key="frame" x="0.0" y="215" width="520" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1185,9 +1208,12 @@
                     </view>
                     <connections>
                         <outlet property="playerView" destination="MMG-zt-4ZZ" id="XyH-Jq-kz1"/>
+                        <outlet property="progressView" destination="K5C-Y2-cNb" id="ShI-fX-AJ7"/>
+                        <outlet property="subtitleTrackContainerView" destination="CWy-l4-FlO" id="V5b-Tp-AlF"/>
                         <outlet property="timeLabel" destination="Dcv-fO-TIm" id="PIm-6a-ri2"/>
                         <outlet property="timelineOverallView" destination="mHu-9K-0O1" id="KNa-wG-e6N"/>
                         <outlet property="timelineScrollView" destination="QEG-SY-Hn2" id="6Bt-BF-igB"/>
+                        <outlet property="videoPreviewContainerView" destination="K4d-N4-mRe" id="O3j-UH-f7o"/>
                         <outlet property="waveformImageView" destination="P2a-iw-9CG" id="sGU-RP-60h"/>
                     </connections>
                 </viewController>

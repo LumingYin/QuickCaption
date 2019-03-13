@@ -15,7 +15,12 @@ import AppCenterAnalytics
 class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
+
+    @IBOutlet weak var progressView: NSView!
+    @IBOutlet weak var subtitleTrackContainerView: NSView!
+    @IBOutlet weak var videoPreviewContainerView: NSView!
     @IBOutlet weak var waveformImageView: NSImageView!
+
     @IBOutlet weak var timelineScrollView: NSScrollView!
     @IBOutlet weak var timelineOverallView: NSView!
 
@@ -103,6 +108,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             self.configureTextTrack()
             self.configureWaveTrack()
             self.configureVideoThumbnailTrack()
+            self.configurateRedBar()
         }
     }
 
@@ -216,7 +222,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     func configureTextTrack() {
-
+        self.subtitleTrackContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.subtitleTrackContainerView.frame.size.height))
+        self.subtitleTrackContainerView.layer?.backgroundColor = NSColor.purple.cgColor
     }
 
     func configureWaveTrack() {
@@ -260,7 +267,30 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     func configureVideoThumbnailTrack() {
+        self.videoPreviewContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.videoPreviewContainerView.frame.size.height))
+        self.videoPreviewContainerView.layer?.backgroundColor = NSColor.purple.cgColor
+    }
 
+    let offsetPixelInScrollView: CGFloat = 8
+
+    func configurateRedBar() {
+        let interval = CMTime(value: 1, timescale: 2)
+        self.episode.player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
+
+            let seconds = CMTimeGetSeconds(progressTime)
+            let secondsString = String(format: "%02d", Int(seconds.truncatingRemainder(dividingBy: 60)))
+            let minutesString = String(format: "%02d", Int(seconds / 60))
+
+//            self.currentTimeLabel.text = "\(minutesString):\(secondsString)"
+
+            //lets move the slider thumb
+            if let duration = self.episode.player?.currentItem?.duration {
+                let durationSeconds = CMTimeGetSeconds(duration)
+                let percent = CGFloat(seconds / durationSeconds)
+                self.progressView.setFrameOrigin(NSPoint(x: self.timelineLengthPixels * percent + self.offsetPixelInScrollView, y: self.progressView.frame.origin.y))
+            }
+
+        })
     }
 
 }
