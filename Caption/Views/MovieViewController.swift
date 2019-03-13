@@ -202,6 +202,11 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     func configurateMovieVC() {
         recentTimer?.invalidate()
+        self.subtitleTrackContainerView.subviews = []
+        self.videoPreviewContainerView.subviews = []
+        self.waveformImageView.image = nil
+        self.progressView.setFrameOrigin(NSPoint(x: 0, y: self.progressView.frame.origin.y))
+
         if let url = self.episode.videoURL {
             self.playVideo(url)
         } else {
