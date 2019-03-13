@@ -293,6 +293,22 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         })
     }
 
+    @IBAction func clickedOnNewTimelineIndex(_ sender: NSClickGestureRecognizer) {
+        let location = sender.location(in: timelineOverallView).x - self.offsetPixelInScrollView
+        let percent = location / self.timelineLengthPixels
+
+        if let duration = self.episode.player?.currentItem?.duration {
+            let totalSeconds = CMTimeGetSeconds(duration)
+            let value = Float64(percent) * totalSeconds
+            let seekTime = CMTime(value: Int64(value), timescale: 1)
+            self.episode.player?.pause()
+            self.episode.player?.seek(to: seekTime, completionHandler: { (completedSeek) in
+                //perhaps do something later here
+                self.episode.player?.play()
+            })
+        }
+    }
+
 }
 
 

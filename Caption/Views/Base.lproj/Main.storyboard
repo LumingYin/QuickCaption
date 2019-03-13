@@ -1171,6 +1171,13 @@
                                                     </subviews>
                                                 </customView>
                                             </subviews>
+                                            <gestureRecognizers>
+                                                <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="5T5-nT-ofk">
+                                                    <connections>
+                                                        <action selector="clickedOnNewTimelineIndex:" target="XfG-lQ-9wD" id="095-lG-6fH"/>
+                                                    </connections>
+                                                </clickGestureRecognizer>
+                                            </gestureRecognizers>
                                         </customView>
                                     </subviews>
                                 </clipView>
