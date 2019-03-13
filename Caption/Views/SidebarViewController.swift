@@ -16,7 +16,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         super.viewDidLoad()
         do {
             let fetchRequest: NSFetchRequest<EpisodeProject> = EpisodeProject.fetchRequest()
-//            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lastUpdated", ascending: false)]
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "modifiedDate", ascending: false)]
             episodeProjects = try Helper.context!.fetch(fetchRequest)
         } catch {
             print("Can't fetch persistence store with: \(error)")

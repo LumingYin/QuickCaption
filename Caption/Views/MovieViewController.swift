@@ -15,6 +15,11 @@ import AppCenterAnalytics
 class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
+    @IBOutlet weak var waveformImageView: NSImageView!
+    @IBOutlet weak var timelineScrollView: NSScrollView!
+    @IBOutlet weak var timelineOverallView: NSView!
+
+
     var episode: EpisodeProject! {
         didSet {
             
@@ -71,10 +76,10 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         episode.player = AVPlayer(url: videoURL)
         playerView.player = episode.player
         episode.player?.play()
-        recentTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateFirstCaption), userInfo: nil, repeats: false)
+        recentTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateLoadVideo), userInfo: nil, repeats: false)
     }
 
-    @objc func updateFirstCaption() {
+    @objc func updateLoadVideo() {
         if self.episode.arrayForCaption?.count ?? 0 <= 0 {
             let cap = CaptionLine(context: Helper.context!)
             cap.caption = ""
@@ -93,6 +98,12 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             self.episode.modifiedDate = NSDate()
         }
         self.populateThumbnail()
+        DispatchQueue.main.async {
+            self.configureOverallScrollView()
+            self.configureTextTrack()
+            self.configureWaveTrack()
+            self.configureVideoThumbnailTrack()
+        }
     }
 
     func populateThumbnail() {
@@ -186,6 +197,72 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             print("Can't configurate movie VC")
         }
     }
+
+    var pointsPerFrameScaleFactor: CGFloat = 15
+    var timelineLengthPixels: CGFloat {
+        get {
+            let player = self.episode.player!
+            return CGFloat(CMTimeGetSeconds((player.currentItem?.asset.duration)!)) * pointsPerFrameScaleFactor
+        }
+    }
+    var timeLineSegmentHeight: CGFloat {
+        // 64 for now
+        return timelineScrollView.frame.height / 3
+    }
+
+    // MARK: - Custom Timeline
+    func configureOverallScrollView() {
+        self.timelineOverallView.setFrameSize(NSSize(width: timelineLengthPixels + 100, height: self.timelineOverallView.frame.size.height))
+    }
+
+    func configureTextTrack() {
+
+    }
+
+    func configureWaveTrack() {
+        let asset = self.episode.player?.currentItem?.asset
+        let audioTracks:[AVAssetTrack] = asset!.tracks(withMediaType: AVMediaType.audio)
+        if let track:AVAssetTrack = audioTracks.first{
+            //let timeRange = CMTimeRangeMake(CMTime(seconds: 0, preferredTimescale: 1000), CMTime(seconds: 1, preferredTimescale: 1000))
+            let timeRange:CMTimeRange? = nil
+            self.waveformImageView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.waveformImageView.frame.size.height))
+            let width = Int(timelineLengthPixels)
+
+            // Let's extract the downsampled samples
+            let samplingStartTime = CFAbsoluteTimeGetCurrent()
+            SamplesExtractor.samples(audioTrack: track,
+                                     timeRange: timeRange,
+                                     desiredNumberOfSamples: width,
+                                     onSuccess: { s, sMax, _ in
+                                        let sampling = (samples: s, sampleMax: sMax)
+                                        // let samplingDuration = CFAbsoluteTimeGetCurrent() - samplingStartTime
+                                        // Image Drawing
+                                        // Let's draw the sample into an image.
+                                        let configuration = WaveformConfiguration(size: self.waveformImageView.bounds.size,
+                                                                                  color: WaveColor.red,
+                                                                                  backgroundColor:WaveColor.clear,
+                                                                                  style: .gradient,
+                                                                                  position: .middle,
+                                                                                  scale: 1,
+                                                                                  borderWidth:0,
+                                                                                  borderColor:WaveColor.red)
+                                        let drawingStartTime = CFAbsoluteTimeGetCurrent()
+                                        self.waveformImageView.image = WaveFormDrawer.image(with: sampling, and: configuration)
+                                        // let drawingDuration = CFAbsoluteTimeGetCurrent() - drawingStartTime
+                                        // self.nbLabel.stringValue = "\(width)/\(sampling.samples.count)"
+                                        // self.samplingDurationLabel.stringValue = String(format:"%.3f s",samplingDuration)
+                                        // self.drawingDurationLabel.stringValue = String(format:"%.3f s",drawingDuration)
+            }, onFailure: { error, id in
+                print("\(id ?? "") \(error)")
+            })
+        }
+
+    }
+
+    func configureVideoThumbnailTrack() {
+
+    }
+
 }
 
 
