@@ -220,7 +220,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
     var timeLineSegmentHeight: CGFloat {
         // 64 for now
-        return timelineScrollView.frame.height / 3
+//        return timelineScrollView.frame.height / 3
+        return 64
     }
 
     // MARK: - Custom Timeline
@@ -266,8 +267,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                                                                                   borderColor:WaveColor.red)
                                         let drawingStartTime = CFAbsoluteTimeGetCurrent()
                                         DispatchQueue.main.async {
+//                                            self.waveformImageView.imageFrameStyle = .grayBezel
                                             self.waveformImageView.image = WaveFormDrawer.image(with: sampling, and: configuration)
-
                                         }
                                         // let drawingDuration = CFAbsoluteTimeGetCurrent() - drawingStartTime
                                         // self.nbLabel.stringValue = "\(width)/\(sampling.samples.count)"
@@ -281,7 +282,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     func configureVideoThumbnailTrack() {
         self.videoPreviewContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.videoPreviewContainerView.frame.size.height))
-        self.videoPreviewContainerView.layer?.backgroundColor = NSColor.purple.cgColor
+//        self.videoPreviewContainerView.layer?.backgroundColor = NSColor.purple.cgColor
         // one snapshot every 10 seconds
         var asset = self.episode.player?.currentItem?.asset
         var imageGenerator = AVAssetImageGenerator(asset: asset!)
@@ -297,6 +298,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                     let imageRef = try! imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
                     let image = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
                     let imageView = NSImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(imageIndex), y: 0, width: widthOfThumbnail, height: timeLineSegmentHeight))
+                    imageView.imageScaling = .scaleProportionallyUpOrDown
+                    imageView.imageFrameStyle = .grayBezel
                     imageView.image = image
                     videoPreviewContainerView.addSubview(imageView)
                 } catch {"Can't take screenshot: \(error)"}
@@ -332,6 +335,19 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 let percent = CGFloat(seconds / durationSeconds)
                 self.progressView.setFrameOrigin(NSPoint(x: self.timelineLengthPixels * percent + self.offsetPixelInScrollView - self.redBarOffsetInScrollView, y: self.progressView.frame.origin.y))
             }
+
+//            if !(self.timelineScrollView.bounds.contains(self.progressView.frame)) {
+//                print("Not matching up, self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame)")
+//                // time to scroll to make the new timestamp visible!
+//                var targetFrame = self.progressView.frame
+//                targetFrame.size.width = self.timelineScrollView.frame.width
+//                targetFrame.origin.x -= self.offsetPixelInScrollView
+////                var newPoint = NSPoint(x: self.progressView.frame.origin.x, y: self.timelineScrollView.contentView.frame.origin.y)
+//                self.timelineScrollView.contentView.scrollToVisible(targetFrame)
+////                self.timelineScrollView.contentView.scroll(to: newPoint)
+//            } else {
+//                print("matching up, self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame)")
+//            }
         })
     }
 
