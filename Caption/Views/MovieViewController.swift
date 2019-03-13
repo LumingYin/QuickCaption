@@ -255,6 +255,10 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 for index in indexSet {
                     let indexInt: Int = index
                     if let captionLine = episode.arrayForCaption?.object(at: indexInt) as? CaptionLine {
+                        captionLine.addObserver(self, forKeyPath: "caption", options: [.new, .initial], context: &MovieViewController.textTrackContext)
+                        captionLine.addObserver(self, forKeyPath: "startingTime", options: [.new, .initial], context: &MovieViewController.textTrackContext)
+                        captionLine.addObserver(self, forKeyPath: "endingTime", options: [.new, .initial], context: &MovieViewController.textTrackContext)
+
                         let startingPercentile = CGFloat(captionLine.startingTime / calculatedDuration)
                         let endingPercentile = CGFloat(captionLine.endingTime / calculatedDuration)
                         let diffBetweenStartEnd = endingPercentile - startingPercentile
