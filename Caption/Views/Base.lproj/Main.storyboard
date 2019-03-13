@@ -1156,11 +1156,11 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K5C-Y2-cNb">
-                                                    <rect key="frame" x="8" y="0.0" width="19" height="213"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="16" height="213"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <subviews>
                                                         <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="gTd-tF-LlQ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="2" height="213"/>
+                                                            <rect key="frame" x="8" y="0.0" width="2" height="213"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <view key="contentView" ambiguous="YES" id="4xa-ch-QWB">
                                                                 <rect key="frame" x="0.0" y="0.0" width="2" height="213"/>
@@ -1169,6 +1169,13 @@
                                                             <color key="fillColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                                         </box>
                                                     </subviews>
+                                                    <gestureRecognizers>
+                                                        <panGestureRecognizer delaysPrimaryMouseButtonEvents="YES" id="wVZ-2Z-mjZ">
+                                                            <connections>
+                                                                <action selector="pannedToNewTimelineIndex:" target="XfG-lQ-9wD" id="fbb-fa-KEL"/>
+                                                            </connections>
+                                                        </panGestureRecognizer>
+                                                    </gestureRecognizers>
                                                 </customView>
                                             </subviews>
                                             <gestureRecognizers>
@@ -1216,6 +1223,7 @@
                     <connections>
                         <outlet property="playerView" destination="MMG-zt-4ZZ" id="XyH-Jq-kz1"/>
                         <outlet property="progressView" destination="K5C-Y2-cNb" id="ShI-fX-AJ7"/>
+                        <outlet property="progressViewColorLineBox" destination="gTd-tF-LlQ" id="afY-66-pxp"/>
                         <outlet property="subtitleTrackContainerView" destination="CWy-l4-FlO" id="V5b-Tp-AlF"/>
                         <outlet property="timeLabel" destination="Dcv-fO-TIm" id="PIm-6a-ri2"/>
                         <outlet property="timelineOverallView" destination="mHu-9K-0O1" id="KNa-wG-e6N"/>

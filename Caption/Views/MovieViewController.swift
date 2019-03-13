@@ -17,6 +17,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     @IBOutlet weak var timeLabel: NSTextField!
 
     @IBOutlet weak var progressView: NSView!
+    @IBOutlet weak var progressViewColorLineBox: NSBox!
+
     @IBOutlet weak var subtitleTrackContainerView: NSView!
     @IBOutlet weak var videoPreviewContainerView: NSView!
     @IBOutlet weak var waveformImageView: NSImageView!
@@ -103,12 +105,17 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             self.episode.modifiedDate = NSDate()
         }
         self.populateThumbnail()
+        self.configureOverallScrollView()
+        self.configurateRedBar()
+
         DispatchQueue.main.async {
-            self.configureOverallScrollView()
             self.configureTextTrack()
+        }
+        DispatchQueue.global(qos: .background).async {
             self.configureWaveTrack()
+        }
+        DispatchQueue.main.async {
             self.configureVideoThumbnailTrack()
-            self.configurateRedBar()
         }
     }
 
@@ -232,7 +239,11 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         if let track:AVAssetTrack = audioTracks.first{
             //let timeRange = CMTimeRangeMake(CMTime(seconds: 0, preferredTimescale: 1000), CMTime(seconds: 1, preferredTimescale: 1000))
             let timeRange:CMTimeRange? = nil
-            self.waveformImageView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.waveformImageView.frame.size.height))
+            DispatchQueue.main.async {
+                self.waveformImageView.setFrameSize(NSSize(width: self.timelineLengthPixels, height: self.waveformImageView.frame.size.height))
+            }
+            var cachedBounds = self.waveformImageView.bounds.size
+            cachedBounds.width = self.timelineLengthPixels
             let width = Int(timelineLengthPixels)
 
             // Let's extract the downsampled samples
@@ -245,7 +256,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                                         // let samplingDuration = CFAbsoluteTimeGetCurrent() - samplingStartTime
                                         // Image Drawing
                                         // Let's draw the sample into an image.
-                                        let configuration = WaveformConfiguration(size: self.waveformImageView.bounds.size,
+                                        let configuration = WaveformConfiguration(size: cachedBounds,
                                                                                   color: WaveColor.red,
                                                                                   backgroundColor:WaveColor.clear,
                                                                                   style: .gradient,
@@ -254,7 +265,10 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                                                                                   borderWidth:0,
                                                                                   borderColor:WaveColor.red)
                                         let drawingStartTime = CFAbsoluteTimeGetCurrent()
-                                        self.waveformImageView.image = WaveFormDrawer.image(with: sampling, and: configuration)
+                                        DispatchQueue.main.async {
+                                            self.waveformImageView.image = WaveFormDrawer.image(with: sampling, and: configuration)
+
+                                        }
                                         // let drawingDuration = CFAbsoluteTimeGetCurrent() - drawingStartTime
                                         // self.nbLabel.stringValue = "\(width)/\(sampling.samples.count)"
                                         // self.samplingDurationLabel.stringValue = String(format:"%.3f s",samplingDuration)
@@ -263,20 +277,49 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 print("\(id ?? "") \(error)")
             })
         }
-
     }
 
     func configureVideoThumbnailTrack() {
         self.videoPreviewContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.videoPreviewContainerView.frame.size.height))
         self.videoPreviewContainerView.layer?.backgroundColor = NSColor.purple.cgColor
+        // one snapshot every 10 seconds
+        var asset = self.episode.player?.currentItem?.asset
+        var imageGenerator = AVAssetImageGenerator(asset: asset!)
+        if let duration = self.episode.player?.currentItem?.duration {
+            let totalSeconds = CMTimeGetSeconds(duration)
+            var secondIndex: Float64 = 1
+            var imageIndex: Int = 0
+            let numberOfThumbnails = Int(totalSeconds / 10)
+            let widthOfThumbnail = timelineLengthPixels / CGFloat(numberOfThumbnails)
+            while (secondIndex < totalSeconds) {
+                let screenshotTime = CMTime(seconds: Double(secondIndex), preferredTimescale: 1)
+                do {
+                    let imageRef = try! imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
+                    let image = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
+                    let imageView = NSImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(imageIndex), y: 0, width: widthOfThumbnail, height: timeLineSegmentHeight))
+                    imageView.image = image
+                    videoPreviewContainerView.addSubview(imageView)
+                } catch {"Can't take screenshot: \(error)"}
+                secondIndex += 10
+                imageIndex += 1
+            }
+        }
+//        var imageGenerator = AVAssetImageGenerator(asset: asset!)
+//            let value = Float64(percent) * totalSeconds
+//            let seekTime = CMTime(seconds: Double(value), preferredTimescale: 1)
+//        }
+//        var time = CMTimeMake(1, 1)
+//        var imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
+//        var thumbnail = UIImage(cgImage:imageRef)
+
     }
 
     let offsetPixelInScrollView: CGFloat = 8
+    let redBarOffsetInScrollView: CGFloat = 8
 
     func configurateRedBar() {
         let interval = CMTime(value: 1, timescale: 2)
         self.episode.player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
-
             let seconds = CMTimeGetSeconds(progressTime)
             let secondsString = String(format: "%02d", Int(seconds.truncatingRemainder(dividingBy: 60)))
             let minutesString = String(format: "%02d", Int(seconds / 60))
@@ -287,28 +330,41 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             if let duration = self.episode.player?.currentItem?.duration {
                 let durationSeconds = CMTimeGetSeconds(duration)
                 let percent = CGFloat(seconds / durationSeconds)
-                self.progressView.setFrameOrigin(NSPoint(x: self.timelineLengthPixels * percent + self.offsetPixelInScrollView, y: self.progressView.frame.origin.y))
+                self.progressView.setFrameOrigin(NSPoint(x: self.timelineLengthPixels * percent + self.offsetPixelInScrollView - self.redBarOffsetInScrollView, y: self.progressView.frame.origin.y))
             }
-
         })
     }
 
     @IBAction func clickedOnNewTimelineIndex(_ sender: NSClickGestureRecognizer) {
+        handleNewTimelineLocation(sender: sender)
+    }
+
+    @IBAction func pannedToNewTimelineIndex(_ sender: NSPanGestureRecognizer) {
+        if sender.state == .began || sender.state == .changed {
+            progressViewColorLineBox.fillColor = NSColor.yellow
+        } else {
+            progressViewColorLineBox.fillColor = NSColor.red
+        }
+        handleNewTimelineLocation(sender: sender)
+    }
+
+    func handleNewTimelineLocation(sender: NSGestureRecognizer) {
         let location = sender.location(in: timelineOverallView).x - self.offsetPixelInScrollView
         let percent = location / self.timelineLengthPixels
 
         if let duration = self.episode.player?.currentItem?.duration {
             let totalSeconds = CMTimeGetSeconds(duration)
             let value = Float64(percent) * totalSeconds
-            let seekTime = CMTime(value: Int64(value), timescale: 1)
-            self.episode.player?.pause()
+            let seekTime = CMTime(seconds: Double(value), preferredTimescale: 1)
+            //            let seekTime = CMTime(value: Int64(value * 10000000), timescale: 10000000)
+            print("Seeking to: \(seekTime) with percent of \(percent) at location \(location)")
+            //            self.episode.player?.pause()
             self.episode.player?.seek(to: seekTime, completionHandler: { (completedSeek) in
                 //perhaps do something later here
-                self.episode.player?.play()
+                //                self.episode.player?.play()
             })
         }
     }
-
 }
 
 
