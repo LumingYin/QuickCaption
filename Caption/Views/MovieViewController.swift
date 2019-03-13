@@ -100,10 +100,10 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             }
             self.timeLabel.stringValue = "\(self.episode.framerate)fps  |  \(self.episode.videoDescription ?? "")"
             self.episode.creationDate = NSDate()
-            self.episode.videoDuration = Float(CMTimeGetSeconds((self.episode.player?.currentItem?.asset.duration)!))
         } else {
             self.episode.modifiedDate = NSDate()
         }
+        self.episode.videoDuration = Float(CMTimeGetSeconds((self.episode.player?.currentItem?.asset.duration)!))
         self.populateThumbnail()
         self.configureOverallScrollView()
         self.configurateRedBar()
@@ -229,9 +229,52 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         self.timelineOverallView.setFrameSize(NSSize(width: timelineLengthPixels + 100, height: self.timelineOverallView.frame.size.height))
     }
 
+    private static var textTrackContext = 0
+
     func configureTextTrack() {
         self.subtitleTrackContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.subtitleTrackContainerView.frame.size.height))
         self.subtitleTrackContainerView.layer?.backgroundColor = NSColor.purple.cgColor
+        episode.addObserver(self, forKeyPath: "arrayForCaption", options: [.initial, .new], context: &MovieViewController.textTrackContext)
+    }
+
+    var calculatedDuration: Float {
+        get {
+            return Float(CMTimeGetSeconds((self.episode.player!.currentItem?.asset.duration)!))
+        }
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard context == &MovieViewController.textTrackContext else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+            return
+        }
+        for aChange in change ?? [:] {
+            print("The change key: \(aChange.key), value: \(aChange.value)")
+            if let indexSet = aChange.value as? NSIndexSet {
+                print("The NSIndexSet is: \(indexSet)")
+                for index in indexSet {
+                    let indexInt: Int = index
+                    if let captionLine = episode.arrayForCaption?.object(at: indexInt) as? CaptionLine {
+                        let startingPercentile = CGFloat(captionLine.startingTime / calculatedDuration)
+                        let endingPercentile = CGFloat(captionLine.endingTime / calculatedDuration)
+                        let diffBetweenStartEnd = endingPercentile - startingPercentile
+                        var width = diffBetweenStartEnd * timelineLengthPixels
+                        if width == 0 {
+                            width = 15
+                        }
+                        let textField = NSTextField(frame: NSRect(x: startingPercentile * timelineLengthPixels, y: 0, width: width, height: timeLineSegmentHeight))
+                        textField.isBezeled = true
+                        textField.bezelStyle = .roundedBezel
+                        textField.stringValue = captionLine.caption ?? ""
+                        self.subtitleTrackContainerView.addSubview(textField)
+                    }
+                }
+            }
+        }
+//        if let line = object as? CaptionLine {
+//            print("Changed captionline object: \(line)")
+//        }
+//        print("Something on object: \(object) changed: \(change)")
     }
 
     func configureWaveTrack() {
