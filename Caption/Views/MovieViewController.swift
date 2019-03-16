@@ -368,10 +368,10 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         }
     }
 
-    func configureVideoThumbnailTrack() {
+    let thumbnailPerSeconds: Float64 = 2
 
+    func configureVideoThumbnailTrack() {
         self.videoPreviewContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.videoPreviewContainerView.frame.size.height))
-//        self.videoPreviewContainerView.layer?.backgroundColor = NSColor.purple.cgColor
         // one snapshot every 10 seconds
         DispatchQueue.global(qos: .background).async {
             let asset = self.episode.player?.currentItem?.asset
@@ -383,7 +383,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 if (totalSeconds.isNaN) {
                     return
                 }
-                let numberOfThumbnails = Int(totalSeconds / 10)
+                let numberOfThumbnails = Int(totalSeconds / self.thumbnailPerSeconds)
                 let widthOfThumbnail = self.timelineLengthPixels / CGFloat(numberOfThumbnails)
                 var generatedImages: [NSImage] = []
                 while (secondIndex < totalSeconds) {
@@ -403,7 +403,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                     } catch {
                         "Can't take screenshot: \(error)"
                     }
-                    secondIndex += 10
+                    secondIndex += self.thumbnailPerSeconds
                     imageIndex += 1
                 }
             }
