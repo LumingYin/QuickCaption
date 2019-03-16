@@ -332,7 +332,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         if let track:AVAssetTrack = audioTracks.first{
             //let timeRange = CMTimeRangeMake(CMTime(seconds: 0, preferredTimescale: 1000), CMTime(seconds: 1, preferredTimescale: 1000))
             let timeRange:CMTimeRange? = nil
-            self.waveformImageView.setFrameSize(NSSize(width: self.timelineLengthPixels, height: self.waveformImageView.frame.size.height))
+            self.waveformImageView.setFrameSize(NSSize(width: self.timelineLengthPixels, height: timeLineSegmentHeight)) // should this be self.waveformImageView.frame.size.height?
             var cachedBounds = self.waveformImageView.bounds.size
             cachedBounds.width = self.timelineLengthPixels
             let width = Int(timelineLengthPixels)
@@ -354,13 +354,15 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                                                                                       style: .gradient,
                                                                                       position: .middle,
                                                                                       scale: 1,
-                                                                                      borderWidth: 1,
+                                                                                      borderWidth: 0,
                                                                                       borderColor: WaveColor.gray)
 //                                            let drawingStartTime = CFAbsoluteTimeGetCurrent()
                                             let imageDrawn = WaveFormDrawer.image(with: sampling, and: configuration)
-                                            DispatchQueue.main.async {
-                                                // self.waveformImageView.imageFrameStyle = .grayBezel
-                                                self.waveformImageView.image = imageDrawn
+                                            if imageDrawn?.size.width >= self.timelineLengthPixels * 0.98 || imageDrawn?.size.width <= self.timelineLengthPixels * 1.02 {
+                                                DispatchQueue.main.async {
+                                                    // self.waveformImageView.imageFrameStyle = .grayBezel
+                                                    self.waveformImageView.image = imageDrawn
+                                                }
                                             }
                                             // let drawingDuration = CFAbsoluteTimeGetCurrent() - drawingStartTime
                                             // self.nbLabel.stringValue = "\(width)/\(sampling.samples.count)"
