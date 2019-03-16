@@ -75,6 +75,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             }
         }
         let project = episodeProjects[index]
+        AppDelegate.movieVC()?.dismantleOldMovieVC()
         AppDelegate.movieVC()?.episode = project
         AppDelegate.movieVC()?.configurateMovieVC()
         AppDelegate.subtitleVC()?.episode = project

@@ -205,17 +205,19 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     }
 
-    func configurateMovieVC() {
+    func dismantleOldMovieVC() {
         recentTimer?.invalidate()
         NotificationCenter.default.removeObserver(self)
-
-        episode.safelyRemoveObserver(self, forKeyPath: "arrayForCaption")
-        if let arr = self.episode.arrayForCaption?.array as? [CaptionLine] {
-            for line in arr {
-                line.safelyRemoveObserver(self, forKeyPath: "caption")
-                line.safelyRemoveObserver(self, forKeyPath: "startingTime")
-                line.safelyRemoveObserver(self, forKeyPath: "endingTime")
+        if (episode != nil) {
+            episode.safelyRemoveObserver(self, forKeyPath: "arrayForCaption")
+            if let arr = self.episode.arrayForCaption?.array as? [CaptionLine] {
+                for line in arr {
+                    line.safelyRemoveObserver(self, forKeyPath: "caption")
+                    line.safelyRemoveObserver(self, forKeyPath: "startingTime")
+                    line.safelyRemoveObserver(self, forKeyPath: "endingTime")
+                }
             }
+
         }
         for (_, view) in cachedCaptionViews {
             view.removeFromSuperview()
@@ -228,7 +230,9 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         self.videoPreviewContainerView.subviews = []
         self.waveformImageView.image = nil
         self.progressView.setFrameOrigin(NSPoint(x: 0, y: self.progressView.frame.origin.y))
+    }
 
+    func configurateMovieVC() {
         if let url = self.episode.videoURL {
             self.playVideo(url)
         } else {
