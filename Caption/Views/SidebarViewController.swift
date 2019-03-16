@@ -34,6 +34,12 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 
     func addNewProject() {
         episodeProjects.append(EpisodeProject(context: Helper.context!))
+        episodeProjects.sort { (ep1, ep2) -> Bool in
+            if let d1 = ep1.modifiedDate as Date?, let d2 = ep2.modifiedDate as Date? {
+                return d1 > d2
+            }
+            return false
+        }
         tableView.reloadData()
         tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
     }

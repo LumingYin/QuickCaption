@@ -203,6 +203,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     func configurateMovieVC() {
         recentTimer?.invalidate()
+        NotificationCenter.default.removeObserver(self)
+
         episode.safelyRemoveObserver(self, forKeyPath: "arrayForCaption")
         if let arr = self.episode.arrayForCaption?.array as? [CaptionLine] {
             for line in arr {
@@ -370,6 +372,9 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             let totalSeconds = CMTimeGetSeconds(duration)
             var secondIndex: Float64 = 1
             var imageIndex: Int = 0
+            if (totalSeconds.isNaN) {
+                return
+            }
             let numberOfThumbnails = Int(totalSeconds / 10)
             let widthOfThumbnail = timelineLengthPixels / CGFloat(numberOfThumbnails)
             while (secondIndex < totalSeconds) {
