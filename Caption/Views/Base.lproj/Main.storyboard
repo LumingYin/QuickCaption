@@ -1168,6 +1168,11 @@
                                                             </view>
                                                             <color key="fillColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                                         </box>
+                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LrD-cw-iRT">
+                                                            <rect key="frame" x="-6" y="195" width="30" height="25"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="triangle" id="Vkd-lx-Dgt"/>
+                                                        </imageView>
                                                     </subviews>
                                                     <gestureRecognizers>
                                                         <panGestureRecognizer delaysPrimaryMouseButtonEvents="YES" id="wVZ-2Z-mjZ">
@@ -1191,7 +1196,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="V95-Hy-NGv"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.11267605633802817" horizontal="YES" id="wxD-Wq-Vsv">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="wxD-Wq-Vsv">
                                     <rect key="frame" x="0.0" y="215" width="520" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1872,5 +1877,6 @@
         <image name="file_txt" width="175" height="184"/>
         <image name="import" width="19" height="19"/>
         <image name="inspector" width="19" height="19"/>
+        <image name="triangle" width="98" height="82"/>
     </resources>
 </document>
