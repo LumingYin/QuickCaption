@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Caption/Views/MovieViewController.swift"
-            timestampString = "574467340.2974"
+            timestampString = "574467877.8277431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
             landmarkName = "observeValue(forKeyPath:of:change:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,12 +26,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Caption/Views/MovieViewController.swift"
-            timestampString = "574467340.297461"
+            timestampString = "574467877.828125"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "observeValue(forKeyPath:of:change:context:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Caption/Views/MovieViewController.swift"
+            timestampString = "574468130.912392"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "populateThumbnail()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

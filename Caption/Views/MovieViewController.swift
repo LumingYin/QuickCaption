@@ -114,9 +114,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         DispatchQueue.main.async {
             self.configureTextTrack()
         }
-        DispatchQueue.global(qos: .background).async {
-            self.configureWaveTrack()
-        }
+        self.configureWaveTrack()
         DispatchQueue.main.async {
             self.configureVideoThumbnailTrack()
         }
@@ -321,43 +319,44 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         if let track:AVAssetTrack = audioTracks.first{
             //let timeRange = CMTimeRangeMake(CMTime(seconds: 0, preferredTimescale: 1000), CMTime(seconds: 1, preferredTimescale: 1000))
             let timeRange:CMTimeRange? = nil
-            DispatchQueue.main.async {
-                self.waveformImageView.setFrameSize(NSSize(width: self.timelineLengthPixels, height: self.waveformImageView.frame.size.height))
-            }
+            self.waveformImageView.setFrameSize(NSSize(width: self.timelineLengthPixels, height: self.waveformImageView.frame.size.height))
             var cachedBounds = self.waveformImageView.bounds.size
             cachedBounds.width = self.timelineLengthPixels
             let width = Int(timelineLengthPixels)
 
-            // Let's extract the downsampled samples
-            let samplingStartTime = CFAbsoluteTimeGetCurrent()
-            SamplesExtractor.samples(audioTrack: track,
-                                     timeRange: timeRange,
-                                     desiredNumberOfSamples: width,
-                                     onSuccess: { s, sMax, _ in
-                                        let sampling = (samples: s, sampleMax: sMax)
-                                        // let samplingDuration = CFAbsoluteTimeGetCurrent() - samplingStartTime
-                                        // Image Drawing
-                                        // Let's draw the sample into an image.
-                                        let configuration = WaveformConfiguration(size: cachedBounds,
-                                                                                  color: WaveColor(red: 77 / 255, green: 103 / 255, blue: 143 / 255, alpha: 1),
-                                                                                  backgroundColor: WaveColor(red: 22 / 255, green: 38 / 255, blue: 67 / 255, alpha: 1),
-                                                                                  style: .gradient,
-                                                                                  position: .middle,
-                                                                                  scale: 1,
-                                                                                  borderWidth: 1,
-                                                                                  borderColor: WaveColor.gray)
-                                        let drawingStartTime = CFAbsoluteTimeGetCurrent()
-                                        DispatchQueue.main.async {
-//                                            self.waveformImageView.imageFrameStyle = .grayBezel
-                                            self.waveformImageView.image = WaveFormDrawer.image(with: sampling, and: configuration)
-                                        }
-                                        // let drawingDuration = CFAbsoluteTimeGetCurrent() - drawingStartTime
-                                        // self.nbLabel.stringValue = "\(width)/\(sampling.samples.count)"
-                                        // self.samplingDurationLabel.stringValue = String(format:"%.3f s",samplingDuration)
-                                        // self.drawingDurationLabel.stringValue = String(format:"%.3f s",drawingDuration)
-            }, onFailure: { error, id in
-                print("\(id ?? "") \(error)")
-            })
+            DispatchQueue.global(qos: .background).async {
+                // Let's extract the downsampled samples
+//                let samplingStartTime = CFAbsoluteTimeGetCurrent()
+                SamplesExtractor.samples(audioTrack: track,
+                                         timeRange: timeRange,
+                                         desiredNumberOfSamples: width,
+                                         onSuccess: { s, sMax, _ in
+                                            let sampling = (samples: s, sampleMax: sMax)
+                                            // let samplingDuration = CFAbsoluteTimeGetCurrent() - samplingStartTime
+                                            // Image Drawing
+                                            // Let's draw the sample into an image.
+                                            let configuration = WaveformConfiguration(size: cachedBounds,
+                                                                                      color: WaveColor(red: 77 / 255, green: 103 / 255, blue: 143 / 255, alpha: 1),
+                                                                                      backgroundColor: WaveColor(red: 22 / 255, green: 38 / 255, blue: 67 / 255, alpha: 1),
+                                                                                      style: .gradient,
+                                                                                      position: .middle,
+                                                                                      scale: 1,
+                                                                                      borderWidth: 1,
+                                                                                      borderColor: WaveColor.gray)
+//                                            let drawingStartTime = CFAbsoluteTimeGetCurrent()
+                                            let imageDrawn = WaveFormDrawer.image(with: sampling, and: configuration)
+                                            DispatchQueue.main.async {
+                                                // self.waveformImageView.imageFrameStyle = .grayBezel
+                                                self.waveformImageView.image = imageDrawn
+                                            }
+                                            // let drawingDuration = CFAbsoluteTimeGetCurrent() - drawingStartTime
+                                            // self.nbLabel.stringValue = "\(width)/\(sampling.samples.count)"
+                                            // self.samplingDurationLabel.stringValue = String(format:"%.3f s",samplingDuration)
+                                            // self.drawingDurationLabel.stringValue = String(format:"%.3f s",drawingDuration)
+                }, onFailure: { error, id in
+                    print("\(id ?? "") \(error)")
+                })
+            }
         }
     }
 
@@ -365,8 +364,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         self.videoPreviewContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.videoPreviewContainerView.frame.size.height))
 //        self.videoPreviewContainerView.layer?.backgroundColor = NSColor.purple.cgColor
         // one snapshot every 10 seconds
-        var asset = self.episode.player?.currentItem?.asset
-        var imageGenerator = AVAssetImageGenerator(asset: asset!)
+        let asset = self.episode.player?.currentItem?.asset
+        let imageGenerator = AVAssetImageGenerator(asset: asset!)
         if let duration = self.episode.player?.currentItem?.duration {
             let totalSeconds = CMTimeGetSeconds(duration)
             var secondIndex: Float64 = 1
@@ -376,14 +375,16 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             while (secondIndex < totalSeconds) {
                 let screenshotTime = CMTime(seconds: Double(secondIndex), preferredTimescale: 1)
                 do {
-                    let imageRef = try! imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
-                    let image = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
+                    let imageRef = try? imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
+                    let image = NSImage(cgImage: imageRef!, size: NSSize(width: imageRef!.width, height: imageRef!.height))
                     let imageView = NSImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(imageIndex), y: 0, width: widthOfThumbnail, height: timeLineSegmentHeight))
                     imageView.imageScaling = .scaleProportionallyUpOrDown
                     imageView.imageFrameStyle = .grayBezel
                     imageView.image = image
                     videoPreviewContainerView.addSubview(imageView)
-                } catch {"Can't take screenshot: \(error)"}
+                } catch {
+                    "Can't take screenshot: \(error)"
+                }
                 secondIndex += 10
                 imageIndex += 1
             }

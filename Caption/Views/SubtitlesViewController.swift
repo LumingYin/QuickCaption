@@ -36,7 +36,11 @@ import AVKit
         if (control == transcribeTextField) {
             episode.player?.pause()
             if let last = episode.arrayForCaption?.lastObject as? CaptionLine, let time = episode.player?.currentTime() {
-                last.endingTime = Float(CMTimeGetSeconds(time))
+                if (Float(CMTimeGetSeconds(time)) < last.startingTime) {
+                    _ = Helper.dialogOKCancel(question: "Unable to add caption", text: "You can't add a caption with an ending time earlier than the starting time.")
+                } else {
+                    last.endingTime = Float(CMTimeGetSeconds(time))
+                }
             }
         }
         return true
