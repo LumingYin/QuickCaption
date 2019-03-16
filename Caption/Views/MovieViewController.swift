@@ -25,6 +25,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     @IBOutlet weak var timelineScrollView: NSScrollView!
     @IBOutlet weak var timelineOverallView: NSView!
+    @IBOutlet weak var captionPreviewLabel: NSTextField!
 
     var cachedCaptionViews: [String: CaptionBoxView] = [:]
 
@@ -424,7 +425,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     let redBarOffsetInScrollView: CGFloat = 8
 
     func configurateRedBar() {
-        let interval = CMTime(value: 1, timescale: 2)
+        let interval = CMTime(value: 1, timescale: 30)
         self.episode.player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
             let seconds = CMTimeGetSeconds(progressTime)
             let secondsString = String(format: "%02d", Int(seconds.truncatingRemainder(dividingBy: 60)))
@@ -442,6 +443,22 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 }
                 self.progressView.setFrameOrigin(originPoint)
             }
+
+            self.episode.arrayForCaption?.enumerateObjects({ (element, index, stop) in
+                var matched: Bool = false
+                if let captionLine = element as? CaptionLine {
+                    if let s = self.episode.player?.currentTime().seconds {
+                        let sec = Float(s)
+                        if sec > captionLine.startingTime && sec < captionLine.endingTime {
+                            self.captionPreviewLabel.stringValue = captionLine.caption ?? ""
+                            matched = true
+                        }
+                    }
+                }
+                if matched == false {
+                    self.captionPreviewLabel.stringValue = ""
+                }
+            })
 
 //            if !(self.timelineScrollView.bounds.contains(self.progressView.frame)) {
 //                print("Not matching up, self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame)")

@@ -1250,6 +1250,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="captionPreviewLabel" destination="jiy-T2-5Ml" id="TUc-3s-Ekx"/>
                         <outlet property="playerView" destination="MMG-zt-4ZZ" id="XyH-Jq-kz1"/>
                         <outlet property="progressView" destination="K5C-Y2-cNb" id="ShI-fX-AJ7"/>
                         <outlet property="progressViewColorLineBox" destination="gTd-tF-LlQ" id="afY-66-pxp"/>
@@ -1895,7 +1896,7 @@
         <image name="NSIChatTheaterTemplate" width="15" height="13"/>
         <image name="NSPathTemplate" width="16" height="10"/>
         <image name="NSShareTemplate" width="11" height="16"/>
-        <image name="bunny" width="310" height="174"/>
+        <image name="bunny" width="322" height="180"/>
         <image name="file_fcpxml" width="174" height="185"/>
         <image name="file_srt" width="175" height="184"/>
         <image name="file_txt" width="175" height="184"/>
