@@ -1169,7 +1169,7 @@
                                                             <color key="fillColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                                         </box>
                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LrD-cw-iRT">
-                                                            <rect key="frame" x="-6" y="195" width="30" height="25"/>
+                                                            <rect key="frame" x="-6" y="196" width="30" height="25"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="triangle" id="Vkd-lx-Dgt"/>
                                                         </imageView>
