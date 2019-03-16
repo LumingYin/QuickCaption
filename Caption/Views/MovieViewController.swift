@@ -339,13 +339,13 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                                         // Image Drawing
                                         // Let's draw the sample into an image.
                                         let configuration = WaveformConfiguration(size: cachedBounds,
-                                                                                  color: WaveColor.red,
-                                                                                  backgroundColor:WaveColor.clear,
+                                                                                  color: WaveColor(red: 77 / 255, green: 103 / 255, blue: 143 / 255, alpha: 1),
+                                                                                  backgroundColor: WaveColor(red: 22 / 255, green: 38 / 255, blue: 67 / 255, alpha: 1),
                                                                                   style: .gradient,
                                                                                   position: .middle,
                                                                                   scale: 1,
-                                                                                  borderWidth:0,
-                                                                                  borderColor:WaveColor.red)
+                                                                                  borderWidth: 1,
+                                                                                  borderColor: WaveColor.gray)
                                         let drawingStartTime = CFAbsoluteTimeGetCurrent()
                                         DispatchQueue.main.async {
 //                                            self.waveformImageView.imageFrameStyle = .grayBezel
