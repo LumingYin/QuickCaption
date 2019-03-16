@@ -444,8 +444,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 self.progressView.setFrameOrigin(originPoint)
             }
 
+            var matched: Bool = false
             self.episode.arrayForCaption?.enumerateObjects({ (element, index, stop) in
-                var matched: Bool = false
                 if let captionLine = element as? CaptionLine {
                     if let s = self.episode.player?.currentTime().seconds {
                         let sec = Float(s)
@@ -455,10 +455,10 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                         }
                     }
                 }
-                if matched == false {
-                    self.captionPreviewLabel.stringValue = ""
-                }
             })
+            if matched == false {
+                self.captionPreviewLabel.stringValue = ""
+            }
 
 //            if !(self.timelineScrollView.bounds.contains(self.progressView.frame)) {
 //                print("Not matching up, self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame)")
