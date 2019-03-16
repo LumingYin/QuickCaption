@@ -253,7 +253,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     func configureTextTrack() {
         self.subtitleTrackContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.subtitleTrackContainerView.frame.size.height))
-        self.subtitleTrackContainerView.layer?.backgroundColor = NSColor.purple.cgColor
+//        self.subtitleTrackContainerView.layer?.backgroundColor = NSColor.purple.cgColor
         if (episode == nil || episode!.arrayForCaption == nil) { return }
         for captionLine in (episode!.arrayForCaption?.array as! [CaptionLine]) {
             self.addObserverForCaptionLine(captionLine)

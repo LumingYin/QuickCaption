@@ -14,11 +14,13 @@ class CaptionBoxView: NSView {
         super.draw(dirtyRect)
 
         NSColor(red: 63 / 255, green: 34 / 255, blue: 114 / 255, alpha: 1.0).setFill()
-        NSColor.white.setStroke()
         let path = NSBezierPath(roundedRect: self.bounds, xRadius: 5, yRadius: 5)
-
-        path.stroke()
         path.fill()
+
+        NSColor.white.withAlphaComponent(0.6).setStroke()
+        let smallerRectForFraming = self.bounds.insetBy(dx: self.bounds.width * 0.05, dy: self.bounds.height * 0.05)
+        let smallPath = NSBezierPath(roundedRect: smallerRectForFraming, xRadius: 5, yRadius: 5)
+        smallPath.stroke()
 
         (captionText as NSString).drawLeftAligned(in: bounds, withAttributes: [.foregroundColor: NSColor(red: 179 / 255, green: 152 / 255, blue: 233 / 255, alpha: 1.0)])
         // Drawing code here.
