@@ -231,7 +231,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         }
     }
 
-    var pointsPerFrameScaleFactor: CGFloat = 15
+    var pointsPerFrameScaleFactor: CGFloat = 45
     var timelineLengthPixels: CGFloat {
         get {
             let player = self.episode.player!

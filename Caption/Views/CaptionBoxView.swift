@@ -16,6 +16,8 @@ class CaptionBoxView: NSView {
         dirtyRect.fill()
         NSColor.white.setStroke()
         NSBezierPath.stroke(bounds)
+
+        (captionText as NSString).drawCentered(in: bounds, withAttributes: [.foregroundColor: NSColor.white])
         // Drawing code here.
     }
     
