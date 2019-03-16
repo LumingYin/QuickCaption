@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.95.2" systemVersion="18E215a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18E215a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CaptionLine" representedClassName="CaptionLine" syncable="YES">
         <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endingTime" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="guidIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startingTime" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="episodeProject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EpisodeProject" inverseName="arrayForCaption" inverseEntity="EpisodeProject" syncable="YES"/>
     </entity>
@@ -22,7 +23,7 @@
         <relationship name="arrayForCaption" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CaptionLine" inverseName="episodeProject" inverseEntity="CaptionLine" syncable="YES"/>
     </entity>
     <elements>
+        <element name="CaptionLine" positionX="-63" positionY="0" width="128" height="120"/>
         <element name="EpisodeProject" positionX="-63" positionY="-18" width="128" height="240"/>
-        <element name="CaptionLine" positionX="-63" positionY="0" width="128" height="105"/>
     </elements>
 </model>

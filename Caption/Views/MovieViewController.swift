@@ -26,6 +26,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     @IBOutlet weak var timelineScrollView: NSScrollView!
     @IBOutlet weak var timelineOverallView: NSView!
 
+    var cachedCaptionViews: [String: CaptionBoxView] = [:]
+
 
     var episode: EpisodeProject! {
         didSet {
@@ -89,6 +91,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     @objc func updateLoadVideo() {
         if self.episode.arrayForCaption?.count ?? 0 <= 0 {
             let cap = CaptionLine(context: Helper.context!)
+            cap.guidIdentifier = NSUUID().uuidString
             cap.caption = ""
             cap.startingTime = Float(CMTimeGetSeconds((episode.player?.currentTime())!))
             cap.endingTime = 0
@@ -127,8 +130,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             let time = CMTimeMake(value: 1, timescale: 1)
             let imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
             let thumbnail = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
-            let desktopURL = FileManager.default.urls(for: .allLibrariesDirectory, in: .userDomainMask).first!
-            let destinationURL = desktopURL.appendingPathComponent("CaptionStudio").appendingPathComponent("\(NSUUID().uuidString).png")
+            let desktopURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+            let destinationURL = desktopURL.appendingPathComponent("thumbnails").appendingPathComponent("\(NSUUID().uuidString).png")
             let result = thumbnail.pngWrite(to: destinationURL)
             print("Writing thumbnail: \(result)")
             self.episode.thumbnailURL = destinationURL
@@ -202,6 +205,18 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     func configurateMovieVC() {
         recentTimer?.invalidate()
+        episode.safelyRemoveObserver(self, forKeyPath: "arrayForCaption")
+        if let arr = self.episode.arrayForCaption?.array as? [CaptionLine] {
+            for line in arr {
+                line.safelyRemoveObserver(self, forKeyPath: "caption")
+                line.safelyRemoveObserver(self, forKeyPath: "startingTime")
+                line.safelyRemoveObserver(self, forKeyPath: "endingTime")
+            }
+        }
+        for (key, view) in cachedCaptionViews {
+            view.removeFromSuperview()
+        }
+        self.cachedCaptionViews = [:]
         self.subtitleTrackContainerView.subviews = []
         self.videoPreviewContainerView.subviews = []
         self.waveformImageView.image = nil
@@ -239,6 +254,10 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     func configureTextTrack() {
         self.subtitleTrackContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.subtitleTrackContainerView.frame.size.height))
         self.subtitleTrackContainerView.layer?.backgroundColor = NSColor.purple.cgColor
+        if (episode == nil || episode!.arrayForCaption == nil) { return }
+        for captionLine in (episode!.arrayForCaption?.array as! [CaptionLine]) {
+            self.addObserverForCaptionLine(captionLine)
+        }
         episode.addObserver(self, forKeyPath: "arrayForCaption", options: [.initial, .new], context: &MovieViewController.textTrackContext)
     }
 
@@ -246,6 +265,12 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         get {
             return Float(CMTimeGetSeconds((self.episode.player!.currentItem?.asset.duration)!))
         }
+    }
+
+    func addObserverForCaptionLine(_ captionLine: CaptionLine) {
+        captionLine.addObserver(self, forKeyPath: "caption", options: [.new, .initial], context: &MovieViewController.textTrackContext)
+        captionLine.addObserver(self, forKeyPath: "startingTime", options: [.new, .initial], context: &MovieViewController.textTrackContext)
+        captionLine.addObserver(self, forKeyPath: "endingTime", options: [.new, .initial], context: &MovieViewController.textTrackContext)
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -260,25 +285,28 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 for index in indexSet {
                     let indexInt: Int = index
                     if let captionLine = episode.arrayForCaption?.object(at: indexInt) as? CaptionLine {
-                        captionLine.addObserver(self, forKeyPath: "caption", options: [.new, .initial], context: &MovieViewController.textTrackContext)
-                        captionLine.addObserver(self, forKeyPath: "startingTime", options: [.new, .initial], context: &MovieViewController.textTrackContext)
-                        captionLine.addObserver(self, forKeyPath: "endingTime", options: [.new, .initial], context: &MovieViewController.textTrackContext)
-
-                        let startingPercentile = CGFloat(captionLine.startingTime / calculatedDuration)
-                        let endingPercentile = CGFloat(captionLine.endingTime / calculatedDuration)
-                        let diffBetweenStartEnd = endingPercentile - startingPercentile
-                        var width = diffBetweenStartEnd * timelineLengthPixels
-                        if width == 0 {
-                            width = 15
-                        }
-                        let textField = NSTextField(frame: NSRect(x: startingPercentile * timelineLengthPixels, y: 0, width: width, height: timeLineSegmentHeight))
-                        textField.isBezeled = true
-                        textField.bezelStyle = .roundedBezel
-                        textField.stringValue = captionLine.caption ?? ""
-                        self.subtitleTrackContainerView.addSubview(textField)
+                        addObserverForCaptionLine(captionLine)
                     }
                 }
             }
+        }
+        if let captionLine = object as? CaptionLine {
+            guard let guid = captionLine.guidIdentifier else {return}
+            if cachedCaptionViews[guid] == nil {
+                cachedCaptionViews[guid] = CaptionBoxView()
+                self.subtitleTrackContainerView.addSubview(cachedCaptionViews[guid]!)
+            }
+            guard let existingView = cachedCaptionViews[guid] else { return }
+            existingView.captionText = captionLine.caption ?? ""
+
+            let startingPercentile = CGFloat(captionLine.startingTime / calculatedDuration)
+            let endingPercentile = CGFloat(captionLine.endingTime / calculatedDuration)
+            let diffBetweenStartEnd = endingPercentile - startingPercentile
+            var width = diffBetweenStartEnd * timelineLengthPixels
+            if width == 0 {
+                width = 0
+            }
+            existingView.frame = NSRect(x: startingPercentile * timelineLengthPixels, y: 0, width: width, height: timeLineSegmentHeight)
         }
 //        if let line = object as? CaptionLine {
 //            print("Changed captionline object: \(line)")
@@ -417,6 +445,9 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     func handleNewTimelineLocation(sender: NSGestureRecognizer) {
+        if (self.episode == nil || self.episode.player == nil || self.episode.player?.currentItem == nil) {
+            return
+        }
         let location = sender.location(in: timelineOverallView).x - self.offsetPixelInScrollView
         let percent = location / self.timelineLengthPixels
 

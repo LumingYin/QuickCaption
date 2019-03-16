@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3204751F223DA1A30027218F /* CaptionBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3204751E223DA1A30027218F /* CaptionBoxView.swift */; };
+		32047523223DA6100027218F /* NSObject+KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 32047522223DA6100027218F /* NSObject+KVO.m */; };
 		321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C32235FE650038C8FB /* Caption.xcdatamodeld */; };
 		321DC3CA2236037C0038C8FB /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C72236037C0038C8FB /* ExampleViewController.swift */; };
 		321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */; };
@@ -62,6 +64,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3204751E223DA1A30027218F /* CaptionBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionBoxView.swift; sourceTree = "<group>"; };
+		32047520223DA60F0027218F /* Quick Caption-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Quick Caption-Bridging-Header.h"; sourceTree = "<group>"; };
+		32047521223DA6100027218F /* NSObject+KVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVO.h"; sourceTree = "<group>"; };
+		32047522223DA6100027218F /* NSObject+KVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVO.m"; sourceTree = "<group>"; };
 		321DC3C42235FE650038C8FB /* Caption.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Caption.xcdatamodel; sourceTree = "<group>"; };
 		321DC3C72236037C0038C8FB /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveFormDrawer.swift; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 				321DC3F622361E3D0038C8FB /* CaptionExportViewController.swift */,
 				321DC3F4223615E90038C8FB /* MainSplitViewController.swift */,
 				562A68861F2D4F5E000E6B16 /* MovieViewController.swift */,
+				3204751E223DA1A30027218F /* CaptionBoxView.swift */,
 				324971D122190D1C00562223 /* CaptionWindowController.swift */,
 				321DC3CD22360ADC0038C8FB /* SidebarViewController.swift */,
 				321DC3CF22360F310038C8FB /* SubtitlesViewController.swift */,
@@ -168,11 +175,14 @@
 		321DC3F3223615840038C8FB /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				32047521223DA6100027218F /* NSObject+KVO.h */,
+				32047522223DA6100027218F /* NSObject+KVO.m */,
 				562A68841F2D4F5E000E6B16 /* AppDelegate.swift */,
 				321DC3F82236216B0038C8FB /* Helper.swift */,
 				3C43B6932068A7A000219EF6 /* film.icns */,
 				562A68881F2D4F5E000E6B16 /* Assets.xcassets */,
 				562A688D1F2D4F5E000E6B16 /* Info.plist */,
+				32047520223DA60F0027218F /* Quick Caption-Bridging-Header.h */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -265,7 +275,7 @@
 					562A68801F2D4F5E000E6B16 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 3Q7XKEDZ36;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.HardenedRuntime = {
@@ -326,6 +336,7 @@
 				321DC401223629030038C8FB /* SidebarEpisodeTableCellView.swift in Sources */,
 				321DC3D222360F410038C8FB /* FontViewController.swift in Sources */,
 				562A68871F2D4F5E000E6B16 /* MovieViewController.swift in Sources */,
+				32047523223DA6100027218F /* NSObject+KVO.m in Sources */,
 				32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */,
 				321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */,
 				321DC3F5223615E90038C8FB /* MainSplitViewController.swift in Sources */,
@@ -333,6 +344,7 @@
 				321DC3F92236216B0038C8FB /* Helper.swift in Sources */,
 				562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */,
 				321DC3FD223623500038C8FB /* Exporter.swift in Sources */,
+				3204751F223DA1A30027218F /* CaptionBoxView.swift in Sources */,
 				32F53CDE22376C4D007B66E1 /* EpisodeProject+CoreDataClass.swift in Sources */,
 				321DC3CE22360ADC0038C8FB /* SidebarViewController.swift in Sources */,
 				32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */,
@@ -473,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3Q7XKEDZ36;
@@ -491,6 +504,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dim.Caption;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Caption/Others/Quick Caption-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.2;
 			};
@@ -500,6 +515,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3Q7XKEDZ36;
@@ -518,6 +534,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dim.Caption;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Caption/Others/Quick Caption-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.2;
 			};
