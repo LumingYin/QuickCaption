@@ -16,4 +16,16 @@ extension NSString {
                             y: rect.origin.y + (rect.height - stringSize.height) / 2.0)
         draw(at: point, withAttributes: attrs)
     }
+
+    func drawLeftAligned(in rect: NSRect, withAttributes attrs: [NSAttributedString.Key: Any]? = nil) {
+        let stringSize = size(withAttributes: attrs)
+        var startingPoint: CGFloat = 8
+        if rect.width <= 8 {
+            startingPoint = rect.width * 0.15
+        }
+        let point = NSPoint(x: startingPoint,
+                            y: rect.origin.y + (rect.height - stringSize.height) / 2.0)
+        draw(at: point, withAttributes: attrs)
+    }
+
 }

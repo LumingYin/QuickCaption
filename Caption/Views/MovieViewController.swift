@@ -307,6 +307,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 width = 0
             }
             existingView.frame = NSRect(x: startingPercentile * timelineLengthPixels, y: 0, width: width, height: timeLineSegmentHeight)
+            existingView.setNeedsDisplay(existingView.bounds)
         }
 //        if let line = object as? CaptionLine {
 //            print("Changed captionline object: \(line)")
