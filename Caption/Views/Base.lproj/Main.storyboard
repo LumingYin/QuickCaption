@@ -1033,91 +1033,101 @@
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="ttB-6C-NvU">
                                         <rect key="frame" x="175" y="10" width="170" height="42"/>
                                         <subviews>
-                                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IqB-TS-eQP">
-                                                <rect key="frame" x="0.0" y="0.0" width="170" height="22"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M3v-sj-Z0g">
-                                                        <rect key="frame" x="0.0" y="-1" width="28" height="23"/>
-                                                        <buttonCell key="cell" type="roundTextured" title="&lt;-" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="tF0-qf-zW6">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <action selector="queryTime:" target="XfG-lQ-9wD" id="F0F-qg-24V"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Ci-9Y-OZ0">
-                                                        <rect key="frame" x="31" y="-1" width="36" height="23"/>
-                                                        <buttonCell key="cell" type="roundTextured" title="&lt;15" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="1SU-0n-Kh2">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <action selector="queryTime:" target="XfG-lQ-9wD" id="ks1-lY-zmP"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OEK-bl-yga">
-                                                        <rect key="frame" x="70" y="-1" width="30" height="23"/>
-                                                        <buttonCell key="cell" type="roundTextured" title="&gt;||" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="FfU-kh-fBS">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <action selector="queryTime:" target="XfG-lQ-9wD" id="tUj-aM-sz7"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gpa-7B-pA4">
-                                                        <rect key="frame" x="103" y="-1" width="36" height="23"/>
-                                                        <buttonCell key="cell" type="roundTextured" title="&gt;15" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="9Od-4R-dsD">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <action selector="queryTime:" target="XfG-lQ-9wD" id="aA7-jr-C1F"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HHe-bf-zDy">
-                                                        <rect key="frame" x="142" y="-1" width="28" height="23"/>
-                                                        <buttonCell key="cell" type="roundTextured" title="-&gt;" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="7bk-eA-WqJ">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <action selector="queryTime:" target="XfG-lQ-9wD" id="Dit-Zw-lOA"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <visibilityPriorities>
-                                                    <integer value="1000"/>
-                                                    <integer value="1000"/>
-                                                    <integer value="1000"/>
-                                                    <integer value="1000"/>
-                                                    <integer value="1000"/>
-                                                </visibilityPriorities>
-                                                <customSpacing>
-                                                    <real value="3.4028234663852886e+38"/>
-                                                    <real value="3.4028234663852886e+38"/>
-                                                    <real value="3.4028234663852886e+38"/>
-                                                    <real value="3.4028234663852886e+38"/>
-                                                    <real value="3.4028234663852886e+38"/>
-                                                </customSpacing>
-                                            </stackView>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ihC-TU-2C9">
                                                 <rect key="frame" x="15" y="25" width="137" height="17"/>
                                                 <autoresizingMask key="autoresizingMask"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="00:03:12:15" id="kxx-Zu-D6O">
+                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="00:00:00:00" id="kxx-Zu-D6O">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2l-eq-tnu">
+                                                <rect key="frame" x="9" y="-1" width="28" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="j42-j3-dfi">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="queryTime:" target="XfG-lQ-9wD" id="bbZ-GF-OPb"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRi-bL-Mbk">
+                                                <rect key="frame" x="40" y="-1" width="28" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="1qS-ty-ctl">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="queryTime:" target="XfG-lQ-9wD" id="HJB-zt-MmL"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TnG-Dw-kSw">
+                                                <rect key="frame" x="71" y="-1" width="28" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="fYG-vN-i1a">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="queryTime:" target="XfG-lQ-9wD" id="5Hk-3i-l7e"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kcM-MG-g0M">
+                                                <rect key="frame" x="102" y="-1" width="28" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="I0L-WU-dfI">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="queryTime:" target="XfG-lQ-9wD" id="wdw-Qx-KSz"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-fP-aGm">
+                                                <rect key="frame" x="133" y="-1" width="28" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="QYs-CB-WRe">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="queryTime:" target="XfG-lQ-9wD" id="TAW-OF-bYU"/>
+                                                </connections>
+                                            </button>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TRN-rk-sxt">
+                                                <rect key="frame" x="15" y="0.0" width="16" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_framePrev" id="JMp-Sc-QDn"/>
+                                            </imageView>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8w-1Y-ajd">
+                                                <rect key="frame" x="44" y="5" width="20" height="12"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_last" id="GN3-Yw-pTs"/>
+                                            </imageView>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="36y-8A-Qbb">
+                                                <rect key="frame" x="107" y="5" width="20" height="12"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_next" id="qye-9o-uN9"/>
+                                            </imageView>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J02-2i-BCs">
+                                                <rect key="frame" x="139" y="0.0" width="16" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_frameNext" id="SuH-wf-Sqy"/>
+                                            </imageView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="BsX-gc-xba"/>
                                             <constraint firstAttribute="width" constant="170" id="dZ6-H3-Fbp"/>
                                         </constraints>
                                     </customView>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FA1-Kt-fGw">
+                                        <rect key="frame" x="253" y="15" width="15" height="12"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_play" id="mfa-5f-l54"/>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="qcp-ff-jh0" secondAttribute="bottom" constant="20" id="15O-JW-YGD"/>
@@ -1205,22 +1215,36 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <avPlayerView controlsStyle="inline" translatesAutoresizingMaskIntoConstraints="NO" id="MMG-zt-4ZZ">
+                            <avPlayerView controlsStyle="minimal" showsFrameSteppingButtons="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMG-zt-4ZZ">
                                 <rect key="frame" x="0.0" y="292" width="520" height="194"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="194" id="4VW-YY-Wk2"/>
                                 </constraints>
                             </avPlayerView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jiy-T2-5Ml">
+                                <rect key="frame" x="18" y="306" width="484" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="qTg-qv-Nfu"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Caption Preview" id="9Gm-kK-WN1">
+                                    <font key="font" metaFont="system" size="16"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="MMG-zt-4ZZ" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="2is-Uv-FU2"/>
                             <constraint firstItem="MMG-zt-4ZZ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="8jQ-Eg-iWa"/>
+                            <constraint firstItem="WhH-E3-1w2" firstAttribute="top" secondItem="jiy-T2-5Ml" secondAttribute="bottom" constant="14" id="Mxv-sR-6nz"/>
                             <constraint firstItem="QEG-SY-Hn2" firstAttribute="top" secondItem="WhH-E3-1w2" secondAttribute="bottom" id="NLs-8v-gjR"/>
+                            <constraint firstAttribute="trailing" secondItem="jiy-T2-5Ml" secondAttribute="trailing" constant="20" id="NvI-p6-WoD"/>
                             <constraint firstAttribute="trailing" secondItem="WhH-E3-1w2" secondAttribute="trailing" id="OFZ-VQ-2a5"/>
                             <constraint firstAttribute="trailing" secondItem="MMG-zt-4ZZ" secondAttribute="trailing" id="Ofa-HJ-oaQ"/>
                             <constraint firstItem="QEG-SY-Hn2" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="P7P-S5-Gz1"/>
                             <constraint firstItem="WhH-E3-1w2" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="QlG-01-VDR"/>
                             <constraint firstItem="WhH-E3-1w2" firstAttribute="top" secondItem="MMG-zt-4ZZ" secondAttribute="bottom" id="RVX-ft-Qj2"/>
+                            <constraint firstItem="jiy-T2-5Ml" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="cCG-qp-0Pc"/>
                             <constraint firstAttribute="bottom" secondItem="QEG-SY-Hn2" secondAttribute="bottom" id="kXL-CT-f4r"/>
                             <constraint firstAttribute="trailing" secondItem="QEG-SY-Hn2" secondAttribute="trailing" id="qoH-Dm-TQ1"/>
                         </constraints>
@@ -1877,6 +1901,11 @@
         <image name="file_txt" width="175" height="184"/>
         <image name="import" width="19" height="19"/>
         <image name="inspector" width="19" height="19"/>
+        <image name="tb_frameNext" width="95" height="29"/>
+        <image name="tb_framePrev" width="95" height="29"/>
+        <image name="tb_last" width="100" height="75"/>
+        <image name="tb_next" width="100" height="75"/>
+        <image name="tb_play" width="75" height="75"/>
         <image name="triangle" width="98" height="82"/>
     </resources>
 </document>
