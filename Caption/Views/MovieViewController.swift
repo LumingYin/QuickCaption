@@ -216,7 +216,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 line.safelyRemoveObserver(self, forKeyPath: "endingTime")
             }
         }
-        for (key, view) in cachedCaptionViews {
+        for (_, view) in cachedCaptionViews {
             view.removeFromSuperview()
         }
         self.cachedCaptionViews = [:]
@@ -366,37 +366,49 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     func configureVideoThumbnailTrack() {
+
         self.videoPreviewContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.videoPreviewContainerView.frame.size.height))
 //        self.videoPreviewContainerView.layer?.backgroundColor = NSColor.purple.cgColor
         // one snapshot every 10 seconds
-        let asset = self.episode.player?.currentItem?.asset
-        let imageGenerator = AVAssetImageGenerator(asset: asset!)
-        if let duration = self.episode.player?.currentItem?.duration {
-            let totalSeconds = CMTimeGetSeconds(duration)
-            var secondIndex: Float64 = 1
-            var imageIndex: Int = 0
-            if (totalSeconds.isNaN) {
-                return
-            }
-            let numberOfThumbnails = Int(totalSeconds / 10)
-            let widthOfThumbnail = timelineLengthPixels / CGFloat(numberOfThumbnails)
-            while (secondIndex < totalSeconds) {
-                let screenshotTime = CMTime(seconds: Double(secondIndex), preferredTimescale: 1)
-                do {
-                    let imageRef = try? imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
-                    let image = NSImage(cgImage: imageRef!, size: NSSize(width: imageRef!.width, height: imageRef!.height))
-                    let imageView = NSImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(imageIndex), y: 0, width: widthOfThumbnail, height: timeLineSegmentHeight))
-                    imageView.imageScaling = .scaleProportionallyUpOrDown
-                    imageView.imageFrameStyle = .grayBezel
-                    imageView.image = image
-                    videoPreviewContainerView.addSubview(imageView)
-                } catch {
-                    "Can't take screenshot: \(error)"
+        DispatchQueue.global(qos: .background).async {
+            let asset = self.episode.player?.currentItem?.asset
+            let imageGenerator = AVAssetImageGenerator(asset: asset!)
+            if let duration = self.episode.player?.currentItem?.duration {
+                let totalSeconds = CMTimeGetSeconds(duration)
+                var secondIndex: Float64 = 1
+                var imageIndex: Int = 0
+                if (totalSeconds.isNaN) {
+                    return
                 }
-                secondIndex += 10
-                imageIndex += 1
+                let numberOfThumbnails = Int(totalSeconds / 10)
+                let widthOfThumbnail = self.timelineLengthPixels / CGFloat(numberOfThumbnails)
+                var generatedImages: [NSImage] = []
+                while (secondIndex < totalSeconds) {
+                    let screenshotTime = CMTime(seconds: Double(secondIndex), preferredTimescale: 1)
+                    do {
+                        let imageRef = try? imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
+                        let image = NSImage(cgImage: imageRef!, size: NSSize(width: imageRef!.width, height: imageRef!.height))
+                        generatedImages.append(image)
+                    } catch {
+                        "Can't take screenshot: \(error)"
+                    }
+                    secondIndex += 10
+                    imageIndex += 1
+                }
+                DispatchQueue.main.async {
+                    for i in 0..<generatedImages.count {
+                        let image = generatedImages[i]
+                        let imageView = NSImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(i), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
+                        imageView.imageScaling = .scaleProportionallyUpOrDown
+                        imageView.imageFrameStyle = .grayBezel
+                        imageView.image = image
+                        self.videoPreviewContainerView.addSubview(imageView)
+                    }
+                }
             }
+
         }
+
 //        var imageGenerator = AVAssetImageGenerator(asset: asset!)
 //            let value = Float64(percent) * totalSeconds
 //            let seekTime = CMTime(seconds: Double(value), preferredTimescale: 1)
@@ -423,7 +435,11 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             if let duration = self.episode.player?.currentItem?.duration {
                 let durationSeconds = CMTimeGetSeconds(duration)
                 let percent = CGFloat(seconds / durationSeconds)
-                self.progressView.setFrameOrigin(NSPoint(x: self.timelineLengthPixels * percent + self.offsetPixelInScrollView - self.redBarOffsetInScrollView, y: self.progressView.frame.origin.y))
+                let originPoint = NSPoint(x: self.timelineLengthPixels * percent + self.offsetPixelInScrollView - self.redBarOffsetInScrollView, y: self.progressView.frame.origin.y)
+                if (originPoint.x.isNaN || originPoint.y.isNaN) {
+                    return
+                }
+                self.progressView.setFrameOrigin(originPoint)
             }
 
 //            if !(self.timelineScrollView.bounds.contains(self.progressView.frame)) {
