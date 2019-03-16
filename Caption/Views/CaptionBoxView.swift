@@ -18,7 +18,7 @@ class CaptionBoxView: NSView {
         path.fill()
 
         NSColor.white.withAlphaComponent(0.6).setStroke()
-        let smallerRectForFraming = self.bounds.insetBy(dx: self.bounds.width * 0.05, dy: self.bounds.height * 0.05)
+        let smallerRectForFraming = self.bounds.insetBy(dx: 1, dy: 1)
         let smallPath = NSBezierPath(roundedRect: smallerRectForFraming, xRadius: 5, yRadius: 5)
         smallPath.stroke()
 
