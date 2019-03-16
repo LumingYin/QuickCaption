@@ -41,7 +41,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             return false
         }
         tableView.reloadData()
-        tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+//        tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

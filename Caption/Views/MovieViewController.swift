@@ -128,8 +128,11 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             let time = CMTimeMake(value: 1, timescale: 1)
             let imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
             let thumbnail = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
-            let desktopURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-            let destinationURL = desktopURL.appendingPathComponent("thumbnails").appendingPathComponent("\(NSUUID().uuidString).png")
+//            let desktopURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+            let dir = self.applicationDataDirectory().appendingPathComponent("thumbnails")
+            do {try FileManager.default.createDirectory(at: self.applicationDataDirectory().appendingPathComponent("thumbnails"), withIntermediateDirectories: true, attributes: nil)
+            } catch {print(error)}
+            let destinationURL = self.applicationDataDirectory().appendingPathComponent("thumbnails").appendingPathComponent("\(NSUUID().uuidString).png")
             let result = thumbnail.pngWrite(to: destinationURL)
             print("Writing thumbnail: \(result)")
             self.episode.thumbnailURL = destinationURL
