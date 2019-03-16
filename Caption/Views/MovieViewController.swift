@@ -389,21 +389,19 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                         let imageRef = try? imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
                         let image = NSImage(cgImage: imageRef!, size: NSSize(width: imageRef!.width, height: imageRef!.height))
                         generatedImages.append(image)
+                        let capturedIndex = imageIndex
+                        DispatchQueue.main.async {
+                            let imageView = NSImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
+                            imageView.imageScaling = .scaleProportionallyUpOrDown
+                            imageView.imageFrameStyle = .grayBezel
+                            imageView.image = image
+                            self.videoPreviewContainerView.addSubview(imageView)
+                        }
                     } catch {
                         "Can't take screenshot: \(error)"
                     }
                     secondIndex += 10
                     imageIndex += 1
-                }
-                DispatchQueue.main.async {
-                    for i in 0..<generatedImages.count {
-                        let image = generatedImages[i]
-                        let imageView = NSImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(i), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
-                        imageView.imageScaling = .scaleProportionallyUpOrDown
-                        imageView.imageFrameStyle = .grayBezel
-                        imageView.image = image
-                        self.videoPreviewContainerView.addSubview(imageView)
-                    }
                 }
             }
 
