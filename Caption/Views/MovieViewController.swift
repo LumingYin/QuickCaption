@@ -219,6 +219,9 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         for (_, view) in cachedCaptionViews {
             view.removeFromSuperview()
         }
+        for view in videoPreviewContainerView.subviews {
+            view.removeFromSuperview()
+        }
         self.cachedCaptionViews = [:]
         self.subtitleTrackContainerView.subviews = []
         self.videoPreviewContainerView.subviews = []
