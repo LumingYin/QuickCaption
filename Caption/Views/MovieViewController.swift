@@ -71,7 +71,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
     
     @IBAction func queryTime(_ sender: Any) {
-        if (episode.player == nil) {
+        if (episode == nil || episode.player == nil) {
             return
         }
         let time = episode.player?.currentTime().value
