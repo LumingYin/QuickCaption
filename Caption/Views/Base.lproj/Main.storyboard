@@ -1097,6 +1097,11 @@
                                                     <action selector="queryTime:" target="XfG-lQ-9wD" id="TAW-OF-bYU"/>
                                                 </connections>
                                             </button>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FA1-Kt-fGw">
+                                                <rect key="frame" x="77" y="5" width="15" height="12"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_play" id="mfa-5f-l54"/>
+                                            </imageView>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TRN-rk-sxt">
                                                 <rect key="frame" x="15" y="0.0" width="16" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1123,11 +1128,6 @@
                                             <constraint firstAttribute="width" constant="170" id="dZ6-H3-Fbp"/>
                                         </constraints>
                                     </customView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FA1-Kt-fGw">
-                                        <rect key="frame" x="253" y="15" width="15" height="12"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_play" id="mfa-5f-l54"/>
-                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="qcp-ff-jh0" secondAttribute="bottom" constant="20" id="15O-JW-YGD"/>
