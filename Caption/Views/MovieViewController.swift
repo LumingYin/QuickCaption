@@ -135,8 +135,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     func refreshFontToReflectStyleChanges() {
         var postScriptName = "Helvetica"
+        let size = self.episode.styleFontSize ?? "53"
         guard let arrayofSubs = NSFontManager.shared.availableMembers(ofFontFamily: self.episode.styleFontFamily ?? "Helvetica"),
-            let size = self.episode.styleFontSize,
             let floatSize = Float(size) else { return }
         var resultingSub:[String] = []
         for i in 0..<arrayofSubs.count {
@@ -147,7 +147,6 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 }
             }
         }
-
         guard let desiredFont = NSFont.init(name: postScriptName, size: CGFloat(floatSize)) else { return }
         self.captionPreviewLabel.font = desiredFont
         self.captionPreviewLabel.textColor = NSColor(hexString: self.episode.styleFontColor ?? "#ffffff")
@@ -249,7 +248,13 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                     line.safelyRemoveObserver(self, forKeyPath: "endingTime")
                 }
             }
+            episode.safelyRemoveObserver(self, forKeyPath: "styleFontColor")
+            episode.safelyRemoveObserver(self, forKeyPath: "styleFontFamily")
+            episode.safelyRemoveObserver(self, forKeyPath: "styleFontShadow")
+            episode.safelyRemoveObserver(self, forKeyPath: "styleFontSize")
+            episode.safelyRemoveObserver(self, forKeyPath: "styleFontWeight")
         }
+
         self.subtitleTrackContainerView.stopTracking()
         for (_, view) in cachedCaptionViews {
             view.removeFromSuperview()
