@@ -19,6 +19,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var lightMenuItem: NSMenuItem!
     @IBOutlet weak var followSystemMenuItem: NSMenuItem!
 
+    static func rebuildMovieAndSubVC() {
+        if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController,
+            let movieVC = NSStoryboard.main?.instantiateController(withIdentifier: "MovieViewController")  as? MovieViewController {
+            splitVC.splitViewItems[1].viewController = movieVC
+        }
+        if let tabVC = AppDelegate.sideTabVC(), let subVC = NSStoryboard.main?.instantiateController(withIdentifier: "SubtitlesViewController") as? SubtitlesViewController {
+            tabVC.tabViewItems[0].viewController = subVC
+        }
+    }
+
     static func sourceListVC() -> SidebarViewController? {
         if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController, let sourceListVC = splitVC.splitViewItems[0].viewController as? SidebarViewController {
             return sourceListVC

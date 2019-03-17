@@ -57,3 +57,21 @@ extension NSImage {
         }
     }
 }
+
+extension Double {
+    /// Compares the receiver (Double) with annother Double considering a defined
+    /// number of fractional digits.
+    func checkIsEqual(toDouble pDouble : Double, includingNumberOfFractionalDigits : Int) -> Bool {
+
+        let denominator         : Double = pow(10.0, Double(includingNumberOfFractionalDigits))
+        let maximumDifference   : Double = 1.0 / denominator
+        let realDifference      : Double = fabs(self - pDouble)
+
+        if realDifference >= maximumDifference {
+            return false
+        } else {
+            return true
+        }
+    }
+}
+

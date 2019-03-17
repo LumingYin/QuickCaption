@@ -94,6 +94,8 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
                 player.pause()
             }
         }
+//        AppDelegate.rebuildMovieAndSubVC()
+        AppDelegate.subtitleVC()?.dismantleSubtitleVC()
         let project = episodeProjects[index]
         AppDelegate.movieVC()?.dismantleOldMovieVC()
         AppDelegate.movieVC()?.episode = project

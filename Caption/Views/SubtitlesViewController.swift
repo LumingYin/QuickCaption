@@ -16,11 +16,13 @@ import AVKit
 
     weak var episode: EpisodeProject! {
         didSet {
-            episode.arrayForCaption?.enumerateObjects({ (obj, index, stop) in
-                if let line = obj as? CaptionLine {
-                    self.addObserverForCaptionLine(line: line)
-                }
-            })
+            if episode != nil && episode.arrayForCaption != nil {
+                episode.arrayForCaption?.enumerateObjects({ (obj, index, stop) in
+                    if let line = obj as? CaptionLine {
+                        self.addObserverForCaptionLine(line: line)
+                    }
+                })
+            }
         }
     }
 
@@ -49,6 +51,11 @@ import AVKit
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    func dismantleSubtitleVC() {
+        self.episode = nil
+        self.resultTableView.reloadData()
     }
 
     func configurateSubtitleVC() {
@@ -122,6 +129,9 @@ import AVKit
 
     // MARK: - Table View Delegate/Data Source
     func numberOfRows(in tableView: NSTableView) -> Int {
+        if episode == nil || episode.arrayForCaption == nil {
+            return 0
+        }
         return episode.arrayForCaption?.count ?? 0
     }
 

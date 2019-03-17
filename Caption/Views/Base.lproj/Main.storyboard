@@ -945,7 +945,7 @@
         <!--Movie View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="MovieViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieViewController" id="XfG-lQ-9wD" customClass="MovieViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="520" height="486"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1269,7 +1269,7 @@
         <!--Side Tab View Controller-->
         <scene sceneID="ybh-Xt-C6Q">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="yk7-24-Pcf" customClass="SideTabViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController storyboardIdentifier="SideTabViewController" selectedTabViewItemIndex="0" tabStyle="unspecified" id="yk7-24-Pcf" customClass="SideTabViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" id="mtC-oI-RgF"/>
                         <tabViewItem identifier="" id="Rx2-tZ-6fu"/>

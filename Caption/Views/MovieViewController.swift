@@ -41,6 +41,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        AppDelegate.subtitleVC()?.dismantleSubtitleVC()
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
     }
     
