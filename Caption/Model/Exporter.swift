@@ -96,8 +96,9 @@ enum FileType {
         let fontFamilyName = episode.styleFontFamily ?? "Helvetica"
         let fontFace = episode.styleFontWeight ?? "Regular"
         let fontSize = episode.styleFontSize ?? "53"
-        let fontColor = "0.999996 1 1 1"
+        let fontColor = NSColor(hexString: episode.styleFontColor ?? "#ffffff")?.fcpxString ?? "0.999996 1 1 1"
         let fontAlignment = "center"
+        let (shadowColor, shadowOffset, shadowBlurRadius) = shadowDict[Int(episode.styleFontShadow)] ?? shadowDict[1]!
 
         var projectName = "Caption Project"
         if let fileName = episode.videoDescription?.withoutFileExtension {
@@ -142,7 +143,7 @@ enum FileType {
                                             <text-style ref="xs\(i + 1)-1">\(str)</text-style>
                                         </text>
                                         <text-style-def id="xs\(i + 1)-1">
-                                            <text-style font="\(fontFamilyName)" fontSize="\(fontSize)" fontFace="\(fontFace)" fontColor="\(fontColor)" alignment="\(fontAlignment)"/>
+                                            <text-style font="\(fontFamilyName)" fontSize="\(fontSize)" fontFace="\(fontFace)" fontColor="\(fontColor)" shadowColor="\(shadowColor)" shadowOffset="\(shadowOffset)" shadowBlurRadius="\(shadowBlurRadius)" alignment="\(fontAlignment)"/>
                                         </text-style-def>
                                         <note>en - \(noteUUID)</note>
                                 </title>

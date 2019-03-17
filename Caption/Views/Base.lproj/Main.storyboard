@@ -1705,15 +1705,15 @@
                                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pZb-KP-UuS">
                                                 <rect key="frame" x="124" y="119" width="267" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <popUpButtonCell key="cell" type="push" title="On" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Qwq-jg-2Id" id="GQU-oO-M0M">
+                                                <popUpButtonCell key="cell" type="push" title="Drop Shadow" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Qwq-jg-2Id" id="GQU-oO-M0M">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
                                                     <menu key="menu" id="jfA-qG-nha">
                                                         <items>
-                                                            <menuItem title="On" state="on" id="Qwq-jg-2Id">
+                                                            <menuItem title="No Shadow" id="Qpq-Bz-05T">
                                                                 <modifierMask key="keyEquivalentModifierMask"/>
                                                             </menuItem>
-                                                            <menuItem title="Off" id="Qpq-Bz-05T">
+                                                            <menuItem title="Drop Shadow" state="on" id="Qwq-jg-2Id">
                                                                 <modifierMask key="keyEquivalentModifierMask"/>
                                                             </menuItem>
                                                         </items>

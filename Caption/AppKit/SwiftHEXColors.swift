@@ -36,6 +36,11 @@ private extension Int {
 
 /// An extension of UIColor (on iOS) or NSColor (on OSX) providing HEX color handling.
 public extension SWColor {
+    var fcpxString: String {
+        let string = NSString(format:"%.6f %.6f %.6f %.6f", self.redComponent, self.greenComponent, self.blueComponent, self.alphaComponent)
+        return string as String
+    }
+
     var hexString: String {
         guard let rgbColor = usingColorSpaceName(NSColorSpaceName.calibratedRGB) else {
             return "FFFFFF"

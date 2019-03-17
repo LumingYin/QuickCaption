@@ -36,7 +36,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     @IBAction func exportFCPXMLClicked(_ sender: Any) {
         let row = tableView.clickedRow
         let project = episodeProjects[row]
-        
+
     }
 
     @IBAction func exportSRTClicked(_ sender: Any) {
@@ -90,6 +90,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         episode.guidIdentifier = NSUUID().uuidString
         episode.creationDate = NSDate()
         episode.modifiedDate = NSDate()
+        episode.styleFontShadow = 1
         episodeProjects.append(episode)
         fetchDBData()
         tableView.insertRows(at: IndexSet(integer: 0), withAnimation: .slideDown)

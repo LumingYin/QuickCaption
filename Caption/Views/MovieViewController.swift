@@ -252,6 +252,7 @@ import AppCenterAnalytics
 
     func dismantleOldMovieVC() {
         AppDelegate.setCurrentEpisodeTitle(nil)
+        self.captionPreviewLabel.stringValue = ""
         recentTimer?.invalidate()
         volumeSlider.floatValue = 1
         speedSlider.floatValue = 1
