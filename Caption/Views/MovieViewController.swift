@@ -328,11 +328,11 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 let diffEnding = abs(timePoint - captionLine.endingTime)
                 let diffThisNext = abs(captionLineNext.startingTime - captionLine.endingTime)
 
-                if diffThisNext < 0.1 && diffEnding < 0.2 {
+                if diffThisNext < 0.1 && diffEnding < 0.1 {
                     return (captionLine, captionLineNext, .resizeLeftRight)
-                } else if diffStarting < 0.2 {
+                } else if diffStarting < 0.25 {
                     return (captionLine, nil, .resizeRight)
-                } else if diffEnding < 0.2 {
+                } else if diffEnding < 0.25 {
                     return (captionLine, nil, .resizeLeft)
                 }
             }
@@ -348,17 +348,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     func trackingMouseUp(with event: NSEvent) {
-        let timePoint = correspondingTimeAtEvent(event)
-        if let operation = cachedOperation {
-            if (operation == .resizeLeftRight) {
-                cachedDownLine1?.endingTime = timePoint
-                cachedDownLine2?.startingTime = timePoint
-            } else if (operation == .resizeLeft) {
-                cachedDownLine1?.startingTime = timePoint
-            } else if (operation == .resizeRight) {
-                cachedDownLine1?.endingTime = timePoint
-            }
-        }
+        commonBetweenDraggedAndUp(with: event)
         cachedDownLine1 = nil
         cachedDownLine2 = nil
         cachedOperation = nil
@@ -379,7 +369,21 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     func trackingMouseDragged(with event: NSEvent) {
+        commonBetweenDraggedAndUp(with: event)
+    }
 
+    func commonBetweenDraggedAndUp(with event: NSEvent) {
+        let timePoint = correspondingTimeAtEvent(event)
+        if let operation = cachedOperation {
+            if (operation == .resizeLeftRight) {
+                cachedDownLine1?.endingTime = timePoint
+                cachedDownLine2?.startingTime = timePoint
+            } else if (operation == .resizeLeft) {
+                cachedDownLine1?.endingTime = timePoint
+            } else if (operation == .resizeRight) {
+                cachedDownLine1?.startingTime = timePoint
+            }
+        }
     }
 
     func restoreOriginalPointer() {
