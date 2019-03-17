@@ -51,6 +51,7 @@ class SubtitleTrackContainerView: NSView {
     }
 
     override func mouseExited(with event: NSEvent) {
+        delegate?.commonCursorReturn()
     }
 
 }
@@ -60,4 +61,6 @@ protocol SubtitleTrackContainerViewDelegate {
     func trackingMouseUp(with event: NSEvent)
     func trackingMouseDown(with event: NSEvent)
     func trackingMouseDragged(with event: NSEvent)
+    func commonCursorReturn()
+    
 }

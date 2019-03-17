@@ -164,17 +164,13 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         })
 
         var text = "Export is unsuccessful."
-        var ext = ""
-        
+
         if type == .srt {
             text = Exporter.generateSRTFromArray(arrayForCaption: copiedArray)
-            ext = "srt"
         } else if type == .txt {
             text = Exporter.generateTXTFromArray(arrayForCaption: copiedArray)
-            ext = "txt"
         } else if type == .fcpXML {
             text = Exporter.generateFCPXMLFromArray(player: episode.player, arrayForCaption: copiedArray)
-            ext = "fcpxml"
         }
 
         guard let origonalVideoName = self.episode.videoURL?.lastPathComponent else {
@@ -276,8 +272,6 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         print(self.subtitleTrackContainerView.bounds)
         self.subtitleTrackContainerView.startTracking()
         self.subtitleTrackContainerView.delegate = self
-//        let trackingArea = NSTrackingArea.init(rect: self.subtitleTrackContainerView.bounds, options: [.mouseEnteredAndExited, .activeAlways, .mouseMoved], owner: self, userInfo: ["type": "captionMouseArea", "guid": episode.guidIdentifier ?? ""])
-//        self.subtitleTrackContainerView.addTrackingArea(trackingArea)
     }
 
     func checkForCaptionDirectManipulation(with event: NSEvent) {
@@ -290,18 +284,18 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         switch cursorType {
         case .resizeLeft:
             self.view.window?.disableCursorRects()
-            print("resizeLeft, \(NSCursor.current)")
+//            print("resizeLeft, \(NSCursor.current)")
             NSCursor.resizeLeft.set()
         case .resizeRight:
             self.view.window?.disableCursorRects()
-            print("resizeRight, \(NSCursor.current)")
+//            print("resizeRight, \(NSCursor.current)")
             NSCursor.resizeRight.set()
         case .resizeLeftRight:
             self.view.window?.disableCursorRects()
-            print("resizeLeftRight, \(NSCursor.current)")
+//            print("resizeLeftRight, \(NSCursor.current)")
             NSCursor.resizeLeftRight.set()
         default:
-            print("arrow")
+//            print("arrow")
             self.view.window?.enableCursorRects()
             NSCursor.arrow.set()
         }
@@ -324,16 +318,27 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 let captionLine = eparr[i]
                 let captionLineNext = eparr[i + 1]
 
-                let diffStarting = abs(timePoint - captionLine.startingTime)
-                let diffEnding = abs(timePoint - captionLine.endingTime)
+                let diffStarting = timePoint - captionLine.startingTime
+                let diffEnding = timePoint - captionLine.endingTime
                 let diffThisNext = abs(captionLineNext.startingTime - captionLine.endingTime)
 
-                if diffThisNext < 0.1 && diffEnding < 0.1 {
+                let diffNextStartThisEnd = (captionLineNext.startingTime - captionLine.endingTime)
+
+                if diffThisNext < 0.1 && abs(diffEnding) < 0.1 {
                     return (captionLine, captionLineNext, .resizeLeftRight)
-                } else if diffStarting < 0.25 {
+                }
+                // WE NEED TO SOMEHOW HANDLE THIS CASE
+                else if timePoint > captionLine.endingTime && timePoint < captionLineNext.startingTime + 0.25 && timePoint >= captionLineNext.startingTime {
+                    return (captionLineNext, nil, .resizeRight)
+                }
+                else if timePoint > captionLineNext.startingTime && abs(diffStarting) <= 0.25 {
+                    print(".resizeRight, diffStarting:\(diffStarting)")
                     return (captionLine, nil, .resizeRight)
-                } else if diffEnding < 0.25 {
+                } else if abs(diffEnding) <= 0.25 {
+                    print(".resizeLeft, diffEnding:\(diffEnding)")
                     return (captionLine, nil, .resizeLeft)
+                } else {
+                    print(".passing, diffStarting:\(diffStarting), diffEnding: \(diffEnding)")
                 }
             }
         }
@@ -349,6 +354,10 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     func trackingMouseUp(with event: NSEvent) {
         commonBetweenDraggedAndUp(with: event)
+        commonCursorReturn()
+    }
+
+    func commonCursorReturn() {
         cachedDownLine1 = nil
         cachedDownLine2 = nil
         cachedOperation = nil
