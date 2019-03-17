@@ -300,7 +300,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return .terminateNow
     }
 
-    
+    // MARK: - Menu Bar Items
+    @IBAction func togglePlaybackPausing(_ sender: Any) {
+        AppDelegate.movieVC()?.playPauseClicked(sender)
+    }
+
+    @IBAction func splitHere(_ sender: Any) {
+
+    }
+
 }
 
 

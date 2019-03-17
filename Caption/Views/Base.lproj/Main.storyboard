@@ -125,6 +125,18 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="WRV-NI-Exz"/>
+                                        <menuItem title="Toggle Playback" keyEquivalent=" " id="AAL-p4-Coj">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="togglePlaybackPausing:" target="Voe-Tx-rLC" id="uuK-W2-4fH"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Split Here" keyEquivalent="b" id="nMN-xk-z8S">
+                                            <connections>
+                                                <action selector="splitHere:" target="Voe-Tx-rLC" id="R0y-ZG-ci3"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="vjx-Fk-SFp"/>
                                         <menuItem title="Cut" keyEquivalent="x" id="uRl-iY-unG">
                                             <connections>
                                                 <action selector="cut:" target="Ady-hI-5gd" id="YJe-68-I9s"/>
@@ -669,7 +681,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="mainWindow" id="B8D-0N-5wS" customClass="CaptionWindowController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Quick Caption" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Quick Caption" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="QuickCaptionWindow" customModule="Quick_Caption" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -1404,8 +1416,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="306" height="460"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KIc-rW-E5T">
-                                        <rect key="frame" x="20" y="20" width="266" height="22"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="New Caption Line" drawsBackground="YES" id="IAT-fW-GaI">
+                                        <rect key="frame" x="20" y="20" width="197" height="22"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="New Caption Line" bezelStyle="round" id="IAT-fW-GaI">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1551,17 +1563,29 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fbY-ui-ed3">
+                                        <rect key="frame" x="219" y="14" width="72" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gE4-KY-0tg">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="doneButtonClicked:" target="b2M-Hl-zi7" id="7LK-Z7-hwx"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="fbY-ui-ed3" firstAttribute="centerY" secondItem="KIc-rW-E5T" secondAttribute="centerY" id="3aB-sP-S9U"/>
                                     <constraint firstAttribute="bottom" secondItem="KIc-rW-E5T" secondAttribute="bottom" constant="20" symbolic="YES" id="8RO-Yy-wdp"/>
                                     <constraint firstItem="JyG-MX-P3Y" firstAttribute="leading" secondItem="KIc-rW-E5T" secondAttribute="leading" id="BaZ-AQ-c9b"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="GfS-Hl-69W"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="HBh-hf-TgU"/>
+                                    <constraint firstItem="fbY-ui-ed3" firstAttribute="leading" secondItem="KIc-rW-E5T" secondAttribute="trailing" constant="8" id="Ls0-Dw-0jo"/>
                                     <constraint firstItem="JyG-MX-P3Y" firstAttribute="leading" secondItem="b2l-Cd-ncK" secondAttribute="leading" constant="20" symbolic="YES" id="Lzk-PM-sPc"/>
-                                    <constraint firstItem="JyG-MX-P3Y" firstAttribute="trailing" secondItem="KIc-rW-E5T" secondAttribute="trailing" id="RBU-Yb-YJy"/>
                                     <constraint firstItem="KIc-rW-E5T" firstAttribute="top" secondItem="JyG-MX-P3Y" secondAttribute="bottom" constant="18" id="U1R-Of-4K8"/>
                                     <constraint firstItem="JyG-MX-P3Y" firstAttribute="top" secondItem="b2l-Cd-ncK" secondAttribute="top" constant="20" symbolic="YES" id="ksd-Lu-xC6"/>
                                     <constraint firstAttribute="trailing" secondItem="JyG-MX-P3Y" secondAttribute="trailing" constant="20" symbolic="YES" id="rmG-13-HN5"/>
+                                    <constraint firstItem="fbY-ui-ed3" firstAttribute="trailing" secondItem="dEe-LC-xJc" secondAttribute="trailing" id="u5F-qu-C27"/>
                                 </constraints>
                             </customView>
                         </subviews>

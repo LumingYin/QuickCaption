@@ -38,6 +38,8 @@
 		326A090A223E0C48009A8313 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0909223E0C48009A8313 /* NSView+Extensions.swift */; };
 		326A090C223E0CD2009A8313 /* VideoPreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A090B223E0CD2009A8313 /* VideoPreviewContainerView.swift */; };
 		326A090E223E3482009A8313 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A090D223E3482009A8313 /* SwiftHEXColors.swift */; };
+		326A0910223F03BE009A8313 /* QuickCaptionApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A090F223F03BE009A8313 /* QuickCaptionApplication.swift */; };
+		326A0912223F0699009A8313 /* QuickCaptionWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0911223F0699009A8313 /* QuickCaptionWindow.swift */; };
 		32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */; };
 		32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */; };
 		32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */; };
@@ -101,6 +103,8 @@
 		326A0909223E0C48009A8313 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
 		326A090B223E0CD2009A8313 /* VideoPreviewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewContainerView.swift; sourceTree = "<group>"; };
 		326A090D223E3482009A8313 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHEXColors.swift; sourceTree = "<group>"; };
+		326A090F223F03BE009A8313 /* QuickCaptionApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuickCaptionApplication.swift; path = Caption/Views/QuickCaptionApplication.swift; sourceTree = SOURCE_ROOT; };
+		326A0911223F0699009A8313 /* QuickCaptionWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickCaptionWindow.swift; sourceTree = "<group>"; };
 		32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionDetailTableCellView.swift; sourceTree = "<group>"; };
 		32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextFieldCell.swift; sourceTree = "<group>"; };
 		32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnscrollableScrollView.swift; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				562A688A1F2D4F5E000E6B16 /* Main.storyboard */,
+				326A0911223F0699009A8313 /* QuickCaptionWindow.swift */,
 				326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */,
 				326A090B223E0CD2009A8313 /* VideoPreviewContainerView.swift */,
 				326A0905223DD62B009A8313 /* TimelineOverallView.swift */,
@@ -193,6 +198,7 @@
 				32047521223DA6100027218F /* NSObject+KVO.h */,
 				32047522223DA6100027218F /* NSObject+KVO.m */,
 				562A68841F2D4F5E000E6B16 /* AppDelegate.swift */,
+				326A090F223F03BE009A8313 /* QuickCaptionApplication.swift */,
 				321DC3F82236216B0038C8FB /* Helper.swift */,
 				3C43B6932068A7A000219EF6 /* film.icns */,
 				562A68881F2D4F5E000E6B16 /* Assets.xcassets */,
@@ -364,6 +370,7 @@
 				321DC3F5223615E90038C8FB /* MainSplitViewController.swift in Sources */,
 				321DC3F0223611F00038C8FB /* ResizableInputContainerView.swift in Sources */,
 				321DC3F92236216B0038C8FB /* Helper.swift in Sources */,
+				326A0910223F03BE009A8313 /* QuickCaptionApplication.swift in Sources */,
 				326A090C223E0CD2009A8313 /* VideoPreviewContainerView.swift in Sources */,
 				562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */,
 				321DC3FD223623500038C8FB /* Exporter.swift in Sources */,
@@ -373,6 +380,7 @@
 				32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */,
 				321DC3D022360F310038C8FB /* SubtitlesViewController.swift in Sources */,
 				321DC3D4223610750038C8FB /* SideTabViewController.swift in Sources */,
+				326A0912223F0699009A8313 /* QuickCaptionWindow.swift in Sources */,
 				321DC3CA2236037C0038C8FB /* ExampleViewController.swift in Sources */,
 				326A090A223E0C48009A8313 /* NSView+Extensions.swift in Sources */,
 				321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */,

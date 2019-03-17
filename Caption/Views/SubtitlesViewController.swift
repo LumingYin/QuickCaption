@@ -75,8 +75,16 @@ import AVKit
         if (control == transcribeTextField) {
             episode.player?.pause()
             if let last = episode.arrayForCaption?.lastObject as? CaptionLine, let time = episode.player?.currentTime() {
-                if (Float(CMTimeGetSeconds(time)) < last.startingTime) {
-                    _ = Helper.dialogOKCancel(question: "Unable to add caption", text: "You can't add a caption with an ending time earlier than the starting time.")
+                let currentTimeFloat = Float(CMTimeGetSeconds(time))
+                if (currentTimeFloat < last.startingTime) {
+                    last.startingTime = (currentTimeFloat - 2) > 0 ? currentTimeFloat - 2 : 0
+                    last.endingTime = currentTimeFloat
+//                    _ = Helper.dialogOKCancel(question: "Unable to add caption", text: "You can't add a caption with an ending time earlier than the starting time.")
+//                    if last.endingTime - 1 >= 0 {
+//                        last.startingTime = last.endingTime - 1
+//                    } else {
+//                        last.endingTime = last.startingTime + 0.5
+//                    }
                 } else {
                     last.endingTime = Float(CMTimeGetSeconds(time))
                 }
@@ -172,4 +180,8 @@ import AVKit
         }
     }
 
-}
+    @IBAction func doneButtonClicked(_ sender: Any) {
+        self.resignFirstResponder()
+        self.transcribeTextField.resignFirstResponder()
+        NSApp.mainWindow?.makeFirstResponder(AppDelegate.movieVC())
+    }}
