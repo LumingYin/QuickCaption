@@ -365,6 +365,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     func commonCursorReturn() {
+        self.setStateForCaption(cachedDownLine1, state: .normal)
+        self.setStateForCaption(cachedDownLine2, state: .normal)
         cachedDownLine1 = nil
         cachedDownLine2 = nil
         cachedOperation = nil
@@ -390,6 +392,12 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     let errorAvoidanceThreshold: Float = 0.3
 
+    func setStateForCaption(_ caption: CaptionLine?, state: CaptionManipulationState?) {
+        if let line = caption, let guid = line.guidIdentifier, let matchedView = self.cachedCaptionViews[guid], let st = state {
+            matchedView.state = st
+        }
+    }
+
     func commonBetweenDraggedAndUp(with event: NSEvent) {
         let timePoint = correspondingTimeAtEvent(event)
         if let operation = cachedOperation {
@@ -397,16 +405,20 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 if (timePoint > cachedDownLine1!.startingTime + errorAvoidanceThreshold && timePoint < cachedDownLine2!.endingTime - errorAvoidanceThreshold) {
                     cachedDownLine1!.endingTime = timePoint
                     cachedDownLine2!.startingTime = timePoint
+                    self.setStateForCaption(cachedDownLine1, state: .dragging)
+                    self.setStateForCaption(cachedDownLine2, state: .dragging)
                 }
             } else if (operation == .resizeLeft) {
                 let newPotentialTimeIfCommitting = timePoint - cachedDownLine1!.startingTime
                 if (newPotentialTimeIfCommitting > errorAvoidanceThreshold) {
+                    self.setStateForCaption(cachedDownLine1, state: .dragging)
                     cachedDownLine1?.endingTime = timePoint
                 }
             } else if (operation == .resizeRight) {
                 let newPotentialTimeIfCommitting = cachedDownLine1!.endingTime - timePoint
                 if (newPotentialTimeIfCommitting > errorAvoidanceThreshold) {
                     cachedDownLine1?.startingTime = timePoint
+                    self.setStateForCaption(cachedDownLine1, state: .dragging)
                 }
             } else if (operation == .moveTime) {
                 let delta = event.deltaX
@@ -416,6 +428,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 if (newStartIfCommitting > 0 && newEndIfCommtting < self.calculatedDuration) {
                     cachedDownLine1?.startingTime = newStartIfCommitting
                     cachedDownLine1?.endingTime = newEndIfCommtting
+                    self.setStateForCaption(cachedDownLine1, state: .dragging)
                 }
             }
         }
