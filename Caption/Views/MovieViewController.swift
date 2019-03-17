@@ -752,7 +752,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
             let timeScale = self.episode.player?.currentItem?.asset.duration.timescale ?? 1
             let exactTime = CMTime(seconds: value, preferredTimescale: timeScale)
-            self.episode.player!.seek(to: exactTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.positiveInfinity)
+            self.episode.player!.seek(to: exactTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         }
     }
 }
