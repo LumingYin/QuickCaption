@@ -41,10 +41,10 @@ class FontViewController: NSViewController {
 
     func configurateFontVC() {
         restoreFontSettings()
-        episode.addObserver(self, forKeyPath: "videoDescription", options: [.new], context: nil)
-        episode.addObserver(self, forKeyPath: "videoURL", options: [.new], context: nil)
-        episode.addObserver(self, forKeyPath: "videoDuration", options: [.new], context: nil)
-        episode.addObserver(self, forKeyPath: "framerate", options: [.new], context: nil)
+//        episode.addObserver(self, forKeyPath: "videoDescription", options: [.new], context: nil)
+//        episode.addObserver(self, forKeyPath: "videoURL", options: [.new], context: nil)
+//        episode.addObserver(self, forKeyPath: "videoDuration", options: [.new], context: nil)
+//        episode.addObserver(self, forKeyPath: "framerate", options: [.new], context: nil)
         configureAllMetadata()
     }
 
@@ -57,13 +57,13 @@ class FontViewController: NSViewController {
 
     private static var metadataObserverContext = 2
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &FontViewController.metadataObserverContext else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-            return
-        }
-        self.configureAllMetadata()
-    }
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        guard context == &FontViewController.metadataObserverContext else {
+//            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+//            return
+//        }
+//        self.configureAllMetadata()
+//    }
 
     func configurateAllFonts() {
         fontFamilyButton.removeAllItems()

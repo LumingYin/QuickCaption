@@ -97,6 +97,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         if self.episode != nil && (self.episode.framerate == nil || self.episode.framerate == 0 || self.episode.framerate == 0.0)  {
             if let framerate = self.episode.player?.currentItem?.tracks[0].assetTrack?.nominalFrameRate {
                 self.episode.framerate = framerate
+                AppDelegate.fontVC()?.configureAllMetadata()
             }
         }
     }
@@ -130,6 +131,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         }
         refreshFontToReflectStyleChanges()
         self.configurateFontPreviewListener()
+        AppDelegate.fontVC()?.configureAllMetadata()
     }
 
     func configurateFontPreviewListener() {
