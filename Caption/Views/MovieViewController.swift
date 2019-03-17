@@ -810,6 +810,19 @@ import AppCenterAnalytics
     }
 
     @IBAction func rewindByFiveSeconds(_ sender: Any) {
+        movePlayheadBySeconds(-5)
+    }
+
+    func movePlayheadBySeconds(_ seconds: Double) {
+        if let duration = self.episode.player?.currentItem?.duration, let currentTime = self.episode.player?.currentTime().seconds {
+//            let totalSeconds = CMTimeGetSeconds(duration)
+            let value = currentTime + seconds
+//            if value >= 0 && value <= totalSeconds {
+                let timeScale = self.episode.player?.currentItem?.asset.duration.timescale ?? 1
+                let exactTime = CMTime(seconds: value, preferredTimescale: timeScale)
+                self.episode.player!.seek(to: exactTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+//            }
+        }
     }
 
     @IBAction func playPauseClicked(_ sender: Any) {
@@ -823,6 +836,7 @@ import AppCenterAnalytics
     }
 
     @IBAction func forwardByFiveSeconds(_ sender: Any) {
+        movePlayheadBySeconds(5)
     }
 
     @IBAction func forwardByOneFrame(_ sender: Any) {
