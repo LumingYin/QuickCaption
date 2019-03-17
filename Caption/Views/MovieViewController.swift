@@ -12,14 +12,14 @@ import AVFoundation
 import AppCenter
 import AppCenterAnalytics
 
-class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
+class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate, SubtitleTrackContainerViewDelegate {
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
 
     @IBOutlet weak var progressView: NSView!
     @IBOutlet weak var progressViewColorLineBox: NSBox!
 
-    @IBOutlet weak var subtitleTrackContainerView: NSView!
+    @IBOutlet weak var subtitleTrackContainerView: SubtitleTrackContainerView!
     @IBOutlet weak var videoPreviewContainerView: NSView!
     @IBOutlet weak var waveformImageView: NSImageView!
 
@@ -220,8 +220,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                     line.safelyRemoveObserver(self, forKeyPath: "endingTime")
                 }
             }
-
         }
+        self.subtitleTrackContainerView.stopTracking()
         for (_, view) in cachedCaptionViews {
             view.removeFromSuperview()
         }
@@ -274,62 +274,96 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         }
         episode.addObserver(self, forKeyPath: "arrayForCaption", options: [.initial, .new], context: &MovieViewController.textTrackContext)
         print(self.subtitleTrackContainerView.bounds)
-        let trackingArea = NSTrackingArea.init(rect: self.subtitleTrackContainerView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: ["type": "captionMouseArea", "guid": episode.guidIdentifier ?? ""])
-        self.subtitleTrackContainerView.addTrackingArea(trackingArea)
+        self.subtitleTrackContainerView.startTracking()
+        self.subtitleTrackContainerView.delegate = self
+//        let trackingArea = NSTrackingArea.init(rect: self.subtitleTrackContainerView.bounds, options: [.mouseEnteredAndExited, .activeAlways, .mouseMoved], owner: self, userInfo: ["type": "captionMouseArea", "guid": episode.guidIdentifier ?? ""])
+//        self.subtitleTrackContainerView.addTrackingArea(trackingArea)
     }
 
     // MARK: - Dragging to retime captions
 //    override func mouseEntered(with event: NSEvent) {
 //        print(event)
 //    }
-
-    override func mouseMoved(with event: NSEvent) {
-        print(event)
-        checkForCaptionDirectManipulation(with: event)
-    }
-
-    override func mouseDown(with event: NSEvent) {
-        print(event)
-    }
-
-    override func mouseDragged(with event: NSEvent) {
-        print(event)
-    }
-
-    override func mouseUp(with event: NSEvent) {
-        print(event)
-    }
-
-    override func mouseExited(with event: NSEvent) {
-        print(event)
-    }
+//
+//    override func mouseMoved(with event: NSEvent) {
+//        print(event)
+//        checkForCaptionDirectManipulation(with: event)
+//    }
+//
+//    override func mouseDown(with event: NSEvent) {
+//        print(event)
+//    }
+//
+//    override func mouseDragged(with event: NSEvent) {
+//        print(event)
+//    }
+//
+//    override func mouseUp(with event: NSEvent) {
+//        print(event)
+//    }
+//
+//    override func mouseExited(with event: NSEvent) {
+//        print(event)
+//    }
 
     func checkForCaptionDirectManipulation(with event: NSEvent) {
         if (self.episode == nil || self.episode.player == nil || self.episode.videoURL == nil || self.episode.player?.currentItem == nil) {
             return
         }
+
+//        print("event.trackingArea = \(event.trackingArea)")
+//        guard let userData = event.trackingArea?.userInfo as? [String : String] else {return}
+//        print(userData)
+//        guard let section = userData["type"] else { return }
+//        if section != "captionMouseArea" {
+//            return
+//        }
+
         let location = self.subtitleTrackContainerView.convert(event.locationInWindow, from: nil).x
         print(location)
         let percentage = Float(location / self.timelineLengthPixels)
         let timePoint = percentage * self.calculatedDuration
         var specialCursor = false
-        episode.arrayForCaption?.enumerateObjects({ (object, index, cancel) in
-            if let captionLine = object as? CaptionLine {
+        if let eparr = episode.arrayForCaption?.array as? [CaptionLine] {
+            if eparr.count < 2 {
+                return
+            }
+            for i in 0..<eparr.count - 1 {
+                let captionLine = eparr[i]
+                let captionLineNext = eparr[i + 1]
+
                 let diffStarting = abs(timePoint - captionLine.startingTime)
-                let diffEnding = abs(timePoint - captionLine.startingTime)
-                if diffStarting < 0.4 && diffEnding < 0.4 {
+                let diffEnding = abs(timePoint - captionLine.endingTime)
+                let diffThisNext = abs(captionLineNext.startingTime - captionLine.endingTime)
+
+                if diffThisNext < 0.1 && diffEnding < 0.2 {
+                    self.view.window?.disableCursorRects()
+                    print("resizeLeftRight, \(NSCursor.current)")
                     NSCursor.resizeLeftRight.set()
                     specialCursor = true
-                } else if diffStarting < 0.4 {
+                    break
+                } else if diffStarting < 0.2 {
+                    self.view.window?.disableCursorRects()
+                    print("resizeRight, \(NSCursor.current)")
                     NSCursor.resizeRight.set()
                     specialCursor = true
-                } else if diffEnding < 0.4 {
+                    break
+                } else if diffEnding < 0.2 {
+                    self.view.window?.disableCursorRects()
+                    print("resizeLeft, \(NSCursor.current)")
                     NSCursor.resizeLeft.set()
                     specialCursor = true
+                    break
                 }
             }
-        })
+        }
+//        episode.arrayForCaption?.enumerateObjects({ (object, index, stop) in
+//            if let captionLine = object as? CaptionLine {
+//            }
+//        })
         if !specialCursor {
+            print("arrow")
+            self.view.window?.enableCursorRects()
             NSCursor.arrow.set()
         }
 //        NSCursor.resizeLeftRight.set()

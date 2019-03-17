@@ -1147,7 +1147,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="520" height="215"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mHu-9K-0O1">
+                                        <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mHu-9K-0O1" customClass="TimelineOverallView" customModule="Quick_Caption" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="-2431" width="591" height="213"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <subviews>
@@ -1161,7 +1161,7 @@
                                                     <rect key="frame" x="8" y="3" width="521" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
-                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CWy-l4-FlO">
+                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CWy-l4-FlO" customClass="SubtitleTrackContainerView" customModule="Quick_Caption" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="147" width="521" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
@@ -1206,7 +1206,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="V95-Hy-NGv"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="wxD-Wq-Vsv">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.11267605633802817" horizontal="YES" id="wxD-Wq-Vsv">
                                     <rect key="frame" x="0.0" y="215" width="520" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1226,7 +1226,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="qTg-qv-Nfu"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Caption Preview" id="9Gm-kK-WN1">
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="9Gm-kK-WN1">
                                     <font key="font" metaFont="system" size="16"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

@@ -28,6 +28,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         }
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsEmptySelection = false
     }
 
     override func viewDidAppear() {
@@ -100,7 +101,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         }
         return true
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         return episodeProjects.count
     }

@@ -18,5 +18,5 @@ class SidebarEpisodeTableCellView: NSTableCellView {
 
         // Drawing code here.
     }
-    
+
 }

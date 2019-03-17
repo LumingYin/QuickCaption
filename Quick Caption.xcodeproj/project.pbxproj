@@ -33,6 +33,8 @@
 		323EE3C6221943B100CC22B3 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 323EE3B62219439F00CC22B3 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324971D122190D1C00562223 /* CaptionWindowController.swift */; };
 		324971DB221929C000562223 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 324971DA221929C000562223 /* Security.framework */; };
+		326A0906223DD62B009A8313 /* TimelineOverallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0905223DD62B009A8313 /* TimelineOverallView.swift */; };
+		326A0908223DD7E9009A8313 /* SubtitleTrackContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */; };
 		32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */; };
 		32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */; };
 		32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */; };
@@ -91,6 +93,8 @@
 		323EE3BA2219439F00CC22B3 /* LetsMove.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LetsMove.framework; path = Caption/Frameworks/LetsMove.framework; sourceTree = "<group>"; };
 		324971D122190D1C00562223 /* CaptionWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionWindowController.swift; sourceTree = "<group>"; };
 		324971DA221929C000562223 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		326A0905223DD62B009A8313 /* TimelineOverallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineOverallView.swift; sourceTree = "<group>"; };
+		326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTrackContainerView.swift; sourceTree = "<group>"; };
 		32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionDetailTableCellView.swift; sourceTree = "<group>"; };
 		32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextFieldCell.swift; sourceTree = "<group>"; };
 		32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnscrollableScrollView.swift; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				562A688A1F2D4F5E000E6B16 /* Main.storyboard */,
+				326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */,
+				326A0905223DD62B009A8313 /* TimelineOverallView.swift */,
 				321DC400223629030038C8FB /* SidebarEpisodeTableCellView.swift */,
 				321DC3F622361E3D0038C8FB /* CaptionExportViewController.swift */,
 				321DC3F4223615E90038C8FB /* MainSplitViewController.swift */,
@@ -331,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				326A0906223DD62B009A8313 /* TimelineOverallView.swift in Sources */,
 				32047525223DA7910027218F /* NSString+Drawing.swift in Sources */,
 				32F53CDF22376C4D007B66E1 /* EpisodeProject+CoreDataProperties.swift in Sources */,
 				32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */,
@@ -338,6 +345,7 @@
 				321DC3F722361E3D0038C8FB /* CaptionExportViewController.swift in Sources */,
 				32F53CE022376C4D007B66E1 /* CaptionLine+CoreDataClass.swift in Sources */,
 				321DC401223629030038C8FB /* SidebarEpisodeTableCellView.swift in Sources */,
+				326A0908223DD7E9009A8313 /* SubtitleTrackContainerView.swift in Sources */,
 				321DC3D222360F410038C8FB /* FontViewController.swift in Sources */,
 				562A68871F2D4F5E000E6B16 /* MovieViewController.swift in Sources */,
 				32047523223DA6100027218F /* NSObject+KVO.m in Sources */,
