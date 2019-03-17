@@ -284,18 +284,14 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         switch cursorType {
         case .resizeLeft:
             self.view.window?.disableCursorRects()
-//            print("resizeLeft, \(NSCursor.current)")
             NSCursor.resizeLeft.set()
         case .resizeRight:
             self.view.window?.disableCursorRects()
-//            print("resizeRight, \(NSCursor.current)")
             NSCursor.resizeRight.set()
         case .resizeLeftRight:
             self.view.window?.disableCursorRects()
-//            print("resizeLeftRight, \(NSCursor.current)")
             NSCursor.resizeLeftRight.set()
         default:
-//            print("arrow")
             self.view.window?.enableCursorRects()
             NSCursor.arrow.set()
         }
@@ -308,6 +304,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         let timePoint = percentage * self.calculatedDuration
         return timePoint
     }
+
+    let draggingMargin: Float = 0.25
 
     func correspondingCaptionAtLocation(timePoint: Float) -> (line1: CaptionLine?, line2: CaptionLine?, cursorType: CursorType) {
         if let eparr = episode.arrayForCaption?.array as? [CaptionLine] {
@@ -326,12 +324,12 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
                 if diffThisNext < 0.1 && abs(diffEnding) < 0.1 {
                     return (captionLine, captionLineNext, .resizeLeftRight)
-                } else if timePoint > captionLine.endingTime && timePoint < captionLineNext.startingTime + 0.25 && timePoint >= captionLineNext.startingTime {
+                } else if timePoint > captionLine.endingTime && timePoint < captionLineNext.startingTime + draggingMargin && timePoint >= captionLineNext.startingTime {
                     return (captionLineNext, nil, .resizeRight)
-                } else if timePoint > captionLineNext.startingTime && abs(diffStarting) <= 0.25 {
+                } else if timePoint > captionLineNext.startingTime && abs(diffStarting) <= draggingMargin {
                     print(".resizeRight, diffStarting:\(diffStarting)")
                     return (captionLine, nil, .resizeRight)
-                } else if abs(diffEnding) <= 0.25 {
+                } else if abs(diffEnding) <= draggingMargin {
                     print(".resizeLeft, diffEnding:\(diffEnding)")
                     return (captionLine, nil, .resizeLeft)
                 } else {
@@ -341,10 +339,12 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
             for i in 0..<eparr.count {
                 let captionLine = eparr[i]
-                if timePoint > captionLine.startingTime && timePoint < captionLine.startingTime + 0.25 {
+                if timePoint > captionLine.startingTime && timePoint < captionLine.startingTime + draggingMargin {
                     return (captionLine, nil, .resizeRight)
-                } else if timePoint < captionLine.endingTime && timePoint > captionLine.endingTime - 0.25 {
+                } else if timePoint < captionLine.endingTime && timePoint > captionLine.endingTime - draggingMargin {
                     return (captionLine, nil, .resizeLeft)
+                } else if timePoint > captionLine.startingTime + draggingMargin && timePoint < captionLine.endingTime - draggingMargin {
+                    return (captionLine, nil, .moveTime)
                 }
             }
         }
@@ -355,6 +355,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         case resizeLeftRight
         case resizeRight
         case resizeLeft
+        case moveTime
         case normal
     }
 
@@ -406,6 +407,15 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 let newPotentialTimeIfCommitting = cachedDownLine1!.endingTime - timePoint
                 if (newPotentialTimeIfCommitting > errorAvoidanceThreshold) {
                     cachedDownLine1?.startingTime = timePoint
+                }
+            } else if (operation == .moveTime) {
+                let delta = event.deltaX
+                let deltaTimeSeconds = Float(delta / self.timelineLengthPixels) * self.calculatedDuration
+                let newStartIfCommitting = cachedDownLine1!.startingTime + deltaTimeSeconds
+                let newEndIfCommtting = cachedDownLine1!.endingTime + deltaTimeSeconds
+                if (newStartIfCommitting > 0 && newEndIfCommtting < self.calculatedDuration) {
+                    cachedDownLine1?.startingTime = newStartIfCommitting
+                    cachedDownLine1?.endingTime = newEndIfCommtting
                 }
             }
         }
