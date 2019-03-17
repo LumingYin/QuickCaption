@@ -326,12 +326,9 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
                 if diffThisNext < 0.1 && abs(diffEnding) < 0.1 {
                     return (captionLine, captionLineNext, .resizeLeftRight)
-                }
-                // WE NEED TO SOMEHOW HANDLE THIS CASE
-                else if timePoint > captionLine.endingTime && timePoint < captionLineNext.startingTime + 0.25 && timePoint >= captionLineNext.startingTime {
+                } else if timePoint > captionLine.endingTime && timePoint < captionLineNext.startingTime + 0.25 && timePoint >= captionLineNext.startingTime {
                     return (captionLineNext, nil, .resizeRight)
-                }
-                else if timePoint > captionLineNext.startingTime && abs(diffStarting) <= 0.25 {
+                } else if timePoint > captionLineNext.startingTime && abs(diffStarting) <= 0.25 {
                     print(".resizeRight, diffStarting:\(diffStarting)")
                     return (captionLine, nil, .resizeRight)
                 } else if abs(diffEnding) <= 0.25 {
