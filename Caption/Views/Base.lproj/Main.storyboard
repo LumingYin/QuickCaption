@@ -1075,17 +1075,29 @@
                                         </customSpacing>
                                     </stackView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="ttB-6C-NvU">
-                                        <rect key="frame" x="175" y="10" width="170" height="42"/>
+                                        <rect key="frame" x="175" y="6" width="170" height="50"/>
                                         <subviews>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ihC-TU-2C9">
-                                                <rect key="frame" x="-2" y="25" width="174" height="17"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="00:00:00:00" id="kxx-Zu-D6O">
-                                                    <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
+                                            <box fixedFrame="YES" boxType="custom" cornerRadius="6" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="PcZ-In-Mr1">
+                                                <rect key="frame" x="12" y="24" width="148" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <view key="contentView" ambiguous="YES" id="jRe-Rb-jdz">
+                                                    <rect key="frame" x="1" y="1" width="146" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ihC-TU-2C9">
+                                                            <rect key="frame" x="-2" y="0.0" width="150" height="19"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="00:00:00,000" id="kxx-Zu-D6O">
+                                                                <font key="font" metaFont="system" size="15"/>
+                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </subviews>
+                                                </view>
+                                                <color key="borderColor" red="1" green="1" blue="1" alpha="0.18326364436619719" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </box>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2l-eq-tnu">
                                                 <rect key="frame" x="10" y="-1" width="27" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1168,7 +1180,7 @@
                                             </imageView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="BsX-gc-xba"/>
+                                            <constraint firstAttribute="height" constant="50" id="BsX-gc-xba"/>
                                             <constraint firstAttribute="width" constant="170" id="dZ6-H3-Fbp"/>
                                         </constraints>
                                     </customView>

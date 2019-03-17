@@ -44,6 +44,7 @@ import AppCenterAnalytics
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        timeLabel.font = NSFont.monospacedDigitSystemFont(ofSize: 15, weight: .regular)
         AppDelegate.subtitleVC()?.dismantleSubtitleVC()
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
     }
@@ -698,11 +699,10 @@ import AppCenterAnalytics
         let interval = CMTime(value: 1, timescale: 30)
         self.episode.player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
             self.updatePersistedFramerate()
-            let seconds = CMTimeGetSeconds(progressTime)
-            let secondsString = String(format: "%02d", Int(seconds.truncatingRemainder(dividingBy: 60)))
-            let minutesString = String(format: "%02d", Int(seconds / 60))
 
-//            self.currentTimeLabel.text = "\(minutesString):\(secondsString)"
+            let seconds = CMTimeGetSeconds(progressTime)
+            let timeCode = Helper.secondFloatToString(float: seconds)
+            self.timeLabel.stringValue = timeCode
 
             //lets move the slider thumb
             if let duration = self.episode.player?.currentItem?.duration {

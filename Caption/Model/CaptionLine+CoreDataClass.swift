@@ -56,30 +56,7 @@ public class CaptionLine: NSManagedObject {
     }
 
     func secondFloatToString(float: Float64) -> String {
-        if float.isNaN {
-            return ""
-        }
-        
-        var second = float
-
-        var hours: Int = 0
-        var minutes: Int = 0
-        var seconds: Int = 0
-        var milliseconds: Int = 0
-
-        hours = Int(second / Float64(3600))
-        second = second - Float64(hours * 3600)
-
-        minutes = Int(second / Float64(60))
-        second = second - Float64(minutes * 60)
-
-        seconds = Int(second)
-        second = second - Float64(seconds)
-
-        milliseconds = Int(second * 1000)
-
-        let string = NSString(format:"%.2d:%.2d:%.2d,%.3d", hours, minutes, seconds, milliseconds)
-        return string as String
+        return Helper.secondFloatToString(float: float)
     }
 
 
