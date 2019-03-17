@@ -14,6 +14,13 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchDBData()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.allowsEmptySelection = false
+    }
+
+    func fetchDBData() {
         do {
             let fetchRequest: NSFetchRequest<EpisodeProject> = EpisodeProject.fetchRequest()
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "modifiedDate", ascending: false)]
@@ -26,9 +33,6 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
                 episode.guidIdentifier = NSUUID().uuidString
             }
         }
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.allowsEmptySelection = false
     }
 
     override func viewDidAppear() {
@@ -41,14 +45,13 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     func addNewProject() {
         let episode = EpisodeProject(context: Helper.context!)
         episode.guidIdentifier = NSUUID().uuidString
+        episode.creationDate = NSDate()
+        episode.modifiedDate = NSDate()
         episodeProjects.append(episode)
-        episodeProjects.sort { (ep1, ep2) -> Bool in
-            if let d1 = ep1.modifiedDate as Date?, let d2 = ep2.modifiedDate as Date? {
-                return d1 > d2
-            }
-            return false
-        }
-        tableView.reloadData()
+        fetchDBData()
+//        tableView.reloadData()
+        tableView.insertRows(at: IndexSet(integer: 0), withAnimation: .slideDown)
+        tableView.reloadData(forRowIndexes: IndexSet(integer: 0), columnIndexes: IndexSet(integer: 0))
 //        tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
     }
 

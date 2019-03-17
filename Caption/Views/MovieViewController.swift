@@ -522,6 +522,9 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         // one snapshot every 10 seconds
         DispatchQueue.global(qos: .background).async {
             let asset = self.episode.player?.currentItem?.asset
+            if asset == nil {
+                return
+            }
             let imageGenerator = AVAssetImageGenerator(asset: asset!)
             if let duration = self.episode.player?.currentItem?.duration {
                 let totalSeconds = CMTimeGetSeconds(duration)
