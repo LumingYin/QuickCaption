@@ -1295,7 +1295,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <avPlayerView controlsStyle="minimal" showsFrameSteppingButtons="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMG-zt-4ZZ">
+                            <avPlayerView controlsStyle="none" showsFrameSteppingButtons="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMG-zt-4ZZ">
                                 <rect key="frame" x="0.0" y="292" width="520" height="194"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="194" id="4VW-YY-Wk2"/>
@@ -1328,6 +1328,7 @@
                     </view>
                     <connections>
                         <outlet property="captionPreviewLabel" destination="jiy-T2-5Ml" id="TUc-3s-Ekx"/>
+                        <outlet property="playPauseImageView" destination="FA1-Kt-fGw" id="Thf-LV-b8j"/>
                         <outlet property="playerView" destination="MMG-zt-4ZZ" id="XyH-Jq-kz1"/>
                         <outlet property="progressView" destination="K5C-Y2-cNb" id="ShI-fX-AJ7"/>
                         <outlet property="progressViewColorLineBox" destination="gTd-tF-LlQ" id="afY-66-pxp"/>

@@ -28,6 +28,7 @@ import AppCenterAnalytics
     @IBOutlet weak var captionPreviewLabel: NSTextField!
     @IBOutlet weak var volumeSlider: NSSlider!
     @IBOutlet weak var speedSlider: NSSlider!
+    @IBOutlet weak var playPauseImageView: NSImageView!
 
     var cachedCaptionViews: [String: CaptionBoxView] = [:]
 
@@ -87,6 +88,7 @@ import AppCenterAnalytics
     func playVideo(_ videoURL: URL) {
         self.episode.videoURL = videoURL
         episode.player = AVPlayer(url: videoURL)
+        self.episode.player?.addObserver(self, forKeyPath: "rate", options: [.new], context: &MovieViewController.playerPlayrateContext)
         playerView.player = episode.player
         episode.player?.play()
         recentTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateLoadVideo), userInfo: nil, repeats: false)
@@ -253,7 +255,9 @@ import AppCenterAnalytics
             task.cancel()
         }
         NotificationCenter.default.removeObserver(self)
+        self.playerView.player?.safelyRemoveObserver(self, forKeyPath: "rate")
         if (episode != nil) {
+            self.episode.player?.safelyRemoveObserver(self, forKeyPath: "rate")
             episode.safelyRemoveObserver(self, forKeyPath: "arrayForCaption")
             if let arr = self.episode.arrayForCaption?.array as? [CaptionLine] {
                 for line in arr {
@@ -289,6 +293,7 @@ import AppCenterAnalytics
         } else {
             self.episode.player = AVPlayer()
             self.playerView.player = self.episode.player
+            self.episode.player?.addObserver(self, forKeyPath: "rate", options: [.new], context: &MovieViewController.playerPlayrateContext)
             print("Can't configurate movie VC")
         }
     }
@@ -313,6 +318,7 @@ import AppCenterAnalytics
 
     private static var textTrackContext = 0
     private static var fontPreviewTrackContext = 1
+    private static var playerPlayrateContext = 5
 
     func configureTextTrack() {
         self.subtitleTrackContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.subtitleTrackContainerView.frame.size.height))
@@ -511,7 +517,7 @@ import AppCenterAnalytics
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &MovieViewController.textTrackContext || context == &MovieViewController.fontPreviewTrackContext else {
+        guard context == &MovieViewController.textTrackContext || context == &MovieViewController.fontPreviewTrackContext || context == &MovieViewController.playerPlayrateContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
@@ -519,6 +525,16 @@ import AppCenterAnalytics
             self.observeMovieCaptionTextValue(forKeyPath: keyPath, of: object, change: change)
         } else if context == &MovieViewController.fontPreviewTrackContext {
             self.observeFontStyleChangedValue(forKeyPath: keyPath, of: object, change: change)
+        } else if context == &MovieViewController.playerPlayrateContext {
+            if keyPath == "rate" {
+                if let player = self.playerView.player {
+                    if player.rate > 0 {
+                        self.playPauseImageView.image = NSImage(named: "tb_pause")
+                    } else {
+                        self.playPauseImageView.image = NSImage(named: "tb_play")
+                    }
+                }
+            }
         }
     }
 
@@ -734,7 +750,23 @@ import AppCenterAnalytics
         handleNewTimelineLocation(sender: sender)
     }
 
+    var shouldResumePlayingAfterPanEnds = false
+
     @IBAction func pannedToNewTimelineIndex(_ sender: NSPanGestureRecognizer) {
+        if sender.state == .began {
+            if let player = playerView.player {
+                if player.rate > 0 {
+                    shouldResumePlayingAfterPanEnds = true
+                    playerView.player?.pause()
+                } else {
+                    shouldResumePlayingAfterPanEnds = false
+                }
+            }
+        } else if sender.state == .ended || sender.state == .cancelled || sender.state == .failed {
+            if shouldResumePlayingAfterPanEnds {
+                playerView.player?.play()
+            }
+        }
         if sender.state == .began || sender.state == .changed {
             progressViewColorLineBox.fillColor = NSColor.yellow
         } else {
@@ -772,19 +804,31 @@ import AppCenterAnalytics
     }
 
     @IBAction func rewindByOneFrame(_ sender: Any) {
-
+        if let item = self.playerView.player?.currentItem {
+            item.step(byCount: -1)
+        }
     }
 
     @IBAction func rewindByFiveSeconds(_ sender: Any) {
     }
 
     @IBAction func playPauseClicked(_ sender: Any) {
+        if let player = playerView.player {
+            if player.rate > 0 {
+                self.playerView.player?.pause()
+            } else {
+                self.playerView.player?.play()
+            }
+        }
     }
 
     @IBAction func forwardByFiveSeconds(_ sender: Any) {
     }
 
     @IBAction func forwardByOneFrame(_ sender: Any) {
+        if let item = self.playerView.player?.currentItem {
+            item.step(byCount: 1)
+        }
     }
 
 
