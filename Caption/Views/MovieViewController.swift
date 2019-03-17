@@ -137,7 +137,9 @@ import AppCenterAnalytics
         refreshFontToReflectStyleChanges()
         self.configurateFontPreviewListener()
         AppDelegate.fontVC()?.configureAllMetadata()
-        AppDelegate.setCurrentEpisodeTitle(self.episode.videoDescription)
+        if let desc = self.episode.videoDescription {
+            AppDelegate.setCurrentEpisodeTitle(desc.withoutFileExtension)
+        }
     }
 
     func configurateFontPreviewListener() {

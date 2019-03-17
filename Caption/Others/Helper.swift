@@ -113,3 +113,14 @@ extension Double {
     }
 }
 
+
+extension String {
+    var withoutFileExtension: String {
+        get {
+            var components = self.components(separatedBy: ".")
+            guard components.count > 1 else { return self }
+            components.removeLast()
+            return components.joined(separator: ".")
+        }
+    }
+}
