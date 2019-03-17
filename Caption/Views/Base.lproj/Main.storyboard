@@ -1005,16 +1005,8 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="WhH-E3-1w2">
                                 <rect key="frame" x="0.0" y="230" width="520" height="62"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dcv-fO-TIm">
-                                        <rect key="frame" x="10" y="23" width="136" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="No Opened Video File" id="e7r-jb-dvJ">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qcp-ff-jh0">
-                                        <rect key="frame" x="375" y="20" width="124" height="22"/>
+                                        <rect key="frame" x="362" y="20" width="124" height="22"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VtY-c4-yrT">
                                                 <rect key="frame" x="0.0" y="-1" width="22" height="23"/>
@@ -1086,7 +1078,7 @@
                                         <rect key="frame" x="175" y="10" width="170" height="42"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ihC-TU-2C9">
-                                                <rect key="frame" x="15" y="25" width="137" height="17"/>
+                                                <rect key="frame" x="-2" y="25" width="174" height="17"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="00:00:00:00" id="kxx-Zu-D6O">
                                                     <font key="font" metaFont="system"/>
@@ -1180,16 +1172,46 @@
                                             <constraint firstAttribute="width" constant="170" id="dZ6-H3-Fbp"/>
                                         </constraints>
                                     </customView>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="3bb-vV-bCI">
+                                        <rect key="frame" x="20" y="4" width="138" height="50"/>
+                                        <subviews>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9B-vX-ClI">
+                                                <rect key="frame" x="0.0" y="26" width="24" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Volume4" id="Zf1-H2-x4T"/>
+                                            </imageView>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="493-pM-wCi">
+                                                <rect key="frame" x="0.0" y="0.0" width="21" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="turtle" id="SCC-hN-ys0"/>
+                                            </imageView>
+                                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vX9-SF-5ld">
+                                                <rect key="frame" x="30" y="28" width="110" height="19"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <sliderCell key="cell" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="ouN-uN-xRf"/>
+                                            </slider>
+                                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="30m-Cb-1NW">
+                                                <rect key="frame" x="30" y="2" width="110" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <sliderCell key="cell" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="below" numberOfTickMarks="5" allowsTickMarkValuesOnly="YES" sliderType="linear" id="ATD-NS-bgf"/>
+                                            </slider>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="0xw-3a-JZu"/>
+                                            <constraint firstAttribute="width" constant="138" id="KnI-mM-83N"/>
+                                        </constraints>
+                                    </customView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="qcp-ff-jh0" secondAttribute="bottom" constant="20" id="15O-JW-YGD"/>
-                                    <constraint firstItem="Dcv-fO-TIm" firstAttribute="centerY" secondItem="WhH-E3-1w2" secondAttribute="centerY" id="1Tw-SK-IyO"/>
                                     <constraint firstItem="qcp-ff-jh0" firstAttribute="top" secondItem="WhH-E3-1w2" secondAttribute="top" constant="20" id="8nc-xu-Otj"/>
-                                    <constraint firstItem="Dcv-fO-TIm" firstAttribute="leading" secondItem="WhH-E3-1w2" secondAttribute="leading" constant="12" id="M21-pe-9GC"/>
                                     <constraint firstItem="ttB-6C-NvU" firstAttribute="centerX" secondItem="WhH-E3-1w2" secondAttribute="centerX" id="PJE-mk-jeI"/>
                                     <constraint firstItem="ttB-6C-NvU" firstAttribute="centerY" secondItem="WhH-E3-1w2" secondAttribute="centerY" id="UIz-aJ-RFR"/>
+                                    <constraint firstAttribute="bottom" secondItem="3bb-vV-bCI" secondAttribute="bottom" constant="4" id="aQ6-G1-5l9"/>
                                     <constraint firstAttribute="height" constant="62" id="ghi-aH-IsM"/>
-                                    <constraint firstAttribute="trailing" secondItem="qcp-ff-jh0" secondAttribute="trailing" constant="21" id="uMn-nz-xYK"/>
+                                    <constraint firstItem="ttB-6C-NvU" firstAttribute="leading" secondItem="3bb-vV-bCI" secondAttribute="trailing" constant="17" id="hdH-Mq-rwy"/>
+                                    <constraint firstItem="qcp-ff-jh0" firstAttribute="leading" secondItem="ttB-6C-NvU" secondAttribute="trailing" constant="17" id="tJh-L0-HQU"/>
+                                    <constraint firstItem="3bb-vV-bCI" firstAttribute="top" secondItem="WhH-E3-1w2" secondAttribute="top" constant="8" id="unb-en-2RD"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="520" id="yYa-aF-UF1"/>
                                 </constraints>
                             </customView>
@@ -1304,7 +1326,7 @@
                         <outlet property="progressView" destination="K5C-Y2-cNb" id="ShI-fX-AJ7"/>
                         <outlet property="progressViewColorLineBox" destination="gTd-tF-LlQ" id="afY-66-pxp"/>
                         <outlet property="subtitleTrackContainerView" destination="CWy-l4-FlO" id="V5b-Tp-AlF"/>
-                        <outlet property="timeLabel" destination="Dcv-fO-TIm" id="PIm-6a-ri2"/>
+                        <outlet property="timeLabel" destination="ihC-TU-2C9" id="cjb-ah-MFg"/>
                         <outlet property="timelineOverallView" destination="mHu-9K-0O1" id="KNa-wG-e6N"/>
                         <outlet property="timelineScrollView" destination="QEG-SY-Hn2" id="6Bt-BF-igB"/>
                         <outlet property="videoPreviewContainerView" destination="K4d-N4-mRe" id="O3j-UH-f7o"/>
@@ -1996,6 +2018,7 @@
         <image name="NSIChatTheaterTemplate" width="15" height="13"/>
         <image name="NSPathTemplate" width="16" height="10"/>
         <image name="NSShareTemplate" width="11" height="16"/>
+        <image name="Volume4" width="21" height="16"/>
         <image name="bunny" width="322" height="180"/>
         <image name="file_fcpxml" width="174" height="185"/>
         <image name="file_srt" width="175" height="184"/>
@@ -2008,5 +2031,6 @@
         <image name="tb_next" width="100" height="75"/>
         <image name="tb_play" width="75" height="75"/>
         <image name="triangle" width="98" height="82"/>
+        <image name="turtle" width="384" height="384"/>
     </resources>
 </document>
