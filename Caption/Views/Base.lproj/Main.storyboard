@@ -61,14 +61,9 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="New Window" keyEquivalent="n" id="aH0-E0-9kc">
+                                        <menuItem title="New Project" keyEquivalent="n" id="aH0-E0-9kc">
                                             <connections>
                                                 <action selector="openNewWindow:" target="Voe-Tx-rLC" id="5Ko-Ka-9Ly"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="New Tab" keyEquivalent="t" id="smC-gf-mYx">
-                                            <connections>
-                                                <action selector="openNewTab:" target="Voe-Tx-rLC" id="vR8-3y-JXF"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open Video or Audio…" keyEquivalent="o" id="IAo-SY-fd9">
@@ -91,19 +86,19 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Export To" id="2Pg-4i-meh">
                                                 <items>
-                                                    <menuItem title="FCPXML…" keyEquivalent="f" allowsKeyEquivalentWhenHidden="YES" id="zcr-Xv-Pbz">
+                                                    <menuItem title="FCPXML" keyEquivalent="f" allowsKeyEquivalentWhenHidden="YES" id="zcr-Xv-Pbz">
                                                         <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="saveFCPXMLFile:" target="Voe-Tx-rLC" id="rkT-UU-8B1"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="SRT…" keyEquivalent="s" allowsKeyEquivalentWhenHidden="YES" id="pxx-59-PXV">
+                                                    <menuItem title="SRT" keyEquivalent="s" allowsKeyEquivalentWhenHidden="YES" id="pxx-59-PXV">
                                                         <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="saveSRTFile:" target="Voe-Tx-rLC" id="jwM-0q-cGw"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="TXT…" keyEquivalent="t" allowsKeyEquivalentWhenHidden="YES" id="HAT-IQ-Cm1">
+                                                    <menuItem title="TXT" keyEquivalent="t" allowsKeyEquivalentWhenHidden="YES" id="HAT-IQ-Cm1">
                                                         <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="saveTXTFile:" target="Voe-Tx-rLC" id="gM2-j9-f9C"/>
@@ -684,9 +679,9 @@
                                 <toolbarItem implicitItemIdentifier="F6A823BE-D2DC-49C0-87A0-26A8577C8F5D" label="Title" paletteLabel="Title" id="nZs-lk-s2l">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="38" height="17"/>
-                                    <size key="maxSize" width="102" height="17"/>
+                                    <size key="maxSize" width="417" height="17"/>
                                     <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="qOr-R3-Q9F">
-                                        <rect key="frame" x="0.0" y="14" width="101" height="17"/>
+                                        <rect key="frame" x="0.0" y="14" width="417" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Quick Caption" id="rfY-R9-W1P">
                                             <font key="font" metaFont="system"/>
@@ -714,7 +709,7 @@
                                     <button key="view" verticalHuggingPriority="750" id="d46-sI-8dg">
                                         <rect key="frame" x="0.0" y="14" width="42" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSAddTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="m3F-MA-WBq">
+                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="m3F-MA-WBq">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -785,6 +780,7 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="currentTitle" destination="qOr-R3-Q9F" id="FEu-Vv-m7Y"/>
                         <segue destination="GXO-oy-cs0" kind="relationship" relationship="window.shadowedContentViewController" id="PLB-ki-g7I"/>
                     </connections>
                 </windowController>

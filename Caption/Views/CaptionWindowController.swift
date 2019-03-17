@@ -10,6 +10,7 @@ import Cocoa
 
 class CaptionWindowController: NSWindowController, NSWindowDelegate {
     weak var splitViewController: MainSplitViewController!
+    @IBOutlet weak var currentTitle: NSTextField!
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)

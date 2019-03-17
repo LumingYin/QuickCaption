@@ -137,6 +137,7 @@ import AppCenterAnalytics
         refreshFontToReflectStyleChanges()
         self.configurateFontPreviewListener()
         AppDelegate.fontVC()?.configureAllMetadata()
+        AppDelegate.setCurrentEpisodeTitle(self.episode.videoDescription)
     }
 
     func configurateFontPreviewListener() {
@@ -248,6 +249,7 @@ import AppCenterAnalytics
     }
 
     func dismantleOldMovieVC() {
+        AppDelegate.setCurrentEpisodeTitle(nil)
         recentTimer?.invalidate()
         volumeSlider.floatValue = 1
         speedSlider.floatValue = 1

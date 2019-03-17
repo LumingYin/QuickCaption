@@ -19,6 +19,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var lightMenuItem: NSMenuItem!
     @IBOutlet weak var followSystemMenuItem: NSMenuItem!
 
+    static func setCurrentEpisodeTitle(_ title: String?) {
+        if let window = NSApp.mainWindow?.windowController as? CaptionWindowController {
+            window.currentTitle.stringValue = title ?? "Quick Caption"
+        }
+    }
     static func rebuildMovieAndSubVC() {
         if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController,
             let movieVC = NSStoryboard.main?.instantiateController(withIdentifier: "MovieViewController")  as? MovieViewController {
@@ -131,28 +136,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func openNewWindow(_ sender: Any) {
-        if #available(OSX 10.13, *) {
-            guard let captionWindowController = NSStoryboard.main?.instantiateController(withIdentifier: "mainWindow") as? CaptionWindowController else {
-                return
-            }
-            captionWindowController.shouldCascadeWindows = true
-            captionWindowController.showWindow(self)
-        } else {
-        }
+        AppDelegate.sourceListVC()?.addNewProject()
     }
 
-    @IBAction func openNewTab(_ sender: Any) {
-        if #available(OSX 10.13, *) {
-            guard let captionWindowController = NSStoryboard.main?.instantiateController(withIdentifier: "mainWindow") as? CaptionWindowController else {
-                return
-            }
-            NSApplication.shared.mainWindow?.addTabbedWindow(captionWindowController.window!, ordered: .above)
-            captionWindowController.shouldCascadeWindows = true
-            captionWindowController.showWindow(self)
-        } else {
-        }
-    }
-
+//    @IBAction func openNewTab(_ sender: Any) {
+//        if #available(OSX 10.13, *) {
+//            guard let captionWindowController = NSStoryboard.main?.instantiateController(withIdentifier: "mainWindow") as? CaptionWindowController else {
+//                return
+//            }
+//            NSApplication.shared.mainWindow?.addTabbedWindow(captionWindowController.window!, ordered: .above)
+//            captionWindowController.shouldCascadeWindows = true
+//            captionWindowController.showWindow(self)
+//        } else {
+//        }
+//    }
 
     @IBAction func openVideoFile(_ sender: NSMenuItem) {
         AppDelegate.movieVC()?.openFile(self)
