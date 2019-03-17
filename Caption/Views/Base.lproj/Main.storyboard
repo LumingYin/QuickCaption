@@ -82,7 +82,7 @@
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Save Everything" keyEquivalent="s" id="Vi3-xH-UAh">
+                                        <menuItem title="Save All" keyEquivalent="s" id="Vi3-xH-UAh">
                                             <connections>
                                                 <action selector="saveEverything:" target="Voe-Tx-rLC" id="sTK-XA-WhG"/>
                                             </connections>
@@ -91,14 +91,20 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Export To" id="2Pg-4i-meh">
                                                 <items>
-                                                    <menuItem title="SRT…" id="pxx-59-PXV">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <menuItem title="FCPXML…" keyEquivalent="f" allowsKeyEquivalentWhenHidden="YES" id="zcr-Xv-Pbz">
+                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                                        <connections>
+                                                            <action selector="saveFCPXMLFile:" target="Voe-Tx-rLC" id="rkT-UU-8B1"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="SRT…" keyEquivalent="s" allowsKeyEquivalentWhenHidden="YES" id="pxx-59-PXV">
+                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="saveSRTFile:" target="Voe-Tx-rLC" id="jwM-0q-cGw"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="TXT…" id="HAT-IQ-Cm1">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <menuItem title="TXT…" keyEquivalent="t" allowsKeyEquivalentWhenHidden="YES" id="HAT-IQ-Cm1">
+                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="saveTXTFile:" target="Voe-Tx-rLC" id="gM2-j9-f9C"/>
                                                         </connections>
@@ -939,6 +945,33 @@
                     </connections>
                 </viewController>
                 <customObject id="u43-FF-6D2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="t5b-P1-LuO">
+                    <items>
+                        <menuItem title="Duplicate" id="kQJ-qa-2ft">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Delete" id="Fvw-0f-e43">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="UaM-9x-DTA"/>
+                        <menuItem title="Export" id="KKs-z6-BJ9">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <menu key="submenu" title="Export" id="6ja-z3-Hv4">
+                                <items>
+                                    <menuItem title="FCPXML..." id="8Zz-Yc-CCf">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                    <menuItem title="SRT..." id="ImZ-eh-fQI">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                    <menuItem title="TXT..." id="uBg-o2-b6n">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                </items>
+                            </menu>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="1496" y="-402"/>
         </scene>
@@ -1043,7 +1076,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2l-eq-tnu">
-                                                <rect key="frame" x="9" y="-1" width="28" height="23"/>
+                                                <rect key="frame" x="10" y="-1" width="27" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="j42-j3-dfi">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1054,7 +1087,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRi-bL-Mbk">
-                                                <rect key="frame" x="40" y="-1" width="28" height="23"/>
+                                                <rect key="frame" x="41" y="-1" width="27" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="1qS-ty-ctl">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1065,7 +1098,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TnG-Dw-kSw">
-                                                <rect key="frame" x="71" y="-1" width="28" height="23"/>
+                                                <rect key="frame" x="72" y="-1" width="27" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="fYG-vN-i1a">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1076,7 +1109,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kcM-MG-g0M">
-                                                <rect key="frame" x="102" y="-1" width="28" height="23"/>
+                                                <rect key="frame" x="103" y="-1" width="27" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="I0L-WU-dfI">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1087,7 +1120,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-fP-aGm">
-                                                <rect key="frame" x="133" y="-1" width="28" height="23"/>
+                                                <rect key="frame" x="134" y="-1" width="27" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="QYs-CB-WRe">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1206,7 +1239,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="V95-Hy-NGv"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.11267605633802817" horizontal="YES" id="wxD-Wq-Vsv">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="wxD-Wq-Vsv">
                                     <rect key="frame" x="0.0" y="215" width="520" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1260,6 +1293,16 @@
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="ltV-N1-SKn">
+                    <items>
+                        <menuItem title="Reveal in Editor" id="zQD-Wr-Hf8">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Delete Caption" id="fiX-jh-luV">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="1588" y="464"/>
         </scene>
@@ -1476,6 +1519,19 @@
                     </connections>
                 </viewController>
                 <customObject id="FAZ-cl-t8k" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="OK3-Pn-moE">
+                    <items>
+                        <menuItem title="Delete" id="kpD-Lb-CyE">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Change Start Time..." enabled="NO" id="w1j-Sw-7ZY">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Change End Time..." enabled="NO" id="ZpV-fI-qDw">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="783" y="1525"/>
         </scene>
@@ -1566,12 +1622,12 @@
                                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pZb-KP-UuS">
                                                 <rect key="frame" x="124" y="119" width="267" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <popUpButtonCell key="cell" type="push" title="On" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Qwq-jg-2Id" id="GQU-oO-M0M">
+                                                <popUpButtonCell key="cell" type="push" title="On" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Qwq-jg-2Id" id="GQU-oO-M0M">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
                                                     <menu key="menu" id="jfA-qG-nha">
                                                         <items>
-                                                            <menuItem title="On" id="Qwq-jg-2Id">
+                                                            <menuItem title="On" state="on" id="Qwq-jg-2Id">
                                                                 <modifierMask key="keyEquivalentModifierMask"/>
                                                             </menuItem>
                                                             <menuItem title="Off" id="Qpq-Bz-05T">

@@ -166,6 +166,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppDelegate.movieVC()?.saveToDisk(.txt)
     }
 
+    @IBAction func saveFCPXMLFile(_ sender: Any) {
+        AppDelegate.movieVC()?.saveFCPXMLToDisk(self)
+    }
+
+
     @IBAction func saveEverything(_ sender: Any) {
         saveAction(nil)
     }

@@ -90,6 +90,17 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         recentTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateLoadVideo), userInfo: nil, repeats: false)
     }
 
+    func updatePersistedFramerate() {
+        if self.episode.player?.currentItem?.tracks == nil || self.episode.player?.currentItem?.tracks.count ?? 0 <= 0 {
+            return
+        }
+        if self.episode != nil && (self.episode.framerate == nil || self.episode.framerate == 0 || self.episode.framerate == 0.0)  {
+            if let framerate = self.episode.player?.currentItem?.tracks[0].assetTrack?.nominalFrameRate {
+                self.episode.framerate = framerate
+            }
+        }
+    }
+
     @objc func updateLoadVideo() {
         self.videoPreviewContainerView.guid = self.episode.guidIdentifier
         if self.episode.arrayForCaption?.count ?? 0 <= 0 {
@@ -100,10 +111,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             cap.endingTime = 0
 
             self.episode.addToArrayForCaption(cap)
-
-            if let framerate = self.episode.player?.currentItem?.tracks[0].assetTrack?.nominalFrameRate {
-                self.episode.framerate = framerate
-            }
+            updatePersistedFramerate()
             self.timeLabel.stringValue = "\(self.episode.framerate)fps  |  \(self.episode.videoDescription ?? "")"
             self.episode.creationDate = NSDate()
         } else {
@@ -298,7 +306,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     private static var textTrackContext = 0
-    private static var fontPreviewTrackContext = 0
+    private static var fontPreviewTrackContext = 1
 
     func configureTextTrack() {
         self.subtitleTrackContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.subtitleTrackContainerView.frame.size.height))
@@ -667,6 +675,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     func configurateRedBar() {
         let interval = CMTime(value: 1, timescale: 30)
         self.episode.player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
+            self.updatePersistedFramerate()
             let seconds = CMTimeGetSeconds(progressTime)
             let secondsString = String(format: "%02d", Int(seconds.truncatingRemainder(dividingBy: 60)))
             let minutesString = String(format: "%02d", Int(seconds / 60))
