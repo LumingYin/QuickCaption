@@ -7,8 +7,18 @@
 //
 
 import Cocoa
+import AVKit
 
 class Helper: NSObject {
+
+    static func conform(time: Double, toFrameDuration frameDuration: CMTime) -> CMTime {
+        let numberOfFrames = time / frameDuration.seconds
+        let numberOfFramesRounded = floor(Double(numberOfFrames))
+        let conformedTime = CMTimeMake(value: Int64(numberOfFramesRounded * Double(frameDuration.value)), timescale: frameDuration.timescale)
+
+        return conformedTime
+    }
+
 
     static func dialogOKCancel(question: String, text: String) -> Bool {
         let alert = NSAlert()

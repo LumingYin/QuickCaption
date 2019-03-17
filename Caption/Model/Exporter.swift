@@ -62,7 +62,6 @@ enum FileType {
             return ""
         }
 
-        // test
         let fpsDouble = Double(fps)
         var fpsFCPXValue = ""
         var templateName = ""
@@ -87,7 +86,7 @@ enum FileType {
 
         let cmTime = fpsFCPXValue.split(separator: "/")
         let frameDuration = CMTimeMake(value: Int64(cmTime[0])!, timescale: Int32(cmTime[1])!)
-        let overallLength = conform(time: totalDuration.seconds, toFrameDuration: frameDuration)
+        let overallLength = Helper.conform(time: totalDuration, toFrameDuration: frameDuration)
 
         var tcFormat = "NDF"
         if fpsDouble.checkIsEqual(toDouble: 23.976, includingNumberOfFractionalDigits: 3) {
@@ -122,8 +121,8 @@ enum FileType {
             let line = arrayForCaption[i]
             if let str: String = line.caption {
                 if str.count > 0 {
-                    let conformedTitleOffset = conform(time: Double(line.startingTime), toFrameDuration: frameDuration)
-                    let conformedTitleDuration = conform(time: Double(line.endingTime - line.startingTime), toFrameDuration: frameDuration)
+                    let conformedTitleOffset = Helper.conform(time: Double(line.startingTime), toFrameDuration: frameDuration)
+                    let conformedTitleDuration = Helper.conform(time: Double(line.endingTime - line.startingTime), toFrameDuration: frameDuration)
 
                     let noteUUID = NSUUID().uuidString
 
@@ -158,14 +157,6 @@ enum FileType {
 """
 
         return "\(templateA)\(templateB)\(templateC)"
-    }
-
-    static func conform(time: Double, toFrameDuration frameDuration: CMTime) -> CMTime {
-        let numberOfFrames = time / frameDuration.seconds
-        let numberOfFramesRounded = floor(Double(numberOfFrames))
-        let conformedTime = CMTimeMake(value: Int64(numberOfFramesRounded * Double(frameDuration.value)), timescale: frameDuration.timescale)
-
-        return conformedTime
     }
 
 

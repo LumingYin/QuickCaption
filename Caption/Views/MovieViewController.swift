@@ -749,14 +749,10 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         if let duration = self.episode.player?.currentItem?.duration {
             let totalSeconds = CMTimeGetSeconds(duration)
             let value = Float64(percent) * totalSeconds
-            let seekTime = CMTime(seconds: Double(value), preferredTimescale: 1)
-            //            let seekTime = CMTime(value: Int64(value * 10000000), timescale: 10000000)
-            print("Seeking to: \(seekTime) with percent of \(percent) at location \(location)")
-            //            self.episode.player?.pause()
-            self.episode.player?.seek(to: seekTime, completionHandler: { (completedSeek) in
-                //perhaps do something later here
-                //                self.episode.player?.play()
-            })
+
+            let timeScale = self.episode.player?.currentItem?.asset.duration.timescale ?? 1
+            let exactTime = CMTime(seconds: value, preferredTimescale: timeScale)
+            self.episode.player!.seek(to: exactTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.positiveInfinity)
         }
     }
 }
