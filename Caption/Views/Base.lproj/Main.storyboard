@@ -1222,12 +1222,9 @@
                                 </constraints>
                             </avPlayerView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jiy-T2-5Ml">
-                                <rect key="frame" x="18" y="306" width="484" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="qTg-qv-Nfu"/>
-                                </constraints>
+                                <rect key="frame" x="18" y="306" width="484" height="41"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="9Gm-kK-WN1">
-                                    <font key="font" metaFont="system" size="16"/>
+                                    <font key="font" metaFont="system" size="34"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>

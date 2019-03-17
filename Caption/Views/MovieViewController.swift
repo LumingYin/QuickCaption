@@ -120,6 +120,37 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         DispatchQueue.main.async {
             self.configureVideoThumbnailTrack()
         }
+        refreshFontToReflectStyleChanges()
+        self.configurateFontPreviewListener()
+    }
+
+    func configurateFontPreviewListener() {
+        episode.addObserver(self, forKeyPath: "styleFontColor", options: [.new], context: &MovieViewController.fontPreviewTrackContext)
+        episode.addObserver(self, forKeyPath: "styleFontFamily", options: [.new], context: &MovieViewController.fontPreviewTrackContext)
+        episode.addObserver(self, forKeyPath: "styleFontShadow", options: [.new], context: &MovieViewController.fontPreviewTrackContext)
+        episode.addObserver(self, forKeyPath: "styleFontSize", options: [.new], context: &MovieViewController.fontPreviewTrackContext)
+        episode.addObserver(self, forKeyPath: "styleFontWeight", options: [.new], context: &MovieViewController.fontPreviewTrackContext)
+    }
+
+
+    func refreshFontToReflectStyleChanges() {
+        var postScriptName = "Helvetica"
+        guard let arrayofSubs = NSFontManager.shared.availableMembers(ofFontFamily: self.episode.styleFontFamily ?? "Helvetica"),
+            let size = self.episode.styleFontSize,
+            let floatSize = Float(size) else { return }
+        var resultingSub:[String] = []
+        for i in 0..<arrayofSubs.count {
+            if let nameOfSubFamily = arrayofSubs[i][1] as? String {
+                if nameOfSubFamily == self.episode.styleFontWeight {
+                    postScriptName = arrayofSubs[i][0] as? String ?? "Helvetica"
+                    break
+                }
+            }
+        }
+
+        guard let desiredFont = NSFont.init(name: postScriptName, size: CGFloat(floatSize)) else { return }
+        self.captionPreviewLabel.font = desiredFont
+        self.captionPreviewLabel.textColor = NSColor(hexString: self.episode.styleFontColor ?? "#ffffff")
     }
 
     func populateThumbnail() {
@@ -262,6 +293,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     private static var textTrackContext = 0
+    private static var fontPreviewTrackContext = 0
 
     func configureTextTrack() {
         self.subtitleTrackContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.subtitleTrackContainerView.frame.size.height))
@@ -460,10 +492,22 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &MovieViewController.textTrackContext else {
+        guard context == &MovieViewController.textTrackContext || context == &MovieViewController.fontPreviewTrackContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
+        if context == &MovieViewController.textTrackContext {
+            self.observeMovieCaptionTextValue(forKeyPath: keyPath, of: object, change: change)
+        } else if context == &MovieViewController.fontPreviewTrackContext {
+            self.observeFontStyleChangedValue(forKeyPath: keyPath, of: object, change: change)
+        }
+    }
+
+    func observeFontStyleChangedValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?) {
+        refreshFontToReflectStyleChanges()
+    }
+
+    func observeMovieCaptionTextValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?) {
         for aChange in change ?? [:] {
             print("The change key: \(aChange.key), value: \(aChange.value)")
             if let indexSet = aChange.value as? NSIndexSet {
@@ -495,10 +539,6 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             existingView.frame = NSRect(x: startingPercentile * timelineLengthPixels, y: 0, width: width, height: timeLineSegmentHeight)
             existingView.setNeedsDisplay(existingView.bounds)
         }
-//        if let line = object as? CaptionLine {
-//            print("Changed captionline object: \(line)")
-//        }
-//        print("Something on object: \(object) changed: \(change)")
     }
 
     func configureWaveTrack() {

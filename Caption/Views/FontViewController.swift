@@ -40,7 +40,6 @@ class FontViewController: NSViewController {
 
     func configurateAllFonts() {
         fontFamilyButton.removeAllItems()
-        fontFamilyButton.addItem(withTitle: "System Font")
         fontFamilyButton.addItems(withTitles: allFontNames)
 
         updateSubFamily(saveNewSelection: false)
