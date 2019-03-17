@@ -211,7 +211,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         } else if type == .txt {
             text = Exporter.generateTXTFromArray(arrayForCaption: copiedArray)
         } else if type == .fcpXML {
-            text = Exporter.generateFCPXMLFromArray(episode: episode, player: episode.player, arrayForCaption: copiedArray)
+            text = Exporter.generateFCPXMLFromArray(episode: episode, player: episode.player, arrayForCaption: copiedArray, withoutAVPlayer: false)
         }
 
         guard let origonalVideoName = self.episode.videoURL?.lastPathComponent else {

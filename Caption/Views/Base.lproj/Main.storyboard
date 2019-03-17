@@ -909,6 +909,9 @@
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>
+                                                    <connections>
+                                                        <outlet property="menu" destination="t5b-P1-LuO" id="Eqq-pE-IGz"/>
+                                                    </connections>
                                                 </tableView>
                                             </subviews>
                                             <nil key="backgroundColor"/>
@@ -941,6 +944,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contextMenu" destination="t5b-P1-LuO" id="lDO-pm-U5E"/>
                         <outlet property="tableView" destination="yfo-s7-Mnb" id="pqR-JP-3JT"/>
                     </connections>
                 </viewController>
@@ -949,9 +953,15 @@
                     <items>
                         <menuItem title="Duplicate" id="kQJ-qa-2ft">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="duplicateClicked:" target="S31-PW-wUx" id="8qh-YO-o5X"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Delete" id="Fvw-0f-e43">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="deleteClicked:" target="S31-PW-wUx" id="YPH-IS-GKe"/>
+                            </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="UaM-9x-DTA"/>
                         <menuItem title="Export" id="KKs-z6-BJ9">
@@ -960,12 +970,21 @@
                                 <items>
                                     <menuItem title="FCPXML..." id="8Zz-Yc-CCf">
                                         <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="exportFCPXMLClicked:" target="S31-PW-wUx" id="srw-iW-AMa"/>
+                                        </connections>
                                     </menuItem>
                                     <menuItem title="SRT..." id="ImZ-eh-fQI">
                                         <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="exportSRTClicked:" target="S31-PW-wUx" id="7dD-qF-9HQ"/>
+                                        </connections>
                                     </menuItem>
                                     <menuItem title="TXT..." id="uBg-o2-b6n">
                                         <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="exportTXTClicked:" target="S31-PW-wUx" id="Ykc-KG-9o6"/>
+                                        </connections>
                                     </menuItem>
                                 </items>
                             </menu>

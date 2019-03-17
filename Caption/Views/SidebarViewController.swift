@@ -11,7 +11,41 @@ import Cocoa
 class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     @IBOutlet weak var tableView: NSTableView!
     var episodeProjects: [EpisodeProject] = []
+    @IBOutlet var contextMenu: NSMenu!
 
+
+    @IBAction func duplicateClicked(_ sender: Any) {
+    }
+
+    @IBAction func deleteClicked(_ sender: Any) {
+        let row = tableView.clickedRow
+        let project = episodeProjects[row]
+        var newRow = row + 1
+        if newRow > episodeProjects.count - 1 {
+            newRow = row - 1
+        }
+        if newRow < 0 || episodeProjects.count <= 0 {
+            addNewProject()
+            newRow = 0
+        }
+        tableView.selectRowIndexes(IndexSet(integer: newRow), byExtendingSelection: false)
+        Helper.context?.delete(project)
+        tableView.removeRows(at: IndexSet(integer: row), withAnimation: .slideDown)
+    }
+
+    @IBAction func exportFCPXMLClicked(_ sender: Any) {
+        let row = tableView.clickedRow
+        let project = episodeProjects[row]
+        
+    }
+
+    @IBAction func exportSRTClicked(_ sender: Any) {
+    }
+
+    @IBAction func exportTXTClicked(_ sender: Any) {
+    }
+
+    @IBOutlet weak var duplicateClicked: NSMenuItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchDBData()
