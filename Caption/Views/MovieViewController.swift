@@ -399,7 +399,9 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     func setStateForCaption(_ caption: CaptionLine?, state: CaptionManipulationState?) {
         if let line = caption, let guid = line.guidIdentifier, let matchedView = self.cachedCaptionViews[guid], let st = state {
+            matchedView.state = st
             matchedView.bringToFront()
+            matchedView.setNeedsDisplay(matchedView.bounds)
         }
     }
 
