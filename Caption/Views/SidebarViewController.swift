@@ -21,6 +21,11 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         } catch {
             print("Can't fetch persistence store with: \(error)")
         }
+        for episode in episodeProjects {
+            if episode.guidIdentifier == nil {
+                episode.guidIdentifier = NSUUID().uuidString
+            }
+        }
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -33,7 +38,9 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
 
     func addNewProject() {
-        episodeProjects.append(EpisodeProject(context: Helper.context!))
+        let episode = EpisodeProject(context: Helper.context!)
+        episode.guidIdentifier = NSUUID().uuidString
+        episodeProjects.append(episode)
         episodeProjects.sort { (ep1, ep2) -> Bool in
             if let d1 = ep1.modifiedDate as Date?, let d2 = ep2.modifiedDate as Date? {
                 return d1 > d2
@@ -55,6 +62,8 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             }
             if let url = episode.thumbnailURL, let image = NSImage(contentsOf: url) {
                 view.episodePreview?.image = image
+            } else {
+                view.episodePreview?.image = NSImage(named: "bunny")
             }
             return view
         }

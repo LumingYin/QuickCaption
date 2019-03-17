@@ -10,6 +10,7 @@
     <entity name="EpisodeProject" representedClassName="EpisodeProject" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="framerate" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="guidIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="modifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="styleFontColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="styleFontFamily" optional="YES" attributeType="String" syncable="YES"/>
@@ -24,6 +25,6 @@
     </entity>
     <elements>
         <element name="CaptionLine" positionX="-63" positionY="0" width="128" height="120"/>
-        <element name="EpisodeProject" positionX="-63" positionY="-18" width="128" height="240"/>
+        <element name="EpisodeProject" positionX="-63" positionY="-18" width="128" height="255"/>
     </elements>
 </model>

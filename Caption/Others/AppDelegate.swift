@@ -79,10 +79,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             MSAnalytics.self,
             MSCrashes.self,
             ])
+        Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { (_) in
+            self.saveEverything(self)
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         UserDefaults.standard.set(true, forKey: "SUAutomaticallyUpdate")
+
+        do {
+            let fetchRequest: NSFetchRequest<EpisodeProject> = EpisodeProject.fetchRequest()
+            let episodeProjects = try Helper.context!.fetch(fetchRequest)
+            for proj in episodeProjects {
+                if proj.videoURL == nil {
+                    Helper.context!.delete(proj)
+                }
+            }
+        } catch {
+            print(error)
+        }
+
         saveEverything(self)
     }
     

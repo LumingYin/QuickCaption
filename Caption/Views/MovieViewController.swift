@@ -207,6 +207,9 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     func dismantleOldMovieVC() {
         recentTimer?.invalidate()
+        for task in accumulatedMainQueueTasks {
+            task.cancel()
+        }
         NotificationCenter.default.removeObserver(self)
         if (episode != nil) {
             episode.safelyRemoveObserver(self, forKeyPath: "arrayForCaption")
@@ -270,6 +273,45 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             self.addObserverForCaptionLine(captionLine)
         }
         episode.addObserver(self, forKeyPath: "arrayForCaption", options: [.initial, .new], context: &MovieViewController.textTrackContext)
+        let trackingArea = NSTrackingArea.init(rect: self.subtitleTrackContainerView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: ["type": "captionMouseArea", "guid": episode.guidIdentifier ?? ""])
+        self.subtitleTrackContainerView.addTrackingArea(trackingArea)
+    }
+
+    // MARK: - Dragging to retime captions
+//    override func mouseEntered(with event: NSEvent) {
+//        print(event)
+//    }
+
+    override func mouseMoved(with event: NSEvent) {
+        checkForCaptionDirectManipulation(with: event)
+    }
+
+    override func mouseDown(with event: NSEvent) {
+        print(event)
+        NSCursor.resizeLeftRight.set()
+    }
+
+    override func mouseDragged(with event: NSEvent) {
+        print(event)
+    }
+
+    override func mouseUp(with event: NSEvent) {
+        print(event)
+    }
+
+    override func mouseExited(with event: NSEvent) {
+        print(event)
+    }
+
+    func checkForCaptionDirectManipulation(with event: NSEvent) {
+//        let location = self.subtitleTrackContainerView.convert(event.locationInWindow, from: nil)
+//        episode.arrayForCaption?.enumerateObjects({ (object, index, cancel) in
+//            if let captionLine = object as? CaptionLine {
+//                if location.x
+//
+//            }
+//        })
+//        NSCursor.resizeLeftRight.set()
     }
 
     var calculatedDuration: Float {
@@ -340,6 +382,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             DispatchQueue.global(qos: .background).async {
                 // Let's extract the downsampled samples
 //                let samplingStartTime = CFAbsoluteTimeGetCurrent()
+                let capturedGUID = self.episode.guidIdentifier
                 SamplesExtractor.samples(audioTrack: track,
                                          timeRange: timeRange,
                                          desiredNumberOfSamples: width,
@@ -357,12 +400,14 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                                                                                       borderWidth: 0,
                                                                                       borderColor: WaveColor.gray)
 //                                            let drawingStartTime = CFAbsoluteTimeGetCurrent()
-                                            let imageDrawn = WaveFormDrawer.image(with: sampling, and: configuration)
-                                            if imageDrawn?.size.width >= self.timelineLengthPixels * 0.98 || imageDrawn?.size.width <= self.timelineLengthPixels * 1.02 {
-                                                DispatchQueue.main.async {
-                                                    // self.waveformImageView.imageFrameStyle = .grayBezel
-                                                    self.waveformImageView.image = imageDrawn
+                                            if let imageDrawn = WaveFormDrawer.image(with: sampling, and: configuration) {
+                                                let task = DispatchWorkItem {
+                                                    if (self.episode.guidIdentifier == capturedGUID) {
+                                                        self.waveformImageView.image = imageDrawn
+                                                    }
                                                 }
+                                                self.accumulatedMainQueueTasks.append(task)
+                                                DispatchQueue.main.async(execute: task)
                                             }
                                             // let drawingDuration = CFAbsoluteTimeGetCurrent() - drawingStartTime
                                             // self.nbLabel.stringValue = "\(width)/\(sampling.samples.count)"
@@ -376,6 +421,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     let thumbnailPerSeconds: Float64 = 2
+
+    var accumulatedMainQueueTasks: [DispatchWorkItem] = []
 
     func configureVideoThumbnailTrack() {
         self.videoPreviewContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.videoPreviewContainerView.frame.size.height))
@@ -400,13 +447,18 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                         let image = NSImage(cgImage: imageRef!, size: NSSize(width: imageRef!.width, height: imageRef!.height))
                         generatedImages.append(image)
                         let capturedIndex = imageIndex
-                        DispatchQueue.main.async {
+                        let capturedGUID = self.episode.guidIdentifier
+                        let task = DispatchWorkItem {
                             let imageView = NSImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
                             imageView.imageScaling = .scaleProportionallyUpOrDown
                             imageView.imageFrameStyle = .grayBezel
                             imageView.image = image
-                            self.videoPreviewContainerView.addSubview(imageView)
+                            if (capturedGUID != nil) {
+                                self.addSubImageView(capturedGUID: capturedGUID!, imageView: imageView)
+                            }
                         }
+                        self.accumulatedMainQueueTasks.append(task)
+                        DispatchQueue.main.async(execute: task)
                     } catch {
                         "Can't take screenshot: \(error)"
                     }
@@ -414,7 +466,6 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                     imageIndex += 1
                 }
             }
-
         }
 
 //        var imageGenerator = AVAssetImageGenerator(asset: asset!)
@@ -425,6 +476,12 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 //        var imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
 //        var thumbnail = UIImage(cgImage:imageRef)
 
+    }
+
+    func addSubImageView(capturedGUID: String, imageView: NSImageView) {
+        if (self.episode.guidIdentifier == capturedGUID) {
+            self.videoPreviewContainerView.addSubview(imageView)
+        }
     }
 
     let offsetPixelInScrollView: CGFloat = 8

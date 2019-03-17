@@ -17,6 +17,7 @@ extension EpisodeProject {
         return NSFetchRequest<EpisodeProject>(entityName: "EpisodeProject")
     }
 
+    @NSManaged public var guidIdentifier: String?
     @NSManaged public var videoDescription: String?
     @NSManaged public var videoURL: URL?
     @NSManaged public var thumbnailURL: URL?
