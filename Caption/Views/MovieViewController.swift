@@ -280,7 +280,11 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         }
 
         let timePoint = correspondingTimeAtEvent(event)
-        let (_, _, cursorType) = correspondingCaptionAtLocation(timePoint: timePoint)
+        let (line1, line2, cursorType) = correspondingCaptionAtLocation(timePoint: timePoint)
+        if cursorType != .normal {
+            self.setStateForCaption(line1, state: .hovering)
+            self.setStateForCaption(line2, state: .hovering)
+        }
         switch cursorType {
         case .resizeLeft:
             self.view.window?.disableCursorRects()
