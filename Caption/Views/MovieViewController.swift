@@ -311,22 +311,40 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             return
         }
 
-//        print("event.trackingArea = \(event.trackingArea)")
-//        guard let userData = event.trackingArea?.userInfo as? [String : String] else {return}
-//        print(userData)
-//        guard let section = userData["type"] else { return }
-//        if section != "captionMouseArea" {
-//            return
-//        }
+        let timePoint = correspondingTimeAtEvent(event)
+        let (captionLine1, captionLine2, cursorType) = correspondingCaptionAtLocation(timePoint: timePoint)
+        switch cursorType {
+        case .resizeLeft:
+            self.view.window?.disableCursorRects()
+            print("resizeLeft, \(NSCursor.current)")
+            NSCursor.resizeLeft.set()
+        case .resizeRight:
+            self.view.window?.disableCursorRects()
+            print("resizeRight, \(NSCursor.current)")
+            NSCursor.resizeRight.set()
+        case .resizeLeftRight:
+            self.view.window?.disableCursorRects()
+            print("resizeLeftRight, \(NSCursor.current)")
+            NSCursor.resizeLeftRight.set()
+        default:
+            print("arrow")
+            self.view.window?.enableCursorRects()
+            NSCursor.arrow.set()
+        }
+    }
 
+    func correspondingTimeAtEvent(_ event: NSEvent) -> Float {
         let location = self.subtitleTrackContainerView.convert(event.locationInWindow, from: nil).x
         print(location)
         let percentage = Float(location / self.timelineLengthPixels)
         let timePoint = percentage * self.calculatedDuration
-        var specialCursor = false
+        return timePoint
+    }
+
+    func correspondingCaptionAtLocation(timePoint: Float) -> (line1: CaptionLine?, line2: CaptionLine?, cursorType: CursorType) {
         if let eparr = episode.arrayForCaption?.array as? [CaptionLine] {
             if eparr.count < 2 {
-                return
+                return (nil, nil, .normal)
             }
             for i in 0..<eparr.count - 1 {
                 let captionLine = eparr[i]
@@ -337,36 +355,40 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 let diffThisNext = abs(captionLineNext.startingTime - captionLine.endingTime)
 
                 if diffThisNext < 0.1 && diffEnding < 0.2 {
-                    self.view.window?.disableCursorRects()
-                    print("resizeLeftRight, \(NSCursor.current)")
-                    NSCursor.resizeLeftRight.set()
-                    specialCursor = true
-                    break
+                    return (captionLine, captionLineNext, .resizeLeftRight)
                 } else if diffStarting < 0.2 {
-                    self.view.window?.disableCursorRects()
-                    print("resizeRight, \(NSCursor.current)")
-                    NSCursor.resizeRight.set()
-                    specialCursor = true
-                    break
+                    return (captionLine, nil, .resizeRight)
                 } else if diffEnding < 0.2 {
-                    self.view.window?.disableCursorRects()
-                    print("resizeLeft, \(NSCursor.current)")
-                    NSCursor.resizeLeft.set()
-                    specialCursor = true
-                    break
+                    return (captionLine, nil, .resizeLeft)
                 }
             }
         }
-//        episode.arrayForCaption?.enumerateObjects({ (object, index, stop) in
-//            if let captionLine = object as? CaptionLine {
-//            }
-//        })
-        if !specialCursor {
-            print("arrow")
-            self.view.window?.enableCursorRects()
-            NSCursor.arrow.set()
-        }
-//        NSCursor.resizeLeftRight.set()
+        return (nil, nil, .normal)
+    }
+
+    enum CursorType {
+        case resizeLeftRight
+        case resizeRight
+        case resizeLeft
+        case normal
+    }
+
+    func trackingMouseUp(with event: NSEvent) {
+        self.view.window?.enableCursorRects()
+        NSCursor.arrow.set()
+    }
+
+    func trackingMouseDown(with event: NSEvent) {
+
+    }
+
+    func trackingMouseDragged(with event: NSEvent) {
+
+    }
+
+    func restoreOriginalPointer() {
+        self.view.window?.enableCursorRects()
+        NSCursor.arrow.set()
     }
 
     var calculatedDuration: Float {

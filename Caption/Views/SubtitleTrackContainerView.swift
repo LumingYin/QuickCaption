@@ -16,7 +16,6 @@ class SubtitleTrackContainerView: NSView {
     }
 
     override func awakeFromNib() {
-        
     }
 
     func startTracking() {
@@ -33,34 +32,32 @@ class SubtitleTrackContainerView: NSView {
     }
 
     override func mouseEntered(with event: NSEvent) {
-//        print(event)
     }
 
     override func mouseMoved(with event: NSEvent) {
-//        print(event)
         delegate?.checkForCaptionDirectManipulation(with: event)
     }
 
     override func mouseDown(with event: NSEvent) {
-//        print(event)
+        delegate?.trackingMouseDown(with: event)
     }
 
     override func mouseDragged(with event: NSEvent) {
-//        print(event)
+        delegate?.trackingMouseDragged(with: event)
     }
 
     override func mouseUp(with event: NSEvent) {
-//        print(event)
+        delegate?.trackingMouseUp(with: event)
     }
 
     override func mouseExited(with event: NSEvent) {
-//        print(event)
     }
-
-
 
 }
 
 protocol SubtitleTrackContainerViewDelegate {
     func checkForCaptionDirectManipulation(with event: NSEvent)
+    func trackingMouseUp(with event: NSEvent)
+    func trackingMouseDown(with event: NSEvent)
+    func trackingMouseDragged(with event: NSEvent)
 }
