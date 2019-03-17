@@ -372,16 +372,26 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         commonBetweenDraggedAndUp(with: event)
     }
 
+    let errorAvoidanceThreshold: Float = 0.3
+
     func commonBetweenDraggedAndUp(with event: NSEvent) {
         let timePoint = correspondingTimeAtEvent(event)
         if let operation = cachedOperation {
             if (operation == .resizeLeftRight) {
-                cachedDownLine1?.endingTime = timePoint
-                cachedDownLine2?.startingTime = timePoint
+                if (timePoint > cachedDownLine1!.startingTime + errorAvoidanceThreshold && timePoint < cachedDownLine2!.endingTime - errorAvoidanceThreshold) {
+                    cachedDownLine1!.endingTime = timePoint
+                    cachedDownLine2!.startingTime = timePoint
+                }
             } else if (operation == .resizeLeft) {
-                cachedDownLine1?.endingTime = timePoint
+                let newPotentialTimeIfCommitting = timePoint - cachedDownLine1!.startingTime
+                if (newPotentialTimeIfCommitting > errorAvoidanceThreshold) {
+                    cachedDownLine1?.endingTime = timePoint
+                }
             } else if (operation == .resizeRight) {
-                cachedDownLine1?.startingTime = timePoint
+                let newPotentialTimeIfCommitting = cachedDownLine1!.endingTime - timePoint
+                if (newPotentialTimeIfCommitting > errorAvoidanceThreshold) {
+                    cachedDownLine1?.startingTime = timePoint
+                }
             }
         }
     }
