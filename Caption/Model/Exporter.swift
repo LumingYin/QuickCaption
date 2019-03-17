@@ -88,13 +88,15 @@ enum FileType {
             if let str: String = line.caption {
                 if str.count > 0 {
 
-                    let titleOffset = "\(Int(line.startingTime * 30000))/30000s"
-                    let titleDuration = "\(Int((line.endingTime - line.startingTime) * 30000))/30000s"
+                    let frameDuration = CMTimeMake(value: 1001, timescale: 30000)
+                    let conformedTitleOffset = conform(time: Double(line.startingTime), toFrameDuration: frameDuration)
+                    let conformedTitleDuration = conform(time: Double(line.endingTime - line.startingTime), toFrameDuration: frameDuration)
+
                     let noteUUID = NSUUID().uuidString
 
                     templateB += """
                     <!--Title No. \(i + 1) +++++++++++++++++++++-->
-                    <title name="\(str) - TextUp" lane="1" offset="\(titleOffset)" duration="\(titleDuration)" ref="fx2" role="titles.English_en">
+                    <title name="\(str) - TextUp" lane="1" offset="\(conformedTitleOffset.value)/\(conformedTitleOffset.timescale)s" duration="\(conformedTitleDuration.value)/\(conformedTitleDuration.timescale)s)" ref="fx2" role="titles.English_en">
                     <param name="Background Color" key="9999/24742/24860/24776/3/24789/2" value="0 0 0 1"></param>
                     <param name="Background Opacity" key="9999/24742/24860/1/200/202" value="0"></param>
                     <param name="Padding" key="9999/24999/100/25000/2/100" value="0.066666666667"></param>
@@ -105,7 +107,7 @@ enum FileType {
                     <text-style-def id="xs\(i + 1)-1">
                     <text-style font="Arial" fontSize="53" fontColor="1 1 1 1" alignment="center"></text-style>
                     </text-style-def>
-                    <note>\(noteUUID)</note>
+                    <note>en - \(noteUUID)</note>
                     </title>
                     """
                 }
@@ -122,6 +124,14 @@ enum FileType {
 """
 
         return "\(templateA)\(templateB)\(templateC)"
+    }
+
+    static func conform(time: Double, toFrameDuration frameDuration: CMTime) -> CMTime {
+        let numberOfFrames = time / frameDuration.seconds
+        let numberOfFramesRounded = floor(Double(numberOfFrames))
+        let conformedTime = CMTimeMake(value: Int64(numberOfFramesRounded * Double(frameDuration.value)), timescale: frameDuration.timescale)
+
+        return conformedTime
     }
 
 //    static func generateFCPXMLFromArray(player: AVPlayer?, arrayForCaption: [CaptionLine]) -> String {
