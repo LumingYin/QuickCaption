@@ -31,10 +31,12 @@ class FontViewController: NSViewController {
     }
 
     func dismantleOldFontVC() {
-        episode.safelyRemoveObserver(self, forKeyPath: "videoDescription")
-        episode.safelyRemoveObserver(self, forKeyPath: "videoURL")
-        episode.safelyRemoveObserver(self, forKeyPath: "videoDuration")
-        episode.safelyRemoveObserver(self, forKeyPath: "framerate")
+        if episode != nil {
+            episode.safelyRemoveObserver(self, forKeyPath: "videoDescription")
+            episode.safelyRemoveObserver(self, forKeyPath: "videoURL")
+            episode.safelyRemoveObserver(self, forKeyPath: "videoDuration")
+            episode.safelyRemoveObserver(self, forKeyPath: "framerate")
+        }
     }
 
     func configurateFontVC() {
