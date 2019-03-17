@@ -88,6 +88,13 @@ enum FileType {
         if fpsDouble.checkIsEqual(toDouble: 23.976, includingNumberOfFractionalDigits: 3) {
             tcFormat = "DF"
         }
+
+        let fontFamilyName = "Arial"
+        let fontFace = "Regular"
+        let fontSize = 53
+        let fontColor = "0.999996 1 1 1"
+        let fontAlignment = "center"
+
         let templateA = """
         <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <!DOCTYPE fcpxml>
@@ -126,7 +133,7 @@ enum FileType {
                                             <text-style ref="xs\(i + 1)-1">\(str)</text-style>
                                         </text>
                                         <text-style-def id="xs\(i + 1)-1">
-                                            <text-style font="Arial" fontSize="53" fontColor="1 1 1 1" alignment="center"></text-style>
+                                            <text-style font="\(fontFamilyName)" fontSize="\(fontSize)" fontFace="\(fontFace)" fontColor="\(fontColor)" alignment="\(fontAlignment)"/>
                                         </text-style-def>
                                         <note>en - \(noteUUID)</note>
                                 </title>
