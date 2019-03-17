@@ -17,12 +17,17 @@ class FontViewController: NSViewController {
 
     @IBOutlet weak var fontFamilyButton: NSPopUpButton!
     @IBOutlet weak var fontWeightButton: NSPopUpButton!
-    @IBOutlet weak var fontSizeButton: NSPopUpButton!
+    @IBOutlet weak var fontSizeButton: NSComboBox!
     @IBOutlet weak var fontShadowButton: NSPopUpButton!
     @IBOutlet weak var fontColorButton: NSColorWell!
 
+    let allFontNames = NSFontManager.shared.availableFontFamilies
+    var fontPostScriptArray: [String] = []
+    let allFontSizes = [24, 36, 48, 53, 64, 72, 96]
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        configurateAllFonts()
     }
 
     func configurateFontVC() {
@@ -30,5 +35,69 @@ class FontViewController: NSViewController {
         self.videoPath.stringValue = episode.videoURL?.absoluteString ?? ""
         self.videoDurationField.stringValue = "\(episode.videoDuration) seconds"
         self.videoFramerateField.stringValue = "\(episode.framerate) fps"
+        restoreFontSettings()
     }
+
+    func configurateAllFonts() {
+        fontFamilyButton.removeAllItems()
+        fontFamilyButton.addItems(withTitles: allFontNames)
+
+        updateSubFamily(saveNewSelection: false)
+        fontSizeButton.removeAllItems()
+        fontSizeButton.addItems(withObjectValues: allFontSizes)
+        fontSizeButton.selectItem(at: 3)
+    }
+
+    func updateSubFamily(saveNewSelection: Bool) {
+        fontWeightButton.removeAllItems()
+        if let selectedFamily = fontFamilyButton.titleOfSelectedItem {
+            if let arrayofSubs = NSFontManager.shared.availableMembers(ofFontFamily: selectedFamily)  {
+                var resultingSub:[String] = []
+                fontPostScriptArray = []
+                for i in 0..<arrayofSubs.count {
+                    if let nameOfSubFamily = arrayofSubs[i][1] as? String {
+                        resultingSub.append(nameOfSubFamily)
+                    }
+                    if let nameOfPostScript = arrayofSubs[i][0] as? String {
+                        fontPostScriptArray.append(nameOfPostScript)
+                    }
+                }
+                fontWeightButton.addItems(withTitles: resultingSub)
+            }
+        }
+        if saveNewSelection {
+            self.episode.styleFontWeight = fontWeightButton.title
+        }
+    }
+
+    func restoreFontSettings() {
+        fontFamilyButton.selectItem(withTitle: self.episode.styleFontFamily ?? "Helvetica")
+        updateSubFamily(saveNewSelection: false)
+        fontWeightButton.selectItem(withTitle: self.episode.styleFontWeight ?? "Regular")
+        fontSizeButton.stringValue = self.episode.styleFontSize ?? "53"
+        fontShadowButton.selectItem(at: Int(self.episode.styleFontShadow))
+        fontColorButton.color = NSColor(hexString: self.episode.styleFontColor ?? "#ffffff") ?? NSColor.white
+    }
+
+    @IBAction func fontNameChanged(_ sender: NSPopUpButton) {
+        updateSubFamily(saveNewSelection: true)
+        self.episode.styleFontFamily = sender.title
+    }
+
+    @IBAction func fontSubFamilyChanged(_ sender: NSPopUpButton) {
+        self.episode.styleFontWeight = sender.title
+    }
+
+    @IBAction func fontSizeChanged(_ sender: NSComboBox) {
+        self.episode.styleFontSize = sender.stringValue
+    }
+
+    @IBAction func shadowChanged(_ sender: NSPopUpButton) {
+        self.episode.styleFontShadow = Int16(sender.indexOfSelectedItem)
+    }
+
+    @IBAction func colorChanged(_ sender: NSColorWell) {
+        self.episode.styleFontColor = sender.color.hexString
+    }
+
 }

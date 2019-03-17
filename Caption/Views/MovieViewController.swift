@@ -20,7 +20,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     @IBOutlet weak var progressViewColorLineBox: NSBox!
 
     @IBOutlet weak var subtitleTrackContainerView: SubtitleTrackContainerView!
-    @IBOutlet weak var videoPreviewContainerView: NSView!
+    @IBOutlet weak var videoPreviewContainerView: VideoPreviewContainerView!
     @IBOutlet weak var waveformImageView: NSImageView!
 
     @IBOutlet weak var timelineScrollView: NSScrollView!
@@ -41,6 +41,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        AppDelegate.subtitleVC()?.dismantleSubtitleVC()
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
     }
     
@@ -51,7 +52,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         dialog.title                   = "Choose a video file"
         dialog.showsResizeIndicator    = true
         dialog.showsHiddenFiles        = false
-        dialog.canChooseDirectories    = true
+        dialog.canChooseDirectories    = false
         dialog.canCreateDirectories    = true
         dialog.allowsMultipleSelection = false
         dialog.allowedFileTypes        = ["mp4", "mpeg4", "m4v", "ts", "mpg", "mpeg", "mp3", "mpeg3", "m4a", "mov"]
@@ -90,6 +91,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     @objc func updateLoadVideo() {
+        self.videoPreviewContainerView.guid = self.episode.guidIdentifier
         if self.episode.arrayForCaption?.count ?? 0 <= 0 {
             let cap = CaptionLine(context: Helper.context!)
             cap.guidIdentifier = NSUUID().uuidString
@@ -111,7 +113,6 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         self.populateThumbnail()
         self.configureOverallScrollView()
         self.configurateRedBar()
-
         DispatchQueue.main.async {
             self.configureTextTrack()
         }
@@ -119,6 +120,36 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         DispatchQueue.main.async {
             self.configureVideoThumbnailTrack()
         }
+        refreshFontToReflectStyleChanges()
+        self.configurateFontPreviewListener()
+    }
+
+    func configurateFontPreviewListener() {
+        episode.addObserver(self, forKeyPath: "styleFontColor", options: [.new], context: &MovieViewController.fontPreviewTrackContext)
+        episode.addObserver(self, forKeyPath: "styleFontFamily", options: [.new], context: &MovieViewController.fontPreviewTrackContext)
+        episode.addObserver(self, forKeyPath: "styleFontShadow", options: [.new], context: &MovieViewController.fontPreviewTrackContext)
+        episode.addObserver(self, forKeyPath: "styleFontSize", options: [.new], context: &MovieViewController.fontPreviewTrackContext)
+        episode.addObserver(self, forKeyPath: "styleFontWeight", options: [.new], context: &MovieViewController.fontPreviewTrackContext)
+    }
+
+
+    func refreshFontToReflectStyleChanges() {
+        var postScriptName = "Helvetica"
+        let size = self.episode.styleFontSize ?? "53"
+        guard let arrayofSubs = NSFontManager.shared.availableMembers(ofFontFamily: self.episode.styleFontFamily ?? "Helvetica"),
+            let floatSize = Float(size) else { return }
+        var resultingSub:[String] = []
+        for i in 0..<arrayofSubs.count {
+            if let nameOfSubFamily = arrayofSubs[i][1] as? String {
+                if nameOfSubFamily == self.episode.styleFontWeight {
+                    postScriptName = arrayofSubs[i][0] as? String ?? "Helvetica"
+                    break
+                }
+            }
+        }
+        guard let desiredFont = NSFont.init(name: postScriptName, size: CGFloat(floatSize)) else { return }
+        self.captionPreviewLabel.font = desiredFont
+        self.captionPreviewLabel.textColor = NSColor(hexString: self.episode.styleFontColor ?? "#ffffff")
     }
 
     func populateThumbnail() {
@@ -170,7 +201,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         } else if type == .txt {
             text = Exporter.generateTXTFromArray(arrayForCaption: copiedArray)
         } else if type == .fcpXML {
-            text = Exporter.generateFCPXMLFromArray(player: episode.player, arrayForCaption: copiedArray)
+            text = Exporter.generateFCPXMLFromArray(episode: episode, player: episode.player, arrayForCaption: copiedArray)
         }
 
         guard let origonalVideoName = self.episode.videoURL?.lastPathComponent else {
@@ -203,6 +234,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     func dismantleOldMovieVC() {
         recentTimer?.invalidate()
+        self.videoPreviewContainerView.guid = nil
         for task in accumulatedMainQueueTasks {
             task.cancel()
         }
@@ -216,7 +248,13 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                     line.safelyRemoveObserver(self, forKeyPath: "endingTime")
                 }
             }
+            episode.safelyRemoveObserver(self, forKeyPath: "styleFontColor")
+            episode.safelyRemoveObserver(self, forKeyPath: "styleFontFamily")
+            episode.safelyRemoveObserver(self, forKeyPath: "styleFontShadow")
+            episode.safelyRemoveObserver(self, forKeyPath: "styleFontSize")
+            episode.safelyRemoveObserver(self, forKeyPath: "styleFontWeight")
         }
+
         self.subtitleTrackContainerView.stopTracking()
         for (_, view) in cachedCaptionViews {
             view.removeFromSuperview()
@@ -260,6 +298,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     private static var textTrackContext = 0
+    private static var fontPreviewTrackContext = 0
 
     func configureTextTrack() {
         self.subtitleTrackContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.subtitleTrackContainerView.frame.size.height))
@@ -280,7 +319,11 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         }
 
         let timePoint = correspondingTimeAtEvent(event)
-        let (_, _, cursorType) = correspondingCaptionAtLocation(timePoint: timePoint)
+        let (line1, line2, cursorType) = correspondingCaptionAtLocation(timePoint: timePoint)
+        if cursorType != .normal {
+            self.setStateForCaption(line1, state: .normal)
+            self.setStateForCaption(line2, state: .normal)
+        }
         switch cursorType {
         case .resizeLeft:
             self.view.window?.disableCursorRects()
@@ -365,6 +408,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     func commonCursorReturn() {
+        self.setStateForCaption(cachedDownLine1, state: .normal)
+        self.setStateForCaption(cachedDownLine2, state: .normal)
         cachedDownLine1 = nil
         cachedDownLine2 = nil
         cachedOperation = nil
@@ -390,6 +435,14 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     let errorAvoidanceThreshold: Float = 0.3
 
+    func setStateForCaption(_ caption: CaptionLine?, state: CaptionManipulationState?) {
+        if let line = caption, let guid = line.guidIdentifier, let matchedView = self.cachedCaptionViews[guid], let st = state {
+            matchedView.state = st
+            matchedView.bringToFront()
+            matchedView.setNeedsDisplay(matchedView.bounds)
+        }
+    }
+
     func commonBetweenDraggedAndUp(with event: NSEvent) {
         let timePoint = correspondingTimeAtEvent(event)
         if let operation = cachedOperation {
@@ -397,16 +450,20 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 if (timePoint > cachedDownLine1!.startingTime + errorAvoidanceThreshold && timePoint < cachedDownLine2!.endingTime - errorAvoidanceThreshold) {
                     cachedDownLine1!.endingTime = timePoint
                     cachedDownLine2!.startingTime = timePoint
+                    self.setStateForCaption(cachedDownLine1, state: .dragging)
+                    self.setStateForCaption(cachedDownLine2, state: .dragging)
                 }
             } else if (operation == .resizeLeft) {
                 let newPotentialTimeIfCommitting = timePoint - cachedDownLine1!.startingTime
                 if (newPotentialTimeIfCommitting > errorAvoidanceThreshold) {
+                    self.setStateForCaption(cachedDownLine1, state: .dragging)
                     cachedDownLine1?.endingTime = timePoint
                 }
             } else if (operation == .resizeRight) {
                 let newPotentialTimeIfCommitting = cachedDownLine1!.endingTime - timePoint
                 if (newPotentialTimeIfCommitting > errorAvoidanceThreshold) {
                     cachedDownLine1?.startingTime = timePoint
+                    self.setStateForCaption(cachedDownLine1, state: .dragging)
                 }
             } else if (operation == .moveTime) {
                 let delta = event.deltaX
@@ -416,6 +473,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                 if (newStartIfCommitting > 0 && newEndIfCommtting < self.calculatedDuration) {
                     cachedDownLine1?.startingTime = newStartIfCommitting
                     cachedDownLine1?.endingTime = newEndIfCommtting
+                    self.setStateForCaption(cachedDownLine1, state: .dragging)
                 }
             }
         }
@@ -439,10 +497,22 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &MovieViewController.textTrackContext else {
+        guard context == &MovieViewController.textTrackContext || context == &MovieViewController.fontPreviewTrackContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
+        if context == &MovieViewController.textTrackContext {
+            self.observeMovieCaptionTextValue(forKeyPath: keyPath, of: object, change: change)
+        } else if context == &MovieViewController.fontPreviewTrackContext {
+            self.observeFontStyleChangedValue(forKeyPath: keyPath, of: object, change: change)
+        }
+    }
+
+    func observeFontStyleChangedValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?) {
+        refreshFontToReflectStyleChanges()
+    }
+
+    func observeMovieCaptionTextValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?) {
         for aChange in change ?? [:] {
             print("The change key: \(aChange.key), value: \(aChange.value)")
             if let indexSet = aChange.value as? NSIndexSet {
@@ -474,10 +544,6 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             existingView.frame = NSRect(x: startingPercentile * timelineLengthPixels, y: 0, width: width, height: timeLineSegmentHeight)
             existingView.setNeedsDisplay(existingView.bounds)
         }
-//        if let line = object as? CaptionLine {
-//            print("Changed captionline object: \(line)")
-//        }
-//        print("Something on object: \(object) changed: \(change)")
     }
 
     func configureWaveTrack() {
@@ -564,12 +630,13 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                         let capturedIndex = imageIndex
                         let capturedGUID = self.episode.guidIdentifier
                         let task = DispatchWorkItem {
-                            let imageView = NSImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
+                            let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
                             imageView.imageScaling = .scaleProportionallyUpOrDown
                             imageView.imageFrameStyle = .grayBezel
                             imageView.image = image
+                            imageView.correspondingGUID = capturedGUID
                             if (capturedGUID != nil) {
-                                self.addSubImageView(capturedGUID: capturedGUID!, imageView: imageView)
+                                self.videoPreviewContainerView.addSubImageView(capturedGUID: capturedGUID, imageView: imageView)
                             }
                         }
                         self.accumulatedMainQueueTasks.append(task)
@@ -593,11 +660,6 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     }
 
-    func addSubImageView(capturedGUID: String, imageView: NSImageView) {
-        if (self.episode.guidIdentifier == capturedGUID) {
-            self.videoPreviewContainerView.addSubview(imageView)
-        }
-    }
 
     let offsetPixelInScrollView: CGFloat = 8
     let redBarOffsetInScrollView: CGFloat = 8

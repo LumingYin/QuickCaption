@@ -945,7 +945,7 @@
         <!--Movie View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="MovieViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieViewController" id="XfG-lQ-9wD" customClass="MovieViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="520" height="486"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1157,7 +1157,7 @@
                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="DTT-i0-VKS"/>
                                                     <color key="contentTintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                 </imageView>
-                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K4d-N4-mRe">
+                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K4d-N4-mRe" customClass="VideoPreviewContainerView" customModule="Quick_Caption" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="3" width="521" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
@@ -1222,12 +1222,9 @@
                                 </constraints>
                             </avPlayerView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jiy-T2-5Ml">
-                                <rect key="frame" x="18" y="306" width="484" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="qTg-qv-Nfu"/>
-                                </constraints>
+                                <rect key="frame" x="18" y="306" width="484" height="41"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="9Gm-kK-WN1">
-                                    <font key="font" metaFont="system" size="16"/>
+                                    <font key="font" metaFont="system" size="34"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1269,7 +1266,7 @@
         <!--Side Tab View Controller-->
         <scene sceneID="ybh-Xt-C6Q">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="yk7-24-Pcf" customClass="SideTabViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController storyboardIdentifier="SideTabViewController" selectedTabViewItemIndex="0" tabStyle="unspecified" id="yk7-24-Pcf" customClass="SideTabViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" id="mtC-oI-RgF"/>
                         <tabViewItem identifier="" id="Rx2-tZ-6fu"/>
@@ -1541,6 +1538,9 @@
                                                     <font key="font" metaFont="menu"/>
                                                     <menu key="menu" id="zCI-qx-F65"/>
                                                 </popUpButtonCell>
+                                                <connections>
+                                                    <action selector="fontNameChanged:" target="Lpo-yO-LUY" id="cAI-Bw-50e"/>
+                                                </connections>
                                             </popUpButton>
                                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oKE-qj-tkh">
                                                 <rect key="frame" x="124" y="172" width="267" height="25"/>
@@ -1550,20 +1550,14 @@
                                                     <font key="font" metaFont="menu"/>
                                                     <menu key="menu" id="Bx1-rb-w01"/>
                                                 </popUpButtonCell>
-                                            </popUpButton>
-                                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FYb-An-QDR">
-                                                <rect key="frame" x="124" y="146" width="267" height="25"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="ooY-Wo-TyC">
-                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="menu"/>
-                                                    <menu key="menu" id="yvk-f8-tnR"/>
-                                                </popUpButtonCell>
+                                                <connections>
+                                                    <action selector="fontSubFamilyChanged:" target="Lpo-yO-LUY" id="Nei-rp-9Mw"/>
+                                                </connections>
                                             </popUpButton>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="hnn-4r-pUV">
                                                 <rect key="frame" x="-2" y="177" width="118" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Font Weight" id="FuA-AQ-fSC">
+                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Font Style" id="FuA-AQ-fSC">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1572,11 +1566,23 @@
                                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pZb-KP-UuS">
                                                 <rect key="frame" x="124" y="119" width="267" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="GQU-oO-M0M">
+                                                <popUpButtonCell key="cell" type="push" title="On" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Qwq-jg-2Id" id="GQU-oO-M0M">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
-                                                    <menu key="menu" id="jfA-qG-nha"/>
+                                                    <menu key="menu" id="jfA-qG-nha">
+                                                        <items>
+                                                            <menuItem title="On" id="Qwq-jg-2Id">
+                                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                                            </menuItem>
+                                                            <menuItem title="Off" id="Qpq-Bz-05T">
+                                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                                            </menuItem>
+                                                        </items>
+                                                    </menu>
                                                 </popUpButtonCell>
+                                                <connections>
+                                                    <action selector="shadowChanged:" target="Lpo-yO-LUY" id="2KN-WW-9wz"/>
+                                                </connections>
                                             </popUpButton>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="NZW-LX-5Av">
                                                 <rect key="frame" x="-2" y="124" width="118" height="17"/>
@@ -1600,7 +1606,26 @@
                                                 <rect key="frame" x="126" y="93" width="262" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <action selector="colorChanged:" target="Lpo-yO-LUY" id="Cae-j3-9m0"/>
+                                                </connections>
                                             </colorWell>
+                                            <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SwU-WR-Q55">
+                                                <rect key="frame" x="127" y="144" width="264" height="26"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="jgC-Ts-Ur8">
+                                                    <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="xJb-uh-wwG">
+                                                        <real key="minimum" value="12"/>
+                                                        <real key="maximum" value="100"/>
+                                                    </numberFormatter>
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </comboBoxCell>
+                                                <connections>
+                                                    <action selector="fontSizeChanged:" target="Lpo-yO-LUY" id="0Ib-lT-ghk"/>
+                                                </connections>
+                                            </comboBox>
                                         </subviews>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="B7h-9g-97J" customClass="ResizableInputContainerView" customModule="Quick_Caption" customModuleProvider="target">
@@ -1713,7 +1738,7 @@
                         <outlet property="fontColorButton" destination="OQR-T9-CG4" id="d3C-ck-2Bn"/>
                         <outlet property="fontFamilyButton" destination="oOc-o6-Q9x" id="ZCE-SJ-iaw"/>
                         <outlet property="fontShadowButton" destination="pZb-KP-UuS" id="hbO-mg-gaB"/>
-                        <outlet property="fontSizeButton" destination="FYb-An-QDR" id="WSt-84-0AW"/>
+                        <outlet property="fontSizeButton" destination="SwU-WR-Q55" id="y05-lF-maE"/>
                         <outlet property="fontWeightButton" destination="oKE-qj-tkh" id="JEv-54-bKf"/>
                         <outlet property="videoDurationField" destination="BbW-Tm-veH" id="6gL-QA-JdL"/>
                         <outlet property="videoFramerateField" destination="PWq-gy-bto" id="4r4-Sz-tgb"/>

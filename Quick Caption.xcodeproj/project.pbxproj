@@ -35,6 +35,9 @@
 		324971DB221929C000562223 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 324971DA221929C000562223 /* Security.framework */; };
 		326A0906223DD62B009A8313 /* TimelineOverallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0905223DD62B009A8313 /* TimelineOverallView.swift */; };
 		326A0908223DD7E9009A8313 /* SubtitleTrackContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */; };
+		326A090A223E0C48009A8313 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0909223E0C48009A8313 /* NSView+Extensions.swift */; };
+		326A090C223E0CD2009A8313 /* VideoPreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A090B223E0CD2009A8313 /* VideoPreviewContainerView.swift */; };
+		326A090E223E3482009A8313 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A090D223E3482009A8313 /* SwiftHEXColors.swift */; };
 		32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */; };
 		32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */; };
 		32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */; };
@@ -95,6 +98,9 @@
 		324971DA221929C000562223 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		326A0905223DD62B009A8313 /* TimelineOverallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineOverallView.swift; sourceTree = "<group>"; };
 		326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTrackContainerView.swift; sourceTree = "<group>"; };
+		326A0909223E0C48009A8313 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
+		326A090B223E0CD2009A8313 /* VideoPreviewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewContainerView.swift; sourceTree = "<group>"; };
+		326A090D223E3482009A8313 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHEXColors.swift; sourceTree = "<group>"; };
 		32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionDetailTableCellView.swift; sourceTree = "<group>"; };
 		32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextFieldCell.swift; sourceTree = "<group>"; };
 		32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnscrollableScrollView.swift; sourceTree = "<group>"; };
@@ -149,6 +155,7 @@
 			children = (
 				562A688A1F2D4F5E000E6B16 /* Main.storyboard */,
 				326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */,
+				326A090B223E0CD2009A8313 /* VideoPreviewContainerView.swift */,
 				326A0905223DD62B009A8313 /* TimelineOverallView.swift */,
 				321DC400223629030038C8FB /* SidebarEpisodeTableCellView.swift */,
 				321DC3F622361E3D0038C8FB /* CaptionExportViewController.swift */,
@@ -198,9 +205,11 @@
 		32F53CCD223762E2007B66E1 /* AppKit */ = {
 			isa = PBXGroup;
 			children = (
+				326A090D223E3482009A8313 /* SwiftHEXColors.swift */,
 				32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */,
 				32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */,
 				32047524223DA7910027218F /* NSString+Drawing.swift */,
+				326A0909223E0C48009A8313 /* NSView+Extensions.swift */,
 			);
 			path = AppKit;
 			sourceTree = "<group>";
@@ -340,6 +349,7 @@
 				326A0906223DD62B009A8313 /* TimelineOverallView.swift in Sources */,
 				32047525223DA7910027218F /* NSString+Drawing.swift in Sources */,
 				32F53CDF22376C4D007B66E1 /* EpisodeProject+CoreDataProperties.swift in Sources */,
+				326A090E223E3482009A8313 /* SwiftHEXColors.swift in Sources */,
 				32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */,
 				3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */,
 				321DC3F722361E3D0038C8FB /* CaptionExportViewController.swift in Sources */,
@@ -354,6 +364,7 @@
 				321DC3F5223615E90038C8FB /* MainSplitViewController.swift in Sources */,
 				321DC3F0223611F00038C8FB /* ResizableInputContainerView.swift in Sources */,
 				321DC3F92236216B0038C8FB /* Helper.swift in Sources */,
+				326A090C223E0CD2009A8313 /* VideoPreviewContainerView.swift in Sources */,
 				562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */,
 				321DC3FD223623500038C8FB /* Exporter.swift in Sources */,
 				3204751F223DA1A30027218F /* CaptionBoxView.swift in Sources */,
@@ -363,6 +374,7 @@
 				321DC3D022360F310038C8FB /* SubtitlesViewController.swift in Sources */,
 				321DC3D4223610750038C8FB /* SideTabViewController.swift in Sources */,
 				321DC3CA2236037C0038C8FB /* ExampleViewController.swift in Sources */,
+				326A090A223E0C48009A8313 /* NSView+Extensions.swift in Sources */,
 				321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */,
 				321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */,
 				324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */,
