@@ -52,7 +52,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         dialog.title                   = "Choose a video file"
         dialog.showsResizeIndicator    = true
         dialog.showsHiddenFiles        = false
-        dialog.canChooseDirectories    = true
+        dialog.canChooseDirectories    = false
         dialog.canCreateDirectories    = true
         dialog.allowsMultipleSelection = false
         dialog.allowedFileTypes        = ["mp4", "mpeg4", "m4v", "ts", "mpg", "mpeg", "mp3", "mpeg3", "m4a", "mov"]

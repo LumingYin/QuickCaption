@@ -37,6 +37,7 @@
 		326A0908223DD7E9009A8313 /* SubtitleTrackContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */; };
 		326A090A223E0C48009A8313 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0909223E0C48009A8313 /* NSView+Extensions.swift */; };
 		326A090C223E0CD2009A8313 /* VideoPreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A090B223E0CD2009A8313 /* VideoPreviewContainerView.swift */; };
+		326A090E223E3482009A8313 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A090D223E3482009A8313 /* SwiftHEXColors.swift */; };
 		32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */; };
 		32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */; };
 		32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */; };
@@ -99,6 +100,7 @@
 		326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTrackContainerView.swift; sourceTree = "<group>"; };
 		326A0909223E0C48009A8313 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
 		326A090B223E0CD2009A8313 /* VideoPreviewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewContainerView.swift; sourceTree = "<group>"; };
+		326A090D223E3482009A8313 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHEXColors.swift; sourceTree = "<group>"; };
 		32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionDetailTableCellView.swift; sourceTree = "<group>"; };
 		32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextFieldCell.swift; sourceTree = "<group>"; };
 		32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnscrollableScrollView.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 		32F53CCD223762E2007B66E1 /* AppKit */ = {
 			isa = PBXGroup;
 			children = (
+				326A090D223E3482009A8313 /* SwiftHEXColors.swift */,
 				32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */,
 				32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */,
 				32047524223DA7910027218F /* NSString+Drawing.swift */,
@@ -346,6 +349,7 @@
 				326A0906223DD62B009A8313 /* TimelineOverallView.swift in Sources */,
 				32047525223DA7910027218F /* NSString+Drawing.swift in Sources */,
 				32F53CDF22376C4D007B66E1 /* EpisodeProject+CoreDataProperties.swift in Sources */,
+				326A090E223E3482009A8313 /* SwiftHEXColors.swift in Sources */,
 				32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */,
 				3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */,
 				321DC3F722361E3D0038C8FB /* CaptionExportViewController.swift in Sources */,
