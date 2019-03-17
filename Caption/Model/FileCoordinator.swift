@@ -20,6 +20,9 @@ class FileData: NSObject {
 extension FileData: NSFilePresenter {
     var presentedItemURL: URL? {
         let range = filePath.range(of: ".", options:NSString.CompareOptions.backwards)
+        if (range == nil) {
+            return nil
+        }
         let baseName = String(filePath[..<range!.lowerBound])
         
         let altFilePath = baseName + "." + ext
