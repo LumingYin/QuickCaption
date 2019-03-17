@@ -1617,14 +1617,13 @@
                                                 <rect key="frame" x="127" y="144" width="264" height="26"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="jgC-Ts-Ur8">
+                                                    <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="xJb-uh-wwG">
+                                                        <real key="minimum" value="12"/>
+                                                        <real key="maximum" value="100"/>
+                                                    </numberFormatter>
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <objectValues>
-                                                        <string>Item 1</string>
-                                                        <string>Item 2</string>
-                                                        <string>Item 3</string>
-                                                    </objectValues>
                                                 </comboBoxCell>
                                                 <connections>
                                                     <action selector="fontSizeChanged:" target="Lpo-yO-LUY" id="0Ib-lT-ghk"/>

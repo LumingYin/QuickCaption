@@ -48,7 +48,7 @@ enum FileType {
                                                   60: "100/60000"]
 
 
-    static func generateFCPXMLFromArray(player: AVPlayer?, arrayForCaption: [CaptionLine]) -> String {
+    static func generateFCPXMLFromArray(episode: EpisodeProject, player: AVPlayer?, arrayForCaption: [CaptionLine]) -> String {
         guard let totalDuration = player?.currentItem?.asset.duration, let asset = player?.currentItem?.asset else {
             return ""
         }
@@ -89,9 +89,9 @@ enum FileType {
             tcFormat = "DF"
         }
 
-        let fontFamilyName = "Arial"
-        let fontFace = "Regular"
-        let fontSize = 53
+        let fontFamilyName = episode.styleFontFamily ?? "Helvetica"
+        let fontFace = episode.styleFontWeight ?? "Regular"
+        let fontSize = episode.styleFontSize ?? "53"
         let fontColor = "0.999996 1 1 1"
         let fontAlignment = "center"
 

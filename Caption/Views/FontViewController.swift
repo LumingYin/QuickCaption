@@ -70,19 +70,20 @@ class FontViewController: NSViewController {
 
     func restoreFontSettings() {
         fontFamilyButton.selectItem(withTitle: self.episode.styleFontFamily ?? "Helvetica")
+        updateSubFamily()
         fontWeightButton.selectItem(withTitle: self.episode.styleFontWeight ?? "Regular")
-        fontWeightButton.stringValue = self.episode.styleFontSize ?? "59"
+        fontSizeButton.stringValue = self.episode.styleFontSize ?? "59"
         fontShadowButton.selectItem(at: Int(self.episode.styleFontShadow))
         fontColorButton.color = NSColor(hexString: self.episode.styleFontColor ?? "#ffffff") ?? NSColor.white
     }
 
     @IBAction func fontNameChanged(_ sender: NSPopUpButton) {
         updateSubFamily()
-        self.episode.styleFontFamily = sender.stringValue
+        self.episode.styleFontFamily = sender.title
     }
 
     @IBAction func fontSubFamilyChanged(_ sender: NSPopUpButton) {
-        self.episode.styleFontWeight = sender.stringValue
+        self.episode.styleFontWeight = sender.title
     }
 
     @IBAction func fontSizeChanged(_ sender: NSComboBox) {
