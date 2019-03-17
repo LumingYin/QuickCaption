@@ -35,6 +35,7 @@
 		324971DB221929C000562223 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 324971DA221929C000562223 /* Security.framework */; };
 		326A0906223DD62B009A8313 /* TimelineOverallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0905223DD62B009A8313 /* TimelineOverallView.swift */; };
 		326A0908223DD7E9009A8313 /* SubtitleTrackContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */; };
+		326A090A223E0C48009A8313 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0909223E0C48009A8313 /* NSView+Extensions.swift */; };
 		32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */; };
 		32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */; };
 		32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */; };
@@ -95,6 +96,7 @@
 		324971DA221929C000562223 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		326A0905223DD62B009A8313 /* TimelineOverallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineOverallView.swift; sourceTree = "<group>"; };
 		326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTrackContainerView.swift; sourceTree = "<group>"; };
+		326A0909223E0C48009A8313 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
 		32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionDetailTableCellView.swift; sourceTree = "<group>"; };
 		32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextFieldCell.swift; sourceTree = "<group>"; };
 		32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnscrollableScrollView.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */,
 				32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */,
 				32047524223DA7910027218F /* NSString+Drawing.swift */,
+				326A0909223E0C48009A8313 /* NSView+Extensions.swift */,
 			);
 			path = AppKit;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				321DC3D022360F310038C8FB /* SubtitlesViewController.swift in Sources */,
 				321DC3D4223610750038C8FB /* SideTabViewController.swift in Sources */,
 				321DC3CA2236037C0038C8FB /* ExampleViewController.swift in Sources */,
+				326A090A223E0C48009A8313 /* NSView+Extensions.swift in Sources */,
 				321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */,
 				321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */,
 				324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */,

@@ -44,7 +44,7 @@ class CaptionBoxView: NSView {
         } else if (state == .hovering) {
             let smallerRectForFraming = self.bounds.insetBy(dx: 2, dy: 2)
             let smallPath = NSBezierPath(roundedRect: smallerRectForFraming, xRadius: 5, yRadius: 5)
-            smallPath.lineWidth = 1.5
+            smallPath.lineWidth = 2
             NSColor.red.withAlphaComponent(0.6).setStroke()
             smallPath.stroke()
         }
