@@ -43,13 +43,13 @@ class FontViewController: NSViewController {
         fontFamilyButton.addItem(withTitle: "System Font")
         fontFamilyButton.addItems(withTitles: allFontNames)
 
-        updateSubFamily()
+        updateSubFamily(saveNewSelection: false)
         fontSizeButton.removeAllItems()
         fontSizeButton.addItems(withObjectValues: allFontSizes)
         fontSizeButton.selectItem(at: 3)
     }
 
-    func updateSubFamily() {
+    func updateSubFamily(saveNewSelection: Bool) {
         fontWeightButton.removeAllItems()
         if let selectedFamily = fontFamilyButton.titleOfSelectedItem {
             if let arrayofSubs = NSFontManager.shared.availableMembers(ofFontFamily: selectedFamily)  {
@@ -66,11 +66,14 @@ class FontViewController: NSViewController {
                 fontWeightButton.addItems(withTitles: resultingSub)
             }
         }
+        if saveNewSelection {
+            self.episode.styleFontWeight = fontWeightButton.title
+        }
     }
 
     func restoreFontSettings() {
         fontFamilyButton.selectItem(withTitle: self.episode.styleFontFamily ?? "Helvetica")
-        updateSubFamily()
+        updateSubFamily(saveNewSelection: false)
         fontWeightButton.selectItem(withTitle: self.episode.styleFontWeight ?? "Regular")
         fontSizeButton.stringValue = self.episode.styleFontSize ?? "53"
         fontShadowButton.selectItem(at: Int(self.episode.styleFontShadow))
@@ -78,7 +81,7 @@ class FontViewController: NSViewController {
     }
 
     @IBAction func fontNameChanged(_ sender: NSPopUpButton) {
-        updateSubFamily()
+        updateSubFamily(saveNewSelection: true)
         self.episode.styleFontFamily = sender.title
     }
 
