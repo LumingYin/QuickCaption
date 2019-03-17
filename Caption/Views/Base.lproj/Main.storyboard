@@ -1085,7 +1085,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ihC-TU-2C9">
-                                                            <rect key="frame" x="-2" y="0.0" width="150" height="19"/>
+                                                            <rect key="frame" x="-2" y="1" width="150" height="19"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="00:00:00,000" id="kxx-Zu-D6O">
                                                                 <font key="font" metaFont="system" size="15"/>
@@ -1095,8 +1095,8 @@
                                                         </textField>
                                                     </subviews>
                                                 </view>
-                                                <color key="borderColor" red="1" green="1" blue="1" alpha="0.18326364436619719" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="borderColor" red="1" green="1" blue="1" alpha="0.19509242957746484" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="fillColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             </box>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2l-eq-tnu">
                                                 <rect key="frame" x="10" y="-1" width="27" height="23"/>
