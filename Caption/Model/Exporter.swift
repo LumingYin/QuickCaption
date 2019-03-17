@@ -99,15 +99,20 @@ enum FileType {
         let fontColor = "0.999996 1 1 1"
         let fontAlignment = "center"
 
+        var projectName = "Caption Project"
+        if let fileName = episode.videoDescription?.withoutFileExtension {
+            projectName = fileName
+        }
+
         let templateA = """
         <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <!DOCTYPE fcpxml>
 
         <fcpxml version="1.3">
-            <project name="cap" uid="\(headerUUID)">
+            <project name="\(projectName)" uid="\(headerUUID)">
                 <resources>
                     <format id="r1" name="\(templateName)" frameDuration="\(fpsFCPXValue)s" width="1920" height="1080"></format>
-                    <effect id="fx2" name="TextUp" uid="/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Spherico/Standard Subtitles/TextUp/TextUp/TextUp.moti"></effect>
+                    <effect id="fx2" name="Caption" uid="/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions/Caption/Caption.moti"></effect>
                 </resources>
                 <sequence duration="\(durationString)" format="r1" tcStart="0s" tcFormat="\(tcFormat)" audioLayout="stereo" audioRate="48k">
                     <spine>
@@ -128,7 +133,7 @@ enum FileType {
 
                     templateB += """
                                 <!--Title No. \(i + 1) +++++++++++++++++++++-->
-                                <title name="\(str) - TextUp" lane="1" offset="\(conformedTitleOffset.value)/\(conformedTitleOffset.timescale)s" duration="\(conformedTitleDuration.value)/\(conformedTitleDuration.timescale)s" ref="fx2" role="titles.English_en">
+                                <title name="\(str) - Caption" lane="1" offset="\(conformedTitleOffset.value)/\(conformedTitleOffset.timescale)s" duration="\(conformedTitleDuration.value)/\(conformedTitleDuration.timescale)s" ref="fx2" role="titles.English_en">
                                         <param name="Background Color" key="9999/24742/24860/24776/3/24789/2" value="0 0 0 1"></param>
                                         <param name="Background Opacity" key="9999/24742/24860/1/200/202" value="0"></param>
                                         <param name="Padding" key="9999/24999/100/25000/2/100" value="0.066666666667"></param>

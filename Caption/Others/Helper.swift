@@ -11,6 +11,26 @@ import AVKit
 
 class Helper: NSObject {
 
+    static func installFCPXCaptionFiles() -> Bool {
+        let fileMgr = FileManager.default
+        //        let userDocumentURL = fileMgr.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let urlForCreation = URL(fileURLWithPath: "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions", isDirectory: true)
+        let urlForCopy = URL(fileURLWithPath: "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions/Caption", isDirectory: true)
+        if let bundleURL = Bundle.main.url(forResource: "Caption", withExtension: "") {
+            do {
+                try fileMgr.createDirectory(at: urlForCreation, withIntermediateDirectories: true, attributes: nil)
+                try fileMgr.copyItem(at: bundleURL, to: urlForCopy)
+                return true
+            } catch let error as NSError { // Handle the error
+                print("copy failed! Error:\(error.localizedDescription)")
+                return false
+            }
+        } else {
+            print("Folder doesn't not exist in bundle folder")
+            return false
+        }
+    }
+
     static func secondFloatToString(float: Float64) -> String {
         if float.isNaN {
             return ""

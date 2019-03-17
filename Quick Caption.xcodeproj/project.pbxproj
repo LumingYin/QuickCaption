@@ -40,6 +40,7 @@
 		326A090E223E3482009A8313 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A090D223E3482009A8313 /* SwiftHEXColors.swift */; };
 		326A0910223F03BE009A8313 /* QuickCaptionApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A090F223F03BE009A8313 /* QuickCaptionApplication.swift */; };
 		326A0912223F0699009A8313 /* QuickCaptionWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0911223F0699009A8313 /* QuickCaptionWindow.swift */; };
+		326A0914223F0CFF009A8313 /* Caption in Resources */ = {isa = PBXBuildFile; fileRef = 326A0913223F0CFF009A8313 /* Caption */; };
 		32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */; };
 		32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */; };
 		32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */; };
@@ -105,6 +106,7 @@
 		326A090D223E3482009A8313 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHEXColors.swift; sourceTree = "<group>"; };
 		326A090F223F03BE009A8313 /* QuickCaptionApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuickCaptionApplication.swift; path = Caption/Views/QuickCaptionApplication.swift; sourceTree = SOURCE_ROOT; };
 		326A0911223F0699009A8313 /* QuickCaptionWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickCaptionWindow.swift; sourceTree = "<group>"; };
+		326A0913223F0CFF009A8313 /* Caption */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Caption; sourceTree = "<group>"; };
 		32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionDetailTableCellView.swift; sourceTree = "<group>"; };
 		32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextFieldCell.swift; sourceTree = "<group>"; };
 		32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnscrollableScrollView.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		321DC3F3223615840038C8FB /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				326A0913223F0CFF009A8313 /* Caption */,
 				32047521223DA6100027218F /* NSObject+KVO.h */,
 				32047522223DA6100027218F /* NSObject+KVO.m */,
 				562A68841F2D4F5E000E6B16 /* AppDelegate.swift */,
@@ -340,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C43B6942068A7A000219EF6 /* film.icns in Resources */,
+				326A0914223F0CFF009A8313 /* Caption in Resources */,
 				562A68891F2D4F5E000E6B16 /* Assets.xcassets in Resources */,
 				562A688C1F2D4F5E000E6B16 /* Main.storyboard in Resources */,
 			);

@@ -94,6 +94,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             MSAnalytics.self,
             MSCrashes.self,
             ])
+        Helper.installFCPXCaptionFiles()
         Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { (_) in
             self.saveEverything(self)
         }
