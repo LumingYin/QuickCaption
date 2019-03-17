@@ -1157,7 +1157,7 @@
                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="DTT-i0-VKS"/>
                                                     <color key="contentTintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                 </imageView>
-                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K4d-N4-mRe">
+                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K4d-N4-mRe" customClass="VideoPreviewContainerView" customModule="Quick_Caption" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="3" width="521" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>

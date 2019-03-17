@@ -20,7 +20,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     @IBOutlet weak var progressViewColorLineBox: NSBox!
 
     @IBOutlet weak var subtitleTrackContainerView: SubtitleTrackContainerView!
-    @IBOutlet weak var videoPreviewContainerView: NSView!
+    @IBOutlet weak var videoPreviewContainerView: VideoPreviewContainerView!
     @IBOutlet weak var waveformImageView: NSImageView!
 
     @IBOutlet weak var timelineScrollView: NSScrollView!
@@ -90,6 +90,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     @objc func updateLoadVideo() {
+        self.videoPreviewContainerView.guid = self.episode.guidIdentifier
         if self.episode.arrayForCaption?.count ?? 0 <= 0 {
             let cap = CaptionLine(context: Helper.context!)
             cap.guidIdentifier = NSUUID().uuidString
@@ -111,7 +112,6 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
         self.populateThumbnail()
         self.configureOverallScrollView()
         self.configurateRedBar()
-
         DispatchQueue.main.async {
             self.configureTextTrack()
         }
@@ -203,6 +203,7 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     func dismantleOldMovieVC() {
         recentTimer?.invalidate()
+        self.videoPreviewContainerView.guid = nil
         for task in accumulatedMainQueueTasks {
             task.cancel()
         }
@@ -581,12 +582,13 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                         let capturedIndex = imageIndex
                         let capturedGUID = self.episode.guidIdentifier
                         let task = DispatchWorkItem {
-                            let imageView = NSImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
+                            let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
                             imageView.imageScaling = .scaleProportionallyUpOrDown
                             imageView.imageFrameStyle = .grayBezel
                             imageView.image = image
+                            imageView.correspondingGUID = capturedGUID
                             if (capturedGUID != nil) {
-                                self.addSubImageView(capturedGUID: capturedGUID!, imageView: imageView)
+                                self.videoPreviewContainerView.addSubImageView(capturedGUID: capturedGUID, imageView: imageView)
                             }
                         }
                         self.accumulatedMainQueueTasks.append(task)
@@ -610,11 +612,6 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     }
 
-    func addSubImageView(capturedGUID: String, imageView: NSImageView) {
-        if (self.episode.guidIdentifier == capturedGUID) {
-            self.videoPreviewContainerView.addSubview(imageView)
-        }
-    }
 
     let offsetPixelInScrollView: CGFloat = 8
     let redBarOffsetInScrollView: CGFloat = 8
