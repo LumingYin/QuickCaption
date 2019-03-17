@@ -12,7 +12,7 @@ import AVFoundation
 import AppCenter
 import AppCenterAnalytics
 
-class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate, SubtitleTrackContainerViewDelegate {
+@objc class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate, SubtitleTrackContainerViewDelegate {
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
 
@@ -26,6 +26,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     @IBOutlet weak var timelineScrollView: NSScrollView!
     @IBOutlet weak var timelineOverallView: NSView!
     @IBOutlet weak var captionPreviewLabel: NSTextField!
+    @IBOutlet weak var volumeSlider: NSSlider!
+    @IBOutlet weak var speedSlider: NSSlider!
 
     var cachedCaptionViews: [String: CaptionBoxView] = [:]
 
@@ -244,6 +246,8 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 
     func dismantleOldMovieVC() {
         recentTimer?.invalidate()
+        volumeSlider.floatValue = 1
+        speedSlider.floatValue = 1
         self.videoPreviewContainerView.guid = nil
         for task in accumulatedMainQueueTasks {
             task.cancel()
@@ -755,6 +759,35 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
             self.episode.player!.seek(to: exactTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         }
     }
+
+
+    // Mark: - Middle buttons
+
+    @IBAction func volumeChanged(_ sender: NSSlider) {
+        self.playerView.player?.volume = sender.floatValue
+    }
+
+    @IBAction func speedChanged(_ sender: NSSlider) {
+        self.playerView.player?.rate = sender.floatValue
+    }
+
+    @IBAction func rewindByOneFrame(_ sender: Any) {
+
+    }
+
+    @IBAction func rewindByFiveSeconds(_ sender: Any) {
+    }
+
+    @IBAction func playPauseClicked(_ sender: Any) {
+    }
+
+    @IBAction func forwardByFiveSeconds(_ sender: Any) {
+    }
+
+    @IBAction func forwardByOneFrame(_ sender: Any) {
+    }
+
+
 }
 
 

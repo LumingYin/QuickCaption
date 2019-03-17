@@ -1094,7 +1094,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="queryTime:" target="XfG-lQ-9wD" id="bbZ-GF-OPb"/>
+                                                    <action selector="rewindByOneFrame:" target="XfG-lQ-9wD" id="LK2-ev-YhF"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRi-bL-Mbk">
@@ -1105,7 +1105,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="queryTime:" target="XfG-lQ-9wD" id="HJB-zt-MmL"/>
+                                                    <action selector="rewindByFiveSeconds:" target="XfG-lQ-9wD" id="FVM-JM-GAl"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TnG-Dw-kSw">
@@ -1116,7 +1116,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="queryTime:" target="XfG-lQ-9wD" id="5Hk-3i-l7e"/>
+                                                    <action selector="playPauseClicked:" target="XfG-lQ-9wD" id="ghx-bx-cyl"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kcM-MG-g0M">
@@ -1127,7 +1127,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="queryTime:" target="XfG-lQ-9wD" id="wdw-Qx-KSz"/>
+                                                    <action selector="forwardByFiveSeconds:" target="XfG-lQ-9wD" id="iYz-wC-BbL"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-fP-aGm">
@@ -1138,7 +1138,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="queryTime:" target="XfG-lQ-9wD" id="TAW-OF-bYU"/>
+                                                    <action selector="forwardByOneFrame:" target="XfG-lQ-9wD" id="Cc3-EV-YHH"/>
                                                 </connections>
                                             </button>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FA1-Kt-fGw">
@@ -1189,11 +1189,17 @@
                                                 <rect key="frame" x="30" y="28" width="110" height="19"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <sliderCell key="cell" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="ouN-uN-xRf"/>
+                                                <connections>
+                                                    <action selector="volumeChanged:" target="XfG-lQ-9wD" id="TMv-FL-09f"/>
+                                                </connections>
                                             </slider>
                                             <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="30m-Cb-1NW">
                                                 <rect key="frame" x="30" y="2" width="110" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <sliderCell key="cell" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="below" numberOfTickMarks="5" allowsTickMarkValuesOnly="YES" sliderType="linear" id="ATD-NS-bgf"/>
+                                                <sliderCell key="cell" state="on" alignment="left" minValue="0.5" maxValue="1" doubleValue="1" tickMarkPosition="below" numberOfTickMarks="5" allowsTickMarkValuesOnly="YES" sliderType="linear" id="ATD-NS-bgf"/>
+                                                <connections>
+                                                    <action selector="speedChanged:" target="XfG-lQ-9wD" id="cws-pa-28y"/>
+                                                </connections>
                                             </slider>
                                         </subviews>
                                         <constraints>
@@ -1325,11 +1331,13 @@
                         <outlet property="playerView" destination="MMG-zt-4ZZ" id="XyH-Jq-kz1"/>
                         <outlet property="progressView" destination="K5C-Y2-cNb" id="ShI-fX-AJ7"/>
                         <outlet property="progressViewColorLineBox" destination="gTd-tF-LlQ" id="afY-66-pxp"/>
+                        <outlet property="speedSlider" destination="30m-Cb-1NW" id="3F9-jC-Afu"/>
                         <outlet property="subtitleTrackContainerView" destination="CWy-l4-FlO" id="V5b-Tp-AlF"/>
                         <outlet property="timeLabel" destination="ihC-TU-2C9" id="cjb-ah-MFg"/>
                         <outlet property="timelineOverallView" destination="mHu-9K-0O1" id="KNa-wG-e6N"/>
                         <outlet property="timelineScrollView" destination="QEG-SY-Hn2" id="6Bt-BF-igB"/>
                         <outlet property="videoPreviewContainerView" destination="K4d-N4-mRe" id="O3j-UH-f7o"/>
+                        <outlet property="volumeSlider" destination="vX9-SF-5ld" id="MxB-T9-bfn"/>
                         <outlet property="waveformImageView" destination="P2a-iw-9CG" id="sGU-RP-60h"/>
                     </connections>
                 </viewController>
@@ -1344,6 +1352,7 @@
                         </menuItem>
                     </items>
                 </menu>
+                <userDefaultsController representsSharedInstance="YES" id="lto-lZ-0v7"/>
             </objects>
             <point key="canvasLocation" x="1588" y="464"/>
         </scene>
