@@ -56,8 +56,6 @@ enum FileType {
         guard let fps = tracks.first?.nominalFrameRate else {
             return ""
         }
-        let frameDurationSeconds = 1 / fps
-        let totalDurationSeconds = CMTimeGetSeconds(totalDuration)
 
         // test
         let fpsDouble = Double(fps)
@@ -74,14 +72,22 @@ enum FileType {
             }
         }
 
-//        let durationString = "\(Int(totalDurationSeconds * 3600))/3600s"
+        if fpsFCPXValue.count == 0 {
+            _ = Helper.dialogOKCancel(question: "Unable to export FCPXML", text: "FCPXML export only supports videos with the following framerates: 23.976, 24, 25, 29.97, 30, 50, 59.94, and 60fps. Export into an SRT, and re-encode the caption into your video clip using ffmpeg instead.")
+            return ""
+        }
+
         let durationString = "36000/3600s"
         let headerUUID = NSUUID().uuidString
 
         let cmTime = fpsFCPXValue.split(separator: "/")
         let frameDuration = CMTimeMake(value: Int64(cmTime[0])!, timescale: Int32(cmTime[1])!)
+        let overallLength = conform(time: totalDuration.seconds, toFrameDuration: frameDuration)
 
-
+        var tcFormat = "NDF"
+        if fpsDouble.checkIsEqual(toDouble: 23.976, includingNumberOfFractionalDigits: 3) {
+            tcFormat = "DF"
+        }
         let templateA = """
         <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <!DOCTYPE fcpxml>
@@ -92,9 +98,9 @@ enum FileType {
                     <format id="r1" name="\(templateName)" frameDuration="\(fpsFCPXValue)s" width="1920" height="1080"></format>
                     <effect id="fx2" name="TextUp" uid="/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Spherico/Standard Subtitles/TextUp/TextUp/TextUp.moti"></effect>
                 </resources>
-                <sequence duration="\(durationString)" format="r1" tcStart="0s" tcFormat="DF" audioLayout="stereo" audioRate="48k">
+                <sequence duration="\(durationString)" format="r1" tcStart="0s" tcFormat="\(tcFormat)" audioLayout="stereo" audioRate="48k">
                     <spine>
-                        <gap offset="0s" name="Master" duration="2182180/30000s" start="0s">
+                        <gap offset="0s" name="Master" duration="\(overallLength.value)/\(overallLength.timescale)s" start="0s">
 
         """
 
@@ -111,7 +117,7 @@ enum FileType {
 
                     templateB += """
                                 <!--Title No. \(i + 1) +++++++++++++++++++++-->
-                                <title name="\(str) - TextUp" lane="1" offset="\(conformedTitleOffset.value)/\(conformedTitleOffset.timescale)s" duration="\(conformedTitleDuration.value)/\(conformedTitleDuration.timescale)s)" ref="fx2" role="titles.English_en">
+                                <title name="\(str) - TextUp" lane="1" offset="\(conformedTitleOffset.value)/\(conformedTitleOffset.timescale)s" duration="\(conformedTitleDuration.value)/\(conformedTitleDuration.timescale)s" ref="fx2" role="titles.English_en">
                                         <param name="Background Color" key="9999/24742/24860/24776/3/24789/2" value="0 0 0 1"></param>
                                         <param name="Background Opacity" key="9999/24742/24860/1/200/202" value="0"></param>
                                         <param name="Padding" key="9999/24999/100/25000/2/100" value="0.066666666667"></param>
