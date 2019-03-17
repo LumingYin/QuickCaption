@@ -13,7 +13,39 @@ import AVKit
 
     @IBOutlet weak var transcribeTextField: NSTextField!
     @IBOutlet weak var resultTableView: NSTableView!
-    weak var episode: EpisodeProject!
+
+    weak var episode: EpisodeProject! {
+        didSet {
+            episode.arrayForCaption?.enumerateObjects({ (obj, index, stop) in
+                if let line = obj as? CaptionLine {
+                    self.addObserverForCaptionLine(line: line)
+                }
+            })
+        }
+    }
+
+    func addObserverForCaptionLine(line: CaptionLine) {
+        line.addObserver(self, forKeyPath: "caption", options: [.new], context: nil)
+        line.addObserver(self, forKeyPath: "endingTime", options: [.new], context: nil)
+        line.addObserver(self, forKeyPath: "startingTime", options: [.new], context: nil)
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        var matchedIndex: Int?
+        if let captionLine = object as? CaptionLine {
+            episode.arrayForCaption?.enumerateObjects({ (obj, index, stop) in
+                if let captionMatch = obj as? CaptionLine {
+                    if captionLine == captionMatch {
+                        matchedIndex = index
+                        stop.pointee = true
+                    }
+                }
+            })
+        }
+        if let index = matchedIndex {
+            self.resultTableView.reloadData(forRowIndexes: IndexSet(integer: index), columnIndexes: IndexSet(integer: 0))
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +54,7 @@ import AVKit
     func configurateSubtitleVC() {
         self.resultTableView.delegate = self
         self.resultTableView.dataSource = self
-        transcribeTextField.delegate = self
+        self.transcribeTextField.delegate = self
         self.resultTableView.reloadData()
         self.transcribeTextField.stringValue = ""
     }
@@ -70,12 +102,14 @@ import AVKit
                     new.caption = ""
                     new.startingTime = lastEndingTime
                     new.endingTime = lastEndingTime // this is likely wrong, although better than 0 for integrity
+                    self.addObserverForCaptionLine(line: new)
                 } else {
                     new = CaptionLine(context: Helper.context!)
                     new.guidIdentifier = NSUUID().uuidString
                     new.caption = ""
                     new.startingTime = Float(CMTimeGetSeconds((episode.player?.currentTime())!))
                     new.endingTime = new.startingTime // this is likely wrong, although better than 0 for integrity
+                    self.addObserverForCaptionLine(line: new)
                 }
                 episode.addToArrayForCaption(new)
             }
@@ -90,7 +124,6 @@ import AVKit
     func numberOfRows(in tableView: NSTableView) -> Int {
         return episode.arrayForCaption?.count ?? 0
     }
-
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CaptionCell"), owner: self) as? CaptionDetailTableCellView {
@@ -112,7 +145,6 @@ import AVKit
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 71
     }
-
 
     @IBAction func captionChanged(_ sender: NSTextField) {
         let row = resultTableView.row(for: sender)
