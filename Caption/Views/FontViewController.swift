@@ -23,7 +23,7 @@ class FontViewController: NSViewController {
 
     let allFontNames = NSFontManager.shared.availableFontFamilies
     var fontPostScriptArray: [String] = []
-    let allFontSizes = [24, 36, 48, 59, 64, 72, 96]
+    let allFontSizes = [24, 36, 48, 53, 64, 72, 96]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +72,7 @@ class FontViewController: NSViewController {
         fontFamilyButton.selectItem(withTitle: self.episode.styleFontFamily ?? "Helvetica")
         updateSubFamily()
         fontWeightButton.selectItem(withTitle: self.episode.styleFontWeight ?? "Regular")
-        fontSizeButton.stringValue = self.episode.styleFontSize ?? "59"
+        fontSizeButton.stringValue = self.episode.styleFontSize ?? "53"
         fontShadowButton.selectItem(at: Int(self.episode.styleFontShadow))
         fontColorButton.color = NSColor(hexString: self.episode.styleFontColor ?? "#ffffff") ?? NSColor.white
     }
