@@ -280,39 +280,13 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
 //        self.subtitleTrackContainerView.addTrackingArea(trackingArea)
     }
 
-    // MARK: - Dragging to retime captions
-//    override func mouseEntered(with event: NSEvent) {
-//        print(event)
-//    }
-//
-//    override func mouseMoved(with event: NSEvent) {
-//        print(event)
-//        checkForCaptionDirectManipulation(with: event)
-//    }
-//
-//    override func mouseDown(with event: NSEvent) {
-//        print(event)
-//    }
-//
-//    override func mouseDragged(with event: NSEvent) {
-//        print(event)
-//    }
-//
-//    override func mouseUp(with event: NSEvent) {
-//        print(event)
-//    }
-//
-//    override func mouseExited(with event: NSEvent) {
-//        print(event)
-//    }
-
     func checkForCaptionDirectManipulation(with event: NSEvent) {
         if (self.episode == nil || self.episode.player == nil || self.episode.videoURL == nil || self.episode.player?.currentItem == nil) {
             return
         }
 
         let timePoint = correspondingTimeAtEvent(event)
-        let (captionLine1, captionLine2, cursorType) = correspondingCaptionAtLocation(timePoint: timePoint)
+        let (_, _, cursorType) = correspondingCaptionAtLocation(timePoint: timePoint)
         switch cursorType {
         case .resizeLeft:
             self.view.window?.disableCursorRects()
@@ -374,12 +348,34 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
     }
 
     func trackingMouseUp(with event: NSEvent) {
+        let timePoint = correspondingTimeAtEvent(event)
+        if let operation = cachedOperation {
+            if (operation == .resizeLeftRight) {
+                cachedDownLine1?.endingTime = timePoint
+                cachedDownLine2?.startingTime = timePoint
+            } else if (operation == .resizeLeft) {
+                cachedDownLine1?.startingTime = timePoint
+            } else if (operation == .resizeRight) {
+                cachedDownLine1?.endingTime = timePoint
+            }
+        }
+        cachedDownLine1 = nil
+        cachedDownLine2 = nil
+        cachedOperation = nil
         self.view.window?.enableCursorRects()
         NSCursor.arrow.set()
     }
 
-    func trackingMouseDown(with event: NSEvent) {
+    var cachedDownLine1: CaptionLine?
+    var cachedDownLine2: CaptionLine?
+    var cachedOperation: CursorType?
 
+    func trackingMouseDown(with event: NSEvent) {
+        let timePoint = correspondingTimeAtEvent(event)
+        let cache = correspondingCaptionAtLocation(timePoint: timePoint)
+        cachedDownLine1 = cache.line1
+        cachedDownLine2 = cache.line2
+        cachedOperation = cache.cursorType
     }
 
     func trackingMouseDragged(with event: NSEvent) {
