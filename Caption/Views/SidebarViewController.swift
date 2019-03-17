@@ -32,6 +32,15 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             if episode.guidIdentifier == nil {
                 episode.guidIdentifier = NSUUID().uuidString
             }
+            episode.addObserver(self, forKeyPath: "videoURL", options: [.new], context: nil)
+            episode.addObserver(self, forKeyPath: "thumbnailURL", options: [.new], context: nil)
+            episode.addObserver(self, forKeyPath: "videoDescription", options: [.new], context: nil)
+        }
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let project = object as? EpisodeProject, let index = episodeProjects.firstIndex(of: project) {
+            tableView.reloadData(forRowIndexes: IndexSet(integer: index), columnIndexes: IndexSet(integer: 0))
         }
     }
 
@@ -49,10 +58,8 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         episode.modifiedDate = NSDate()
         episodeProjects.append(episode)
         fetchDBData()
-//        tableView.reloadData()
         tableView.insertRows(at: IndexSet(integer: 0), withAnimation: .slideDown)
         tableView.reloadData(forRowIndexes: IndexSet(integer: 0), columnIndexes: IndexSet(integer: 0))
-//        tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
