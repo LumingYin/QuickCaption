@@ -338,6 +338,15 @@ class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDat
                     print(".passing, diffStarting:\(diffStarting), diffEnding: \(diffEnding)")
                 }
             }
+
+            for i in 0..<eparr.count {
+                let captionLine = eparr[i]
+                if timePoint > captionLine.startingTime && timePoint < captionLine.startingTime + 0.25 {
+                    return (captionLine, nil, .resizeRight)
+                } else if timePoint < captionLine.endingTime && timePoint > captionLine.endingTime - 0.25 {
+                    return (captionLine, nil, .resizeLeft)
+                }
+            }
         }
         return (nil, nil, .normal)
     }
