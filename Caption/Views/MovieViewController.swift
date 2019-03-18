@@ -467,6 +467,7 @@ import AppCenterAnalytics
                     print(".resizeLeft, diffEnding:\(diffEnding)")
                     return (captionLine, nil, .resizeLeft)
                 } else {
+                    return (captionLine, nil, .selection)
 //                    print(".passing, diffStarting:\(diffStarting), diffEnding: \(diffEnding)")
                 }
             }
@@ -489,6 +490,7 @@ import AppCenterAnalytics
         case resizeLeftRight
         case resizeRight
         case resizeLeft
+        case selection
         case moveTime
         case normal
     }
@@ -610,7 +612,7 @@ import AppCenterAnalytics
             guard let player = self.playerView.player else {return}
             if player.status == .readyToPlay {
                 self.updateLoadVideo()
-                episode.player?.play()
+//                episode.player?.play()
             }
         }
     }
@@ -927,6 +929,25 @@ import AppCenterAnalytics
         }
     }
 
+    // MARK: - Right HUD toolset
+
+    @IBAction func revealInSubtitleEditor(_ sender: Any) {
+    }
+
+    @IBAction func joinTwoCaptions(_ sender: Any) {
+    }
+
+    @IBAction func deleteSelectedCaptions(_ sender: Any) {
+    }
+
+    @IBAction func trimRight(_ sender: Any) {
+    }
+
+    @IBAction func trimLeft(_ sender: Any) {
+    }
+
+    @IBAction func bladeInMiddle(_ sender: Any) {
+    }
 
 }
 

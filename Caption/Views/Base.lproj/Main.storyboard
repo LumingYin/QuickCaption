@@ -1287,7 +1287,7 @@ CA
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
-                                                                <action selector="queryTime:" target="XfG-lQ-9wD" id="WOh-Bh-ZMb"/>
+                                                                <action selector="deleteSelectedCaptions:" target="XfG-lQ-9wD" id="0ol-Ky-2Ng"/>
                                                             </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0aX-Er-qoj">
@@ -1298,7 +1298,7 @@ CA
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
-                                                                <action selector="queryTime:" target="XfG-lQ-9wD" id="euQ-79-4td"/>
+                                                                <action selector="trimRight:" target="XfG-lQ-9wD" id="crI-ds-wyq"/>
                                                             </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lhX-MS-bWb">
@@ -1309,7 +1309,7 @@ CA
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
-                                                                <action selector="queryTime:" target="XfG-lQ-9wD" id="f0O-48-fLm"/>
+                                                                <action selector="trimLeft:" target="XfG-lQ-9wD" id="u0o-wK-wAg"/>
                                                             </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pxn-MD-vea">
@@ -1320,7 +1320,7 @@ CA
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
-                                                                <action selector="queryTime:" target="XfG-lQ-9wD" id="ZzD-hl-qED"/>
+                                                                <action selector="bladeInMiddle:" target="XfG-lQ-9wD" id="hn2-eu-jCE"/>
                                                             </connections>
                                                         </button>
                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IFs-1O-rni">
@@ -1334,12 +1334,12 @@ CA
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tool_trimStart" id="NTe-sy-Kj5"/>
                                                         </imageView>
                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gee-Sv-7wT">
-                                                            <rect key="frame" x="36" y="4" width="26" height="18"/>
+                                                            <rect key="frame" x="34" y="4" width="26" height="18"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tool_trimEnd" id="8ab-RI-sjE"/>
                                                         </imageView>
                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HbK-r9-86i">
-                                                            <rect key="frame" x="36" y="25" width="26" height="14"/>
+                                                            <rect key="frame" x="34" y="25" width="26" height="14"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tool_delete" id="BiL-us-NPJ"/>
                                                         </imageView>
@@ -1351,7 +1351,7 @@ CA
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
-                                                                <action selector="queryTime:" target="XfG-lQ-9wD" id="RoI-Oo-rZy"/>
+                                                                <action selector="revealInSubtitleEditor:" target="XfG-lQ-9wD" id="zcC-He-HVX"/>
                                                             </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cCm-xR-djq">
@@ -1362,7 +1362,7 @@ CA
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
-                                                                <action selector="queryTime:" target="XfG-lQ-9wD" id="bGU-Oa-FIB"/>
+                                                                <action selector="joinTwoCaptions:" target="XfG-lQ-9wD" id="fI3-ne-J6I"/>
                                                             </connections>
                                                         </button>
                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zh5-Ns-XRM">
