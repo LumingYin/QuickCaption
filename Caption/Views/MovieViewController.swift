@@ -120,11 +120,11 @@ import AppCenterAnalytics
 //    }
 
     func updatePersistedFramerate() {
-        if self.episode.player?.currentItem?.tracks == nil || self.episode.player?.currentItem?.tracks.count ?? 0 <= 0 {
-            return
-        }
-        if self.episode != nil && self.episode.framerate == nil  {
-            if let framerate = self.episode.player?.currentItem?.tracks[0].assetTrack?.nominalFrameRate {
+//        if self.episode.player?.currentItem?.tracks == nil || (self.episode.player?.currentItem?.tracks.count)! <= 0 {
+//            return
+//        }
+        if self.episode != nil {
+            if let framerate = self.episode.player?.currentItem?.asset.tracks[0].nominalFrameRate {
                 self.episode.framerate = framerate
                 AppDelegate.fontVC()?.configureAllMetadata()
             }
