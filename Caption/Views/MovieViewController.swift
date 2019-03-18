@@ -824,7 +824,9 @@ import AppCenterAnalytics
                         imageView.image = loadedImage
                         self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
                     }
-                    self.accumulatedMainQueueTasks.append(taskToPlaceIntoView)
+                    if taskToPlaceIntoView != nil && self.accumulatedMainQueueTasks != nil {
+                        self.accumulatedMainQueueTasks.append(taskToPlaceIntoView)
+                    }
                     DispatchQueue.main.async(execute: taskToPlaceIntoView)
                 }
                 self.accumulatedBackgroundQueueTasks.append(taskToLoadImage)
