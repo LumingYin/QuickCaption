@@ -4,6 +4,7 @@
         <deployment version="101200" identifier="macosx"/>
         <plugIn identifier="com.apple.AVKitIBPlugin" version="14490.68"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.68"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1017,7 +1018,7 @@
                                         <rect key="frame" x="362" y="20" width="124" height="22"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VtY-c4-yrT">
-                                                <rect key="frame" x="-0.5" y="-1" width="23" height="23"/>
+                                                <rect key="frame" x="0.0" y="-1" width="22" height="23"/>
                                                 <buttonCell key="cell" type="roundTextured" title="A" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="DsE-Eg-fgB">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1027,7 +1028,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5sT-QD-HiD">
-                                                <rect key="frame" x="24.5" y="-1" width="23" height="23"/>
+                                                <rect key="frame" x="25" y="-1" width="22" height="23"/>
                                                 <buttonCell key="cell" type="roundTextured" title="B" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="Dbm-PD-R1J">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1037,7 +1038,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qY8-HI-mjf">
-                                                <rect key="frame" x="49.5" y="-1" width="24" height="23"/>
+                                                <rect key="frame" x="50" y="-1" width="23" height="23"/>
                                                 <buttonCell key="cell" type="roundTextured" title="C" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="HdP-PI-yBG">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1047,7 +1048,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GAQ-3i-cM4">
-                                                <rect key="frame" x="75.5" y="-1" width="24" height="23"/>
+                                                <rect key="frame" x="76" y="-1" width="23" height="23"/>
                                                 <buttonCell key="cell" type="roundTextured" title="D" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="qTB-d1-Zzs">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1057,7 +1058,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sob-Q9-idm">
-                                                <rect key="frame" x="101.5" y="-1" width="23" height="23"/>
+                                                <rect key="frame" x="102" y="-1" width="22" height="23"/>
                                                 <buttonCell key="cell" type="roundTextured" title="T" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="ATJ-pa-En7">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1097,7 +1098,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="00:00:00,000" id="kxx-Zu-D6O">
                                                                 <font key="font" metaFont="system" size="15"/>
-                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
@@ -1107,7 +1108,7 @@
                                                 <color key="fillColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             </box>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2l-eq-tnu">
-                                                <rect key="frame" x="10.5" y="-1" width="27" height="23"/>
+                                                <rect key="frame" x="11" y="-1" width="26" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="j42-j3-dfi">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1118,7 +1119,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRi-bL-Mbk">
-                                                <rect key="frame" x="41.5" y="-1" width="27" height="23"/>
+                                                <rect key="frame" x="42" y="-1" width="26" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="1qS-ty-ctl">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1129,7 +1130,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TnG-Dw-kSw">
-                                                <rect key="frame" x="72.5" y="-1" width="27" height="23"/>
+                                                <rect key="frame" x="73" y="-1" width="26" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="fYG-vN-i1a">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1140,7 +1141,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kcM-MG-g0M">
-                                                <rect key="frame" x="103.5" y="-1" width="27" height="23"/>
+                                                <rect key="frame" x="104" y="-1" width="26" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="I0L-WU-dfI">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1151,7 +1152,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-fP-aGm">
-                                                <rect key="frame" x="134.5" y="-1" width="27" height="23"/>
+                                                <rect key="frame" x="135" y="-1" width="26" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="QYs-CB-WRe">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1251,12 +1252,6 @@
                                             <rect key="frame" x="0.0" y="-2431" width="591" height="213"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <subviews>
-                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P2a-iw-9CG">
-                                                    <rect key="frame" x="8" y="75" width="521" height="64"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="DTT-i0-VKS"/>
-                                                    <color key="contentTintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
-                                                </imageView>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K4d-N4-mRe" customClass="VideoPreviewContainerView" customModule="Quick_Caption" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="3" width="521" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1265,6 +1260,23 @@
                                                     <rect key="frame" x="8" y="147" width="521" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
+                                                <box fixedFrame="YES" boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="fCx-cJ-p9f">
+                                                    <rect key="frame" x="8" y="75" width="0.0" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <view key="contentView" ambiguous="YES" id="oVo-bP-cpU">
+                                                        <rect key="frame" x="0.0" y="1" width="0.0" height="62"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P2a-iw-9CG">
+                                                                <rect key="frame" x="0.0" y="-1" width="521" height="64"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="DTT-i0-VKS"/>
+                                                                <color key="contentTintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                    </view>
+                                                    <color key="fillColor" name="audioTrackBG"/>
+                                                </box>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K5C-Y2-cNb">
                                                     <rect key="frame" x="0.0" y="0.0" width="16" height="213"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1306,7 +1318,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="V95-Hy-NGv"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="wxD-Wq-Vsv">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.11267605633802817" horizontal="YES" id="wxD-Wq-Vsv">
                                     <rect key="frame" x="0.0" y="215" width="520" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1361,6 +1373,7 @@
                         <outlet property="videoPreviewContainerView" destination="K4d-N4-mRe" id="O3j-UH-f7o"/>
                         <outlet property="volumeSlider" destination="vX9-SF-5ld" id="MxB-T9-bfn"/>
                         <outlet property="waveformImageView" destination="P2a-iw-9CG" id="sGU-RP-60h"/>
+                        <outlet property="waveformPreviewContainerBox" destination="fCx-cJ-p9f" id="AHR-c6-rlc"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -2033,5 +2046,8 @@
         <image name="tb_play" width="37.5" height="37.5"/>
         <image name="triangle" width="49" height="41"/>
         <image name="turtle" width="256" height="256"/>
+        <namedColor name="audioTrackBG">
+            <color red="0.086274509803921567" green="0.14901960784313725" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

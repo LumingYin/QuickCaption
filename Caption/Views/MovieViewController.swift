@@ -22,6 +22,7 @@ import AppCenterAnalytics
     @IBOutlet weak var subtitleTrackContainerView: SubtitleTrackContainerView!
     @IBOutlet weak var videoPreviewContainerView: VideoPreviewContainerView!
     @IBOutlet weak var waveformImageView: NSImageView!
+    @IBOutlet weak var waveformPreviewContainerBox: NSBox!
 
     @IBOutlet weak var timelineScrollView: NSScrollView!
     @IBOutlet weak var timelineOverallView: NSView!
@@ -228,11 +229,15 @@ import AppCenterAnalytics
         guard let asset = self.playerView.player?.currentItem?.asset else {return}
         let videoFrame = videoRect
 
-        let diffHeights = (playerView.frame.height - videoFrame.height) / 2
-        if diffHeights > 0 {
-            captionBottomConstraint.constant = 14 + diffHeights
-        } else {
+        if isAudioOnly {
             captionBottomConstraint.constant = 14
+        } else {
+            let diffHeights = (playerView.frame.height - videoFrame.height) / 2
+            if diffHeights > 0 {
+                captionBottomConstraint.constant = 14 + diffHeights
+            } else {
+                captionBottomConstraint.constant = 14
+            }
         }
 
         let shrinkingPercentage = videoFrame.size.width / asset.tracks[0].naturalSize.width
@@ -285,7 +290,12 @@ import AppCenterAnalytics
         Saver.saveEpisodeToDisk(self.episode, type: .fcpXML)
     }
 
+    func dismantleSetTimelineLengthToZero() {
+        self.timelineOverallView.setFrameSize(NSSize(width: 0, height: self.timelineOverallView.frame.size.height))
+    }
+
     func dismantleOldMovieVC() {
+        dismantleSetTimelineLengthToZero()
         AppDelegate.setCurrentEpisodeTitle(nil)
         captionBottomConstraint.constant = 14
         self.captionPreviewLabel.stringValue = ""
@@ -637,6 +647,7 @@ import AppCenterAnalytics
         if let track:AVAssetTrack = audioTracks.first{
             //let timeRange = CMTimeRangeMake(CMTime(seconds: 0, preferredTimescale: 1000), CMTime(seconds: 1, preferredTimescale: 1000))
             let timeRange:CMTimeRange? = nil
+            self.waveformPreviewContainerBox.setFrameSize(NSSize(width: self.timelineLengthPixels, height: timeLineSegmentHeight))
             self.waveformImageView.setFrameSize(NSSize(width: self.timelineLengthPixels, height: timeLineSegmentHeight)) // should this be self.waveformImageView.frame.size.height?
             var cachedBounds = self.waveformImageView.bounds.size
             cachedBounds.width = self.timelineLengthPixels
@@ -655,12 +666,12 @@ import AppCenterAnalytics
                                             // Let's draw the sample into an image.
                                             let configuration = WaveformConfiguration(size: cachedBounds,
                                                                                       color: WaveColor(red: 77 / 255, green: 103 / 255, blue: 143 / 255, alpha: 1),
-                                                                                      backgroundColor: WaveColor(red: 22 / 255, green: 38 / 255, blue: 67 / 255, alpha: 1),
+                                                                                      backgroundColor: WaveColor.clear,
                                                                                       style: .gradient,
                                                                                       position: .middle,
                                                                                       scale: 1,
                                                                                       borderWidth: 0,
-                                                                                      borderColor: WaveColor.gray)
+                                                                                      borderColor: WaveColor.clear)
 //                                            let drawingStartTime = CFAbsoluteTimeGetCurrent()
                                             if let imageDrawn = WaveFormDrawer.image(with: sampling, and: configuration) {
                                                 let task = DispatchWorkItem {

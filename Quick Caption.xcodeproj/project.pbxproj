@@ -24,6 +24,7 @@
 		321DC3F92236216B0038C8FB /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3F82236216B0038C8FB /* Helper.swift */; };
 		321DC3FD223623500038C8FB /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3FC223623500038C8FB /* Exporter.swift */; };
 		321DC401223629030038C8FB /* SidebarEpisodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC400223629030038C8FB /* SidebarEpisodeTableCellView.swift */; };
+		322F4482223F367700427898 /* WaveformPreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F4481223F367700427898 /* WaveformPreviewContainerView.swift */; };
 		323EE3BB2219439F00CC22B3 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B52219439F00CC22B3 /* AppCenter.framework */; };
 		323EE3BC2219439F00CC22B3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B62219439F00CC22B3 /* Sparkle.framework */; };
 		323EE3BD2219439F00CC22B3 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */; };
@@ -94,6 +95,7 @@
 		321DC3F82236216B0038C8FB /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		321DC3FC223623500038C8FB /* Exporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
 		321DC400223629030038C8FB /* SidebarEpisodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarEpisodeTableCellView.swift; sourceTree = "<group>"; };
+		322F4481223F367700427898 /* WaveformPreviewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformPreviewContainerView.swift; sourceTree = "<group>"; };
 		323EE3B52219439F00CC22B3 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Caption/Frameworks/AppCenter.framework; sourceTree = "<group>"; };
 		323EE3B62219439F00CC22B3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Caption/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Caption/Frameworks/AppCenterCrashes.framework; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				562A688A1F2D4F5E000E6B16 /* Main.storyboard */,
+				322F4481223F367700427898 /* WaveformPreviewContainerView.swift */,
 				326A0911223F0699009A8313 /* QuickCaptionWindow.swift */,
 				326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */,
 				326A090B223E0CD2009A8313 /* VideoPreviewContainerView.swift */,
@@ -396,6 +399,7 @@
 				321DC3CA2236037C0038C8FB /* ExampleViewController.swift in Sources */,
 				326A090A223E0C48009A8313 /* NSView+Extensions.swift in Sources */,
 				321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */,
+				322F4482223F367700427898 /* WaveformPreviewContainerView.swift in Sources */,
 				321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */,
 				324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */,
 				32F53CE522377262007B66E1 /* CaptionLine+CoreDataProperties.swift in Sources */,
