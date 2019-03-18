@@ -754,9 +754,9 @@ import AppCenterAnalytics
                         let configuration = WaveformConfiguration(size: cachedBounds, color: WaveColor(red: 77 / 255, green: 103 / 255, blue: 143 / 255, alpha: 1), backgroundColor: WaveColor.clear, style: .gradient, position: .middle, scale: 1, borderWidth: 0, borderColor: WaveColor.clear)
                         if let imageDrawn = WaveFormDrawer.image(with: sampling, and: configuration) {
                             imageDrawn.saveAsFile(with: .png, withName: "\(waveTrackCacheFolder)/\(i).png")
-                            print("WE CARE \(i): [4] WaveFormDrawer is drawn")
+//                            print("WE CARE \(i): [4] WaveFormDrawer is drawn")
                             let task = DispatchWorkItem {
-                                print("WE CARE \(i): [5] In DispatchWorkItem block")
+//                                print("WE CARE \(i): [5] In DispatchWorkItem block")
                                 let imageRect = NSRect(x: pointOffsetXStart, y: 0, width: pointWidth, height: self.timeLineSegmentHeight)
                                 let imageView = NSImageView(frame: imageRect)
                                 imageView.image = imageDrawn
