@@ -12,11 +12,11 @@ class VideoPreviewContainerView: NSView {
     var guid: String?
 
     func addSubImageView(capturedGUID: String?, imageView: VideoPreviewImageView) {
-//        if let cap = capturedGUID {
-//            if (self.guid == cap && self.guid == imageView.correspondingGUID) {
+        if let cap = capturedGUID {
+            if (self.guid == cap && self.guid == imageView.correspondingGUID) {
                 self.addSubview(imageView)
-//            }
-//        }
+            }
+        }
     }
 
 }

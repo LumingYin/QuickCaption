@@ -690,6 +690,7 @@ import AppCenterAnalytics
         if isAudioOnly {
             return
         }
+        let capturedGUID = self.episode.guidIdentifier
         self.videoPreviewContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.videoPreviewContainerView.frame.size.height))
         // one snapshot every 10 seconds
         DispatchQueue.global(qos: .background).async {
@@ -717,17 +718,15 @@ import AppCenterAnalytics
                         let image = NSImage(cgImage: imageRef!, size: NSSize(width: imageRef!.width, height: imageRef!.height))
                         generatedImages.append(image)
                         let capturedIndex = imageIndex
-//                        let capturedGUID = self.episode.guidIdentifier
                         let task = DispatchWorkItem {
                             let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
                             imageView.imageScaling = .scaleProportionallyUpOrDown
                             imageView.imageFrameStyle = .grayBezel
                             imageView.image = image
-//                            imageView.correspondingGUID = capturedGUID
-//                            if (capturedGUID != nil) {
-                                self.videoPreviewContainerView.addSubview(imageView)
-//                                self.videoPreviewContainerView.addSubImageView(capturedGUID: capturedGUID, imageView: imageView)
-//                            }
+                            imageView.correspondingGUID = capturedGUID
+                            if (capturedGUID != nil) {
+                                self.videoPreviewContainerView.addSubImageView(capturedGUID: capturedGUID, imageView: imageView)
+                            }
                         }
                         self.accumulatedMainQueueTasks.append(task)
                         DispatchQueue.main.async(execute: task)
