@@ -14,12 +14,11 @@ class CaptionDetailTableCellView: NSTableCellView {
     @IBOutlet var captionContentTextField: NSTextField!
     var delegate: CaptionDetailTableCellViewDelegate?
 
-    override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
+//    override func draw(_ dirtyRect: NSRect) {
+//        super.draw(dirtyRect)
+//        // Drawing code here.
+//    }
 
-        // Drawing code here.
-    }
-    
     @IBAction func textFieldEdited(_ sender: Any) {
         delegate?.textFieldEdited(self)
     }

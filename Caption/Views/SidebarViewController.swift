@@ -116,7 +116,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SidebarEpisodeTableCellView"), owner: self) as? SidebarEpisodeTableCellView {
             let episode = episodeProjects[row]
-            view.videoFileNameTextField.stringValue = episode.videoDescription ?? "Video Clip"
+            view.videoFileNameTextField.stringValue = episode.videoDescription ?? "New Project"
             let formatter = DateFormatter.init()
             formatter.dateFormat = "MMM dd, yyyy"
             if let date = episode.modifiedDate as Date? {
