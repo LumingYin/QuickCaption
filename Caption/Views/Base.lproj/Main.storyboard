@@ -1838,10 +1838,10 @@ CA
                                 <action selector="deleteRow:" target="b2M-Hl-zi7" id="9No-Pd-yvY"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Change Start Time..." enabled="NO" id="w1j-Sw-7ZY">
+                        <menuItem title="Change Start Time..." hidden="YES" enabled="NO" id="w1j-Sw-7ZY">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
-                        <menuItem title="Change End Time..." enabled="NO" id="ZpV-fI-qDw">
+                        <menuItem title="Change End Time..." hidden="YES" enabled="NO" id="ZpV-fI-qDw">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                     </items>
