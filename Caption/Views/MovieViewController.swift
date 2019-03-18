@@ -652,14 +652,17 @@ import AppCenterAnalytics
 
     func configureWaveTrack() {
         let asset = self.episode.player?.currentItem?.asset
+        self.waveformPreviewContainerBox.setFrameSize(NSSize(width: self.timelineLengthPixels, height: timeLineSegmentHeight))
+        self.waveformImageView.setFrameSize(NSSize(width: self.timelineLengthPixels, height: timeLineSegmentHeight))
         let audioTracks:[AVAssetTrack] = asset!.tracks(withMediaType: AVMediaType.audio)
+        if isVideoOnly {
+            return
+        }
         let capturedGUID = self.episode.guidIdentifier
 
         if let track:AVAssetTrack = audioTracks.first{
             //let timeRange = CMTimeRangeMake(CMTime(seconds: 0, preferredTimescale: 1000), CMTime(seconds: 1, preferredTimescale: 1000))
             let timeRange:CMTimeRange? = nil
-            self.waveformPreviewContainerBox.setFrameSize(NSSize(width: self.timelineLengthPixels, height: timeLineSegmentHeight))
-            self.waveformImageView.setFrameSize(NSSize(width: self.timelineLengthPixels, height: timeLineSegmentHeight)) // should this be self.waveformImageView.frame.size.height?
             var cachedBounds = self.waveformImageView.bounds.size
             cachedBounds.width = self.timelineLengthPixels
             let width = Int(timelineLengthPixels)
