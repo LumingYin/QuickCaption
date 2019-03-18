@@ -54,6 +54,13 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         }
     }
 
+    @IBAction func showInFinderClicked(_ sender: Any) {
+        let episode = episodeProjects[tableView.clickedRow]
+        if let url = episode.videoURL {
+            NSWorkspace.shared.activateFileViewerSelecting([url])
+        }
+    }
+
     @IBOutlet weak var duplicateClicked: NSMenuItem!
     override func viewDidLoad() {
         super.viewDidLoad()

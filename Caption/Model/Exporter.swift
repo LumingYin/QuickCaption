@@ -67,7 +67,7 @@ enum FileType {
         }
 
         if fpsFCPXValue.count == 0 {
-            _ = Helper.dialogOKCancel(question: "Unable to export FCPXML", text: "FCPXML export only supports videos with the following framerates: 23.976, 24, 25, 29.97, 30, 50, 59.94, and 60fps. Export into an SRT, and re-encode the caption into your video clip using ffmpeg instead.")
+            Helper.displayInformationalSheet(title: "Unable to export FCPXML", text: "FCPXML export only supports videos with the following framerates: 23.976, 24, 25, 29.97, 30, 50, 59.94, and 60fps. Export into an SRT, and re-encode the caption into your video clip using ffmpeg instead.")
             return ""
         }
 

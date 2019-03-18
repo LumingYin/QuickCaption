@@ -54,11 +54,11 @@ class Saver {
 
         do {
             try text.write(to: newPath, atomically: true, encoding: String.Encoding.utf8)
-            _ = Helper.dialogOKCancel(question: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).")
+            Helper.displayInformationalSheet(title: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).")
         }
         catch {
             print("Error writing to file: \(error)")
-            _ = Helper.dialogOKCancel(question: "Saved failed!", text: "Save has failed. \(error)")
+            Helper.displayInformationalSheet(title: "Saved failed!", text: "Save has failed. \(error)")
         }
 
     }

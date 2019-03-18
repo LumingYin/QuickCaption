@@ -96,7 +96,7 @@ import AVKit
     @IBAction func captionTextFieldDidChange(_ sender: NSTextField) {
         if (episode == nil || episode.player == nil) {
             sender.stringValue = ""
-            _ = Helper.dialogOKCancel(question: "A video is required before adding captions.", text: "Please open a video first, then add captions to the video.")
+            Helper.displayInformationalSheet(title: "A video is required before adding captions.", text: "Please open a video first, then add captions to the video.")
             return
         }
         if (sender == transcribeTextField) {

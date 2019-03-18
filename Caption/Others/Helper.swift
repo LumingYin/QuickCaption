@@ -68,13 +68,17 @@ class Helper: NSObject {
     }
 
 
-    static func dialogOKCancel(question: String, text: String) -> Bool {
+    static func displayInformationalSheet(title: String, text: String) {
         let alert = NSAlert()
-        alert.messageText = question
+        alert.messageText = title
         alert.informativeText = text
         alert.alertStyle = NSAlert.Style.warning
         alert.addButton(withTitle: "OK")
-        return alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
+        if let window = NSApp.mainWindow {
+            alert.beginSheetModal(for: window, completionHandler: nil)
+        } else {
+            alert.runModal()
+        }
     }
 
 
