@@ -20,36 +20,43 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     @IBAction func deleteClicked(_ sender: Any) {
         let row = tableView.clickedRow
         let project = episodeProjects[row]
-        var newRow = row + 1
-        if newRow > episodeProjects.count - 1 {
-            newRow = row - 1
-        }
-        if newRow < 0 || episodeProjects.count <= 0 {
-            addNewProject()
-            newRow = 0
-        }
-        if let id = project.guidIdentifier {
-            Helper.removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/audio_thumbnail/\(id)")
-            Helper.removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/video_thumbnail/\(id)")
-        }
-//        tableView.selectRowIndexes(IndexSet(integer: newRow), byExtendingSelection: false)
-        if let index = episodeProjects.firstIndex(of: project) {
-            episodeProjects.remove(at: index)
-            project.player?.pause()
-            project.player?.replaceCurrentItem(with: nil)
-            project.player = nil
-            AppDelegate.subtitleVC()?.dismantleSubtitleVC()
-            AppDelegate.movieVC()?.dismantleOldMovieVC()
-            AppDelegate.movieVC()?.configurateMovieVC()
-            AppDelegate.subtitleVC()?.configurateSubtitleVC()
-            AppDelegate.fontVC()?.dismantleOldFontVC()
-            AppDelegate.fontVC()?.configurateFontVC()
-        }
+        if project != nil {
+            Helper.displayInteractiveSheet(title: "Delete Project", text: "Are you sure you want to delete this project? This will remove all subtitles associated with the video \(project.videoDescription ?? ""). While the video itself won't be deleted from your disk, the deletion of this project and associated subtitles is not recoverable.\n\nIf you would like to preseve a copy of the associated subtitle, cancel the deletion, and export the subtitle as a SRT or FCPXML tile.", firstButtonText: "Delete Project", secondButtonText: "Cancel") { (result) in
+                if result {
+                    var newRow = row + 1
+                    if newRow > self.episodeProjects.count - 1 {
+                        newRow = row - 1
+                    }
+                    if newRow < 0 || self.episodeProjects.count <= 0 {
+                        self.addNewProject()
+                        newRow = 0
+                    }
+                    if let id = project.guidIdentifier {
+                        Helper.removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/audio_thumbnail/\(id)")
+                        Helper.removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/video_thumbnail/\(id)")
+                    }
+                    //        tableView.selectRowIndexes(IndexSet(integer: newRow), byExtendingSelection: false)
+                    if let index = self.episodeProjects.firstIndex(of: project) {
+                        self.episodeProjects.remove(at: index)
+                        project.player?.pause()
+                        project.player?.replaceCurrentItem(with: nil)
+                        project.player = nil
+                        AppDelegate.subtitleVC()?.dismantleSubtitleVC()
+                        AppDelegate.movieVC()?.dismantleOldMovieVC()
+                        AppDelegate.movieVC()?.configurateMovieVC()
+                        AppDelegate.subtitleVC()?.configurateSubtitleVC()
+                        AppDelegate.fontVC()?.dismantleOldFontVC()
+                        AppDelegate.fontVC()?.configurateFontVC()
+                    }
 
-        Helper.context?.delete(project)
-//        tableView.removeRows(at: IndexSet(integer: row), withAnimation: .slideDown)
-        tableView.reloadData()
-        updateSelectRow(index: tableView.selectedRow)
+                    Helper.context?.delete(project)
+                    //        tableView.removeRows(at: IndexSet(integer: row), withAnimation: .slideDown)
+                    self.tableView.reloadData()
+                    self.updateSelectRow(index: self.tableView.selectedRow)
+
+                }
+            }
+        }
     }
 
     static func removeFilesUnderURL(urlPath: String) {
