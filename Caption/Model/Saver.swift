@@ -28,7 +28,7 @@ class Saver {
         } else if type == .txt {
             text = Exporter.generateTXTFromArray(arrayForCaption: copiedArray)
         } else if type == .fcpXML {
-            text = Exporter.generateFCPXMLFromArray(episode: episode, player: episode.player, arrayForCaption: copiedArray, withoutAVPlayer: false)
+            text = Exporter.generateFCPXMLFromArray(episode: episode, arrayForCaption: copiedArray)
         }
 
         if text.count == 0 {

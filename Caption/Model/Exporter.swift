@@ -48,19 +48,9 @@ enum FileType {
                                                   60: "100/60000"]
 
 
-    static func generateFCPXMLFromArray(episode: EpisodeProject, player: AVPlayer?, arrayForCaption: [CaptionLine], withoutAVPlayer: Bool) -> String {
-//        var totalDuration: Double?let totalDuration
-//        if withoutAVPlayer {
-//            totalDuration = episode.videoDuration
-//        }
-
-        guard let totalDuration = player?.currentItem?.asset.duration.seconds, let asset = player?.currentItem?.asset else {
-            return ""
-        }
-        let tracks = asset.tracks(withMediaType: .video)
-        guard let fps = tracks.first?.nominalFrameRate else {
-            return ""
-        }
+    static func generateFCPXMLFromArray(episode: EpisodeProject, arrayForCaption: [CaptionLine]) -> String {
+        let totalDuration = Double(episode.videoDuration)
+        let fps = episode.framerate
 
         let fpsDouble = Double(fps)
         var fpsFCPXValue = ""

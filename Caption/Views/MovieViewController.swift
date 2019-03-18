@@ -118,7 +118,7 @@ import AppCenterAnalytics
         if self.episode.player?.currentItem?.tracks == nil || self.episode.player?.currentItem?.tracks.count ?? 0 <= 0 {
             return
         }
-        if self.episode != nil && (self.episode.framerate == nil || self.episode.framerate == 0 || self.episode.framerate == 0.0)  {
+        if self.episode != nil && self.episode.framerate == nil  {
             if let framerate = self.episode.player?.currentItem?.tracks[0].assetTrack?.nominalFrameRate {
                 self.episode.framerate = framerate
                 AppDelegate.fontVC()?.configureAllMetadata()
@@ -128,6 +128,8 @@ import AppCenterAnalytics
 
     @objc func updateLoadVideo() {
         self.videoPreviewContainerView.guid = self.episode.guidIdentifier
+        self.updatePersistedFramerate()
+
         if self.episode.arrayForCaption?.count ?? 0 <= 0 {
             let cap = CaptionLine(context: Helper.context!)
             cap.guidIdentifier = NSUUID().uuidString
@@ -136,7 +138,6 @@ import AppCenterAnalytics
             cap.endingTime = 0
 
             self.episode.addToArrayForCaption(cap)
-            updatePersistedFramerate()
             self.timeLabel.stringValue = "\(self.episode.framerate)fps  |  \(self.episode.videoDescription ?? "")"
             self.episode.creationDate = NSDate()
         } else {
@@ -744,8 +745,6 @@ import AppCenterAnalytics
     func configurateRedBar() {
         let interval = CMTime(value: 1, timescale: 30)
         self.episode.player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
-            self.updatePersistedFramerate()
-
             let seconds = CMTimeGetSeconds(progressTime)
             let timeCode = Helper.secondFloatToString(float: seconds)
             self.timeLabel.stringValue = timeCode
