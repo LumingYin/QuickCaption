@@ -32,18 +32,9 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
         }
     }
 
-    func windowShouldClose(_ sender: NSWindow) -> Bool {
-        if let vc = self.contentViewController as? MovieViewController {
-            if (vc.episode.player != nil) {
-                let response = Helper.dialogTwoButton(question: "Save Captions?", text: "Would you like to save your captions before closing?")
-                print(response)
-                if response {
-                    vc.saveToDisk(.srt)
-                }
-            }
-        }
-        return true
-    }
+//    func windowShouldClose(_ sender: NSWindow) -> Bool {
+//        return true
+//    }
 
     @IBAction func toggleSidebarList(_ sender: Any) {
         splitViewController.splitViewItems[0].isCollapsed = !splitViewController.splitViewItems[0].isCollapsed

@@ -140,28 +140,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppDelegate.sourceListVC()?.addNewProject()
     }
 
-//    @IBAction func openNewTab(_ sender: Any) {
-//        if #available(OSX 10.13, *) {
-//            guard let captionWindowController = NSStoryboard.main?.instantiateController(withIdentifier: "mainWindow") as? CaptionWindowController else {
-//                return
-//            }
-//            NSApplication.shared.mainWindow?.addTabbedWindow(captionWindowController.window!, ordered: .above)
-//            captionWindowController.shouldCascadeWindows = true
-//            captionWindowController.showWindow(self)
-//        } else {
-//        }
-//    }
-
     @IBAction func openVideoFile(_ sender: NSMenuItem) {
         AppDelegate.movieVC()?.openFile(self)
     }
     
     @IBAction func saveSRTFile(_ sender: NSMenuItem) {
-        AppDelegate.movieVC()?.saveToDisk(.srt)
+        AppDelegate.movieVC()?.saveSRTToDisk(self)
     }
     
     @IBAction func saveTXTFile(_ sender: Any) {
-        AppDelegate.movieVC()?.saveToDisk(.txt)
+        AppDelegate.movieVC()?.saveTXTToDisk(self)
     }
 
     @IBAction func saveFCPXMLFile(_ sender: Any) {
