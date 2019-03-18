@@ -76,9 +76,6 @@ class FontViewController: NSViewController {
     }
 
     func updateSubFamily(saveNewSelection: Bool) {
-        if self.episode == nil {
-            return
-        }
         fontWeightButton.removeAllItems()
         if let selectedFamily = fontFamilyButton.titleOfSelectedItem {
             if let arrayofSubs = NSFontManager.shared.availableMembers(ofFontFamily: selectedFamily)  {

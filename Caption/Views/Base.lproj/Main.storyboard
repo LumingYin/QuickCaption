@@ -157,7 +157,7 @@
                                         <menuItem title="Delete" id="pa3-QI-u2k">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="delete:" target="Ady-hI-5gd" id="0Mk-Ml-PaM"/>
+                                                <action selector="delete:" target="Ady-hI-5gd" id="CRh-g2-2Bi"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Select All" keyEquivalent="a" id="Ruw-6m-B2m">
@@ -658,6 +658,12 @@ CA
                                                 <action selector="styleEditorClicked:" target="Voe-Tx-rLC" id="aWl-A6-cbn"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Mdm-aa-7vN"/>
+                                        <menuItem title="Focus On Player" keyEquivalent="4" id="Ozc-bQ-mJn">
+                                            <connections>
+                                                <action selector="focusOnPlayer:" target="Voe-Tx-rLC" id="IUh-y2-R9p"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="25y-yh-ryy"/>
                                         <menuItem title="Appearance" id="SRd-gp-fOx">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -1079,7 +1085,7 @@ CA
                         <menuItem title="Delete" id="Fvw-0f-e43">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="deleteClicked:" target="S31-PW-wUx" id="YPH-IS-GKe"/>
+                                <action selector="deleteClickedWithSender:" target="S31-PW-wUx" id="H4r-L1-ifd"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="UaM-9x-DTA"/>
@@ -1475,7 +1481,7 @@ CA
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <avPlayerView controlsStyle="none" showsFrameSteppingButtons="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMG-zt-4ZZ">
+                            <avPlayerView controlsStyle="minimal" showsFrameSteppingButtons="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMG-zt-4ZZ">
                                 <rect key="frame" x="0.0" y="292" width="648" height="194"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="194" id="4VW-YY-Wk2"/>

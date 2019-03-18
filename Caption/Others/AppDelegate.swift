@@ -371,6 +371,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func styleEditorClicked(_ sender: Any) {
         AppDelegate.mainWindow()?.contentSettingsSidebarHandler(index: 1)
     }
+
+    @IBAction func focusOnPlayer(_ sender: Any) {
+        NSApp.mainWindow?.makeFirstResponder(AppDelegate.movieVC())
+    }
 }
 
 

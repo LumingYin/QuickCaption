@@ -17,8 +17,13 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     @IBAction func duplicateClicked(_ sender: Any) {
     }
 
-    @IBAction func deleteClicked(_ sender: Any) {
-        let row = tableView.clickedRow
+    @IBAction func deleteAtIndex(_ sender: Any) {
+        if tableView.selectedRow >= 0 {
+            deleteHelper(row: tableView.selectedRow)
+        }
+    }
+
+    func deleteHelper(row: Int) {
         let project = episodeProjects[row]
         if project != nil {
             Helper.displayInteractiveSheet(title: "Delete Project", text: "Are you sure you want to delete this project? This will remove all subtitles associated with the video \(project.videoDescription ?? ""). While the video itself won't be deleted from your disk, the deletion of this project and associated subtitles is not recoverable.\n\nIf you would like to preseve a copy of the associated subtitle, cancel the deletion, and export the subtitle as a SRT or FCPXML tile.", firstButtonText: "Delete Project", secondButtonText: "Cancel") { (result) in
@@ -57,6 +62,11 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
                 }
             }
         }
+    }
+
+    @IBAction func deleteClicked(sender: Any) {
+        let row = tableView.clickedRow
+        deleteHelper(row: row)
     }
 
     static func removeFilesUnderURL(urlPath: String) {
@@ -163,6 +173,8 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         tableView.insertRows(at: IndexSet(integer: 0), withAnimation: .slideDown)
         tableView.reloadData(forRowIndexes: IndexSet(integer: 0), columnIndexes: IndexSet(integer: 0))
     }
+
+
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SidebarEpisodeTableCellView"), owner: self) as? SidebarEpisodeTableCellView {
