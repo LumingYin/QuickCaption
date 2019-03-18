@@ -633,6 +633,8 @@ import AppCenterAnalytics
     func configureWaveTrack() {
         let asset = self.episode.player?.currentItem?.asset
         let audioTracks:[AVAssetTrack] = asset!.tracks(withMediaType: AVMediaType.audio)
+        let capturedGUID = self.episode.guidIdentifier
+
         if let track:AVAssetTrack = audioTracks.first{
             //let timeRange = CMTimeRangeMake(CMTime(seconds: 0, preferredTimescale: 1000), CMTime(seconds: 1, preferredTimescale: 1000))
             let timeRange:CMTimeRange? = nil
@@ -644,7 +646,6 @@ import AppCenterAnalytics
             DispatchQueue.global(qos: .background).async {
                 // Let's extract the downsampled samples
 //                let samplingStartTime = CFAbsoluteTimeGetCurrent()
-                let capturedGUID = self.episode.guidIdentifier
                 SamplesExtractor.samples(audioTrack: track,
                                          timeRange: timeRange,
                                          desiredNumberOfSamples: width,

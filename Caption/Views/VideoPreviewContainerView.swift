@@ -23,12 +23,4 @@ class VideoPreviewContainerView: NSView {
 
 class VideoPreviewImageView: NSImageView {
     var correspondingGUID: String?
-//    override func draw(_ dirtyRect: NSRect) {
-//        super.draw(dirtyRect)
-//        if let container = self.superview as? VideoPreviewContainerView {
-//            if (self.correspondingGUID != container.guid) {
-//                self.removeFromSuperview()
-//            }
-//        }
-//    }
 }
