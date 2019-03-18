@@ -71,10 +71,20 @@ import AppCenterAnalytics
 
     // MARK: - Buttons and IBActions
     @IBAction func openFile(_ sender: Any) {
+        if self.episode == nil {
+            Helper.displayInteractiveSheet(title: "Create a Project", text: "To import a video, you need to create a project. Click on your newly created project in the sidebar, then import a video to create captions.", firstButtonText: "Create Project", secondButtonText: "Dismiss") { (result) in
+                if result {
+                    AppDelegate.sourceListVC()?.addNewProject()
+                    AppDelegate.sourceListVC()?.updateSelectRow(index: 0)
+                }
+            }
+            return
+        }
         if self.episode.videoURL != nil {
             Helper.displayInteractiveSheet(title: "Create new project?", text: "The current project already has an associated video. Do you want to create a new project instead?", firstButtonText: "Create New Project", secondButtonText: "Cancel", callback: { (firstButtonClicked) in
                 if (firstButtonClicked) {
                     AppDelegate.sourceListVC()?.addNewProject()
+                    AppDelegate.sourceListVC()?.updateSelectRow(index: 0)
                 }
             })
             return

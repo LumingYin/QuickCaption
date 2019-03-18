@@ -200,6 +200,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
 
     func updateSelectRow(index: Int) {
+        tableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
         if index < 0 {
             return
         }

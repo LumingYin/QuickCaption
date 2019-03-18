@@ -1498,6 +1498,15 @@ CA
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="2qy-J0-ats" userLabel="Custom Hint Container View">
                                 <rect key="frame" x="0.0" y="292" width="648" height="194"/>
                                 <subviews>
+                                    <box boxType="custom" borderWidth="0.0" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="2f7-sV-ex4">
+                                        <rect key="frame" x="0.0" y="0.0" width="648" height="194"/>
+                                        <view key="contentView" id="6Ca-i6-uhJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="648" height="194"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                        <color key="borderColor" red="0.0" green="0.0" blue="0.0" alpha="0.5490196078431373" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="fillColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </box>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="nwY-LW-hdT" userLabel="Custom Hint Inner View">
                                         <rect key="frame" x="192" y="37" width="265" height="120"/>
                                         <subviews>
@@ -1547,8 +1556,12 @@ CA
                                     </customView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="2f7-sV-ex4" secondAttribute="bottom" id="I2l-c8-Ad4"/>
                                     <constraint firstItem="nwY-LW-hdT" firstAttribute="centerX" secondItem="2qy-J0-ats" secondAttribute="centerX" id="Ka2-g4-mDV"/>
                                     <constraint firstItem="nwY-LW-hdT" firstAttribute="centerY" secondItem="2qy-J0-ats" secondAttribute="centerY" id="iZE-La-Xul"/>
+                                    <constraint firstItem="2f7-sV-ex4" firstAttribute="top" secondItem="2qy-J0-ats" secondAttribute="top" id="ldf-By-MYH"/>
+                                    <constraint firstItem="2f7-sV-ex4" firstAttribute="leading" secondItem="2qy-J0-ats" secondAttribute="leading" id="uQe-G7-KCx"/>
+                                    <constraint firstAttribute="trailing" secondItem="2f7-sV-ex4" secondAttribute="trailing" id="zhx-vm-JNR"/>
                                 </constraints>
                             </customView>
                         </subviews>
