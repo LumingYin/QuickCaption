@@ -24,6 +24,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             window.currentTitle.stringValue = title ?? "Quick Caption"
         }
     }
+
+    static func mainWindow() -> CaptionWindowController? {
+        return NSApp.mainWindow?.windowController as? CaptionWindowController
+    }
+
     static func rebuildMovieAndSubVC() {
         if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController,
             let movieVC = NSStoryboard.main?.instantiateController(withIdentifier: "MovieViewController")  as? MovieViewController {
@@ -294,10 +299,67 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppDelegate.movieVC()?.playPauseClicked(sender)
     }
 
-    @IBAction func splitHere(_ sender: Any) {
+    @IBAction func bladeClicked(_ sender: Any) {
 
     }
 
+    @IBAction func joinCaptionClicked(_ sender: Any) {
+    }
+
+    @IBAction func trimStartClicked(_ sender: Any) {
+    }
+
+    @IBAction func trimEndClicked(_ sender: Any) {
+    }
+
+    @IBAction func deleteCaptionClicked(_ sender: Any) {
+    }
+
+    var email: String {
+        get {
+            return ["lu", "mi", "ng", "yin", "-", "ho", "tm", "ai", "l.", "co", "m"].joined().replacingOccurrences(of: "-", with: "@")
+        }
+    }
+
+    @IBAction func contactSupportClicked(_ sender: Any) {
+        sendEmail(emailType: "Contact Support")
+    }
+
+    @IBAction func provideFeedbackClicked(_ sender: Any) {
+        sendEmail(emailType: "Provide Feedback")
+    }
+
+    func sendEmail(emailType: String) {
+        let info = GBDeviceInfo.deviceInfo()?.description
+        let emailBody = """
+        Briefly describe the issue you're experiencing or provide feedback:
+
+
+        -----
+        \(info ?? "")
+        """
+        let emailService =  NSSharingService.init(named: NSSharingService.Name.composeEmail)!
+        emailService.recipients = [email]
+        emailService.subject = "Quick Caption: \(emailType)"
+
+        if emailService.canPerform(withItems: [emailBody]) {
+            emailService.perform(withItems: [emailBody])
+        } else {
+            Helper.displayInformationalSheet(title: "\(emailType)", text: "To \(emailType), send an email to \(email).")
+        }
+    }
+
+    @IBAction func projectNavigatorClicked(_ sender: Any) {
+        AppDelegate.mainWindow()?.toggleSidebarList(self)
+    }
+
+    @IBAction func captionEditorClicked(_ sender: Any) {
+        AppDelegate.mainWindow()?.contentSettingsSidebarHandler(index: 0)
+    }
+
+    @IBAction func styleEditorClicked(_ sender: Any) {
+        AppDelegate.mainWindow()?.contentSettingsSidebarHandler(index: 1)
+    }
 }
 
 

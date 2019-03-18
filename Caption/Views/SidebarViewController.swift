@@ -94,10 +94,15 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         }
     }
 
+    var firstLaunch = true
+
     override func viewDidAppear() {
         if (episodeProjects.count == 0) {
             addNewProject()
+        }
+        if firstLaunch {
             updateSelectRow(index: 0)
+            firstLaunch = false
         }
     }
 

@@ -25,6 +25,8 @@
 		321DC3FD223623500038C8FB /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3FC223623500038C8FB /* Exporter.swift */; };
 		321DC401223629030038C8FB /* SidebarEpisodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC400223629030038C8FB /* SidebarEpisodeTableCellView.swift */; };
 		322F4482223F367700427898 /* WaveformPreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F4481223F367700427898 /* WaveformPreviewContainerView.swift */; };
+		322F448D223F4CC500427898 /* GBDeviceInfo_OSX.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F4484223F4CC500427898 /* GBDeviceInfo_OSX.m */; };
+		322F448E223F4CC500427898 /* GBDeviceInfo_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F448B223F4CC500427898 /* GBDeviceInfo_Common.m */; };
 		323EE3BB2219439F00CC22B3 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B52219439F00CC22B3 /* AppCenter.framework */; };
 		323EE3BC2219439F00CC22B3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B62219439F00CC22B3 /* Sparkle.framework */; };
 		323EE3BD2219439F00CC22B3 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */; };
@@ -96,6 +98,15 @@
 		321DC3FC223623500038C8FB /* Exporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
 		321DC400223629030038C8FB /* SidebarEpisodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarEpisodeTableCellView.swift; sourceTree = "<group>"; };
 		322F4481223F367700427898 /* WaveformPreviewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformPreviewContainerView.swift; sourceTree = "<group>"; };
+		322F4484223F4CC500427898 /* GBDeviceInfo_OSX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDeviceInfo_OSX.m; sourceTree = "<group>"; };
+		322F4485223F4CC500427898 /* GBDeviceInfo_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo_Common.h; sourceTree = "<group>"; };
+		322F4486223F4CC500427898 /* GBDeviceInfoTypes_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfoTypes_Common.h; sourceTree = "<group>"; };
+		322F4487223F4CC500427898 /* GBDeviceInfoTypes_OSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfoTypes_OSX.h; sourceTree = "<group>"; };
+		322F4488223F4CC500427898 /* GBDeviceInfo_OSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo_OSX.h; sourceTree = "<group>"; };
+		322F4489223F4CC500427898 /* GBDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo.h; sourceTree = "<group>"; };
+		322F448A223F4CC500427898 /* GBDeviceInfo_Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo_Subclass.h; sourceTree = "<group>"; };
+		322F448B223F4CC500427898 /* GBDeviceInfo_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDeviceInfo_Common.m; sourceTree = "<group>"; };
+		322F448C223F4CC500427898 /* GBDeviceInfoInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfoInterface.h; sourceTree = "<group>"; };
 		323EE3B52219439F00CC22B3 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Caption/Frameworks/AppCenter.framework; sourceTree = "<group>"; };
 		323EE3B62219439F00CC22B3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Caption/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Caption/Frameworks/AppCenterCrashes.framework; sourceTree = "<group>"; };
@@ -205,6 +216,7 @@
 		321DC3F3223615840038C8FB /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				322F4483223F4CC500427898 /* GBDeviceInfo */,
 				326A0913223F0CFF009A8313 /* Caption */,
 				32047521223DA6100027218F /* NSObject+KVO.h */,
 				32047522223DA6100027218F /* NSObject+KVO.m */,
@@ -218,6 +230,22 @@
 				32047520223DA60F0027218F /* Quick Caption-Bridging-Header.h */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		322F4483223F4CC500427898 /* GBDeviceInfo */ = {
+			isa = PBXGroup;
+			children = (
+				322F4484223F4CC500427898 /* GBDeviceInfo_OSX.m */,
+				322F4485223F4CC500427898 /* GBDeviceInfo_Common.h */,
+				322F4486223F4CC500427898 /* GBDeviceInfoTypes_Common.h */,
+				322F4487223F4CC500427898 /* GBDeviceInfoTypes_OSX.h */,
+				322F4488223F4CC500427898 /* GBDeviceInfo_OSX.h */,
+				322F4489223F4CC500427898 /* GBDeviceInfo.h */,
+				322F448A223F4CC500427898 /* GBDeviceInfo_Subclass.h */,
+				322F448B223F4CC500427898 /* GBDeviceInfo_Common.m */,
+				322F448C223F4CC500427898 /* GBDeviceInfoInterface.h */,
+			);
+			path = GBDeviceInfo;
 			sourceTree = "<group>";
 		};
 		32F53CCD223762E2007B66E1 /* AppKit */ = {
@@ -378,6 +406,7 @@
 				321DC3D222360F410038C8FB /* FontViewController.swift in Sources */,
 				562A68871F2D4F5E000E6B16 /* MovieViewController.swift in Sources */,
 				32047523223DA6100027218F /* NSObject+KVO.m in Sources */,
+				322F448E223F4CC500427898 /* GBDeviceInfo_Common.m in Sources */,
 				32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */,
 				321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */,
 				321DC3F5223615E90038C8FB /* MainSplitViewController.swift in Sources */,
@@ -395,6 +424,7 @@
 				32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */,
 				321DC3D022360F310038C8FB /* SubtitlesViewController.swift in Sources */,
 				321DC3D4223610750038C8FB /* SideTabViewController.swift in Sources */,
+				322F448D223F4CC500427898 /* GBDeviceInfo_OSX.m in Sources */,
 				326A0912223F0699009A8313 /* QuickCaptionWindow.swift in Sources */,
 				321DC3CA2236037C0038C8FB /* ExampleViewController.swift in Sources */,
 				326A090A223E0C48009A8313 /* NSView+Extensions.swift in Sources */,

@@ -87,20 +87,20 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Export To" id="2Pg-4i-meh">
                                                 <items>
-                                                    <menuItem title="FCPXML" keyEquivalent="f" allowsKeyEquivalentWhenHidden="YES" id="zcr-Xv-Pbz">
-                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                                    <menuItem title="FCPXML" allowsKeyEquivalentWhenHidden="YES" id="zcr-Xv-Pbz">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="saveFCPXMLFile:" target="Voe-Tx-rLC" id="rkT-UU-8B1"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="SRT" keyEquivalent="s" allowsKeyEquivalentWhenHidden="YES" id="pxx-59-PXV">
-                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                                    <menuItem title="SRT" allowsKeyEquivalentWhenHidden="YES" id="pxx-59-PXV">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="saveSRTFile:" target="Voe-Tx-rLC" id="jwM-0q-cGw"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="TXT" keyEquivalent="t" allowsKeyEquivalentWhenHidden="YES" id="HAT-IQ-Cm1">
-                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                                    <menuItem title="TXT" allowsKeyEquivalentWhenHidden="YES" id="HAT-IQ-Cm1">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="saveTXTFile:" target="Voe-Tx-rLC" id="gM2-j9-f9C"/>
                                                         </connections>
@@ -130,11 +130,6 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="togglePlaybackPausing:" target="Voe-Tx-rLC" id="uuK-W2-4fH"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Split Here" keyEquivalent="b" id="nMN-xk-z8S">
-                                            <connections>
-                                                <action selector="splitHere:" target="Voe-Tx-rLC" id="R0y-ZG-ci3"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="vjx-Fk-SFp"/>
@@ -338,6 +333,57 @@
                                                     </menuItem>
                                                 </items>
                                             </menu>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Caption" id="6WG-6U-uJ5">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Caption" id="N2t-a4-Q8b">
+                                    <items>
+                                        <menuItem title="Blade" keyEquivalent="b" id="SIq-8H-d7M">
+                                            <connections>
+                                                <action selector="bladeClicked:" target="Voe-Tx-rLC" id="62z-zk-p6Y"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Join Captions" keyEquivalent="j" id="62M-Rm-sJ7">
+                                            <connections>
+                                                <action selector="joinCaptionClicked:" target="Voe-Tx-rLC" id="Tgz-oI-K2A"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="sLm-rW-gph"/>
+                                        <menuItem title="Trim Start" keyEquivalent="[" id="ui5-9e-jKp">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                            <connections>
+                                                <action selector="trimStartClicked:" target="Voe-Tx-rLC" id="3Gs-8Z-3IV"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Trim End" keyEquivalent="]" id="8aO-Zt-0BR">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                            <connections>
+                                                <action selector="trimEndClicked:" target="Voe-Tx-rLC" id="Cnh-1C-Tcx"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="P7X-Qm-dQs"/>
+                                        <menuItem title="Delete Caption" id="Je1-CW-xxl">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="deleteCaptionClicked:" target="Voe-Tx-rLC" id="9Xe-U1-po0"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="bwW-Fy-6Ca"/>
+                                        <menuItem title="Reveal Caption In Editor" id="dau-L4-y4Y">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Reveal Caption In Timeline" id="5ox-EO-1Uc">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="1jl-nY-SZP"/>
+                                        <menuItem title="Reveal Video in Finder" id="X2J-dG-vw3">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                     </items>
                                 </menu>
@@ -588,6 +634,22 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
                                     <items>
+                                        <menuItem title="Project Navigator" keyEquivalent="1" id="2cq-l1-3Ms">
+                                            <connections>
+                                                <action selector="projectNavigatorClicked:" target="Voe-Tx-rLC" id="BKP-Sa-PBw"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Caption Editor" keyEquivalent="2" id="vIy-v7-SWf">
+                                            <connections>
+                                                <action selector="captionEditorClicked:" target="Voe-Tx-rLC" id="ri9-vL-RQx"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Style Editor" keyEquivalent="3" id="DjC-r3-2Qd">
+                                            <connections>
+                                                <action selector="styleEditorClicked:" target="Voe-Tx-rLC" id="aWl-A6-cbn"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="25y-yh-ryy"/>
                                         <menuItem title="Appearance" id="SRd-gp-fOx">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Appearance" id="WyC-bM-jdc">
@@ -623,6 +685,31 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Share" id="lgm-CC-o7X">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Share" id="ou4-Xq-sm1">
+                                    <items>
+                                        <menuItem title="FCPXML" keyEquivalent="l" allowsKeyEquivalentWhenHidden="YES" id="L8E-c7-BJZ">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="saveFCPXMLFile:" target="Voe-Tx-rLC" id="wlT-Qg-lsj"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="SRT" keyEquivalent="s" allowsKeyEquivalentWhenHidden="YES" id="dYy-2j-h68">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="saveSRTFile:" target="Voe-Tx-rLC" id="L4G-t1-LNR"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="TXT" keyEquivalent="t" allowsKeyEquivalentWhenHidden="YES" id="JwG-bC-h3v">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="saveTXTFile:" target="Voe-Tx-rLC" id="vWA-1w-2Mg"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Window" id="aUF-d1-5bR">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
@@ -652,6 +739,19 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
+                                        <menuItem title="Contact Support" id="oCS-UV-IXf">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="contactSupportClicked:" target="Voe-Tx-rLC" id="EQC-gd-kKL"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Provide Feedback" id="xKZ-KF-0Nw">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="provideFeedbackClicked:" target="Voe-Tx-rLC" id="Bm1-2c-cuA"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="nSn-O7-rnd"/>
                                         <menuItem title="Check for Updates" keyEquivalent="u" id="fJE-Ke-bXl">
                                             <connections>
                                                 <action selector="checkForUpdates:" target="Vsf-6z-eCN" id="Hzq-8u-5vL"/>
@@ -793,6 +893,7 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="contentSettingsSegmentedControl" destination="haK-Xz-sSJ" id="Pnl-70-7f2"/>
                         <outlet property="currentTitle" destination="qOr-R3-Q9F" id="FEu-Vv-m7Y"/>
                         <segue destination="GXO-oy-cs0" kind="relationship" relationship="window.shadowedContentViewController" id="PLB-ki-g7I"/>
                     </connections>
@@ -1015,11 +1116,11 @@
                                 <rect key="frame" x="0.0" y="230" width="520" height="62"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qcp-ff-jh0">
-                                        <rect key="frame" x="362" y="20" width="124" height="22"/>
+                                        <rect key="frame" x="362" y="20" width="120" height="22"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VtY-c4-yrT">
-                                                <rect key="frame" x="0.0" y="-1" width="22" height="23"/>
-                                                <buttonCell key="cell" type="roundTextured" title="A" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="DsE-Eg-fgB">
+                                                <rect key="frame" x="0.0" y="-1" width="17" height="23"/>
+                                                <buttonCell key="cell" type="roundTextured" title="I" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="DsE-Eg-fgB">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -1028,8 +1129,8 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5sT-QD-HiD">
-                                                <rect key="frame" x="25" y="-1" width="22" height="23"/>
-                                                <buttonCell key="cell" type="roundTextured" title="B" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="Dbm-PD-R1J">
+                                                <rect key="frame" x="20" y="-1" width="23" height="23"/>
+                                                <buttonCell key="cell" type="roundTextured" title="O" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="Dbm-PD-R1J">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -1038,7 +1139,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qY8-HI-mjf">
-                                                <rect key="frame" x="50" y="-1" width="23" height="23"/>
+                                                <rect key="frame" x="46" y="-1" width="23" height="23"/>
                                                 <buttonCell key="cell" type="roundTextured" title="C" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="HdP-PI-yBG">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1048,7 +1149,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GAQ-3i-cM4">
-                                                <rect key="frame" x="76" y="-1" width="23" height="23"/>
+                                                <rect key="frame" x="72" y="-1" width="23" height="23"/>
                                                 <buttonCell key="cell" type="roundTextured" title="D" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="qTB-d1-Zzs">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1058,7 +1159,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sob-Q9-idm">
-                                                <rect key="frame" x="102" y="-1" width="22" height="23"/>
+                                                <rect key="frame" x="98" y="-1" width="22" height="23"/>
                                                 <buttonCell key="cell" type="roundTextured" title="T" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="ATJ-pa-En7">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -2091,7 +2192,7 @@
                 </viewController>
                 <customObject id="Tc8-l0-Sca" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-329" y="-206"/>
+            <point key="canvasLocation" x="-329.5" y="-206.5"/>
         </scene>
     </scenes>
     <resources>

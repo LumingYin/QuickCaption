@@ -11,6 +11,7 @@ import Cocoa
 class CaptionWindowController: NSWindowController, NSWindowDelegate {
     weak var splitViewController: MainSplitViewController!
     @IBOutlet weak var currentTitle: NSTextField!
+    @IBOutlet weak var contentSettingsSegmentedControl: NSSegmentedControl!
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -56,8 +57,25 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
     }
 
     @IBAction func contentSettingsSidebarClicked(_ sender: NSSegmentedControl) {
-        if sender.selectedSegment < 2 {
-            AppDelegate.sideTabVC()?.tabView.selectTabViewItem(at: sender.indexOfSelectedItem)
+        contentSettingsSidebarHandler(index: sender.selectedSegment)
+    }
+
+    func contentSettingsSidebarHandler(index: Int) {
+        if index < 2 {
+            if let tabView = AppDelegate.sideTabVC()?.tabView, let selected = tabView.selectedTabViewItem {
+                if tabView.indexOfTabViewItem(selected) == index {
+                    // collapse sidebar
+                    splitViewController.splitViewItems[2].isCollapsed = !splitViewController.splitViewItems[2].isCollapsed
+                    if (splitViewController.splitViewItems[2].isCollapsed) {
+                        contentSettingsSegmentedControl.setSelected(false, forSegment: 0)
+                        contentSettingsSegmentedControl.setSelected(false, forSegment: 1)
+                    }
+                } else {
+                    AppDelegate.sideTabVC()?.tabView.selectTabViewItem(at: index)
+                    splitViewController.splitViewItems[2].isCollapsed = false
+                    contentSettingsSegmentedControl.setSelected(true, forSegment: index)
+                }
+            }
         }
     }
 

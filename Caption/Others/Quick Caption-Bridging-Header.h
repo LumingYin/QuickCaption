@@ -3,3 +3,4 @@
 //
 
 #import "NSObject+KVO.h"
+#import "GBDeviceInfo.h"
