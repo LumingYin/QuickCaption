@@ -9,7 +9,7 @@
 import Cocoa
 
 class FontViewController: NSViewController {
-    weak var episode: EpisodeProject!
+    weak var episode: EpisodeProject?
     @IBOutlet weak var videoName: NSTextField!
     @IBOutlet weak var videoPath: NSTextField!
     @IBOutlet weak var videoDurationField: NSTextField!
@@ -32,10 +32,10 @@ class FontViewController: NSViewController {
 
     func dismantleOldFontVC() {
         if episode != nil {
-            episode.safelyRemoveObserver(self, forKeyPath: "videoDescription")
-            episode.safelyRemoveObserver(self, forKeyPath: "videoURL")
-            episode.safelyRemoveObserver(self, forKeyPath: "videoDuration")
-            episode.safelyRemoveObserver(self, forKeyPath: "framerate")
+            episode?.safelyRemoveObserver(self, forKeyPath: "videoDescription")
+            episode?.safelyRemoveObserver(self, forKeyPath: "videoURL")
+            episode?.safelyRemoveObserver(self, forKeyPath: "videoDuration")
+            episode?.safelyRemoveObserver(self, forKeyPath: "framerate")
         }
     }
 
@@ -49,10 +49,10 @@ class FontViewController: NSViewController {
     }
 
     func configureAllMetadata() {
-        self.videoName.stringValue = episode.videoURL?.lastPathComponent ?? ""
-        self.videoPath.stringValue = episode.videoURL?.absoluteString ?? ""
-        self.videoDurationField.stringValue = "\(episode.videoDuration) seconds"
-        self.videoFramerateField.stringValue = "\(episode.framerate) fps"
+        self.videoName.stringValue = episode?.videoURL?.lastPathComponent ?? ""
+        self.videoPath.stringValue = episode?.videoURL?.absoluteString ?? ""
+        self.videoDurationField.stringValue = "\(episode?.videoDuration ?? 0) seconds"
+        self.videoFramerateField.stringValue = "\(episode?.framerate ?? 0) fps"
     }
 
     private static var metadataObserverContext = 2
@@ -96,38 +96,38 @@ class FontViewController: NSViewController {
             }
         }
         if saveNewSelection {
-            self.episode.styleFontWeight = fontWeightButton.title
+            self.episode?.styleFontWeight = fontWeightButton.title
         }
     }
 
     func restoreFontSettings() {
-        fontFamilyButton.selectItem(withTitle: self.episode.styleFontFamily ?? "Helvetica")
+        fontFamilyButton.selectItem(withTitle: self.episode?.styleFontFamily ?? "Helvetica")
         updateSubFamily(saveNewSelection: false)
-        fontWeightButton.selectItem(withTitle: self.episode.styleFontWeight ?? "Regular")
-        fontSizeButton.stringValue = self.episode.styleFontSize ?? "53"
-        fontShadowButton.selectItem(at: Int(self.episode.styleFontShadow))
-        fontColorButton.color = NSColor(hexString: self.episode.styleFontColor ?? "#ffffff") ?? NSColor.white
+        fontWeightButton.selectItem(withTitle: self.episode?.styleFontWeight ?? "Regular")
+        fontSizeButton.stringValue = self.episode?.styleFontSize ?? "53"
+        fontShadowButton.selectItem(at: Int(self.episode?.styleFontShadow ?? 1))
+        fontColorButton.color = NSColor(hexString: self.episode?.styleFontColor ?? "#ffffff") ?? NSColor.white
     }
 
     @IBAction func fontNameChanged(_ sender: NSPopUpButton) {
         updateSubFamily(saveNewSelection: true)
-        self.episode.styleFontFamily = sender.title
+        self.episode?.styleFontFamily = sender.title
     }
 
     @IBAction func fontSubFamilyChanged(_ sender: NSPopUpButton) {
-        self.episode.styleFontWeight = sender.title
+        self.episode?.styleFontWeight = sender.title
     }
 
     @IBAction func fontSizeChanged(_ sender: NSComboBox) {
-        self.episode.styleFontSize = sender.stringValue
+        self.episode?.styleFontSize = sender.stringValue
     }
 
     @IBAction func shadowChanged(_ sender: NSPopUpButton) {
-        self.episode.styleFontShadow = Int16(sender.indexOfSelectedItem)
+        self.episode?.styleFontShadow = Int16(sender.indexOfSelectedItem)
     }
 
     @IBAction func colorChanged(_ sender: NSColorWell) {
-        self.episode.styleFontColor = sender.color.hexString
+        self.episode?.styleFontColor = sender.color.hexString
     }
 
 }
