@@ -27,6 +27,7 @@
 		322F4482223F367700427898 /* WaveformPreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F4481223F367700427898 /* WaveformPreviewContainerView.swift */; };
 		322F448D223F4CC500427898 /* GBDeviceInfo_OSX.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F4484223F4CC500427898 /* GBDeviceInfo_OSX.m */; };
 		322F448E223F4CC500427898 /* GBDeviceInfo_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F448B223F4CC500427898 /* GBDeviceInfo_Common.m */; };
+		322F4495223F720F00427898 /* QuickCaptionScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F4494223F720F00427898 /* QuickCaptionScrollView.m */; };
 		323EE3BB2219439F00CC22B3 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B52219439F00CC22B3 /* AppCenter.framework */; };
 		323EE3BC2219439F00CC22B3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B62219439F00CC22B3 /* Sparkle.framework */; };
 		323EE3BD2219439F00CC22B3 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */; };
@@ -107,6 +108,8 @@
 		322F448A223F4CC500427898 /* GBDeviceInfo_Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo_Subclass.h; sourceTree = "<group>"; };
 		322F448B223F4CC500427898 /* GBDeviceInfo_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDeviceInfo_Common.m; sourceTree = "<group>"; };
 		322F448C223F4CC500427898 /* GBDeviceInfoInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfoInterface.h; sourceTree = "<group>"; };
+		322F4493223F720F00427898 /* QuickCaptionScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickCaptionScrollView.h; sourceTree = "<group>"; };
+		322F4494223F720F00427898 /* QuickCaptionScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickCaptionScrollView.m; sourceTree = "<group>"; };
 		323EE3B52219439F00CC22B3 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Caption/Frameworks/AppCenter.framework; sourceTree = "<group>"; };
 		323EE3B62219439F00CC22B3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Caption/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Caption/Frameworks/AppCenterCrashes.framework; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				562A688A1F2D4F5E000E6B16 /* Main.storyboard */,
+				322F4493223F720F00427898 /* QuickCaptionScrollView.h */,
+				322F4494223F720F00427898 /* QuickCaptionScrollView.m */,
 				322F4481223F367700427898 /* WaveformPreviewContainerView.swift */,
 				326A0911223F0699009A8313 /* QuickCaptionWindow.swift */,
 				326A0907223DD7E9009A8313 /* SubtitleTrackContainerView.swift */,
@@ -432,6 +437,7 @@
 				322F4482223F367700427898 /* WaveformPreviewContainerView.swift in Sources */,
 				321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */,
 				324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */,
+				322F4495223F720F00427898 /* QuickCaptionScrollView.m in Sources */,
 				32F53CE522377262007B66E1 /* CaptionLine+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1398,14 +1398,14 @@ CA
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="520" id="yYa-aF-UF1"/>
                                 </constraints>
                             </customView>
-                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEG-SY-Hn2">
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEG-SY-Hn2" customClass="QuickCaptionScrollView">
                                 <rect key="frame" x="0.0" y="0.0" width="648" height="230"/>
                                 <clipView key="contentView" id="k0n-uO-2Ef">
-                                    <rect key="frame" x="0.0" y="0.0" width="648" height="215"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="648" height="230"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mHu-9K-0O1" customClass="TimelineOverallView" customModule="Quick_Caption" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="-2431" width="591" height="213"/>
+                                            <rect key="frame" x="0.0" y="-2416" width="591" height="213"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <subviews>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K4d-N4-mRe" customClass="VideoPreviewContainerView" customModule="Quick_Caption" customModuleProvider="target">
@@ -1475,10 +1475,10 @@ CA
                                     <constraint firstAttribute="height" constant="230" id="V95-Hy-NGv"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.11764705882352941" horizontal="YES" id="wxD-Wq-Vsv">
-                                    <rect key="frame" x="0.0" y="215" width="648" height="15"/>
+                                    <rect key="frame" x="0.0" y="214" width="648" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Ilf-GR-hhe">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Ilf-GR-hhe">
                                     <rect key="frame" x="-100" y="-100" width="15" height="213"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
