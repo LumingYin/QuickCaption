@@ -72,14 +72,13 @@ import AppCenterAnalytics
     // MARK: - Buttons and IBActions
     @IBAction func openFile(_ sender: Any) {
         let dialog = NSOpenPanel()
-        
-        dialog.title                   = "Choose a video file"
-        dialog.showsResizeIndicator    = true
-        dialog.showsHiddenFiles        = false
-        dialog.canChooseDirectories    = false
-        dialog.canCreateDirectories    = true
+        dialog.title = "Choose a video file"
+        dialog.showsResizeIndicator = true
+        dialog.showsHiddenFiles = false
+        dialog.canChooseDirectories = false
+        dialog.canCreateDirectories = true
         dialog.allowsMultipleSelection = false
-        dialog.allowedFileTypes        = ["mp4", "mpeg4", "m4v", "ts", "mpg", "mpeg", "mp3", "mpeg3", "m4a", "mov"]
+        dialog.allowedFileTypes = ["mp4", "mpeg4", "m4v", "ts", "mpg", "mpeg", "mp3", "mpeg3", "m4a", "mov"]
         
         dialog.beginSheetModal(for: self.view.window!) { (result) in
             if let result = dialog.url, let path = dialog.url?.path {
@@ -316,9 +315,11 @@ import AppCenterAnalytics
         speedSlider.floatValue = 1
         self.videoPreviewContainerView.guid = nil
         for task in accumulatedMainQueueTasks {
+            print("Cancelling \(task)")
             task.cancel()
         }
         for task in accumulatedBackgroundQueueTasks {
+            print("Cancelling \(task)")
             task.cancel()
         }
         NotificationCenter.default.removeObserver(self)
@@ -660,7 +661,8 @@ import AppCenterAnalytics
         }
     }
 
-    var audioImageSlicePerSeconds: Double = 3
+    var audioImageSlicePerSeconds: Double = 15
+    var nudgingOffsetForNonLastSegment: Double = 1
 
     func configureWaveTrack() {
 //        return
@@ -682,28 +684,35 @@ import AppCenterAnalytics
 
         for i in 0...numberOfSlicesInt {
             let bgTask = DispatchWorkItem {
-                print("WE CARE \(i): Entering iterative dispatch")
+//                print("WE CARE \(i): [1] Entering iterative dispatch")
                 var timeInThisSlice = self.audioImageSlicePerSeconds
                 if i == numberOfSlicesInt {
                     timeInThisSlice = timeInLastSlice
                 }
 
-                let timeRange = CMTimeRangeMake(start: CMTime(seconds: Double(i) * self.audioImageSlicePerSeconds, preferredTimescale: timeScale), duration: CMTime(seconds: timeInThisSlice, preferredTimescale: timeScale))
+                var nudgedDuration = timeInThisSlice
+                if i != numberOfSlicesInt {
+                    nudgedDuration += self.nudgingOffsetForNonLastSegment
+                }
+
+                let timeRange = CMTimeRangeMake(start: CMTime(seconds: Double(i) * self.audioImageSlicePerSeconds, preferredTimescale: timeScale), duration: CMTime(seconds: nudgedDuration, preferredTimescale: timeScale))
 
                 let pointOffsetXStart = CGFloat((Double(i) * self.audioImageSlicePerSeconds) / durationSeconds) * self.timelineLengthPixels
-                let pointWidth = CGFloat(timeInThisSlice / durationSeconds) * self.timelineLengthPixels
+                let pointWidth = CGFloat(nudgedDuration / durationSeconds) * self.timelineLengthPixels
                 let cachedBounds = CGSize(width: pointWidth, height: self.timeLineSegmentHeight)
                 let width = Int(pointWidth)
 
-                print("WE CARE \(i): Before SamplesExtractor block")
+//                print("WE CARE \(i): [2] Before SamplesExtractor block")
 
                 SamplesExtractor.samples(audioTrack: track, timeRange: timeRange, desiredNumberOfSamples: width, onSuccess: { s, sMax, _ in
-                    print("WE CARE \(i): In SamplesExtractor block")
+//                    print("WE CARE \(i): [3] In SamplesExtractor block")
                     let sampling = (samples: s, sampleMax: sMax)
                     let configuration = WaveformConfiguration(size: cachedBounds, color: WaveColor(red: 77 / 255, green: 103 / 255, blue: 143 / 255, alpha: 1), backgroundColor: WaveColor.clear, style: .gradient, position: .middle, scale: 1, borderWidth: 0, borderColor: WaveColor.clear)
                     if let imageDrawn = WaveFormDrawer.image(with: sampling, and: configuration) {
+                        imageDrawn.saveAsFile(with: .png, withName: "~/tmp/\(computedGUIDForTask)-\(i).png")
+                        print("WE CARE \(i): [4] WaveFormDrawer is drawn")
                         let task = DispatchWorkItem {
-                            print("WE CARE \(i): In DispatchWorkItem block")
+                            print("WE CARE \(i): [5] In DispatchWorkItem block")
                                 let imageRect = NSRect(x: pointOffsetXStart, y: 0, width: pointWidth, height: self.timeLineSegmentHeight)
                                 let imageView = NSImageView(frame: imageRect)
                                 imageView.image = imageDrawn
@@ -718,7 +727,12 @@ import AppCenterAnalytics
                 })
             }
             accumulatedBackgroundQueueTasks.append(bgTask)
-            DispatchQueue.global(qos: .userInitiated).async(execute: bgTask)
+//            if i < Int(Double(numberOfSlicesInt) * 0.2) || i < 10 {
+//            if i < 5 {
+                DispatchQueue.global(qos: .userInteractive).async(execute: bgTask)
+//            } else {
+//                DispatchQueue.global(qos: .background).async(execute: bgTask)
+//            }
         }
 
     }

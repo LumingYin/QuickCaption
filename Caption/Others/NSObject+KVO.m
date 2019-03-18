@@ -1,5 +1,23 @@
 #import "NSObject+KVO.h"
 
+@implementation NSImage(saveAsJpegWithName)
+
+- (void)saveAsJpegWithName:(NSString*) fileName
+{
+    [self saveAsFileWithType:NSJPEGFileType withName:fileName];
+}
+
+- (void)saveAsFileWithType:(NSBitmapImageFileType)type withName:(NSString *)fileName {
+    // Cache the reduced image
+    NSData *imageData = [self TIFFRepresentation];
+    NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+    NSDictionary *imageProps = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0] forKey:NSImageCompressionFactor];
+    imageData = [imageRep representationUsingType:type properties:imageProps];
+    [imageData writeToFile:[fileName stringByExpandingTildeInPath] atomically:NO];
+}
+@end
+
+
 @implementation NSObject (KVO)
 
 - (void)safelyRemoveObserver:(nonnull NSObject *)observer forKeyPath:(nonnull NSString *)keyPath

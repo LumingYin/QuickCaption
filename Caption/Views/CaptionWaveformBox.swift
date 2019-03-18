@@ -15,6 +15,8 @@ class CaptionWaveformBox: NSBox {
         if let cap = capturedGUID {
             if (self.guid == cap) {
                 self.contentView!.addSubview(imageView)
+            } else {
+                print("Rejecting waveform from GUID:\(capturedGUID)")
             }
         }
     }

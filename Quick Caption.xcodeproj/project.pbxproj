@@ -11,7 +11,6 @@
 		32047523223DA6100027218F /* NSObject+KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 32047522223DA6100027218F /* NSObject+KVO.m */; };
 		32047525223DA7910027218F /* NSString+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32047524223DA7910027218F /* NSString+Drawing.swift */; };
 		321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C32235FE650038C8FB /* Caption.xcdatamodeld */; };
-		321DC3CA2236037C0038C8FB /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C72236037C0038C8FB /* ExampleViewController.swift */; };
 		321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */; };
 		321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C92236037C0038C8FB /* SamplesExtractor.swift */; };
 		321DC3CE22360ADC0038C8FB /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3CD22360ADC0038C8FB /* SidebarViewController.swift */; };
@@ -86,7 +85,6 @@
 		32047522223DA6100027218F /* NSObject+KVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVO.m"; sourceTree = "<group>"; };
 		32047524223DA7910027218F /* NSString+Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Drawing.swift"; sourceTree = "<group>"; };
 		321DC3C42235FE650038C8FB /* Caption.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Caption.xcdatamodel; sourceTree = "<group>"; };
-		321DC3C72236037C0038C8FB /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveFormDrawer.swift; sourceTree = "<group>"; };
 		321DC3C92236037C0038C8FB /* SamplesExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesExtractor.swift; sourceTree = "<group>"; };
 		321DC3CD22360ADC0038C8FB /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
@@ -171,7 +169,6 @@
 		321DC3C6223603740038C8FB /* Waveform */ = {
 			isa = PBXGroup;
 			children = (
-				321DC3C72236037C0038C8FB /* ExampleViewController.swift */,
 				321DC3C92236037C0038C8FB /* SamplesExtractor.swift */,
 				321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */,
 			);
@@ -435,7 +432,6 @@
 				321DC3D4223610750038C8FB /* SideTabViewController.swift in Sources */,
 				322F448D223F4CC500427898 /* GBDeviceInfo_OSX.m in Sources */,
 				326A0912223F0699009A8313 /* QuickCaptionWindow.swift in Sources */,
-				321DC3CA2236037C0038C8FB /* ExampleViewController.swift in Sources */,
 				326A090A223E0C48009A8313 /* NSView+Extensions.swift in Sources */,
 				321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */,
 				322F4482223F367700427898 /* WaveformPreviewContainerView.swift in Sources */,
