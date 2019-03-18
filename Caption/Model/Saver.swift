@@ -31,6 +31,10 @@ class Saver {
             text = Exporter.generateFCPXMLFromArray(episode: episode, player: episode.player, arrayForCaption: copiedArray, withoutAVPlayer: false)
         }
 
+        if text.count == 0 {
+            return
+        }
+
         guard let origonalVideoName = episode.videoURL?.lastPathComponent else {
             return
         }

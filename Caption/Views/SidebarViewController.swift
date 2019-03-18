@@ -34,15 +34,18 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
 
     @IBAction func exportFCPXMLClicked(_ sender: Any) {
-        selectActiveContextMenuRow()
+        let episode = episodeProjects[tableView.clickedRow]
+        Saver.saveEpisodeToDisk(episode, type: .fcpXML)
     }
 
     @IBAction func exportSRTClicked(_ sender: Any) {
-        selectActiveContextMenuRow()
+        let episode = episodeProjects[tableView.clickedRow]
+        Saver.saveEpisodeToDisk(episode, type: .srt)
     }
 
     @IBAction func exportTXTClicked(_ sender: Any) {
-        selectActiveContextMenuRow()
+        let episode = episodeProjects[tableView.clickedRow]
+        Saver.saveEpisodeToDisk(episode, type: .txt)
     }
 
     func selectActiveContextMenuRow() {
