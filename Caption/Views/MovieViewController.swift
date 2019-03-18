@@ -738,13 +738,7 @@ import AppCenterAnalytics
                     })
                 }
                 accumulatedBackgroundQueueTasks.append(bgTask)
-                //            if i < Int(Double(numberOfSlicesInt) * 0.2) || i < 10 {
-                //            if i < 5 {
                 DispatchQueue.global(qos: .userInteractive).async(execute: bgTask)
-                //            } else {
-                //                DispatchQueue.global(qos: .background).async(execute: bgTask)
-                //            }
-
             }
 
         }
@@ -779,27 +773,41 @@ import AppCenterAnalytics
         }
         let numberOfThumbnails = Int(totalSeconds / self.thumbnailPerSeconds)
         let widthOfThumbnail = self.timelineLengthPixels / CGFloat(numberOfThumbnails)
-        var generatedImages: [NSImage] = []
+//        var generatedImages: [NSImage] = []
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.maximumSize = CGSize(width: 320, height: 240);
 
         while (secondIndex < totalSeconds) {
             let screenshotTime = CMTime(seconds: Double(secondIndex), preferredTimescale: 1)
+            let capturedIndex = imageIndex
+            let tentativePath = "\(videoThumbnailTrackCacheFolder)/\(capturedIndex).jpg"
             do {
-                let capturedIndex = imageIndex
-                if FileManager.default.fileExists(atPath: "\(videoThumbnailTrackCacheFolder)/\(capturedIndex).jpg") {
-                    let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
-                    imageView.imageScaling = .scaleProportionallyUpOrDown
-                    imageView.imageFrameStyle = .grayBezel
-                    imageView.image = NSImage.init(contentsOfFile: "\(videoThumbnailTrackCacheFolder)/\(capturedIndex).jpg")
-                    self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
+                if FileManager.default.fileExists(atPath: tentativePath) {
+                    let taskToLoadImage = DispatchWorkItem {
+                        let loadedImage = NSImage.init(contentsOfFile: tentativePath)
+                        let taskToPlaceIntoView = DispatchWorkItem {
+                            let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
+                            imageView.imageScaling = .scaleProportionallyUpOrDown
+                            imageView.imageFrameStyle = .grayBezel
+                            imageView.image = loadedImage
+                            self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
+                        }
+                        self.accumulatedMainQueueTasks.append(taskToPlaceIntoView)
+                        DispatchQueue.main.async(execute: taskToPlaceIntoView)
+                    }
+                    self.accumulatedBackgroundQueueTasks.append(taskToLoadImage)
+                    DispatchQueue.global(qos: .userInitiated).async(execute: taskToLoadImage)
                 } else {
-                    DispatchQueue.global(qos: .userInitiated).async {
+                    let taskToGenerateImage = DispatchWorkItem {
                         let imageRef = try? imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
                         let image = NSImage(cgImage: imageRef!, size: NSSize(width: imageRef!.width, height: imageRef!.height))
-                        generatedImages.append(image)
+//                        generatedImages.append(image)
+                        let taskToSave = DispatchWorkItem {
+                            image.saveAsFile(with: .jpeg, withName: tentativePath)
+                        }
+                        self.accumulatedBackgroundQueueTasks.append(taskToSave)
+                        DispatchQueue.global(qos: .userInitiated).async(execute: taskToSave)
                         let task = DispatchWorkItem {
-                            image.saveAsFile(with: .jpeg, withName: "\(videoThumbnailTrackCacheFolder)/\(capturedIndex).jpg")
                             let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
                             imageView.imageScaling = .scaleProportionallyUpOrDown
                             imageView.imageFrameStyle = .grayBezel
@@ -809,6 +817,8 @@ import AppCenterAnalytics
                         self.accumulatedMainQueueTasks.append(task)
                         DispatchQueue.main.async(execute: task)
                     }
+                    self.accumulatedBackgroundQueueTasks.append(taskToGenerateImage)
+                    DispatchQueue.global(qos: .userInitiated).async(execute: taskToGenerateImage)
                 }
             } catch {
                 "Can't take screenshot: \(error)"
