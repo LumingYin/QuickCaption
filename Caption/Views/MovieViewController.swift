@@ -801,26 +801,32 @@ import AppCenterAnalytics
                 DispatchQueue.global(qos: .userInitiated).async {
                     do {
                         print("WE CARE: [\(capturedIndex), 0]")
-                        let imageRef = try imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
-                        let image = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
-                        //                        generatedImages.append(image)
-                        let taskToSave = DispatchWorkItem {
-                            print("WE CARE: [\(capturedIndex), 1]")
-                            image.saveAsFile(with: .jpeg, withName: tentativePath)
-                        }
-                        self.accumulatedBackgroundQueueTasks.append(taskToSave)
-                        DispatchQueue.global(qos: .userInitiated).async(execute: taskToSave)
-                        let task = DispatchWorkItem {
-                            print("WE CARE: [\(capturedIndex), 2]")
+                        imageGenerator.generateCGImagesAsynchronously(forTimes: [NSValue(time: screenshotTime)], completionHandler: { (time1, image, time2, result, error) in
+                            if result == .succeeded {
+                                let image = NSImage(cgImage: image!, size: NSSize(width: image!.width, height: image!.height))
+                                //                        generatedImages.append(image)
+                                let taskToSave = DispatchWorkItem {
+                                    print("WE CARE: [\(capturedIndex), 1]")
+                                    image.saveAsFile(with: .jpeg, withName: tentativePath)
+                                }
+                                self.accumulatedBackgroundQueueTasks.append(taskToSave)
+                                DispatchQueue.global(qos: .userInitiated).async(execute: taskToSave)
+                                let task = DispatchWorkItem {
+                                    print("WE CARE: [\(capturedIndex), 2]")
 
-                            let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
-                            imageView.imageScaling = .scaleProportionallyUpOrDown
-                            imageView.imageFrameStyle = .grayBezel
-                            imageView.image = image
-                            self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
-                        }
-                        self.accumulatedMainQueueTasks.append(task)
-                        DispatchQueue.main.async(execute: task)
+                                    let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
+                                    imageView.imageScaling = .scaleProportionallyUpOrDown
+                                    imageView.imageFrameStyle = .grayBezel
+                                    imageView.image = image
+                                    self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
+                                }
+                                self.accumulatedMainQueueTasks.append(task)
+                                DispatchQueue.main.async(execute: task)
+                            } else {
+                                print("Failed with: \(error)")
+                            }
+                        })
+//                        let imageRef = try imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
                     } catch {print("Error: \(error)")}
 
                 }
