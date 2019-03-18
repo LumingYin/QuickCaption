@@ -142,7 +142,7 @@ import AppCenterAnalytics
             cap.endingTime = 0
 
             self.episode.addToArrayForCaption(cap)
-            self.timeLabel.stringValue = "\(self.episode.framerate)fps  |  \(self.episode.videoDescription ?? "")"
+//            self.timeLabel.stringValue = "\(self.episode.framerate)fps  |  \(self.episode.videoDescription ?? "")"
             self.episode.creationDate = NSDate()
         } else {
             self.episode.modifiedDate = NSDate()
@@ -467,7 +467,7 @@ import AppCenterAnalytics
                     print(".resizeLeft, diffEnding:\(diffEnding)")
                     return (captionLine, nil, .resizeLeft)
                 } else {
-                    return (captionLine, nil, .selection)
+//                    return (captionLine, nil, .selection)
 //                    print(".passing, diffStarting:\(diffStarting), diffEnding: \(diffEnding)")
                 }
             }
@@ -490,7 +490,7 @@ import AppCenterAnalytics
         case resizeLeftRight
         case resizeRight
         case resizeLeft
-        case selection
+//        case selection
         case moveTime
         case normal
     }
@@ -612,7 +612,7 @@ import AppCenterAnalytics
             guard let player = self.playerView.player else {return}
             if player.status == .readyToPlay {
                 self.updateLoadVideo()
-//                episode.player?.play()
+                episode.player?.play()
             }
         }
     }

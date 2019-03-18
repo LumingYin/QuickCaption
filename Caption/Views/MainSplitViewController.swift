@@ -17,6 +17,10 @@ class MainSplitViewController: NSSplitViewController {
         // Do view setup here.
     }
 
+    override func splitView(_ splitView: NSSplitView, effectiveRect proposedEffectiveRect: NSRect, forDrawnRect drawnRect: NSRect, ofDividerAt dividerIndex: Int) -> NSRect {
+        return NSZeroRect
+    }
+
 //    override func splitView(_ splitView: NSSplitView, constrainMinCoordinate proposedMinimumPosition: CGFloat, ofSubviewAt dividerIndex: Int) -> CGFloat {
 //        var widthUpToSubview: CGFloat = 0
 //        for pane in splitView.subviews {
