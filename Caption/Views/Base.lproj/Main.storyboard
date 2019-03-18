@@ -1626,6 +1626,9 @@
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>
+                                                    <connections>
+                                                        <outlet property="menu" destination="OK3-Pn-moE" id="Kfs-Jx-xfJ"/>
+                                                    </connections>
                                                 </tableView>
                                             </subviews>
                                         </clipView>
@@ -1681,6 +1684,9 @@
                     <items>
                         <menuItem title="Delete" id="kpD-Lb-CyE">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="deleteRow:" target="b2M-Hl-zi7" id="9No-Pd-yvY"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Change Start Time..." enabled="NO" id="w1j-Sw-7ZY">
                             <modifierMask key="keyEquivalentModifierMask"/>

@@ -45,6 +45,13 @@ import AppCenterAnalytics
 
     var recentTimer: Timer?
 
+    func removeCaptionFromTimeline(caption: CaptionLine) {
+        if let capID = caption.guidIdentifier, let existing = self.cachedCaptionViews[capID] {
+            existing.removeFromSuperview()
+            cachedCaptionViews.removeValue(forKey: capID)
+        }
+    }
+
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,13 +62,9 @@ import AppCenterAnalytics
 
     override func viewDidAppear() {
         self.view.window?.delegate = self
-//        self.playerView.postsBoundsChangedNotifications = true
         self.playerView.postsFrameChangedNotifications = true
     }
 
-//    @objc func boundsDidChangeNotification(_ sender: Any) {
-//        print("Player bounds changed")
-//    }
     @objc func frameDidChangeNotification(_ sender: Any) {
         refreshFontRelativeSize()
     }

@@ -26,6 +26,16 @@ import AVKit
         }
     }
 
+    @IBAction func deleteRow(_ sender: NSMenuItem) {
+        let row = resultTableView.clickedRow
+        if let correspondingCaption = episode.arrayForCaption?.object(at: row) as? CaptionLine {
+            episode.removeFromArrayForCaption(correspondingCaption)
+            AppDelegate.movieVC()?.removeCaptionFromTimeline(caption: correspondingCaption)
+            Helper.context?.delete(correspondingCaption)
+            resultTableView.reloadData()
+        }
+    }
+
     func addObserverForCaptionLine(line: CaptionLine) {
         line.addObserver(self, forKeyPath: "caption", options: [.new], context: nil)
         line.addObserver(self, forKeyPath: "endingTime", options: [.new], context: nil)
