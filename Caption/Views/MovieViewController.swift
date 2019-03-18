@@ -105,13 +105,13 @@ import AppCenterAnalytics
         episode.player = AVPlayer(url: videoURL)
         self.episode.player?.addObserver(self, forKeyPath: "rate", options: [.new], context: &MovieViewController.playerPlayrateContext)
         playerView.player = episode.player
-        episode.player?.play()
-        recentTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateLoadVideo), userInfo: nil, repeats: false)
+        episode.player?.addObserver(self, forKeyPath: "status", options: [.new], context: &MovieViewController.playerReadinessContext)
+//        recentTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateLoadVideo), userInfo: nil, repeats: false)
     }
 
-    func windowDidResize(_ notification: Notification) {
-        print("window resized!")
-    }
+//    func windowDidResize(_ notification: Notification) {
+//        print("window resized!")
+//    }
 
     func updatePersistedFramerate() {
         if self.episode.player?.currentItem?.tracks == nil || self.episode.player?.currentItem?.tracks.count ?? 0 <= 0 {
@@ -328,6 +328,7 @@ import AppCenterAnalytics
         AppDelegate.setCurrentEpisodeTitle(nil)
         captionBottomConstraint.constant = 14
         self.captionPreviewLabel.stringValue = ""
+        self.playerView.player?.safelyRemoveObserver(self, forKeyPath: "status")
         recentTimer?.invalidate()
         volumeSlider.floatValue = 1
         speedSlider.floatValue = 1
@@ -403,6 +404,7 @@ import AppCenterAnalytics
     private static var textTrackContext = 0
     private static var fontPreviewTrackContext = 1
     private static var playerPlayrateContext = 5
+    private static var playerReadinessContext = 6
 
     func configureTextTrack() {
         self.subtitleTrackContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.subtitleTrackContainerView.frame.size.height))
@@ -412,7 +414,7 @@ import AppCenterAnalytics
             self.addObserverForCaptionLine(captionLine)
         }
         episode.addObserver(self, forKeyPath: "arrayForCaption", options: [.initial, .new], context: &MovieViewController.textTrackContext)
-        print(self.subtitleTrackContainerView.bounds)
+//        print(self.subtitleTrackContainerView.bounds)
         self.subtitleTrackContainerView.startTracking()
         self.subtitleTrackContainerView.delegate = self
     }
@@ -446,7 +448,7 @@ import AppCenterAnalytics
 
     func correspondingTimeAtEvent(_ event: NSEvent) -> Float {
         let location = self.subtitleTrackContainerView.convert(event.locationInWindow, from: nil).x
-        print(location)
+//        print(location)
         let percentage = Float(location / self.timelineLengthPixels)
         let timePoint = percentage * self.calculatedDuration
         return timePoint
@@ -601,7 +603,7 @@ import AppCenterAnalytics
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &MovieViewController.textTrackContext || context == &MovieViewController.fontPreviewTrackContext || context == &MovieViewController.playerPlayrateContext else {
+        guard context == &MovieViewController.textTrackContext || context == &MovieViewController.fontPreviewTrackContext || context == &MovieViewController.playerPlayrateContext || context == &MovieViewController.playerReadinessContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
@@ -619,6 +621,12 @@ import AppCenterAnalytics
                     }
                 }
             }
+        } else if context == &MovieViewController.playerReadinessContext {
+            guard let player = self.playerView.player else {return}
+            if player.status == .readyToPlay {
+                self.updateLoadVideo()
+                episode.player?.play()
+            }
         }
     }
 
@@ -628,9 +636,9 @@ import AppCenterAnalytics
 
     func observeMovieCaptionTextValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?) {
         for aChange in change ?? [:] {
-            print("The change key: \(aChange.key), value: \(aChange.value)")
+//            print("The change key: \(aChange.key), value: \(aChange.value)")
             if let indexSet = aChange.value as? NSIndexSet {
-                print("The NSIndexSet is: \(indexSet)")
+//                print("The NSIndexSet is: \(indexSet)")
                 for index in indexSet {
                     let indexInt: Int = index
                     if let captionLine = episode.arrayForCaption?.object(at: indexInt) as? CaptionLine {
@@ -721,11 +729,13 @@ import AppCenterAnalytics
         // one snapshot every 10 seconds
         DispatchQueue.global(qos: .background).async {
             let asset = self.episode.player?.currentItem?.asset
+            print("Video Thumbnail asset is: \(asset)")
             if asset == nil {
                 return
             }
             let imageGenerator = AVAssetImageGenerator(asset: asset!)
-            if let duration = self.episode.player?.currentItem?.duration {
+            if let duration = self.episode.player?.currentItem?.asset.duration {
+                print("Video Thumbnail duration is: \(duration)")
                 let totalSeconds = CMTimeGetSeconds(duration)
                 var secondIndex: Float64 = 1
                 var imageIndex: Int = 0
@@ -742,16 +752,17 @@ import AppCenterAnalytics
                         let image = NSImage(cgImage: imageRef!, size: NSSize(width: imageRef!.width, height: imageRef!.height))
                         generatedImages.append(image)
                         let capturedIndex = imageIndex
-                        let capturedGUID = self.episode.guidIdentifier
+//                        let capturedGUID = self.episode.guidIdentifier
                         let task = DispatchWorkItem {
                             let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
                             imageView.imageScaling = .scaleProportionallyUpOrDown
                             imageView.imageFrameStyle = .grayBezel
                             imageView.image = image
-                            imageView.correspondingGUID = capturedGUID
-                            if (capturedGUID != nil) {
-                                self.videoPreviewContainerView.addSubImageView(capturedGUID: capturedGUID, imageView: imageView)
-                            }
+//                            imageView.correspondingGUID = capturedGUID
+//                            if (capturedGUID != nil) {
+                                self.videoPreviewContainerView.addSubview(imageView)
+//                                self.videoPreviewContainerView.addSubImageView(capturedGUID: capturedGUID, imageView: imageView)
+//                            }
                         }
                         self.accumulatedMainQueueTasks.append(task)
                         DispatchQueue.main.async(execute: task)
