@@ -959,7 +959,7 @@
                 <customObject id="u43-FF-6D2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu id="t5b-P1-LuO">
                     <items>
-                        <menuItem title="Show in Finder" id="R7T-EA-VlP">
+                        <menuItem title="Show In Finder" id="R7T-EA-VlP">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="showInFinderClicked:" target="S31-PW-wUx" id="vIn-eC-vxb"/>

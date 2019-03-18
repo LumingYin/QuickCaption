@@ -82,14 +82,21 @@ class Helper: NSObject {
     }
 
 
-    static func dialogTwoButton(question: String, text: String) -> Bool {
+    static func displayInteractiveSheet(title: String, text: String, firstButtonText: String, secondButtonText: String, callback: @escaping ((_ fisrtButtonReturn: Bool)-> ())) {
         let alert = NSAlert()
-        alert.messageText = question
+        alert.messageText = title
         alert.informativeText = text
         alert.alertStyle = NSAlert.Style.warning
-        alert.addButton(withTitle: "Save")
-        alert.addButton(withTitle: "Don't Save")
-        return alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
+        alert.addButton(withTitle: firstButtonText)
+        alert.addButton(withTitle: secondButtonText)
+        if let window = NSApp.mainWindow {
+            alert.beginSheetModal(for: window) { (response) in
+                callback(response == NSApplication.ModalResponse.alertFirstButtonReturn)
+            }
+        } else {
+            let first = alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
+            callback(first)
+        }
     }
 
     static var context: NSManagedObjectContext? {

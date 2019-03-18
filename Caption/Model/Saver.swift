@@ -6,7 +6,7 @@
 //  Copyright © 2019 Bright. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 class Saver {
 
@@ -54,7 +54,11 @@ class Saver {
 
         do {
             try text.write(to: newPath, atomically: true, encoding: String.Encoding.utf8)
-            Helper.displayInformationalSheet(title: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).")
+            Helper.displayInteractiveSheet(title: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).", firstButtonText: "Show in Finder", secondButtonText: "Dismiss") { (firstButtonReturn) in
+                if firstButtonReturn == true {
+                    NSWorkspace.shared.activateFileViewerSelecting([newPath])
+                }
+            }
         }
         catch {
             print("Error writing to file: \(error)")
