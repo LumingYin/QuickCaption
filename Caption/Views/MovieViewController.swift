@@ -314,13 +314,17 @@ import AppCenterAnalytics
         volumeSlider.floatValue = 1
         speedSlider.floatValue = 1
         self.videoPreviewContainerView.guid = nil
-        for task in accumulatedMainQueueTasks {
-//            print("Cancelling \(task)")
-//            task.cancel()
+        if accumulatedMainQueueTasks != nil {
+            for task in accumulatedMainQueueTasks {
+                //            print("Cancelling \(task)")
+                //            task.cancel()
+            }
         }
-        for task in accumulatedBackgroundQueueTasks {
-//            print("Cancelling \(task)")
-//            task.cancel()
+        if accumulatedBackgroundQueueTasks != nil {
+            for task in accumulatedBackgroundQueueTasks {
+                //            print("Cancelling \(task)")
+                //            task.cancel()
+            }
         }
         NotificationCenter.default.removeObserver(self)
         self.playerView.player?.safelyRemoveObserver(self, forKeyPath: "rate")
@@ -361,6 +365,9 @@ import AppCenterAnalytics
     }
 
     func configurateMovieVC() {
+        if self.episode == nil {
+            return
+        }
 //        NotificationCenter.default.addObserver(self, selector: #selector(boundsDidChangeNotification(_:)), name: NSView.boundsDidChangeNotification, object: self.playerView)
         NotificationCenter.default.addObserver(self, selector: #selector(frameDidChangeNotification(_:)), name: NSView.frameDidChangeNotification, object: self.playerView)
 
