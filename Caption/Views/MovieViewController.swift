@@ -31,6 +31,7 @@ import AppCenterAnalytics
     @IBOutlet weak var playPauseImageView: NSImageView!
     @IBOutlet weak var captionBottomConstraint: NSLayoutConstraint!
 
+
     var cachedCaptionViews: [String: CaptionBoxView] = [:]
 
 
@@ -264,64 +265,15 @@ import AppCenterAnalytics
     }
 
     @IBAction func saveTXTToDisk(_ sender: Any) {
-        saveToDisk(.txt)
+        Saver.saveEpisodeToDisk(self.episode, type: .txt)
     }
     
     @IBAction func saveSRTToDisk(_ sender: Any) {
-        saveToDisk(.srt)
+        Saver.saveEpisodeToDisk(self.episode, type: .srt)
     }
     
     @IBAction func saveFCPXMLToDisk(_ sender: Any) {
-        saveToDisk(.fcpXML)
-    }
-
-    func saveToDisk(_ type: FileType) {
-        if episode == nil {
-            return
-        }
-
-        guard var copiedArray = (episode.arrayForCaption?.array as? [CaptionLine]) else { return }
-
-        copiedArray.sort(by: { (this, that) -> Bool in
-            return this.startingTime < that.startingTime
-        })
-
-        var text = "Export is unsuccessful."
-
-        if type == .srt {
-            text = Exporter.generateSRTFromArray(arrayForCaption: copiedArray)
-        } else if type == .txt {
-            text = Exporter.generateTXTFromArray(arrayForCaption: copiedArray)
-        } else if type == .fcpXML {
-            text = Exporter.generateFCPXMLFromArray(episode: episode, player: episode.player, arrayForCaption: copiedArray, withoutAVPlayer: false)
-        }
-
-        guard let origonalVideoName = self.episode.videoURL?.lastPathComponent else {
-            return
-        }
-        let ogVN = (origonalVideoName as NSString).deletingPathExtension
-        
-        var newSubtitleName = "\(ogVN).srt"
-        if (type == .txt) {
-            newSubtitleName = "\(ogVN).txt"
-        }
-        if (type == .fcpXML) {
-            newSubtitleName = "\(ogVN).fcpxml"
-        }
-
-        guard let newPath = self.episode.videoURL?.deletingLastPathComponent().appendingPathComponent(newSubtitleName) else {
-            return
-        }
-        
-        do {
-            try text.write(to: newPath, atomically: true, encoding: String.Encoding.utf8)
-            _ = Helper.dialogOKCancel(question: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).")
-        }
-        catch {
-            print("Error writing to file: \(error)")
-            _ = Helper.dialogOKCancel(question: "Saved failed!", text: "Save has failed. \(error)")
-        }
-
+        Saver.saveEpisodeToDisk(self.episode, type: .fcpXML)
     }
 
     func dismantleOldMovieVC() {
@@ -729,13 +681,13 @@ import AppCenterAnalytics
         // one snapshot every 10 seconds
         DispatchQueue.global(qos: .background).async {
             let asset = self.episode.player?.currentItem?.asset
-            print("Video Thumbnail asset is: \(asset)")
+//            print("Video Thumbnail asset is: \(asset)")
             if asset == nil {
                 return
             }
             let imageGenerator = AVAssetImageGenerator(asset: asset!)
             if let duration = self.episode.player?.currentItem?.asset.duration {
-                print("Video Thumbnail duration is: \(duration)")
+//                print("Video Thumbnail duration is: \(duration)")
                 let totalSeconds = CMTimeGetSeconds(duration)
                 var secondIndex: Float64 = 1
                 var imageIndex: Int = 0

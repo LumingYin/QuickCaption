@@ -34,15 +34,24 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
 
     @IBAction func exportFCPXMLClicked(_ sender: Any) {
-        let row = tableView.clickedRow
-        let project = episodeProjects[row]
-
+        selectActiveContextMenuRow()
+        AppDelegate.movieVC()?.fileTypeToExportWhenReady = .fcpXML
     }
 
     @IBAction func exportSRTClicked(_ sender: Any) {
+        selectActiveContextMenuRow()
+        AppDelegate.movieVC()?.fileTypeToExportWhenReady = .srt
     }
 
     @IBAction func exportTXTClicked(_ sender: Any) {
+        selectActiveContextMenuRow()
+        AppDelegate.movieVC()?.fileTypeToExportWhenReady = .txt
+    }
+
+    func selectActiveContextMenuRow() {
+        if tableView.selectedRow != tableView.clickedRow {
+            updateSelectRow(index: tableView.clickedRow)
+        }
     }
 
     @IBOutlet weak var duplicateClicked: NSMenuItem!

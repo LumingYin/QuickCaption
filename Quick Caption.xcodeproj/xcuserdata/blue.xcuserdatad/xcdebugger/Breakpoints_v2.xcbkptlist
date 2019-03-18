@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Caption/Views/MovieViewController.swift"
-            timestampString = "574564061.558183"
+            timestampString = "574564588.8795969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "731"
-            endingLineNumber = "731"
+            startingLineNumber = "738"
+            endingLineNumber = "738"
             landmarkName = "configureVideoThumbnailTrack()"
             landmarkType = "7">
          </BreakpointContent>

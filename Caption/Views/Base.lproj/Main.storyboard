@@ -959,12 +959,6 @@
                 <customObject id="u43-FF-6D2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu id="t5b-P1-LuO">
                     <items>
-                        <menuItem title="Duplicate" id="kQJ-qa-2ft">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="duplicateClicked:" target="S31-PW-wUx" id="8qh-YO-o5X"/>
-                            </connections>
-                        </menuItem>
                         <menuItem title="Delete" id="Fvw-0f-e43">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
