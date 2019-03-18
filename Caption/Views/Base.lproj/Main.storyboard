@@ -1204,27 +1204,27 @@ CA
                                                 </connections>
                                             </button>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FA1-Kt-fGw">
-                                                <rect key="frame" x="77" y="5" width="15" height="12"/>
+                                                <rect key="frame" x="80" y="5" width="15" height="12"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_play" id="mfa-5f-l54"/>
                                             </imageView>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TRN-rk-sxt">
-                                                <rect key="frame" x="15" y="0.0" width="16" height="22"/>
+                                                <rect key="frame" x="17" y="0.0" width="16" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_framePrev" id="JMp-Sc-QDn"/>
                                             </imageView>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8w-1Y-ajd">
-                                                <rect key="frame" x="44" y="5" width="20" height="12"/>
+                                                <rect key="frame" x="46" y="5" width="20" height="12"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_last" id="GN3-Yw-pTs"/>
                                             </imageView>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="36y-8A-Qbb">
-                                                <rect key="frame" x="107" y="5" width="20" height="12"/>
+                                                <rect key="frame" x="109" y="5" width="20" height="12"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_next" id="qye-9o-uN9"/>
                                             </imageView>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J02-2i-BCs">
-                                                <rect key="frame" x="139" y="0.0" width="16" height="22"/>
+                                                <rect key="frame" x="141" y="0.0" width="16" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_frameNext" id="SuH-wf-Sqy"/>
                                             </imageView>

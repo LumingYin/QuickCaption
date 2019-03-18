@@ -641,7 +641,7 @@ import AppCenterAnalytics
             guard let player = self.playerView.player else {return}
             if player.status == .readyToPlay {
                 self.updateLoadVideo()
-                episode.player?.play()
+//                episode.player?.play()
             }
         }
     }
