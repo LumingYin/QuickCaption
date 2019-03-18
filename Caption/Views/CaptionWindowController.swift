@@ -69,6 +69,8 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
                     if (splitViewController.splitViewItems[2].isCollapsed) {
                         contentSettingsSegmentedControl.setSelected(false, forSegment: 0)
                         contentSettingsSegmentedControl.setSelected(false, forSegment: 1)
+                    } else {
+                        contentSettingsSegmentedControl.setSelected(true, forSegment: index)
                     }
                 } else {
                     AppDelegate.sideTabVC()?.tabView.selectTabViewItem(at: index)

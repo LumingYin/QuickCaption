@@ -55,7 +55,15 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
 
     @IBAction func showInFinderClicked(_ sender: Any) {
-        let episode = episodeProjects[tableView.clickedRow]
+        showEpisodeInFinder(row: tableView.clickedRow)
+    }
+
+    func showActiveVideoInFinderClicked(_ sender: Any) {
+        showEpisodeInFinder(row: tableView.selectedRow)
+    }
+
+    func showEpisodeInFinder(row: Int) {
+        let episode = episodeProjects[row]
         if let url = episode.videoURL {
             NSWorkspace.shared.activateFileViewerSelecting([url])
         }

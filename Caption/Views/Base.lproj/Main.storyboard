@@ -78,7 +78,7 @@
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Save All" keyEquivalent="s" id="Vi3-xH-UAh">
+                                        <menuItem title="Save Library" keyEquivalent="s" id="Vi3-xH-UAh">
                                             <connections>
                                                 <action selector="saveEverything:" target="Voe-Tx-rLC" id="sTK-XA-WhG"/>
                                             </connections>
@@ -377,13 +377,22 @@ CA
                                         <menuItem isSeparatorItem="YES" id="bwW-Fy-6Ca"/>
                                         <menuItem title="Reveal Caption In Editor" id="dau-L4-y4Y">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="revealCaptionInEditorClicked:" target="Voe-Tx-rLC" id="jfc-Si-9Tc"/>
+                                            </connections>
                                         </menuItem>
                                         <menuItem title="Reveal Caption In Timeline" id="5ox-EO-1Uc">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="revealCaptionInTimelineClicked:" target="Voe-Tx-rLC" id="jt3-VO-A4P"/>
+                                            </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="1jl-nY-SZP"/>
                                         <menuItem title="Reveal Video in Finder" id="X2J-dG-vw3">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="revealVideoInFinderClicked:" target="Voe-Tx-rLC" id="s7o-vb-pyf"/>
+                                            </connections>
                                         </menuItem>
                                     </items>
                                 </menu>
@@ -782,7 +791,7 @@ CA
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="mainWindow" id="B8D-0N-5wS" customClass="CaptionWindowController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Quick Caption" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="QuickCaptionWindow" customModule="Quick_Caption" customModuleProvider="target">
+                    <window key="window" title="Quick Caption" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" id="IQv-IB-iLA" customClass="QuickCaptionWindow" customModule="Quick_Caption" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>

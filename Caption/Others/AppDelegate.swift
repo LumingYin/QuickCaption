@@ -315,6 +315,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func deleteCaptionClicked(_ sender: Any) {
     }
 
+    @IBAction func revealCaptionInEditorClicked(_ sender: Any) {
+    }
+
+    @IBAction func revealCaptionInTimelineClicked(_ sender: Any) {
+    }
+
+    @IBAction func revealVideoInFinderClicked(_ sender: Any) {
+        AppDelegate.sourceListVC()?.showActiveVideoInFinderClicked(self)
+    }
+
     var email: String {
         get {
             return ["lu", "mi", "ng", "yin", "-", "ho", "tm", "ai", "l.", "co", "m"].joined().replacingOccurrences(of: "-", with: "@")
