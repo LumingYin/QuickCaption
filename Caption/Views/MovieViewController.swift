@@ -21,8 +21,8 @@ import AppCenterAnalytics
 
     @IBOutlet weak var subtitleTrackContainerView: SubtitleTrackContainerView!
     @IBOutlet weak var videoPreviewContainerView: VideoPreviewContainerView!
-    @IBOutlet weak var waveformImageView: NSImageView!
-    @IBOutlet weak var waveformPreviewContainerBox: NSBox!
+//    @IBOutlet weak var waveformImageView: NSImageView!
+    @IBOutlet weak var waveformPreviewContainerBox: CaptionWaveformBox!
 
     @IBOutlet weak var timelineScrollView: NSScrollView!
     @IBOutlet weak var timelineOverallView: NSView!
@@ -72,14 +72,13 @@ import AppCenterAnalytics
     // MARK: - Buttons and IBActions
     @IBAction func openFile(_ sender: Any) {
         let dialog = NSOpenPanel()
-        
-        dialog.title                   = "Choose a video file"
-        dialog.showsResizeIndicator    = true
-        dialog.showsHiddenFiles        = false
-        dialog.canChooseDirectories    = false
-        dialog.canCreateDirectories    = true
+        dialog.title = "Choose a video file"
+        dialog.showsResizeIndicator = true
+        dialog.showsHiddenFiles = false
+        dialog.canChooseDirectories = false
+        dialog.canCreateDirectories = true
         dialog.allowsMultipleSelection = false
-        dialog.allowedFileTypes        = ["mp4", "mpeg4", "m4v", "ts", "mpg", "mpeg", "mp3", "mpeg3", "m4a", "mov"]
+        dialog.allowedFileTypes = ["mp4", "mpeg4", "m4v", "ts", "mpg", "mpeg", "mp3", "mpeg3", "m4a", "mov"]
         
         dialog.beginSheetModal(for: self.view.window!) { (result) in
             if let result = dialog.url, let path = dialog.url?.path {
@@ -151,13 +150,10 @@ import AppCenterAnalytics
         self.populateThumbnail()
         self.configureOverallScrollView()
         self.configurateRedBar()
-        DispatchQueue.main.async {
-            self.configureTextTrack()
-        }
+        self.configureTextTrack()
+        self.configureVideoThumbnailTrack()
+
         self.configureWaveTrack()
-        DispatchQueue.main.async {
-            self.configureVideoThumbnailTrack()
-        }
         refreshFontToReflectStyleChanges()
         self.configurateFontPreviewListener()
         AppDelegate.fontVC()?.configureAllMetadata()
@@ -318,8 +314,17 @@ import AppCenterAnalytics
         volumeSlider.floatValue = 1
         speedSlider.floatValue = 1
         self.videoPreviewContainerView.guid = nil
-        for task in accumulatedMainQueueTasks {
-            task.cancel()
+        if accumulatedMainQueueTasks != nil {
+            for task in accumulatedMainQueueTasks {
+                //            print("Cancelling \(task)")
+                //            task.cancel()
+            }
+        }
+        if accumulatedBackgroundQueueTasks != nil {
+            for task in accumulatedBackgroundQueueTasks {
+                //            print("Cancelling \(task)")
+                //            task.cancel()
+            }
         }
         NotificationCenter.default.removeObserver(self)
         self.playerView.player?.safelyRemoveObserver(self, forKeyPath: "rate")
@@ -347,14 +352,22 @@ import AppCenterAnalytics
         for view in videoPreviewContainerView.subviews {
             view.removeFromSuperview()
         }
+        for view in waveformPreviewContainerBox.contentView!.subviews {
+            if (view != nil && view.tag != -1) {
+                view.removeFromSuperview()
+            }
+        }
         self.cachedCaptionViews = [:]
         self.subtitleTrackContainerView.subviews = []
         self.videoPreviewContainerView.subviews = []
-        self.waveformImageView.image = nil
+//        self.waveformPreviewContainerBox.subviews = []
         self.progressView.setFrameOrigin(NSPoint(x: 0, y: self.progressView.frame.origin.y))
     }
 
     func configurateMovieVC() {
+        if self.episode == nil {
+            return
+        }
 //        NotificationCenter.default.addObserver(self, selector: #selector(boundsDidChangeNotification(_:)), name: NSView.boundsDidChangeNotification, object: self.playerView)
         NotificationCenter.default.addObserver(self, selector: #selector(frameDidChangeNotification(_:)), name: NSView.frameDidChangeNotification, object: self.playerView)
 
@@ -655,66 +668,94 @@ import AppCenterAnalytics
         }
     }
 
+    var audioImageSlicePerSeconds: Double = 15
+    var nudgingOffsetForNonLastSegment: Double = 1
+    var waveformTrackCacheRoot = ("~/Library/Caches/com.dim.Caption/audio_thumbnail" as NSString).expandingTildeInPath as String
+    var videoThumbnailTrackCacheRoot = ("~/Library/Caches/com.dim.Caption/video_thumbnail" as NSString).expandingTildeInPath as String
+
     func configureWaveTrack() {
+//        return
+        let waveTrackCacheFolder = "\(waveformTrackCacheRoot)/\(self.episode.guidIdentifier ?? "unknown")"
+        let urlForCreation = URL(fileURLWithPath: waveTrackCacheFolder, isDirectory: true)
+        do {
+            try FileManager.default.createDirectory(at: urlForCreation, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            print(error)
+        }
         let asset = self.episode.player?.currentItem?.asset
         self.waveformPreviewContainerBox.setFrameSize(NSSize(width: self.timelineLengthPixels, height: timeLineSegmentHeight))
-        self.waveformImageView.setFrameSize(NSSize(width: self.timelineLengthPixels, height: timeLineSegmentHeight))
+        // self.waveformImageView.setFrameSize(NSSize(width: self.timelineLengthPixels, height: timeLineSegmentHeight))
         let audioTracks:[AVAssetTrack] = asset!.tracks(withMediaType: AVMediaType.audio)
         if isVideoOnly {
             return
         }
-        let capturedGUID = self.episode.guidIdentifier
+        let computedGUIDForTask = NSUUID().uuidString
+        waveformPreviewContainerBox.guid = computedGUIDForTask
+        let timeScale = self.episode.player?.currentItem?.asset.duration.timescale ?? 1
+        guard let track: AVAssetTrack = audioTracks.first, let duration = self.episode.player?.currentItem?.asset.duration else {return}
+        let durationSeconds = duration.seconds
+        let numberOfSlicesDouble: Double = durationSeconds / audioImageSlicePerSeconds
+        let numberOfSlicesInt: Int = Int(numberOfSlicesDouble)
+        let timeInLastSlice = durationSeconds - Double(numberOfSlicesInt * Int(audioImageSlicePerSeconds))
 
-        if let track:AVAssetTrack = audioTracks.first{
-            //let timeRange = CMTimeRangeMake(CMTime(seconds: 0, preferredTimescale: 1000), CMTime(seconds: 1, preferredTimescale: 1000))
-            let timeRange:CMTimeRange? = nil
-            var cachedBounds = self.waveformImageView.bounds.size
-            cachedBounds.width = self.timelineLengthPixels
-            let width = Int(timelineLengthPixels)
-
-            DispatchQueue.global(qos: .background).async {
-                // Let's extract the downsampled samples
-//                let samplingStartTime = CFAbsoluteTimeGetCurrent()
-                SamplesExtractor.samples(audioTrack: track,
-                                         timeRange: timeRange,
-                                         desiredNumberOfSamples: width,
-                                         onSuccess: { s, sMax, _ in
-                                            let sampling = (samples: s, sampleMax: sMax)
-                                            // let samplingDuration = CFAbsoluteTimeGetCurrent() - samplingStartTime
-                                            // Image Drawing
-                                            // Let's draw the sample into an image.
-                                            let configuration = WaveformConfiguration(size: cachedBounds,
-                                                                                      color: WaveColor(red: 77 / 255, green: 103 / 255, blue: 143 / 255, alpha: 1),
-                                                                                      backgroundColor: WaveColor.clear,
-                                                                                      style: .gradient,
-                                                                                      position: .middle,
-                                                                                      scale: 1,
-                                                                                      borderWidth: 0,
-                                                                                      borderColor: WaveColor.clear)
-//                                            let drawingStartTime = CFAbsoluteTimeGetCurrent()
-                                            if let imageDrawn = WaveFormDrawer.image(with: sampling, and: configuration) {
-                                                let task = DispatchWorkItem {
-                                                    if (self.episode.guidIdentifier == capturedGUID) {
-                                                        self.waveformImageView.image = imageDrawn
-                                                    }
-                                                }
-                                                self.accumulatedMainQueueTasks.append(task)
-                                                DispatchQueue.main.async(execute: task)
-                                            }
-                                            // let drawingDuration = CFAbsoluteTimeGetCurrent() - drawingStartTime
-                                            // self.nbLabel.stringValue = "\(width)/\(sampling.samples.count)"
-                                            // self.samplingDurationLabel.stringValue = String(format:"%.3f s",samplingDuration)
-                                            // self.drawingDurationLabel.stringValue = String(format:"%.3f s",drawingDuration)
-                }, onFailure: { error, id in
-                    print("\(id ?? "") \(error)")
-                })
+        for i in 0...numberOfSlicesInt {
+            var timeInThisSlice = self.audioImageSlicePerSeconds
+            if i == numberOfSlicesInt {
+                timeInThisSlice = timeInLastSlice
             }
+            var nudgedDuration = timeInThisSlice
+            if i != numberOfSlicesInt {
+                nudgedDuration += self.nudgingOffsetForNonLastSegment
+            }
+            let pointOffsetXStart = CGFloat((Double(i) * self.audioImageSlicePerSeconds) / durationSeconds) * self.timelineLengthPixels
+            let pointWidth = CGFloat(nudgedDuration / durationSeconds) * self.timelineLengthPixels
+
+            if FileManager.default.fileExists(atPath: "\(waveTrackCacheFolder)/\(i).png") {
+                let imageRect = NSRect(x: pointOffsetXStart, y: 0, width: pointWidth, height: self.timeLineSegmentHeight)
+                let imageView = NSImageView(frame: imageRect)
+                imageView.image = NSImage.init(contentsOfFile: "\(waveTrackCacheFolder)/\(i).png")
+                imageView.tag = 5
+                self.waveformPreviewContainerBox.addSubWaveformView(capturedGUID: computedGUIDForTask, imageView: imageView)
+            } else {
+                let bgTask = DispatchWorkItem {
+                    let timeRange = CMTimeRangeMake(start: CMTime(seconds: Double(i) * self.audioImageSlicePerSeconds, preferredTimescale: timeScale), duration: CMTime(seconds: nudgedDuration, preferredTimescale: timeScale))
+                    let cachedBounds = CGSize(width: pointWidth, height: self.timeLineSegmentHeight)
+                    let width = Int(pointWidth)
+                    // print("WE CARE \(i): [2] Before SamplesExtractor block")
+                    SamplesExtractor.samples(audioTrack: track, timeRange: timeRange, desiredNumberOfSamples: width, onSuccess: { s, sMax, _ in
+                        // print("WE CARE \(i): [3] In SamplesExtractor block")
+                        let sampling = (samples: s, sampleMax: sMax)
+                        let configuration = WaveformConfiguration(size: cachedBounds, color: WaveColor(red: 77 / 255, green: 103 / 255, blue: 143 / 255, alpha: 1), backgroundColor: WaveColor.clear, style: .gradient, position: .middle, scale: 1, borderWidth: 0, borderColor: WaveColor.clear)
+                        if let imageDrawn = WaveFormDrawer.image(with: sampling, and: configuration) {
+                            imageDrawn.saveAsFile(with: .png, withName: "\(waveTrackCacheFolder)/\(i).png")
+                            print("WE CARE \(i): [4] WaveFormDrawer is drawn")
+                            let task = DispatchWorkItem {
+                                print("WE CARE \(i): [5] In DispatchWorkItem block")
+                                let imageRect = NSRect(x: pointOffsetXStart, y: 0, width: pointWidth, height: self.timeLineSegmentHeight)
+                                let imageView = NSImageView(frame: imageRect)
+                                imageView.image = imageDrawn
+                                imageView.tag = 5
+                                self.waveformPreviewContainerBox.addSubWaveformView(capturedGUID: computedGUIDForTask, imageView: imageView)
+                            }
+                            self.accumulatedMainQueueTasks.append(task)
+                            DispatchQueue.main.async(execute: task)
+                        }
+                    }, onFailure: { error, id in
+                        print("\(id ?? "") \(error)")
+                    })
+                }
+                accumulatedBackgroundQueueTasks.append(bgTask)
+                DispatchQueue.global(qos: .userInteractive).async(execute: bgTask)
+            }
+
         }
+
     }
 
     let thumbnailPerSeconds: Float64 = 2
 
     var accumulatedMainQueueTasks: [DispatchWorkItem] = []
+    var accumulatedBackgroundQueueTasks: [DispatchWorkItem] = []
 
     func configureVideoThumbnailTrack() {
         if isAudioOnly {
@@ -723,49 +764,86 @@ import AppCenterAnalytics
         let computedGUIDForTask = NSUUID().uuidString
         videoPreviewContainerView.guid = computedGUIDForTask
         self.videoPreviewContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.videoPreviewContainerView.frame.size.height))
-        // one snapshot every 10 seconds
-        DispatchQueue.global(qos: .background).async {
-            let asset = self.episode.player?.currentItem?.asset
-//            print("Video Thumbnail asset is: \(asset)")
-            if asset == nil {
-                return
-            }
-            let imageGenerator = AVAssetImageGenerator(asset: asset!)
-            if let duration = self.episode.player?.currentItem?.asset.duration {
-//                print("Video Thumbnail duration is: \(duration)")
-                let totalSeconds = CMTimeGetSeconds(duration)
-                var secondIndex: Float64 = 1
-                var imageIndex: Int = 0
-                if (totalSeconds.isNaN) {
-                    return
-                }
-                let numberOfThumbnails = Int(totalSeconds / self.thumbnailPerSeconds)
-                let widthOfThumbnail = self.timelineLengthPixels / CGFloat(numberOfThumbnails)
-                var generatedImages: [NSImage] = []
-                while (secondIndex < totalSeconds) {
-                    let screenshotTime = CMTime(seconds: Double(secondIndex), preferredTimescale: 1)
-                    do {
-                        let imageRef = try? imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
-                        let image = NSImage(cgImage: imageRef!, size: NSSize(width: imageRef!.width, height: imageRef!.height))
-                        generatedImages.append(image)
-                        let capturedIndex = imageIndex
-                        let task = DispatchWorkItem {
-                            let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
-                            imageView.imageScaling = .scaleProportionallyUpOrDown
-                            imageView.imageFrameStyle = .grayBezel
-                            imageView.image = image
-                            self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
-                        }
-                        self.accumulatedMainQueueTasks.append(task)
-                        DispatchQueue.main.async(execute: task)
-                    } catch {
-                        "Can't take screenshot: \(error)"
-                    }
-                    secondIndex += self.thumbnailPerSeconds
-                    imageIndex += 1
-                }
-            }
+        guard let asset = self.episode.player?.currentItem?.asset else {return}
+
+        let videoThumbnailTrackCacheFolder = "\(videoThumbnailTrackCacheRoot)/\(self.episode.guidIdentifier ?? "unknown")"
+        let urlForCreation = URL(fileURLWithPath: videoThumbnailTrackCacheFolder, isDirectory: true)
+        do { try FileManager.default.createDirectory(at: urlForCreation, withIntermediateDirectories: true, attributes: nil) }catch { print(error) }
+
+        guard let duration = self.episode.player?.currentItem?.asset.duration else { return }
+
+        let totalSeconds = CMTimeGetSeconds(duration)
+        var secondIndex: Float64 = 1
+        var imageIndex: Int = 0
+        if (totalSeconds.isNaN) {
+            return
         }
+        let numberOfThumbnails = Int(totalSeconds / self.thumbnailPerSeconds)
+        let widthOfThumbnail = self.timelineLengthPixels / CGFloat(numberOfThumbnails)
+//        var generatedImages: [NSImage] = []
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.maximumSize = CGSize(width: 320, height: 240);
+
+        while (secondIndex < totalSeconds) {
+            let screenshotTime = CMTime(seconds: Double(secondIndex), preferredTimescale: 1)
+            let capturedIndex = imageIndex
+            let tentativePath = "\(videoThumbnailTrackCacheFolder)/\(capturedIndex).jpg"
+            if FileManager.default.fileExists(atPath: tentativePath) {
+                let taskToLoadImage = DispatchWorkItem {
+                    let loadedImage = NSImage.init(contentsOfFile: tentativePath)
+                    let taskToPlaceIntoView = DispatchWorkItem {
+                        let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
+                        imageView.imageScaling = .scaleProportionallyUpOrDown
+                        imageView.imageFrameStyle = .grayBezel
+                        imageView.image = loadedImage
+                        self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
+                    }
+                    self.accumulatedMainQueueTasks.append(taskToPlaceIntoView)
+                    DispatchQueue.main.async(execute: taskToPlaceIntoView)
+                }
+                self.accumulatedBackgroundQueueTasks.append(taskToLoadImage)
+                DispatchQueue.global(qos: .userInitiated).async(execute: taskToLoadImage)
+            } else {
+//                    let taskToGenerateImage = DispatchWorkItem {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    do {
+//                        print("WE CARE: [\(capturedIndex), 0]")
+                        imageGenerator.generateCGImagesAsynchronously(forTimes: [NSValue(time: screenshotTime)], completionHandler: { (time1, image, time2, result, error) in
+                            if result == .succeeded {
+                                let image = NSImage(cgImage: image!, size: NSSize(width: image!.width, height: image!.height))
+                                //                        generatedImages.append(image)
+                                let taskToSave = DispatchWorkItem {
+//                                    print("WE CARE: [\(capturedIndex), 1]")
+                                    image.saveAsFile(with: .jpeg, withName: tentativePath)
+                                }
+                                self.accumulatedBackgroundQueueTasks.append(taskToSave)
+                                DispatchQueue.global(qos: .userInitiated).async(execute: taskToSave)
+                                let task = DispatchWorkItem {
+//                                    print("WE CARE: [\(capturedIndex), 2]")
+
+                                    let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
+                                    imageView.imageScaling = .scaleProportionallyUpOrDown
+                                    imageView.imageFrameStyle = .grayBezel
+                                    imageView.image = image
+                                    self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
+                                }
+                                self.accumulatedMainQueueTasks.append(task)
+                                DispatchQueue.main.async(execute: task)
+                            } else {
+                                print("Failed with: \(error)")
+                            }
+                        })
+//                        let imageRef = try imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
+                    } catch {print("Error: \(error)")}
+
+                }
+//                    self.accumulatedBackgroundQueueTasks.append(taskToGenerateImage)
+//                    DispatchQueue.global(qos: .userInitiated).async(execute: taskToGenerateImage)
+            }
+            secondIndex += self.thumbnailPerSeconds
+            imageIndex += 1
+        }
+
 
 //        var imageGenerator = AVAssetImageGenerator(asset: asset!)
 //            let value = Float64(percent) * totalSeconds

@@ -187,15 +187,15 @@ public struct SamplesExtractor{
                                          samplesPerPixel: samplesPerPixel,
                                          filter: filter)
                 }
-                DispatchQueue.global(qos: .background).async {
+//                DispatchQueue.global(qos: .userInitiated).async {
                     onSuccess(outputSamples, sampleMax)
-                }
+//                }
                 return
 
             case .failed, .cancelled, .loading, .unknown:
-                DispatchQueue.global(qos: .background).async {
+//                DispatchQueue.global(qos: .userInitiated).async {
                     onFailure(SamplesExtractorError.readingError(message: "could not load asset: \(error?.localizedDescription ?? "Unknown error" )"))
-                }
+//                }
             }
         }
 

@@ -28,9 +28,47 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             addNewProject()
             newRow = 0
         }
-        tableView.selectRowIndexes(IndexSet(integer: newRow), byExtendingSelection: false)
+        if let id = project.guidIdentifier {
+            removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/audio_thumbnail/\(id)")
+            removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/video_thumbnail/\(id)")
+
+        }
+//        tableView.selectRowIndexes(IndexSet(integer: newRow), byExtendingSelection: false)
+        if let index = episodeProjects.firstIndex(of: project) {
+            episodeProjects.remove(at: index)
+            project.player?.pause()
+            project.player?.replaceCurrentItem(with: nil)
+            project.player = nil
+            AppDelegate.subtitleVC()?.dismantleSubtitleVC()
+            AppDelegate.movieVC()?.dismantleOldMovieVC()
+            AppDelegate.movieVC()?.configurateMovieVC()
+            AppDelegate.subtitleVC()?.configurateSubtitleVC()
+            AppDelegate.fontVC()?.dismantleOldFontVC()
+            AppDelegate.fontVC()?.configurateFontVC()
+        }
+
         Helper.context?.delete(project)
-        tableView.removeRows(at: IndexSet(integer: row), withAnimation: .slideDown)
+//        tableView.removeRows(at: IndexSet(integer: row), withAnimation: .slideDown)
+        tableView.reloadData()
+        updateSelectRow(index: tableView.selectedRow)
+    }
+
+    func removeFilesUnderURL(urlPath: String) {
+        let cacheURL = (urlPath as NSString).expandingTildeInPath as String
+
+        guard let url = URL(string: cacheURL) else {return}
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(atPath: cacheURL)
+        } catch {
+            print(error)
+        }
+//        let enumerator = fileManager.enumerator(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles, errorHandler: nil)
+//        do {
+//            while let file = enumerator?.nextObject() as? String {
+//                try? fileManager.removeItem(at: url.appendingPathComponent(file))
+//            }
+//        }
     }
 
     @IBAction func exportFCPXMLClicked(_ sender: Any) {
