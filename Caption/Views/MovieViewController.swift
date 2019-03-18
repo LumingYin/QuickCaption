@@ -315,12 +315,12 @@ import AppCenterAnalytics
         speedSlider.floatValue = 1
         self.videoPreviewContainerView.guid = nil
         for task in accumulatedMainQueueTasks {
-            print("Cancelling \(task)")
-            task.cancel()
+//            print("Cancelling \(task)")
+//            task.cancel()
         }
         for task in accumulatedBackgroundQueueTasks {
-            print("Cancelling \(task)")
-            task.cancel()
+//            print("Cancelling \(task)")
+//            task.cancel()
         }
         NotificationCenter.default.removeObserver(self)
         self.playerView.player?.safelyRemoveObserver(self, forKeyPath: "rate")
@@ -781,33 +781,38 @@ import AppCenterAnalytics
             let screenshotTime = CMTime(seconds: Double(secondIndex), preferredTimescale: 1)
             let capturedIndex = imageIndex
             let tentativePath = "\(videoThumbnailTrackCacheFolder)/\(capturedIndex).jpg"
-            do {
-                if FileManager.default.fileExists(atPath: tentativePath) {
-                    let taskToLoadImage = DispatchWorkItem {
-                        let loadedImage = NSImage.init(contentsOfFile: tentativePath)
-                        let taskToPlaceIntoView = DispatchWorkItem {
-                            let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
-                            imageView.imageScaling = .scaleProportionallyUpOrDown
-                            imageView.imageFrameStyle = .grayBezel
-                            imageView.image = loadedImage
-                            self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
-                        }
-                        self.accumulatedMainQueueTasks.append(taskToPlaceIntoView)
-                        DispatchQueue.main.async(execute: taskToPlaceIntoView)
+            if FileManager.default.fileExists(atPath: tentativePath) {
+                let taskToLoadImage = DispatchWorkItem {
+                    let loadedImage = NSImage.init(contentsOfFile: tentativePath)
+                    let taskToPlaceIntoView = DispatchWorkItem {
+                        let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
+                        imageView.imageScaling = .scaleProportionallyUpOrDown
+                        imageView.imageFrameStyle = .grayBezel
+                        imageView.image = loadedImage
+                        self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
                     }
-                    self.accumulatedBackgroundQueueTasks.append(taskToLoadImage)
-                    DispatchQueue.global(qos: .userInitiated).async(execute: taskToLoadImage)
-                } else {
-                    let taskToGenerateImage = DispatchWorkItem {
-                        let imageRef = try? imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
-                        let image = NSImage(cgImage: imageRef!, size: NSSize(width: imageRef!.width, height: imageRef!.height))
-//                        generatedImages.append(image)
+                    self.accumulatedMainQueueTasks.append(taskToPlaceIntoView)
+                    DispatchQueue.main.async(execute: taskToPlaceIntoView)
+                }
+                self.accumulatedBackgroundQueueTasks.append(taskToLoadImage)
+                DispatchQueue.global(qos: .userInitiated).async(execute: taskToLoadImage)
+            } else {
+//                    let taskToGenerateImage = DispatchWorkItem {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    do {
+                        print("WE CARE: [\(capturedIndex), 0]")
+                        let imageRef = try imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
+                        let image = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
+                        //                        generatedImages.append(image)
                         let taskToSave = DispatchWorkItem {
+                            print("WE CARE: [\(capturedIndex), 1]")
                             image.saveAsFile(with: .jpeg, withName: tentativePath)
                         }
                         self.accumulatedBackgroundQueueTasks.append(taskToSave)
                         DispatchQueue.global(qos: .userInitiated).async(execute: taskToSave)
                         let task = DispatchWorkItem {
+                            print("WE CARE: [\(capturedIndex), 2]")
+
                             let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
                             imageView.imageScaling = .scaleProportionallyUpOrDown
                             imageView.imageFrameStyle = .grayBezel
@@ -816,12 +821,11 @@ import AppCenterAnalytics
                         }
                         self.accumulatedMainQueueTasks.append(task)
                         DispatchQueue.main.async(execute: task)
-                    }
-                    self.accumulatedBackgroundQueueTasks.append(taskToGenerateImage)
-                    DispatchQueue.global(qos: .userInitiated).async(execute: taskToGenerateImage)
+                    } catch {print("Error: \(error)")}
+
                 }
-            } catch {
-                "Can't take screenshot: \(error)"
+//                    self.accumulatedBackgroundQueueTasks.append(taskToGenerateImage)
+//                    DispatchQueue.global(qos: .userInitiated).async(execute: taskToGenerateImage)
             }
             secondIndex += self.thumbnailPerSeconds
             imageIndex += 1
