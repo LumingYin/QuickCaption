@@ -71,6 +71,14 @@ import AppCenterAnalytics
 
     // MARK: - Buttons and IBActions
     @IBAction func openFile(_ sender: Any) {
+        if self.episode.videoURL != nil {
+            Helper.displayInteractiveSheet(title: "Create new project?", text: "The current project already has an associated video. Do you want to create a new project instead?", firstButtonText: "Create New Project", secondButtonText: "Cancel", callback: { (firstButtonClicked) in
+                if (firstButtonClicked) {
+                    AppDelegate.sourceListVC()?.addNewProject()
+                }
+            })
+            return
+        }
         let dialog = NSOpenPanel()
         dialog.title = "Choose a video file"
         dialog.showsResizeIndicator = true
@@ -81,7 +89,15 @@ import AppCenterAnalytics
         dialog.allowedFileTypes = ["mp4", "mpeg4", "m4v", "ts", "mpg", "mpeg", "mp3", "mpeg3", "m4a", "mov"]
         
         dialog.beginSheetModal(for: self.view.window!) { (result) in
+            if result != .OK {
+                return
+            }
             if let result = dialog.url, let path = dialog.url?.path {
+                if let id = self.episode.guidIdentifier {
+                    Helper.removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/audio_thumbnail/\(id)")
+                    Helper.removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/video_thumbnail/\(id)")
+                    self.dismantleOldMovieVC()
+                }
                 if self.episode == nil {
                     AppDelegate.sourceListVC()?.updateSelectRow(index: 0)
                 }

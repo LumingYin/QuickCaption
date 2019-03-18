@@ -11,6 +11,18 @@ import AVKit
 
 class Helper: NSObject {
 
+    static func removeFilesUnderURL(urlPath: String) {
+        let cacheURL = (urlPath as NSString).expandingTildeInPath as String
+
+        guard let url = URL(string: cacheURL) else {return}
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(atPath: cacheURL)
+        } catch {
+            print(error)
+        }
+    }
+
     static func installFCPXCaptionFiles() -> Bool {
         let fileMgr = FileManager.default
         //        let userDocumentURL = fileMgr.urls(for: .documentDirectory, in: .userDomainMask).first!

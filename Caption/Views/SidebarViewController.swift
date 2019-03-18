@@ -29,9 +29,8 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             newRow = 0
         }
         if let id = project.guidIdentifier {
-            removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/audio_thumbnail/\(id)")
-            removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/video_thumbnail/\(id)")
-
+            Helper.removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/audio_thumbnail/\(id)")
+            Helper.removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/video_thumbnail/\(id)")
         }
 //        tableView.selectRowIndexes(IndexSet(integer: newRow), byExtendingSelection: false)
         if let index = episodeProjects.firstIndex(of: project) {
@@ -53,7 +52,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         updateSelectRow(index: tableView.selectedRow)
     }
 
-    func removeFilesUnderURL(urlPath: String) {
+    static func removeFilesUnderURL(urlPath: String) {
         let cacheURL = (urlPath as NSString).expandingTildeInPath as String
 
         guard let url = URL(string: cacheURL) else {return}
@@ -63,12 +62,6 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         } catch {
             print(error)
         }
-//        let enumerator = fileManager.enumerator(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles, errorHandler: nil)
-//        do {
-//            while let file = enumerator?.nextObject() as? String {
-//                try? fileManager.removeItem(at: url.appendingPathComponent(file))
-//            }
-//        }
     }
 
     @IBAction func exportFCPXMLClicked(_ sender: Any) {
