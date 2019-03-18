@@ -16,6 +16,7 @@ Quickly transcribe your video:
 - Double click on any existing caption to edit or correct transcription mistakes
 
 Export:
+- Export into .FCPXML format to re-import caption information back into Final Cut Pro X for round-trip workflows
 - Export into .SRT format to distribute your created caption alongside with your video or through the web
 - Export into .TXT format for a plain-text transcript
 
