@@ -12,6 +12,18 @@
 <pubDate>Mon, 18 Mar 2019 01:23:31 -0400</pubDate>
 <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
 <enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption%202019.03.18.0.dmg" sparkle:version="2019.03.18.0" sparkle:shortVersionString="2019.03.18.0" length="5378731" type="application/octet-stream" sparkle:edSignature="91rocC4DtL6omHe+KqmRJWCQiJyL4UmnhAtIioLuX0CYB10uPYvYe/IDdJUy2aiAwxX+Z3Nr178obBgg6aWrDw=="/>
+<sparkle:deltas>
+<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption2019.03.18.0-2019.02.18.2.delta" sparkle:version="2019.03.18.0" sparkle:shortVersionString="2019.03.18.0" sparkle:deltaFrom="2019.02.18.2" length="4557406" type="application/octet-stream" sparkle:edSignature="wFa1xDwHcOg1cW7E0EcS7nR15/atlOt9B4AQFTrxOaL/X7SwBny0JxEpkn7ejNTWcxJoraLvsOgpkyl0N2YDAg=="/></sparkle:deltas>
 </item>
+<item>
+<title>2019.03.18.2</title>
+<pubDate>Mon, 18 Mar 2019 02:11:11 -0400</pubDate>
+<sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
+<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption%202019.03.18.2.dmg" sparkle:version="2019.03.18.2" sparkle:shortVersionString="2019.03.18.2" length="5377281" type="application/octet-stream" sparkle:edSignature="ZBx1JcjXZajPiC8ntCgeacwdnM/jbQRWRNrzTJ5nGJPAWXrJZWqluPQFlx88lM9gnQFOWAn8c7Tu3AuYx5v2Ag=="/>
+<sparkle:deltas>
+<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption2019.03.18.2-2019.03.18.0.delta" sparkle:version="2019.03.18.2" sparkle:shortVersionString="2019.03.18.2" sparkle:deltaFrom="2019.03.18.0" length="151243" type="application/octet-stream" sparkle:edSignature="3WisKup46M8K/juW2QXBfRDSBNNV0hXRKibzoMaQnK0lOkMPjTHG3wWloa4pFhgFy1uLiJUHXcDAfty4neR1Cw=="/>
+<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption2019.03.18.2-2019.02.18.2.delta" sparkle:version="2019.03.18.2" sparkle:shortVersionString="2019.03.18.2" sparkle:deltaFrom="2019.02.18.2" length="4557569" type="application/octet-stream" sparkle:edSignature="mIjAjefUq/2dJ8KKBg8AH2AjpHUR7D1qX4TFPrq/CkcNTiZUhZA4LngbHNMCnu8JFs7A1fB1ay+Q7rCw9LgPAQ=="/></sparkle:deltas>
+</item>
+
 
 </channel></rss>
