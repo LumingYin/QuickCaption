@@ -246,8 +246,17 @@ import AppCenterAnalytics
         self.captionPreviewLabel.font = newFont
     }
 
+    var isAudioOnly: Bool {
+        get {
+            guard let asset = self.playerView.player?.currentItem?.asset else { return false }
+            if asset.tracks(withMediaType: .video).count == 0 { return true }
+            return false
+        }
+    }
+
     func populateThumbnail() {
         if (self.episode.thumbnailURL == nil) {
+            if isAudioOnly { return }
             let sourceURL = self.episode!.videoURL
             let asset = AVAsset(url: sourceURL!)
             let imageGenerator = AVAssetImageGenerator(asset: asset)
@@ -678,6 +687,9 @@ import AppCenterAnalytics
     var accumulatedMainQueueTasks: [DispatchWorkItem] = []
 
     func configureVideoThumbnailTrack() {
+        if isAudioOnly {
+            return
+        }
         self.videoPreviewContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.videoPreviewContainerView.frame.size.height))
         // one snapshot every 10 seconds
         DispatchQueue.global(qos: .background).async {
