@@ -1401,11 +1401,11 @@ CA
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEG-SY-Hn2" customClass="QuickCaptionScrollView">
                                 <rect key="frame" x="0.0" y="0.0" width="648" height="230"/>
                                 <clipView key="contentView" id="k0n-uO-2Ef">
-                                    <rect key="frame" x="0.0" y="0.0" width="648" height="230"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="648" height="215"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mHu-9K-0O1" customClass="TimelineOverallView" customModule="Quick_Caption" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="-2416" width="591" height="213"/>
+                                            <rect key="frame" x="0.0" y="-2431" width="591" height="213"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <subviews>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K4d-N4-mRe" customClass="VideoPreviewContainerView" customModule="Quick_Caption" customModuleProvider="target">
@@ -1416,20 +1416,12 @@ CA
                                                     <rect key="frame" x="8" y="147" width="521" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
-                                                <box fixedFrame="YES" boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="fCx-cJ-p9f">
-                                                    <rect key="frame" x="8" y="75" width="0.0" height="64"/>
+                                                <box fixedFrame="YES" boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="fCx-cJ-p9f" customClass="CaptionWaveformBox" customModule="Quick_Caption" customModuleProvider="target">
+                                                    <rect key="frame" x="8" y="75" width="50" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <view key="contentView" ambiguous="YES" id="oVo-bP-cpU">
-                                                        <rect key="frame" x="0.0" y="1" width="0.0" height="62"/>
+                                                        <rect key="frame" x="1" y="1" width="48" height="62"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <subviews>
-                                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P2a-iw-9CG">
-                                                                <rect key="frame" x="0.0" y="-1" width="521" height="64"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="DTT-i0-VKS"/>
-                                                                <color key="contentTintColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
-                                                            </imageView>
-                                                        </subviews>
                                                     </view>
                                                     <color key="fillColor" name="audioTrackBG"/>
                                                 </box>
@@ -1475,10 +1467,10 @@ CA
                                     <constraint firstAttribute="height" constant="230" id="V95-Hy-NGv"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.11764705882352941" horizontal="YES" id="wxD-Wq-Vsv">
-                                    <rect key="frame" x="0.0" y="214" width="648" height="16"/>
+                                    <rect key="frame" x="0.0" y="215" width="648" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Ilf-GR-hhe">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Ilf-GR-hhe">
                                     <rect key="frame" x="-100" y="-100" width="15" height="213"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1589,7 +1581,6 @@ CA
                         <outlet property="timelineScrollView" destination="QEG-SY-Hn2" id="6Bt-BF-igB"/>
                         <outlet property="videoPreviewContainerView" destination="K4d-N4-mRe" id="O3j-UH-f7o"/>
                         <outlet property="volumeSlider" destination="vX9-SF-5ld" id="MxB-T9-bfn"/>
-                        <outlet property="waveformImageView" destination="P2a-iw-9CG" id="sGU-RP-60h"/>
                         <outlet property="waveformPreviewContainerBox" destination="fCx-cJ-p9f" id="AHR-c6-rlc"/>
                     </connections>
                 </viewController>

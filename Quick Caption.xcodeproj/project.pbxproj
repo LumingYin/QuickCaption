@@ -28,6 +28,7 @@
 		322F448D223F4CC500427898 /* GBDeviceInfo_OSX.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F4484223F4CC500427898 /* GBDeviceInfo_OSX.m */; };
 		322F448E223F4CC500427898 /* GBDeviceInfo_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F448B223F4CC500427898 /* GBDeviceInfo_Common.m */; };
 		322F4495223F720F00427898 /* QuickCaptionScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F4494223F720F00427898 /* QuickCaptionScrollView.m */; };
+		322F4497223F818F00427898 /* CaptionWaveformBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F4496223F818F00427898 /* CaptionWaveformBox.swift */; };
 		323EE3BB2219439F00CC22B3 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B52219439F00CC22B3 /* AppCenter.framework */; };
 		323EE3BC2219439F00CC22B3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B62219439F00CC22B3 /* Sparkle.framework */; };
 		323EE3BD2219439F00CC22B3 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */; };
@@ -110,6 +111,7 @@
 		322F448C223F4CC500427898 /* GBDeviceInfoInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfoInterface.h; sourceTree = "<group>"; };
 		322F4493223F720F00427898 /* QuickCaptionScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickCaptionScrollView.h; sourceTree = "<group>"; };
 		322F4494223F720F00427898 /* QuickCaptionScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickCaptionScrollView.m; sourceTree = "<group>"; };
+		322F4496223F818F00427898 /* CaptionWaveformBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionWaveformBox.swift; sourceTree = "<group>"; };
 		323EE3B52219439F00CC22B3 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Caption/Frameworks/AppCenter.framework; sourceTree = "<group>"; };
 		323EE3B62219439F00CC22B3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Caption/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Caption/Frameworks/AppCenterCrashes.framework; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				562A688A1F2D4F5E000E6B16 /* Main.storyboard */,
+				322F4496223F818F00427898 /* CaptionWaveformBox.swift */,
 				322F4493223F720F00427898 /* QuickCaptionScrollView.h */,
 				322F4494223F720F00427898 /* QuickCaptionScrollView.m */,
 				322F4481223F367700427898 /* WaveformPreviewContainerView.swift */,
@@ -415,6 +418,7 @@
 				32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */,
 				321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */,
 				321DC3F5223615E90038C8FB /* MainSplitViewController.swift in Sources */,
+				322F4497223F818F00427898 /* CaptionWaveformBox.swift in Sources */,
 				321DC3F0223611F00038C8FB /* ResizableInputContainerView.swift in Sources */,
 				321DC3F92236216B0038C8FB /* Helper.swift in Sources */,
 				326A0916223F131F009A8313 /* ShadowPreferences.swift in Sources */,
