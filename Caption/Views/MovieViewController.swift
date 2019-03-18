@@ -12,7 +12,7 @@ import AVFoundation
 import AppCenter
 import AppCenterAnalytics
 
-@objc class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate, SubtitleTrackContainerViewDelegate {
+@objc class MovieViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate, SubtitleTrackContainerViewDelegate, NSWindowDelegate {
     @IBOutlet weak var playerView: AVPlayerView!
     @IBOutlet weak var timeLabel: NSTextField!
 
@@ -48,7 +48,21 @@ import AppCenterAnalytics
         AppDelegate.subtitleVC()?.dismantleSubtitleVC()
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
     }
-    
+
+    override func viewDidAppear() {
+        self.view.window?.delegate = self
+        self.playerView.postsBoundsChangedNotifications = true
+        self.playerView.postsFrameChangedNotifications = true
+    }
+
+    @objc func boundsDidChangeNotification(_ sender: Any) {
+//        print("Player bounds changed")
+    }
+    @objc func frameDidChangeNotification(_ sender: Any) {
+        print("Player frame changed")
+        refreshFontRelativeSize()
+    }
+
     // MARK: - Buttons and IBActions
     @IBAction func openFile(_ sender: Any) {
         let dialog = NSOpenPanel()
@@ -93,6 +107,10 @@ import AppCenterAnalytics
         playerView.player = episode.player
         episode.player?.play()
         recentTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateLoadVideo), userInfo: nil, repeats: false)
+    }
+
+    func windowDidResize(_ notification: Notification) {
+        print("window resized!")
     }
 
     func updatePersistedFramerate() {
@@ -154,6 +172,7 @@ import AppCenterAnalytics
     func refreshFontToReflectStyleChanges() {
         var postScriptName = "Helvetica"
         let size = self.episode.styleFontSize ?? "53"
+
         guard let arrayofSubs = NSFontManager.shared.availableMembers(ofFontFamily: self.episode.styleFontFamily ?? "Helvetica"),
             let floatSize = Float(size) else { return }
         var resultingSub:[String] = []
@@ -168,6 +187,42 @@ import AppCenterAnalytics
         guard let desiredFont = NSFont.init(name: postScriptName, size: CGFloat(floatSize)) else { return }
         self.captionPreviewLabel.font = desiredFont
         self.captionPreviewLabel.textColor = NSColor(hexString: self.episode.styleFontColor ?? "#ffffff")
+        refreshFontRelativeSize()
+    }
+
+    var videoRect: CGRect {
+        get {
+            guard let item = self.playerView.player?.currentItem, let track = item.asset.tracks(withMediaType: .video).first else {return CGRect.zero}
+            let trackSize = track.naturalSize
+            let videoViewSize = self.playerView.bounds.size
+            let trackRatio = trackSize.width / trackSize.height
+            let videoViewRatio = videoViewSize.width / videoViewSize.height
+            var newSize: CGSize
+
+            if (videoViewRatio > trackRatio) {
+                newSize = CGSize(width: trackSize.width * videoViewSize.height / trackSize.height, height: videoViewSize.height)
+            } else {
+                newSize = CGSize(width: videoViewSize.width, height: trackSize.height * videoViewSize.width / trackSize.width);
+            }
+
+            let newX = (videoViewSize.width - newSize.width) / 2;
+            let newY = (videoViewSize.height - newSize.height) / 2;
+
+            return CGRect(x: newX, y: newY, width: newSize.width, height: newSize.height)
+        }
+    }
+
+    func refreshFontRelativeSize() {
+        guard let asset = self.playerView.player?.currentItem?.asset else {return}
+        let videoFrame = videoRect
+        let shrinkingPercentage = videoFrame.size.width / asset.tracks[0].naturalSize.width
+
+        let size = self.episode.styleFontSize ?? "53"
+        let sizeFloat = CGFloat(Float(size) ?? 53)
+        let shrunkFontSize = sizeFloat * shrinkingPercentage
+        guard let oldFont = self.captionPreviewLabel.font else {return}
+        let newFont = NSFont(descriptor: oldFont.fontDescriptor, size: shrunkFontSize)
+        self.captionPreviewLabel.font = newFont
     }
 
     func populateThumbnail() {
@@ -294,6 +349,9 @@ import AppCenterAnalytics
     }
 
     func configurateMovieVC() {
+        NotificationCenter.default.addObserver(self, selector: #selector(boundsDidChangeNotification(_:)), name: NSView.boundsDidChangeNotification, object: self.playerView)
+        NotificationCenter.default.addObserver(self, selector: #selector(frameDidChangeNotification(_:)), name: NSView.frameDidChangeNotification, object: self.playerView)
+
         if let url = self.episode.videoURL {
             self.playVideo(url)
         } else {
