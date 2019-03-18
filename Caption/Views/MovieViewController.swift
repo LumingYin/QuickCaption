@@ -31,6 +31,7 @@ import AppCenterAnalytics
     @IBOutlet weak var speedSlider: NSSlider!
     @IBOutlet weak var playPauseImageView: NSImageView!
     @IBOutlet weak var captionBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var customHintContainerView: NSView!
 
 
     var cachedCaptionViews: [String: CaptionBoxView] = [:]
@@ -79,7 +80,6 @@ import AppCenterAnalytics
         
         dialog.beginSheetModal(for: self.view.window!) { (result) in
             if let result = dialog.url, let path = dialog.url?.path {
-//                self.saveToDisk(.srt)
                 if self.episode == nil {
                     AppDelegate.sourceListVC()?.updateSelectRow(index: 0)
                 }
@@ -105,6 +105,7 @@ import AppCenterAnalytics
     func playVideo(_ videoURL: URL) {
         self.episode.videoURL = videoURL
         episode.player = AVPlayer(url: videoURL)
+        customHintContainerView.isHidden = true
         self.episode.player?.addObserver(self, forKeyPath: "rate", options: [.new], context: &MovieViewController.playerPlayrateContext)
         playerView.player = episode.player
         episode.player?.addObserver(self, forKeyPath: "status", options: [.new], context: &MovieViewController.playerReadinessContext)
@@ -258,6 +259,14 @@ import AppCenterAnalytics
         }
     }
 
+    var isVideoOnly: Bool {
+        get {
+            guard let asset = self.playerView.player?.currentItem?.asset else { return false }
+            if asset.tracks(withMediaType: .audio).count == 0 { return true }
+            return false
+        }
+    }
+
     func populateThumbnail() {
         if (self.episode.thumbnailURL == nil) {
             if isAudioOnly { return }
@@ -295,7 +304,9 @@ import AppCenterAnalytics
     }
 
     func dismantleOldMovieVC() {
+        self.timeLabel.stringValue = "00:00:00,000"
         dismantleSetTimelineLengthToZero()
+        customHintContainerView.isHidden = false
         AppDelegate.setCurrentEpisodeTitle(nil)
         captionBottomConstraint.constant = 14
         self.captionPreviewLabel.stringValue = ""

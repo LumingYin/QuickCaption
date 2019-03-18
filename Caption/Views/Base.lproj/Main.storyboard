@@ -1341,19 +1341,79 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="2qy-J0-ats" userLabel="Custom Hint Container View">
+                                <rect key="frame" x="0.0" y="292" width="520" height="194"/>
+                                <subviews>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="nwY-LW-hdT" userLabel="Custom Hint Inner View">
+                                        <rect key="frame" x="128" y="37" width="265" height="120"/>
+                                        <subviews>
+                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N0Y-Mx-4BP">
+                                                <rect key="frame" x="-2" y="0.0" width="269" height="55"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="To create captions, click on the       button on the toolbar to open an existing video or audio file." id="J7M-zU-7eI">
+                                                    <font key="font" metaFont="system" size="14"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-6x-qHr">
+                                                <rect key="frame" x="208" y="34" width="50" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="import" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U19-4e-upa">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="openFile:" target="XfG-lQ-9wD" id="b7S-7s-lUN"/>
+                                                </connections>
+                                            </button>
+                                            <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="bi5-n9-ws7">
+                                                <rect key="frame" x="5" y="61" width="254" height="5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            </box>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VrY-KV-fKi">
+                                                <rect key="frame" x="89" y="72" width="142" height="46"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Welcome to  Quick Caption" id="OTq-OK-cO6">
+                                                    <font key="font" metaFont="systemSemibold" size="19"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tBV-Sp-iBU">
+                                                <rect key="frame" x="35" y="72" width="48" height="48"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="film" id="oUy-2U-QFT"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="7uR-rR-Jwo"/>
+                                            <constraint firstAttribute="width" constant="265" id="PBJ-gT-eVz"/>
+                                        </constraints>
+                                    </customView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="nwY-LW-hdT" firstAttribute="centerX" secondItem="2qy-J0-ats" secondAttribute="centerX" id="Ka2-g4-mDV"/>
+                                    <constraint firstItem="nwY-LW-hdT" firstAttribute="centerY" secondItem="2qy-J0-ats" secondAttribute="centerY" id="iZE-La-Xul"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="MMG-zt-4ZZ" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="2is-Uv-FU2"/>
                             <constraint firstItem="MMG-zt-4ZZ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="8jQ-Eg-iWa"/>
                             <constraint firstItem="QEG-SY-Hn2" firstAttribute="top" secondItem="WhH-E3-1w2" secondAttribute="bottom" id="NLs-8v-gjR"/>
+                            <constraint firstItem="2qy-J0-ats" firstAttribute="bottom" secondItem="MMG-zt-4ZZ" secondAttribute="bottom" id="NvA-uQ-p88"/>
                             <constraint firstAttribute="trailing" secondItem="jiy-T2-5Ml" secondAttribute="trailing" constant="20" id="NvI-p6-WoD"/>
                             <constraint firstAttribute="trailing" secondItem="WhH-E3-1w2" secondAttribute="trailing" id="OFZ-VQ-2a5"/>
                             <constraint firstAttribute="trailing" secondItem="MMG-zt-4ZZ" secondAttribute="trailing" id="Ofa-HJ-oaQ"/>
                             <constraint firstItem="QEG-SY-Hn2" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="P7P-S5-Gz1"/>
                             <constraint firstItem="WhH-E3-1w2" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="QlG-01-VDR"/>
                             <constraint firstItem="WhH-E3-1w2" firstAttribute="top" secondItem="MMG-zt-4ZZ" secondAttribute="bottom" id="RVX-ft-Qj2"/>
+                            <constraint firstItem="2qy-J0-ats" firstAttribute="leading" secondItem="MMG-zt-4ZZ" secondAttribute="leading" id="Th1-Qy-JOH"/>
+                            <constraint firstItem="2qy-J0-ats" firstAttribute="top" secondItem="MMG-zt-4ZZ" secondAttribute="top" id="bz4-hW-x8T"/>
                             <constraint firstItem="jiy-T2-5Ml" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="cCG-qp-0Pc"/>
                             <constraint firstAttribute="bottom" secondItem="QEG-SY-Hn2" secondAttribute="bottom" id="kXL-CT-f4r"/>
+                            <constraint firstItem="2qy-J0-ats" firstAttribute="trailing" secondItem="MMG-zt-4ZZ" secondAttribute="trailing" id="ptZ-Ey-TYz"/>
                             <constraint firstAttribute="trailing" secondItem="QEG-SY-Hn2" secondAttribute="trailing" id="qoH-Dm-TQ1"/>
                             <constraint firstItem="MMG-zt-4ZZ" firstAttribute="bottom" secondItem="jiy-T2-5Ml" secondAttribute="bottom" constant="14" id="sIp-PQ-tVI"/>
                         </constraints>
@@ -1361,6 +1421,7 @@
                     <connections>
                         <outlet property="captionBottomConstraint" destination="sIp-PQ-tVI" id="nKg-F1-kRy"/>
                         <outlet property="captionPreviewLabel" destination="jiy-T2-5Ml" id="TUc-3s-Ekx"/>
+                        <outlet property="customHintContainerView" destination="2qy-J0-ats" id="Y0A-bG-np1"/>
                         <outlet property="playPauseImageView" destination="FA1-Kt-fGw" id="Thf-LV-b8j"/>
                         <outlet property="playerView" destination="MMG-zt-4ZZ" id="XyH-Jq-kz1"/>
                         <outlet property="progressView" destination="K5C-Y2-cNb" id="ShI-fX-AJ7"/>
@@ -2037,6 +2098,7 @@
         <image name="file_fcpxml" width="174" height="185"/>
         <image name="file_srt" width="175" height="184"/>
         <image name="file_txt" width="175" height="184"/>
+        <image name="film" width="512" height="512"/>
         <image name="import" width="19" height="19"/>
         <image name="inspector" width="19" height="19"/>
         <image name="tb_frameNext" width="47.5" height="14.5"/>
