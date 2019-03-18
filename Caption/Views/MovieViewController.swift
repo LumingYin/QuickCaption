@@ -51,15 +51,14 @@ import AppCenterAnalytics
 
     override func viewDidAppear() {
         self.view.window?.delegate = self
-        self.playerView.postsBoundsChangedNotifications = true
+//        self.playerView.postsBoundsChangedNotifications = true
         self.playerView.postsFrameChangedNotifications = true
     }
 
-    @objc func boundsDidChangeNotification(_ sender: Any) {
+//    @objc func boundsDidChangeNotification(_ sender: Any) {
 //        print("Player bounds changed")
-    }
+//    }
     @objc func frameDidChangeNotification(_ sender: Any) {
-        print("Player frame changed")
         refreshFontRelativeSize()
     }
 
@@ -187,6 +186,17 @@ import AppCenterAnalytics
         guard let desiredFont = NSFont.init(name: postScriptName, size: CGFloat(floatSize)) else { return }
         self.captionPreviewLabel.font = desiredFont
         self.captionPreviewLabel.textColor = NSColor(hexString: self.episode.styleFontColor ?? "#ffffff")
+
+        if self.episode.styleFontShadow != 0 {
+            let shadow: NSShadow = NSShadow()
+            shadow.shadowBlurRadius = 1.07
+            shadow.shadowOffset = NSMakeSize(1, 1.5)
+            shadow.shadowColor = NSColor.black.withAlphaComponent(0.75)
+            self.captionPreviewLabel.shadow = shadow
+        } else {
+            self.captionPreviewLabel.shadow = nil
+        }
+
         refreshFontRelativeSize()
     }
 
@@ -349,7 +359,7 @@ import AppCenterAnalytics
     }
 
     func configurateMovieVC() {
-        NotificationCenter.default.addObserver(self, selector: #selector(boundsDidChangeNotification(_:)), name: NSView.boundsDidChangeNotification, object: self.playerView)
+//        NotificationCenter.default.addObserver(self, selector: #selector(boundsDidChangeNotification(_:)), name: NSView.boundsDidChangeNotification, object: self.playerView)
         NotificationCenter.default.addObserver(self, selector: #selector(frameDidChangeNotification(_:)), name: NSView.frameDidChangeNotification, object: self.playerView)
 
         if let url = self.episode.videoURL {
@@ -856,7 +866,7 @@ import AppCenterAnalytics
     }
 
 
-    // Mark: - Middle buttons
+    // MARK: - Buttons in the middle HUD
 
     @IBAction func volumeChanged(_ sender: NSSlider) {
         self.playerView.player?.volume = sender.floatValue
