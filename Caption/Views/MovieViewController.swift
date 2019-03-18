@@ -127,7 +127,6 @@ import AppCenterAnalytics
     }
 
     @objc func updateLoadVideo() {
-        self.videoPreviewContainerView.guid = self.episode.guidIdentifier
         self.updatePersistedFramerate()
 
         if self.episode.arrayForCaption?.count ?? 0 <= 0 {
@@ -691,7 +690,8 @@ import AppCenterAnalytics
         if isAudioOnly {
             return
         }
-        let capturedGUID = self.episode.guidIdentifier
+        let computedGUIDForTask = NSUUID().uuidString
+        videoPreviewContainerView.guid = computedGUIDForTask
         self.videoPreviewContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.videoPreviewContainerView.frame.size.height))
         // one snapshot every 10 seconds
         DispatchQueue.global(qos: .background).async {
@@ -724,10 +724,7 @@ import AppCenterAnalytics
                             imageView.imageScaling = .scaleProportionallyUpOrDown
                             imageView.imageFrameStyle = .grayBezel
                             imageView.image = image
-                            imageView.correspondingGUID = capturedGUID
-                            if (capturedGUID != nil) {
-                                self.videoPreviewContainerView.addSubImageView(capturedGUID: capturedGUID, imageView: imageView)
-                            }
+                            self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
                         }
                         self.accumulatedMainQueueTasks.append(task)
                         DispatchQueue.main.async(execute: task)
