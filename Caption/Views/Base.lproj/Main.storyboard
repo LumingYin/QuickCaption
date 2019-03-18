@@ -1333,7 +1333,6 @@
                         <constraints>
                             <constraint firstItem="MMG-zt-4ZZ" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="2is-Uv-FU2"/>
                             <constraint firstItem="MMG-zt-4ZZ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="8jQ-Eg-iWa"/>
-                            <constraint firstItem="WhH-E3-1w2" firstAttribute="top" secondItem="jiy-T2-5Ml" secondAttribute="bottom" constant="14" id="Mxv-sR-6nz"/>
                             <constraint firstItem="QEG-SY-Hn2" firstAttribute="top" secondItem="WhH-E3-1w2" secondAttribute="bottom" id="NLs-8v-gjR"/>
                             <constraint firstAttribute="trailing" secondItem="jiy-T2-5Ml" secondAttribute="trailing" constant="20" id="NvI-p6-WoD"/>
                             <constraint firstAttribute="trailing" secondItem="WhH-E3-1w2" secondAttribute="trailing" id="OFZ-VQ-2a5"/>
@@ -1344,9 +1343,11 @@
                             <constraint firstItem="jiy-T2-5Ml" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="cCG-qp-0Pc"/>
                             <constraint firstAttribute="bottom" secondItem="QEG-SY-Hn2" secondAttribute="bottom" id="kXL-CT-f4r"/>
                             <constraint firstAttribute="trailing" secondItem="QEG-SY-Hn2" secondAttribute="trailing" id="qoH-Dm-TQ1"/>
+                            <constraint firstItem="MMG-zt-4ZZ" firstAttribute="bottom" secondItem="jiy-T2-5Ml" secondAttribute="bottom" constant="14" id="sIp-PQ-tVI"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="captionBottomConstraint" destination="sIp-PQ-tVI" id="nKg-F1-kRy"/>
                         <outlet property="captionPreviewLabel" destination="jiy-T2-5Ml" id="TUc-3s-Ekx"/>
                         <outlet property="playPauseImageView" destination="FA1-Kt-fGw" id="Thf-LV-b8j"/>
                         <outlet property="playerView" destination="MMG-zt-4ZZ" id="XyH-Jq-kz1"/>

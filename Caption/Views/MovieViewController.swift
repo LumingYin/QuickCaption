@@ -29,6 +29,7 @@ import AppCenterAnalytics
     @IBOutlet weak var volumeSlider: NSSlider!
     @IBOutlet weak var speedSlider: NSSlider!
     @IBOutlet weak var playPauseImageView: NSImageView!
+    @IBOutlet weak var captionBottomConstraint: NSLayoutConstraint!
 
     var cachedCaptionViews: [String: CaptionBoxView] = [:]
 
@@ -225,6 +226,14 @@ import AppCenterAnalytics
     func refreshFontRelativeSize() {
         guard let asset = self.playerView.player?.currentItem?.asset else {return}
         let videoFrame = videoRect
+
+        let diffHeights = (playerView.frame.height - videoFrame.height) / 2
+        if diffHeights > 0 {
+            captionBottomConstraint.constant = 14 + diffHeights
+        } else {
+            captionBottomConstraint.constant = 14
+        }
+
         let shrinkingPercentage = videoFrame.size.width / asset.tracks[0].naturalSize.width
 
         let size = self.episode.styleFontSize ?? "53"
@@ -317,6 +326,7 @@ import AppCenterAnalytics
 
     func dismantleOldMovieVC() {
         AppDelegate.setCurrentEpisodeTitle(nil)
+        captionBottomConstraint.constant = 14
         self.captionPreviewLabel.stringValue = ""
         recentTimer?.invalidate()
         volumeSlider.floatValue = 1
@@ -470,7 +480,7 @@ import AppCenterAnalytics
                     print(".resizeLeft, diffEnding:\(diffEnding)")
                     return (captionLine, nil, .resizeLeft)
                 } else {
-                    print(".passing, diffStarting:\(diffStarting), diffEnding: \(diffEnding)")
+//                    print(".passing, diffStarting:\(diffStarting), diffEnding: \(diffEnding)")
                 }
             }
 
