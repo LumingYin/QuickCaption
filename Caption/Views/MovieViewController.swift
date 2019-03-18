@@ -304,7 +304,7 @@ import AppCenterAnalytics
 
     func dismantleOldMovieVC() {
         self.timeLabel.stringValue = "00:00:00,000"
-//        dismantleSetTimelineLengthToZero()
+        dismantleSetTimelineLengthToZero()
         customHintContainerView.isHidden = false
         AppDelegate.setCurrentEpisodeTitle(nil)
         captionBottomConstraint.constant = 14
