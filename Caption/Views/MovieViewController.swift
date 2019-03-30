@@ -392,7 +392,7 @@ import AppCenterAnalytics
         NotificationCenter.default.addObserver(self, selector: #selector(frameDidChangeNotification(_:)), name: NSView.frameDidChangeNotification, object: self.playerView)
 
         if let url = self.episode.videoURL {
-            if FileManager.default.fileExists(atPath: url.absoluteString) {
+            if FileManager.default.fileExists(atPath: url.path) {
                 self.playVideo(url)
             } else {
                 Helper.displayInteractiveSheet(title: "Video deleted or moved", text: "The video associated with this captioning project cannot be found. It may have been deleted or moved. Please relink the video.", firstButtonText: "Relink Video", secondButtonText: "Cancel") { (shouldRelink) in
@@ -400,7 +400,7 @@ import AppCenterAnalytics
                         Helper.displayOpenFileDialog(callback: { (hasSelected, fileURL, filePath) in
                             guard let newURL = fileURL else {return}
                             self.episode.videoURL = newURL
-                            if FileManager.default.fileExists(atPath: filePath!) {
+                            if FileManager.default.fileExists(atPath: newURL.path) {
                                 self.playVideo(newURL)
                             } else {
                                 Helper.displayInformationalSheet(title: "Relinking failed", text: "Unable to relink to your newly selected media.")

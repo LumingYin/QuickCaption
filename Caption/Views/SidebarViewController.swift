@@ -216,6 +216,9 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         AppDelegate.movieVC()?.configurateMovieVC()
         episodeProjects.swapAt(index, 0)
         tableView.moveRow(at: index, to: 0)
+//        tableView.reloadData(forRowIndexes: IndexSet(integer: index), columnIndexes: IndexSet(integer: 0))
+//        tableView.reloadData(forRowIndexes: IndexSet(integer: 0), columnIndexes: IndexSet(integer: 0))
+        tableView.reloadData(forRowIndexes: IndexSet(integersIn: 0..<episodeProjects.count), columnIndexes: IndexSet(integer: 0))
 
         AppDelegate.subtitleVC()?.episode = project
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
