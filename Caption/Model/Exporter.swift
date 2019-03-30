@@ -142,19 +142,29 @@ enum FileType {
         var fpsFCPXValue = ""
         var templateName = ""
         for (doub, str) in fpsToFrameDuration {
-            if fpsDouble.checkIsEqual(toDouble: doub, includingNumberOfFractionalDigits: 3) {
+            if fpsDouble.checkIsEqual(toDouble: doub, includingNumberOfFractionalDigits: 2) {
                 fpsFCPXValue = str
             }
         }
         for (doub, str) in fpsToTemplateName {
-            if fpsDouble.checkIsEqual(toDouble: doub, includingNumberOfFractionalDigits: 3) {
+            if fpsDouble.checkIsEqual(toDouble: doub, includingNumberOfFractionalDigits: 2) {
                 templateName = str
             }
         }
 
         if fpsFCPXValue.count == 0 {
+            let options: [Double] = [23.976, 24, 25, 29.97, 30, 50, 59.94, 60]
+            var winningIndex = 0
+            var winningDifference: Double = Double.greatestFiniteMagnitude
+            for i in 0..<options.count {
+                let absDiff = abs(options[i] - fpsDouble)
+                if absDiff < winningDifference {
+                    winningIndex = i
+                    winningDifference = absDiff
+                }
+            }
             let dropdownOptions = ["23.976 fps", "24 fps", "25 fps", "29.97 fps", "30 fps", "50 fps", "59.94 fps", "60 fps"]
-            Helper.displayInteractiveSheet(title: "Choose Framerate", text: "Before exporting, check the framerate of your Final Cut Pro X project. To view your project framerate in Final Cut Pro X, open the project and show inspector. The framerate will appear in the inspector.\n\nFCPXML export only supports videos with the following framerates: 23.976, 24, 25, 29.97, 30, 50, 59.94, and 60fps.\n\nAlternatively, you can export the caption into an SRT file. An SRT file can be directly imported into Final Cut Pro X. SRT files can also be \"burnt into\" your video clip using third party tools such as ffmpeg.", dropdownOptions: dropdownOptions, firstButtonText: "Choose Framerate", secondButtonText: "Cancel") { (selectedOK, index) in
+            Helper.displayInteractiveSheet(title: "Choose Framerate", text: "Before exporting, check the framerate of your Final Cut Pro X project. To view your project framerate in Final Cut Pro X, open the project and show inspector. The framerate will appear in the inspector.\n\nFCPXML export only supports videos with the following framerates: 23.976, 24, 25, 29.97, 30, 50, 59.94, and 60fps.\n\nAlternatively, you can export the caption into an SRT file. An SRT file can be directly imported into Final Cut Pro X. SRT files can also be \"burnt into\" your video clip using third party tools such as ffmpeg.", dropdownOptions: dropdownOptions, preferredIndex: winningIndex, firstButtonText: "Choose Framerate", secondButtonText: "Cancel") { (selectedOK, index) in
                 if selectedOK {
                     print("selected:\(selectedOK), index:\(index)")
                     let value = dropdownOptions[index].replacingOccurrences(of: " fps", with: "")
