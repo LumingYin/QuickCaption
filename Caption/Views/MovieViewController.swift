@@ -85,7 +85,7 @@ import AppCenterAnalytics
         }
         if self.episode.videoURL != nil {
             if FileManager.default.fileExists(atPath: self.episode.videoURL!.path) {
-                Helper.displayInteractiveSheet(title: "Create new project?", text: "The current project already has an associated video. Do you want to create a new project instead?", firstButtonText: "Create New Project", secondButtonText: "Cancel", callback: { (firstButtonClicked) in
+                Helper.displayInteractiveSheet(title: "Create new project?", text: "The current project already has an associated video. Would you like to create a new project instead?", firstButtonText: "Create New Project", secondButtonText: "Cancel", callback: { (firstButtonClicked) in
                     if (firstButtonClicked) {
                         AppDelegate.sourceListVC()?.addNewProject()
                         AppDelegate.sourceListVC()?.updateSelectRow(index: 0)

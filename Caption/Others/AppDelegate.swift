@@ -375,6 +375,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func focusOnPlayer(_ sender: Any) {
         NSApp.mainWindow?.makeFirstResponder(AppDelegate.movieVC())
     }
+
+    @IBAction func replaceCaptionsWithSRT(_ sender: Any) {
+    }
 }
 
 

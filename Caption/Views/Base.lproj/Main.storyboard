@@ -72,6 +72,12 @@
                                                 <action selector="openVideoFile:" target="Voe-Tx-rLC" id="kPS-GV-Ogy"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Replace Captions with SRT File…" hidden="YES" id="GUz-j4-gK6">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="replaceCaptionsWithSRT:" target="Voe-Tx-rLC" id="IV2-0o-hPN"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>

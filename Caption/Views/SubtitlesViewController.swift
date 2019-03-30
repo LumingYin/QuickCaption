@@ -199,4 +199,6 @@ import AVKit
         self.resignFirstResponder()
         self.transcribeTextField.resignFirstResponder()
         NSApp.mainWindow?.makeFirstResponder(AppDelegate.movieVC())
-    }}
+    }
+    
+}
