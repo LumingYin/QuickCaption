@@ -792,6 +792,7 @@ CA
                         <outlet property="darkMenuItem" destination="FHr-d1-Arm" id="usH-A6-gZu"/>
                         <outlet property="followSystemMenuItem" destination="p2f-8Z-e6W" id="1dv-ko-hmp"/>
                         <outlet property="lightMenuItem" destination="zb5-SD-mIj" id="WQM-Qe-hyW"/>
+                        <outlet property="openOrRelinkMenuItem" destination="IAo-SY-fd9" id="R5c-3t-eWB"/>
                     </connections>
                 </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

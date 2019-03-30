@@ -20,9 +20,11 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
             if relinkMode == true {
                 importToolbarItem.label = "Relink"
                 importToolbarButton.image = NSImage(named: "link")
+                AppDelegate.openOrRelinkMenuItem()?.title = "Relink Video or Audio..."
             } else {
-                importToolbarItem.label = "Relink"
+                importToolbarItem.label = "Import"
                 importToolbarButton.image = NSImage(named: "import")
+                AppDelegate.openOrRelinkMenuItem()?.title = "Open Video or Audio..."
             }
         }
     }

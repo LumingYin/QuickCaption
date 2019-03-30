@@ -18,6 +18,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var darkMenuItem: NSMenuItem!
     @IBOutlet weak var lightMenuItem: NSMenuItem!
     @IBOutlet weak var followSystemMenuItem: NSMenuItem!
+    @IBOutlet weak var openOrRelinkMenuItem: NSMenuItem!
+
+    static func openOrRelinkMenuItem() -> NSMenuItem? {
+        if let delegate = NSApp.delegate as? AppDelegate {
+            return delegate.openOrRelinkMenuItem
+        }
+        return nil
+    }
 
     static func setCurrentEpisodeTitle(_ title: String?) {
         if let window = NSApp.mainWindow?.windowController as? CaptionWindowController {
