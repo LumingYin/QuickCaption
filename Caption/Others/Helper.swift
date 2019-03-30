@@ -79,6 +79,28 @@ class Helper: NSObject {
         return conformedTime
     }
 
+    static let movieTypes = ["mp4", "mpeg4", "m4v", "ts", "mpg", "mpeg", "mp3", "mpeg3", "m4a", "mov"]
+
+    static func displayOpenFileDialog(callback: @escaping ((_ selectedFile: Bool, _ fileURL: URL?, _ filePath: String?)-> ())) {
+        let dialog = NSOpenPanel()
+        dialog.title = "Choose a video file"
+        dialog.showsResizeIndicator = true
+        dialog.showsHiddenFiles = false
+        dialog.canChooseDirectories = false
+        dialog.canCreateDirectories = true
+        dialog.allowsMultipleSelection = false
+        dialog.allowedFileTypes = movieTypes
+
+        dialog.beginSheetModal(for: NSApp.mainWindow!) { (result) in
+            if result != .OK {
+                callback(false, nil, nil)
+            }
+            if let result = dialog.url, let path = dialog.url?.path {
+                callback(true, result, path)
+            }
+        }
+
+    }
 
     static func displayInformationalSheet(title: String, text: String) {
         let alert = NSAlert()

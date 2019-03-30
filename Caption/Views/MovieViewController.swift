@@ -89,36 +89,27 @@ import AppCenterAnalytics
             })
             return
         }
-        let dialog = NSOpenPanel()
-        dialog.title = "Choose a video file"
-        dialog.showsResizeIndicator = true
-        dialog.showsHiddenFiles = false
-        dialog.canChooseDirectories = false
-        dialog.canCreateDirectories = true
-        dialog.allowsMultipleSelection = false
-        dialog.allowedFileTypes = ["mp4", "mpeg4", "m4v", "ts", "mpg", "mpeg", "mp3", "mpeg3", "m4a", "mov"]
-        
-        dialog.beginSheetModal(for: self.view.window!) { (result) in
-            if result != .OK {
+
+        Helper.displayOpenFileDialog { (hasFile, result, path) in
+            if !hasFile {
                 return
             }
-            if let result = dialog.url, let path = dialog.url?.path {
-                if let id = self.episode.guidIdentifier {
-                    Helper.removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/audio_thumbnail/\(id)")
-                    Helper.removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/video_thumbnail/\(id)")
-                    self.dismantleOldMovieVC()
-                }
-                if self.episode == nil {
-                    AppDelegate.sourceListVC()?.updateSelectRow(index: 0)
-                }
-                self.episode.arrayForCaption = []
-                self.episode.videoDescription = result.lastPathComponent
-                self.playVideo(result)
-                MSAnalytics.trackEvent("New file opened", withProperties: ["Name": (path as NSString).lastPathComponent])
+            if let id = self.episode.guidIdentifier {
+                Helper.removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/audio_thumbnail/\(id)")
+                Helper.removeFilesUnderURL(urlPath: "~/Library/Caches/com.dim.Caption/video_thumbnail/\(id)")
+                self.dismantleOldMovieVC()
             }
+            if self.episode == nil {
+                AppDelegate.sourceListVC()?.updateSelectRow(index: 0)
+            }
+            self.episode.arrayForCaption = []
+            self.episode.videoDescription = result!.lastPathComponent
+            self.playVideo(result!)
+            MSAnalytics.trackEvent("New file opened", withProperties: ["Name": (path! as NSString).lastPathComponent])
         }
-        
     }
+
+
     
     @IBAction func queryTime(_ sender: Any) {
         if (episode == nil || episode.player == nil) {
@@ -169,9 +160,10 @@ import AppCenterAnalytics
             self.episode.addToArrayForCaption(cap)
 //            self.timeLabel.stringValue = "\(self.episode.framerate)fps  |  \(self.episode.videoDescription ?? "")"
             self.episode.creationDate = NSDate()
-        } else {
-            self.episode.modifiedDate = NSDate()
         }
+//        else {
+//            self.episode.modifiedDate = NSDate()
+//        }
         self.episode.videoDuration = Float(CMTimeGetSeconds((self.episode.player?.currentItem?.asset.duration)!))
         self.populateThumbnail()
         self.configureOverallScrollView()
@@ -394,11 +386,29 @@ import AppCenterAnalytics
         if self.episode == nil {
             return
         }
+        self.episode.modifiedDate = NSDate()
+
 //        NotificationCenter.default.addObserver(self, selector: #selector(boundsDidChangeNotification(_:)), name: NSView.boundsDidChangeNotification, object: self.playerView)
         NotificationCenter.default.addObserver(self, selector: #selector(frameDidChangeNotification(_:)), name: NSView.frameDidChangeNotification, object: self.playerView)
 
         if let url = self.episode.videoURL {
-            self.playVideo(url)
+            if FileManager.default.fileExists(atPath: url.absoluteString) {
+                self.playVideo(url)
+            } else {
+                Helper.displayInteractiveSheet(title: "Video deleted or moved", text: "The video associated with this captioning project cannot be found. It may have been deleted or moved. Please relink the video.", firstButtonText: "Relink Video", secondButtonText: "Cancel") { (shouldRelink) in
+                    if (shouldRelink) {
+                        Helper.displayOpenFileDialog(callback: { (hasSelected, fileURL, filePath) in
+                            guard let newURL = fileURL else {return}
+                            self.episode.videoURL = newURL
+                            if FileManager.default.fileExists(atPath: filePath!) {
+                                self.playVideo(newURL)
+                            } else {
+                                Helper.displayInformationalSheet(title: "Relinking failed", text: "Unable to relink to your newly selected media.")
+                            }
+                        })
+                    }
+                }
+            }
         } else {
             self.episode.player = AVPlayer()
             self.playerView.player = self.episode.player

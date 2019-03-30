@@ -174,8 +174,6 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         tableView.reloadData(forRowIndexes: IndexSet(integer: 0), columnIndexes: IndexSet(integer: 0))
     }
 
-
-
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SidebarEpisodeTableCellView"), owner: self) as? SidebarEpisodeTableCellView {
             let episode = episodeProjects[row]
@@ -201,6 +199,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 
     func updateSelectRow(index: Int) {
         tableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
+
         if index < 0 {
             return
         }
@@ -215,12 +214,24 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         AppDelegate.movieVC()?.dismantleOldMovieVC()
         AppDelegate.movieVC()?.episode = project
         AppDelegate.movieVC()?.configurateMovieVC()
+        episodeProjects.swapAt(index, 0)
+        tableView.moveRow(at: index, to: 0)
+
         AppDelegate.subtitleVC()?.episode = project
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
         AppDelegate.fontVC()?.dismantleOldFontVC()
         AppDelegate.fontVC()?.episode = project
         AppDelegate.fontVC()?.configurateFontVC()
         print("Selected: \(project)")
+    }
+
+    func sortLocalArrayCache() {
+        episodeProjects.sort { (ep1, ep2) -> Bool in
+            if let m1 = ep1.modifiedDate, let m2 = ep2.modifiedDate {
+                return m1.compare(m2 as Date) == ComparisonResult.orderedDescending
+            }
+            return false
+        }
     }
 
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
