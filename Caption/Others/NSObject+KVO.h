@@ -5,7 +5,7 @@
 
 - (void)safelyRemoveObserver:(nonnull NSObject *)observer forKeyPath:(nonnull NSString *)keyPath;
 - (NSURL*)applicationDataDirectory;
-
+-(NSString *)comboBoxAlert;
 @end
 
 @interface NSImage(saveAsJpegWithName)

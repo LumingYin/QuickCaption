@@ -146,9 +146,12 @@ import AppCenterAnalytics
 //            return
 //        }
         if self.episode != nil {
-            if let framerate = self.episode.player?.currentItem?.asset.tracks[0].nominalFrameRate {
-                self.episode.framerate = framerate
-                AppDelegate.fontVC()?.configureAllMetadata()
+            if let tracks = self.episode.player?.currentItem?.asset.tracks {
+                if !tracks.isEmpty {
+                    let framerate = tracks[0].nominalFrameRate
+                    self.episode.framerate = framerate
+                    AppDelegate.fontVC()?.configureAllMetadata()
+                }
             }
         }
     }

@@ -47,30 +47,7 @@ enum FileType {
                                                   59.94: "1001/60000",
                                                   60: "100/60000"]
 
-
-    static func generateFCPXMLFromArray(episode: EpisodeProject, arrayForCaption: [CaptionLine]) -> String {
-        let totalDuration = Double(episode.videoDuration)
-        let fps = episode.framerate
-
-        let fpsDouble = Double(fps)
-        var fpsFCPXValue = ""
-        var templateName = ""
-        for (doub, str) in fpsToFrameDuration {
-            if fpsDouble.checkIsEqual(toDouble: doub, includingNumberOfFractionalDigits: 3) {
-                fpsFCPXValue = str
-            }
-        }
-        for (doub, str) in fpsToTemplateName {
-            if fpsDouble.checkIsEqual(toDouble: doub, includingNumberOfFractionalDigits: 3) {
-                templateName = str
-            }
-        }
-
-        if fpsFCPXValue.count == 0 {
-            Helper.displayInformationalSheet(title: "Unable to export FCPXML", text: "FCPXML export only supports videos with the following framerates: 23.976, 24, 25, 29.97, 30, 50, 59.94, and 60fps. Export into an SRT, and re-encode the caption into your video clip using ffmpeg instead.")
-            return ""
-        }
-
+    static func finishGeneratingFCLXML(episode: EpisodeProject, arrayForCaption: [CaptionLine], fpsFCPXValue: String, totalDuration: Double, fpsDouble: Double, templateName: String) -> String {
         let durationString = "36000/3600s"
         let headerUUID = NSUUID().uuidString
 
@@ -100,14 +77,14 @@ enum FileType {
         <!DOCTYPE fcpxml>
 
         <fcpxml version="1.3">
-            <project name="\(projectName)" uid="\(headerUUID)">
-                <resources>
-                    <format id="r1" name="\(templateName)" frameDuration="\(fpsFCPXValue)s" width="1920" height="1080"></format>
-                    <effect id="fx2" name="Caption" uid="/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions/Caption/Caption.moti"></effect>
-                </resources>
-                <sequence duration="\(durationString)" format="r1" tcStart="0s" tcFormat="\(tcFormat)" audioLayout="stereo" audioRate="48k">
-                    <spine>
-                        <gap offset="0s" name="Master" duration="\(overallLength.value)/\(overallLength.timescale)s" start="0s">
+        <project name="\(projectName)" uid="\(headerUUID)">
+        <resources>
+        <format id="r1" name="\(templateName)" frameDuration="\(fpsFCPXValue)s" width="1920" height="1080"></format>
+        <effect id="fx2" name="Caption" uid="/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions/Caption/Caption.moti"></effect>
+        </resources>
+        <sequence duration="\(durationString)" format="r1" tcStart="0s" tcFormat="\(tcFormat)" audioLayout="stereo" audioRate="48k">
+        <spine>
+        <gap offset="0s" name="Master" duration="\(overallLength.value)/\(overallLength.timescale)s" start="0s">
 
         """
 
@@ -123,20 +100,20 @@ enum FileType {
                     let noteUUID = NSUUID().uuidString
 
                     templateB += """
-                                <!--Title No. \(i + 1) +++++++++++++++++++++-->
-                                <title name="\(str) - Caption" lane="1" offset="\(conformedTitleOffset.value)/\(conformedTitleOffset.timescale)s" duration="\(conformedTitleDuration.value)/\(conformedTitleDuration.timescale)s" ref="fx2" role="titles.English_en">
-                                        <param name="Background Color" key="9999/24742/24860/24776/3/24789/2" value="0 0 0 1"></param>
-                                        <param name="Background Opacity" key="9999/24742/24860/1/200/202" value="0"></param>
-                                        <param name="Padding" key="9999/24999/100/25000/2/100" value="0.066666666667"></param>
-                                        <param name="Title Safe" key="9999/25169/100/25170/2/100" value="0 (Standard 80% 80%)"></param>
-                                        <text>
-                                            <text-style ref="xs\(i + 1)-1">\(str)</text-style>
-                                        </text>
-                                        <text-style-def id="xs\(i + 1)-1">
-                                            <text-style font="\(fontFamilyName)" fontSize="\(fontSize)" fontFace="\(fontFace)" fontColor="\(fontColor)" shadowColor="\(shadowColor)" shadowOffset="\(shadowOffset)" shadowBlurRadius="\(shadowBlurRadius)" alignment="\(fontAlignment)"/>
-                                        </text-style-def>
-                                        <note>en - \(noteUUID)</note>
-                                </title>
+                    <!--Title No. \(i + 1) +++++++++++++++++++++-->
+                    <title name="\(str) - Caption" lane="1" offset="\(conformedTitleOffset.value)/\(conformedTitleOffset.timescale)s" duration="\(conformedTitleDuration.value)/\(conformedTitleDuration.timescale)s" ref="fx2" role="titles.English_en">
+                    <param name="Background Color" key="9999/24742/24860/24776/3/24789/2" value="0 0 0 1"></param>
+                    <param name="Background Opacity" key="9999/24742/24860/1/200/202" value="0"></param>
+                    <param name="Padding" key="9999/24999/100/25000/2/100" value="0.066666666667"></param>
+                    <param name="Title Safe" key="9999/25169/100/25170/2/100" value="0 (Standard 80% 80%)"></param>
+                    <text>
+                    <text-style ref="xs\(i + 1)-1">\(str)</text-style>
+                    </text>
+                    <text-style-def id="xs\(i + 1)-1">
+                    <text-style font="\(fontFamilyName)" fontSize="\(fontSize)" fontFace="\(fontFace)" fontColor="\(fontColor)" shadowColor="\(shadowColor)" shadowOffset="\(shadowOffset)" shadowBlurRadius="\(shadowBlurRadius)" alignment="\(fontAlignment)"/>
+                    </text-style-def>
+                    <note>en - \(noteUUID)</note>
+                    </title>
 
                     """
                 }
@@ -153,6 +130,43 @@ enum FileType {
 """
 
         return "\(templateA)\(templateB)\(templateC)"
+    }
+
+    static func generateFCPXMLFromArray(episode: EpisodeProject, arrayForCaption: [CaptionLine], callback: @escaping((_ success: Bool, _ result: String) ->())) {
+        let fpsDouble = Double(episode.framerate)
+        generateTimedFCPXMLFromArray(episode: episode, arrayForCaption: arrayForCaption, fpsDouble: fpsDouble, callback: callback)
+    }
+
+    static func generateTimedFCPXMLFromArray(episode: EpisodeProject, arrayForCaption: [CaptionLine], fpsDouble: Double, callback: @escaping((_ success: Bool, _ result: String) ->())) {
+        let totalDuration = Double(episode.videoDuration)
+        var fpsFCPXValue = ""
+        var templateName = ""
+        for (doub, str) in fpsToFrameDuration {
+            if fpsDouble.checkIsEqual(toDouble: doub, includingNumberOfFractionalDigits: 3) {
+                fpsFCPXValue = str
+            }
+        }
+        for (doub, str) in fpsToTemplateName {
+            if fpsDouble.checkIsEqual(toDouble: doub, includingNumberOfFractionalDigits: 3) {
+                templateName = str
+            }
+        }
+
+        if fpsFCPXValue.count == 0 {
+            let dropdownOptions = ["23.976 fps", "24 fps", "25 fps", "29.97 fps", "30 fps", "50 fps", "59.94 fps", "60 fps"]
+            Helper.displayInteractiveSheet(title: "Choose Framerate", text: "Before exporting, check the framerate of your Final Cut Pro X project. To view your project framerate in Final Cut Pro X, open the project and show inspector. The framerate will appear in the inspector.\n\nFCPXML export only supports videos with the following framerates: 23.976, 24, 25, 29.97, 30, 50, 59.94, and 60fps.\n\nAlternatively, you can export the caption into an SRT file. An SRT file can be directly imported into Final Cut Pro X. SRT files can also be \"burnt into\" your video clip using third party tools such as ffmpeg.", dropdownOptions: dropdownOptions, firstButtonText: "Choose Framerate", secondButtonText: "Cancel") { (selectedOK, index) in
+                if selectedOK {
+                    print("selected:\(selectedOK), index:\(index)")
+                    let value = dropdownOptions[index].replacingOccurrences(of: " fps", with: "")
+                    if let newFpsDouble = Double(value) {
+                        generateTimedFCPXMLFromArray(episode: episode, arrayForCaption: arrayForCaption, fpsDouble: newFpsDouble, callback: callback)
+                    }
+                }
+            }
+        } else {
+            let generated = finishGeneratingFCLXML(episode: episode, arrayForCaption: arrayForCaption, fpsFCPXValue: fpsFCPXValue, totalDuration: totalDuration, fpsDouble: fpsDouble, templateName: templateName)
+            callback(true, generated)
+        }
     }
 
 

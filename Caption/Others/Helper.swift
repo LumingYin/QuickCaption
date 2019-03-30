@@ -115,21 +115,45 @@ class Helper: NSObject {
         }
     }
 
-
-    static func displayInteractiveSheet(title: String, text: String, firstButtonText: String, secondButtonText: String, callback: @escaping ((_ fisrtButtonReturn: Bool)-> ())) {
+    static func displayInteractiveSheet(title: String, text: String, dropdownOptions: [String], preferredIndex: Int, firstButtonText: String, secondButtonText: String, callback: @escaping ((_ fisrtButtonReturn: Bool, _ selectedItemIndex: Int)-> ())) {
         let alert = NSAlert()
         alert.messageText = title
         alert.informativeText = text
         alert.alertStyle = NSAlert.Style.warning
+
+        var dropdown: NSPopUpButton?
+
+        if (dropdownOptions.count > 0) {
+            dropdown = NSPopUpButton(frame: NSRect(x: 0, y: 0, width: 300, height: 25))
+            dropdown?.addItems(withTitles: dropdownOptions)
+            if preferredIndex >= 0 && preferredIndex < dropdownOptions.count {
+                dropdown?.selectItem(at: preferredIndex)
+            } else {
+                dropdown?.selectItem(at: 0)
+            }
+            alert.accessoryView = dropdown
+        }
+
         alert.addButton(withTitle: firstButtonText)
         alert.addButton(withTitle: secondButtonText)
         if let window = NSApp.mainWindow {
             alert.beginSheetModal(for: window) { (response) in
-                callback(response == NSApplication.ModalResponse.alertFirstButtonReturn)
+                callback(response == NSApplication.ModalResponse.alertFirstButtonReturn, dropdown?.indexOfSelectedItem ?? 0)
             }
         } else {
             let first = alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
-            callback(first)
+            callback(first, dropdown?.indexOfSelectedItem ?? 0)
+        }
+
+    }
+
+    static func displayInteractiveSheet(title: String, text: String, dropdownOptions: [String], firstButtonText: String, secondButtonText: String, callback: @escaping ((_ fisrtButtonReturn: Bool, _ selectedItemIndex: Int)-> ())) {
+        displayInteractiveSheet(title: title, text: text, dropdownOptions: dropdownOptions, preferredIndex: 0, firstButtonText: firstButtonText, secondButtonText: secondButtonText, callback: callback)
+    }
+
+    static func displayInteractiveSheet(title: String, text: String, firstButtonText: String, secondButtonText: String, callback: @escaping ((_ fisrtButtonReturn: Bool)-> ())) {
+        Helper.displayInteractiveSheet(title: title, text: text, dropdownOptions: [], firstButtonText: firstButtonText, secondButtonText: secondButtonText) { (firstButton, _) in
+            callback(firstButton)
         }
     }
 

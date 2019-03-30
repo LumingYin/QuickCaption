@@ -25,12 +25,21 @@ class Saver {
 
         if type == .srt {
             text = Exporter.generateSRTFromArray(arrayForCaption: copiedArray)
+            writeFileToDisk(type: type, text: text, episode: episode)
         } else if type == .txt {
             text = Exporter.generateTXTFromArray(arrayForCaption: copiedArray)
+            writeFileToDisk(type: type, text: text, episode: episode)
         } else if type == .fcpXML {
-            text = Exporter.generateFCPXMLFromArray(episode: episode, arrayForCaption: copiedArray)
+            Exporter.generateFCPXMLFromArray(episode: episode, arrayForCaption: copiedArray, callback: { (success, resultingText) in
+                text = resultingText
+                writeFileToDisk(type: type, text: resultingText, episode: episode)
+            })
         }
 
+
+    }
+
+    static func writeFileToDisk(type: FileType, text: String, episode: EpisodeProject) {
         if text.count == 0 {
             return
         }
@@ -64,7 +73,6 @@ class Saver {
             print("Error writing to file: \(error)")
             Helper.displayInformationalSheet(title: "Saved failed!", text: "Save has failed. \(error)")
         }
-
     }
 
 }
