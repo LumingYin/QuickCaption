@@ -362,10 +362,9 @@
 			};
 			buildConfigurationList = 562A687C1F2D4F5E000E6B16 /* Build configuration list for PBXProject "Quick Caption" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);

@@ -4,12 +4,11 @@
 @interface NSObject (KVO)
 
 - (void)safelyRemoveObserver:(nonnull NSObject *)observer forKeyPath:(nonnull NSString *)keyPath;
-- (NSURL*)applicationDataDirectory;
--(NSString *)comboBoxAlert;
+- (NSURL* _Nonnull)applicationDataDirectory;
 @end
 
 @interface NSImage(saveAsJpegWithName)
-- (void) saveAsJpegWithName:(NSString*) fileName;
-- (void)saveAsFileWithType:(NSBitmapImageFileType)type withName:(NSString *)fileName;
+- (void)saveAsJpegWithName:(NSString* _Nonnull) fileName;
+- (void)saveAsFileWithType:(NSBitmapImageFileType)type withName:(NSString* _Nonnull)fileName;
 @end
 
