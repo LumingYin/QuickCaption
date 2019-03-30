@@ -100,8 +100,8 @@ enum FileType {
                     let noteUUID = NSUUID().uuidString
 
                     templateB += """
-                                <!--Title No. \(i + 1) +++++++++++++++++++++-->
-                                <title name="\(str) - Caption" lane="1" offset="\(conformedTitleOffset.value)/\(conformedTitleOffset.timescale)s" duration="\(conformedTitleDuration.value)/\(conformedTitleDuration.timescale)s" ref="fx2" role="titles.English_en">
+                                    <!--Title No. \(i + 1) +++++++++++++++++++++-->
+                                    <title name="\(str) - Caption" lane="1" offset="\(conformedTitleOffset.value)/\(conformedTitleOffset.timescale)s" duration="\(conformedTitleDuration.value)/\(conformedTitleDuration.timescale)s" ref="fx2" role="titles.English_en">
                                         <param name="Background Color" key="9999/24742/24860/24776/3/24789/2" value="0 0 0 1"></param>
                                         <param name="Background Opacity" key="9999/24742/24860/1/200/202" value="0"></param>
                                         <param name="Padding" key="9999/24999/100/25000/2/100" value="0.066666666667"></param>
@@ -113,7 +113,7 @@ enum FileType {
                                             <text-style font="\(fontFamilyName)" fontSize="\(fontSize)" fontFace="\(fontFace)" fontColor="\(fontColor)" shadowColor="\(shadowColor)" shadowOffset="\(shadowOffset)" shadowBlurRadius="\(shadowBlurRadius)" alignment="\(fontAlignment)"/>
                                         </text-style-def>
                                         <note>en - \(noteUUID)</note>
-                                </title>
+                                    </title>
 
                     """
                 }
