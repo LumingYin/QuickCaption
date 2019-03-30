@@ -70,6 +70,20 @@
 <enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption2019.03.18.7-2019.03.18.0.delta" sparkle:version="2019.03.18.7" sparkle:shortVersionString="2019.03.18.7" sparkle:deltaFrom="2019.03.18.0" length="266101" type="application/octet-stream" sparkle:edSignature="zdenWWlc+oROEJKmbpQRSzZ5mOAqLubnmsX+cmVKVkHKSgzLerAO/bpwTUuO58vyzJAGktUKNQTwlK08YRsgCw=="/>
 <enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption2019.03.18.7-2019.02.18.2.delta" sparkle:version="2019.03.18.7" sparkle:shortVersionString="2019.03.18.7" sparkle:deltaFrom="2019.02.18.2" length="4566695" type="application/octet-stream" sparkle:edSignature="kea7JPmPB3WAYGFHeHcphkzuzUpu6O8KWLKWm70CBRIyw0n9vHSwFsY6z0uDUL/5Ra4BvNnTVini7iGuIKebDg=="/></sparkle:deltas>
 </item>
+<item>
+<title>2019.03.29.1</title>
+<pubDate>Fri, 29 Mar 2019 21:46:23 -0400</pubDate>
+<sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
+<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption%202019.03.29.1.dmg" sparkle:version="2019.03.29.1" sparkle:shortVersionString="2019.03.29.1" length="5396387" type="application/octet-stream" sparkle:edSignature="ViPvDaGqT71f8rQAL0+vl4yEpmWWMNOqpzGFcr5yjaCl3rcjz+ttIJLz0BKcUvYDvxRAwBE2SeOQ+e0QrDlECg=="/>
+<sparkle:deltas>
+<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption2019.03.29.1-2019.03.18.7.delta" sparkle:version="2019.03.29.1" sparkle:shortVersionString="2019.03.29.1" sparkle:deltaFrom="2019.03.18.7" length="618431" type="application/octet-stream" sparkle:edSignature="Wim+nqdefb4TcdubB77gR3K91mI2xW/w7vZL694gCMSewhutFO86c1W6TswadX/0S373/dQQEvSOQwOrVehtDg=="/>
+<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption2019.03.29.1-2019.03.18.6.delta" sparkle:version="2019.03.29.1" sparkle:shortVersionString="2019.03.29.1" sparkle:deltaFrom="2019.03.18.6" length="657805" type="application/octet-stream" sparkle:edSignature="1fVP/cxxsE9AaHK5QPnniMUa+OlREFPB13ib9eAZDsTmz387TqkLx/g98kenTFCf9pYcQteNJrCsjZy0Y430DQ=="/>
+<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption2019.03.29.1-2019.03.18.5.delta" sparkle:version="2019.03.29.1" sparkle:shortVersionString="2019.03.29.1" sparkle:deltaFrom="2019.03.18.5" length="656521" type="application/octet-stream" sparkle:edSignature="5OYtm2pzD/D17PXwMrVktAg+22iDwfuuyJyJ3B6WwqsEsiafK88l9BLaQBc2FJxdm/1rPkPHI3/WcfcbdyYIBA=="/>
+<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption2019.03.29.1-2019.03.18.3.delta" sparkle:version="2019.03.29.1" sparkle:shortVersionString="2019.03.29.1" sparkle:deltaFrom="2019.03.18.3" length="693161" type="application/octet-stream" sparkle:edSignature="5/yCQ/bHcxOMotAK9wMEW993mb1kRJccNa8dD1q6pf2tvPgDXXH0IMZp8MkUDkw+edHyRhjgoKa4Kvovf9QuBw=="/>
+<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption2019.03.29.1-2019.03.18.2.delta" sparkle:version="2019.03.29.1" sparkle:shortVersionString="2019.03.29.1" sparkle:deltaFrom="2019.03.18.2" length="684634" type="application/octet-stream" sparkle:edSignature="S6yZzit63LvI9drYb+AVeSxyVfgnjyHEol+ZLvqqnEEImrpWJTrw4e/XSCethiE4H1VqjMhtOVqMz6TWEdqqAw=="/>
+<enclosure url="https://raw.githubusercontent.com/LumingYin/Caption/master/Sparkle/Quick%20Caption2019.03.29.1-2019.03.18.0.delta" sparkle:version="2019.03.29.1" sparkle:shortVersionString="2019.03.29.1" sparkle:deltaFrom="2019.03.18.0" length="705073" type="application/octet-stream" sparkle:edSignature="FJmwibh4e6f/fUn/bdqHiNdbUB2ftvQPv7zB9t0eHVcfP1DQAtWMvKZme8eNenjQ6jdgRBVR3ChsAOaQCic8Dw=="/></sparkle:deltas>
+</item>
+
 
 
 
