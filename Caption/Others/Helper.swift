@@ -94,9 +94,10 @@ class Helper: NSObject {
         dialog.beginSheetModal(for: NSApp.mainWindow!) { (result) in
             if result != .OK {
                 callback(false, nil, nil)
-            }
-            if let result = dialog.url, let path = dialog.url?.path {
-                callback(true, result, path)
+            } else {
+                if let result = dialog.url, let path = dialog.url?.path {
+                    callback(true, result, path)
+                }
             }
         }
 
