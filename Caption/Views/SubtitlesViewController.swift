@@ -97,6 +97,10 @@ import AVKit
 //                        last.endingTime = last.startingTime + 0.5
 //                    }
                 } else {
+                    let timeDelta = currentTimeFloat - last.startingTime
+                    if timeDelta > 7 {
+                        last.startingTime = (currentTimeFloat - 2) > 0 ? currentTimeFloat - 2 : 0
+                    }
                     last.endingTime = Float(CMTimeGetSeconds(time))
                 }
             }
