@@ -34,6 +34,7 @@ import AppCenterAnalytics
     @IBOutlet weak var customHintContainerView: NSView!
     @IBOutlet weak var welcomingLabel: NSTextField!
     @IBOutlet weak var guidanceLabel: NSTextField!
+    @IBOutlet weak var openFileOrRelinkButton: NSButton!
 
 
     var cachedCaptionViews: [String: CaptionBoxView] = [:]
@@ -334,8 +335,10 @@ import AppCenterAnalytics
         welcomingLabel.stringValue = "Welcome to\nQuick Caption"
         guidanceLabel.stringValue = "To create captions, click on the       button on the toolbar to open an existing video or audio file."
         dismantleSetTimelineLengthToZero()
+        openFileOrRelinkButton.image = NSImage(named: "import")
         customHintContainerView.isHidden = false
         AppDelegate.setCurrentEpisodeTitle(nil)
+        AppDelegate.mainWindow()?.relinkMode = false
         captionBottomConstraint.constant = 14
         self.captionPreviewLabel.stringValue = ""
         self.playerView.player?.safelyRemoveObserver(self, forKeyPath: "status")
@@ -393,9 +396,14 @@ import AppCenterAnalytics
         self.progressView.setFrameOrigin(NSPoint(x: 0, y: self.progressView.frame.origin.y))
     }
 
-    func handleRelinkVideo() {
+    func setupForRelinkVideo() {
+        AppDelegate.mainWindow()?.relinkMode = true
+        openFileOrRelinkButton.image = NSImage(named: "link")
         welcomingLabel.stringValue = "Relinking Is\nRequired"
-        guidanceLabel.stringValue = "To relink the video, click on the       button on the toolbar to open the corresponding video or audio file."
+        guidanceLabel.stringValue = "To relink your video, click on the       button on the toolbar. Then, you will be able to continue working on the project."
+    }
+
+    func handleRelinkVideo() {
         Helper.displayInteractiveSheet(title: "Video deleted or moved", text: "The video associated with this captioning project cannot be found. It may have been deleted or moved. Please relink the video.", firstButtonText: "Relink Video", secondButtonText: "Cancel") { (shouldRelink) in
             if (shouldRelink) {
                 Helper.displayOpenFileDialog(callback: { (hasSelected, fileURL, filePath) in
@@ -424,7 +432,7 @@ import AppCenterAnalytics
             if FileManager.default.fileExists(atPath: url.path) {
                 self.playVideo(url)
             } else {
-                handleRelinkVideo()
+                setupForRelinkVideo()
             }
         } else {
             self.episode.player = AVPlayer()

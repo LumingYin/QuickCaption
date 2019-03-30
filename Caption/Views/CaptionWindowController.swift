@@ -12,6 +12,20 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
     weak var splitViewController: MainSplitViewController!
     @IBOutlet weak var currentTitle: NSTextField!
     @IBOutlet weak var contentSettingsSegmentedControl: NSSegmentedControl!
+    @IBOutlet weak var importToolbarItem: NSToolbarItem!
+    @IBOutlet weak var importToolbarButton: NSButton!
+
+    var relinkMode: Bool = false {
+        didSet {
+            if relinkMode == true {
+                importToolbarItem.label = "Relink"
+                importToolbarButton.image = NSImage(named: "link")
+            } else {
+                importToolbarItem.label = "Relink"
+                importToolbarButton.image = NSImage(named: "import")
+            }
+        }
+    }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
