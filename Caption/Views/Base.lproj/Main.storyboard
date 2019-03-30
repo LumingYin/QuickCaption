@@ -1155,7 +1155,7 @@ CA
                                                 <color key="fillColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             </box>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2l-eq-tnu">
-                                                <rect key="frame" x="13.5" y="-1" width="24" height="23"/>
+                                                <rect key="frame" x="13" y="-1" width="23" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="j42-j3-dfi">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1166,7 +1166,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRi-bL-Mbk">
-                                                <rect key="frame" x="44.5" y="-1" width="24" height="23"/>
+                                                <rect key="frame" x="44" y="-1" width="23" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="1qS-ty-ctl">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1177,7 +1177,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TnG-Dw-kSw">
-                                                <rect key="frame" x="75.5" y="-1" width="24" height="23"/>
+                                                <rect key="frame" x="75" y="-1" width="23" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="fYG-vN-i1a">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1188,7 +1188,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kcM-MG-g0M">
-                                                <rect key="frame" x="106.5" y="-1" width="24" height="23"/>
+                                                <rect key="frame" x="106" y="-1" width="23" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="I0L-WU-dfI">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1199,7 +1199,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-fP-aGm">
-                                                <rect key="frame" x="137.5" y="-1" width="24" height="23"/>
+                                                <rect key="frame" x="137" y="-1" width="23" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="QYs-CB-WRe">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1515,12 +1515,12 @@ CA
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="To create captions, click on the       button on the toolbar to open an existing video or audio file." id="J7M-zU-7eI">
                                                     <font key="font" metaFont="system" size="14"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="textColor" red="0.9941860465116279" green="0.98837209302325579" blue="1" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-6x-qHr">
-                                                <rect key="frame" x="210.5" y="34" width="48" height="23"/>
+                                                <rect key="frame" x="210" y="34" width="47" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="import" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U19-4e-upa">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1539,7 +1539,7 @@ CA
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Welcome to  Quick Caption" id="OTq-OK-cO6">
                                                     <font key="font" metaFont="systemSemibold" size="19"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="textColor" red="0.9941860465116279" green="0.98837209302325579" blue="1" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
@@ -1589,6 +1589,7 @@ CA
                         <outlet property="captionBottomConstraint" destination="sIp-PQ-tVI" id="nKg-F1-kRy"/>
                         <outlet property="captionPreviewLabel" destination="jiy-T2-5Ml" id="TUc-3s-Ekx"/>
                         <outlet property="customHintContainerView" destination="2qy-J0-ats" id="Y0A-bG-np1"/>
+                        <outlet property="guidanceLabel" destination="N0Y-Mx-4BP" id="ZUl-Da-Jbd"/>
                         <outlet property="playPauseImageView" destination="FA1-Kt-fGw" id="Thf-LV-b8j"/>
                         <outlet property="playerView" destination="MMG-zt-4ZZ" id="XyH-Jq-kz1"/>
                         <outlet property="progressView" destination="K5C-Y2-cNb" id="ShI-fX-AJ7"/>
@@ -1601,6 +1602,7 @@ CA
                         <outlet property="videoPreviewContainerView" destination="K4d-N4-mRe" id="O3j-UH-f7o"/>
                         <outlet property="volumeSlider" destination="vX9-SF-5ld" id="MxB-T9-bfn"/>
                         <outlet property="waveformPreviewContainerBox" destination="fCx-cJ-p9f" id="AHR-c6-rlc"/>
+                        <outlet property="welcomingLabel" destination="VrY-KV-fKi" id="4xV-jw-LGf"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
