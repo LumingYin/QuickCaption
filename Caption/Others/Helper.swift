@@ -25,7 +25,7 @@ class Helper: NSObject {
 
     static func installFCPXCaptionFiles() -> Bool {
         let fileMgr = FileManager.default
-        //        let userDocumentURL = fileMgr.urls(for: .documentDirectory, in: .userDomainMask).first!
+        // let userDocumentURL = fileMgr.urls(for: .documentDirectory, in: .userDomainMask).first!
         let urlForCreation = URL(fileURLWithPath: "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions", isDirectory: true)
         let urlForCopy = URL(fileURLWithPath: "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions/Caption", isDirectory: true)
         if let bundleURL = Bundle.main.url(forResource: "Caption", withExtension: "") {
@@ -100,8 +100,27 @@ class Helper: NSObject {
                 }
             }
         }
-
     }
+
+    static func displaySaveFileDialog(callback: @escaping ((_ selectedFile: Bool, _ fileURL: URL?, _ filePath: String?)-> ())) {
+        let dialog = NSSavePanel()
+        dialog.title = "Save created caption file"
+        dialog.showsResizeIndicator = true
+        dialog.showsHiddenFiles = false
+        dialog.canCreateDirectories = true
+//        dialog.allowedFileTypes = movieTypes
+
+        dialog.beginSheetModal(for: NSApp.mainWindow!) { (result) in
+            if result != .OK {
+                callback(false, nil, nil)
+            } else {
+                if let result = dialog.url, let path = dialog.url?.path {
+                    callback(true, result, path)
+                }
+            }
+        }
+    }
+
 
     static func displayInformationalSheet(title: String, text: String) {
         let alert = NSAlert()

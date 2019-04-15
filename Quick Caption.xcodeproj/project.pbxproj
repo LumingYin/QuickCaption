@@ -28,13 +28,6 @@
 		322F448E223F4CC500427898 /* GBDeviceInfo_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F448B223F4CC500427898 /* GBDeviceInfo_Common.m */; };
 		322F4495223F720F00427898 /* QuickCaptionScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F4494223F720F00427898 /* QuickCaptionScrollView.m */; };
 		322F4497223F818F00427898 /* CaptionWaveformBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F4496223F818F00427898 /* CaptionWaveformBox.swift */; };
-		323EE3BB2219439F00CC22B3 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B52219439F00CC22B3 /* AppCenter.framework */; };
-		323EE3BC2219439F00CC22B3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B62219439F00CC22B3 /* Sparkle.framework */; };
-		323EE3BD2219439F00CC22B3 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */; };
-		323EE3BE2219439F00CC22B3 /* AppCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B82219439F00CC22B3 /* AppCenterAnalytics.framework */; };
-		323EE3C02219439F00CC22B3 /* LetsMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3BA2219439F00CC22B3 /* LetsMove.framework */; };
-		323EE3C5221943AF00CC22B3 /* LetsMove.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 323EE3BA2219439F00CC22B3 /* LetsMove.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		323EE3C6221943B100CC22B3 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 323EE3B62219439F00CC22B3 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324971D122190D1C00562223 /* CaptionWindowController.swift */; };
 		324971DB221929C000562223 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 324971DA221929C000562223 /* Security.framework */; };
 		326A0906223DD62B009A8313 /* TimelineOverallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0905223DD62B009A8313 /* TimelineOverallView.swift */; };
@@ -71,8 +64,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				323EE3C5221943AF00CC22B3 /* LetsMove.framework in CopyFiles */,
-				323EE3C6221943B100CC22B3 /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,11 +101,6 @@
 		322F4493223F720F00427898 /* QuickCaptionScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickCaptionScrollView.h; sourceTree = "<group>"; };
 		322F4494223F720F00427898 /* QuickCaptionScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickCaptionScrollView.m; sourceTree = "<group>"; };
 		322F4496223F818F00427898 /* CaptionWaveformBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionWaveformBox.swift; sourceTree = "<group>"; };
-		323EE3B52219439F00CC22B3 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Caption/Frameworks/AppCenter.framework; sourceTree = "<group>"; };
-		323EE3B62219439F00CC22B3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Caption/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
-		323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Caption/Frameworks/AppCenterCrashes.framework; sourceTree = "<group>"; };
-		323EE3B82219439F00CC22B3 /* AppCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterAnalytics.framework; path = Caption/Frameworks/AppCenterAnalytics.framework; sourceTree = "<group>"; };
-		323EE3BA2219439F00CC22B3 /* LetsMove.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LetsMove.framework; path = Caption/Frameworks/LetsMove.framework; sourceTree = "<group>"; };
 		324971D122190D1C00562223 /* CaptionWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionWindowController.swift; sourceTree = "<group>"; };
 		324971DA221929C000562223 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		326A0905223DD62B009A8313 /* TimelineOverallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineOverallView.swift; sourceTree = "<group>"; };
@@ -153,13 +139,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				324971DB221929C000562223 /* Security.framework in Frameworks */,
-				323EE3BB2219439F00CC22B3 /* AppCenter.framework in Frameworks */,
-				323EE3C02219439F00CC22B3 /* LetsMove.framework in Frameworks */,
-				323EE3BC2219439F00CC22B3 /* Sparkle.framework in Frameworks */,
-				323EE3BE2219439F00CC22B3 /* AppCenterAnalytics.framework in Frameworks */,
 				562A68971F2D4FC1000E6B16 /* AVKit.framework in Frameworks */,
 				562A68951F2D4FBE000E6B16 /* AVFoundation.framework in Frameworks */,
-				323EE3BD2219439F00CC22B3 /* AppCenterCrashes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,11 +279,6 @@
 		562A68931F2D4FBE000E6B16 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				323EE3B52219439F00CC22B3 /* AppCenter.framework */,
-				323EE3B82219439F00CC22B3 /* AppCenterAnalytics.framework */,
-				323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */,
-				323EE3BA2219439F00CC22B3 /* LetsMove.framework */,
-				323EE3B62219439F00CC22B3 /* Sparkle.framework */,
 				324971DA221929C000562223 /* Security.framework */,
 				562A68961F2D4FC1000E6B16 /* AVKit.framework */,
 				562A68941F2D4FBE000E6B16 /* AVFoundation.framework */,
@@ -354,7 +330,7 @@
 								enabled = 0;
 							};
 							com.apple.Sandbox = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -569,6 +545,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Quick Caption.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3Q7XKEDZ36;
@@ -598,6 +575,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Quick Caption.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3Q7XKEDZ36;

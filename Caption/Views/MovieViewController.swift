@@ -112,7 +112,6 @@ import AppCenterAnalytics
             self.episode.arrayForCaption = []
             self.episode.videoDescription = result!.lastPathComponent
             self.playVideo(result!)
-            MSAnalytics.trackEvent("New file opened", withProperties: ["Name": (path! as NSString).lastPathComponent])
         }
     }
 

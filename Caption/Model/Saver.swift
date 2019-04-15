@@ -62,7 +62,14 @@ class Saver {
         }
 
         do {
-            try text.write(to: newPath, atomically: true, encoding: String.Encoding.utf8)
+//            try text.write(to: newPath, atomically: true, encoding: String.Encoding.utf8)
+            Helper.displaySaveFileDialog { (success, url, string) in
+                do {
+                    try text.write(to: url!, atomically: true, encoding: String.Encoding.utf8)
+                } catch {
+                    Helper.displayInformationalSheet(title: "Save failed!", text: "Save has failed. \(error)")
+                }
+            }
             Helper.displayInteractiveSheet(title: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).", firstButtonText: "Show in Finder", secondButtonText: "Dismiss") { (firstButtonReturn) in
                 if firstButtonReturn == true {
                     NSWorkspace.shared.activateFileViewerSelecting([newPath])
@@ -71,7 +78,7 @@ class Saver {
         }
         catch {
             print("Error writing to file: \(error)")
-            Helper.displayInformationalSheet(title: "Saved failed!", text: "Save has failed. \(error)")
+            Helper.displayInformationalSheet(title: "Save failed!", text: "Save has failed. \(error)")
         }
     }
 
