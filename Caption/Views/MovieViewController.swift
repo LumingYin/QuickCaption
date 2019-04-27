@@ -894,7 +894,7 @@ import AppCenterAnalytics
                                 self.accumulatedMainQueueTasks.append(task)
                                 DispatchQueue.main.async(execute: task)
                             } else {
-                                print("Failed with: \(error)")
+                                print("Failed with: \(String(describing: error))")
                             }
                         })
 //                        let imageRef = try imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)

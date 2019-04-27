@@ -2003,14 +2003,6 @@ CA
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OQR-T9-CG4">
-                                                <rect key="frame" x="126" y="93" width="262" height="23"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <connections>
-                                                    <action selector="colorChanged:" target="Lpo-yO-LUY" id="Cae-j3-9m0"/>
-                                                </connections>
-                                            </colorWell>
                                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SwU-WR-Q55">
                                                 <rect key="frame" x="127" y="144" width="264" height="26"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -2027,6 +2019,16 @@ CA
                                                     <action selector="fontSizeChanged:" target="Lpo-yO-LUY" id="0Ib-lT-ghk"/>
                                                 </connections>
                                             </comboBox>
+                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PrX-Ea-Kp4" customClass="ComboColorWell" customModule="Quick_Caption" customModuleProvider="target">
+                                                <rect key="frame" x="126" y="93" width="263" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowClearColor" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="colorChanged:" target="Lpo-yO-LUY" id="CGB-Xl-2ba"/>
+                                                </connections>
+                                            </customView>
                                         </subviews>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="B7h-9g-97J" customClass="ResizableInputContainerView" customModule="Quick_Caption" customModuleProvider="target">
@@ -2136,7 +2138,7 @@ CA
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="fontColorButton" destination="OQR-T9-CG4" id="d3C-ck-2Bn"/>
+                        <outlet property="fontColorButton" destination="PrX-Ea-Kp4" id="AA4-hZ-SVc"/>
                         <outlet property="fontFamilyButton" destination="oOc-o6-Q9x" id="ZCE-SJ-iaw"/>
                         <outlet property="fontShadowButton" destination="pZb-KP-UuS" id="hbO-mg-gaB"/>
                         <outlet property="fontSizeButton" destination="SwU-WR-Q55" id="y05-lF-maE"/>

@@ -138,7 +138,7 @@ typedef void (^AppSandboxFileSecurityScopeBlock)(NSURL *securityScopedFileURL, N
  
  @see securityScopedURLForFilePath:persistPermission:bookmark:
  
- @param path A file path, either a file or folder, that the caller needs access to.
+ @param filePath A file path, either a file or folder, that the caller needs access to.
  @param persist If YES will save the permission for future calls.
  @return YES if permission was granted or already available, NO otherwise.
  */

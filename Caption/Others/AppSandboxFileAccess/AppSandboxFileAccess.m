@@ -111,7 +111,7 @@
 		[openPanel setDelegate:openPanelDelegate];
 		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 		NSInteger openPanelButtonPressed = [openPanel runModal];
-		if (openPanelButtonPressed == NSFileHandlingPanelOKButton) {
+        if (openPanelButtonPressed == NSModalResponseOK) {
 			allowedURL = [openPanel URL];
 		}
 	};
