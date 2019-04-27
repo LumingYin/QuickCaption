@@ -96,6 +96,7 @@ class Helper: NSObject {
                 callback(false, nil, nil)
             } else {
                 if let result = dialog.url, let path = dialog.url?.path {
+                    AppSandboxFileAccess().persistPermissionPath(path)
                     callback(true, result, path)
                 }
             }

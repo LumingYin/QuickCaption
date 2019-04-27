@@ -129,12 +129,14 @@ import AppCenterAnalytics
 
     func playVideo(_ videoURL: URL) {
         self.episode.videoURL = videoURL
-        episode.player = AVPlayer(url: videoURL)
-        customHintContainerView.isHidden = true
-        self.episode.player?.addObserver(self, forKeyPath: "rate", options: [.new], context: &MovieViewController.playerPlayrateContext)
-        playerView.player = episode.player
-        episode.player?.addObserver(self, forKeyPath: "status", options: [.new], context: &MovieViewController.playerReadinessContext)
-//        recentTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateLoadVideo), userInfo: nil, repeats: false)
+        AppSandboxFileAccess()?.accessFileURL(videoURL, persistPermission: true, with: {
+            self.episode.player = AVPlayer(url: videoURL)
+            self.customHintContainerView.isHidden = true
+            self.episode.player?.addObserver(self, forKeyPath: "rate", options: [.new], context: &MovieViewController.playerPlayrateContext)
+            self.playerView.player = self.episode.player
+            self.episode.player?.addObserver(self, forKeyPath: "status", options: [.new], context: &MovieViewController.playerReadinessContext)
+            //        recentTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateLoadVideo), userInfo: nil, repeats: false)
+        })
     }
 
 //    func windowDidResize(_ notification: Notification) {

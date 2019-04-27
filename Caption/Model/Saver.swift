@@ -65,7 +65,9 @@ class Saver {
 //            try text.write(to: newPath, atomically: true, encoding: String.Encoding.utf8)
             Helper.displaySaveFileDialog { (success, url, string) in
                 do {
-                    try text.write(to: url!, atomically: true, encoding: String.Encoding.utf8)
+                    if success {
+                        try text.write(to: url!, atomically: true, encoding: String.Encoding.utf8)
+                    }
                 } catch {
                     Helper.displayInformationalSheet(title: "Save failed!", text: "Save has failed. \(error)")
                 }

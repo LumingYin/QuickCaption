@@ -10,6 +10,9 @@
 		3204751F223DA1A30027218F /* CaptionBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3204751E223DA1A30027218F /* CaptionBoxView.swift */; };
 		32047523223DA6100027218F /* NSObject+KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 32047522223DA6100027218F /* NSObject+KVO.m */; };
 		32047525223DA7910027218F /* NSString+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32047524223DA7910027218F /* NSString+Drawing.swift */; };
+		3216F7F62274FC3E00E11EBD /* AppSandboxFileAccessPersist.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216F7EF2274FC3E00E11EBD /* AppSandboxFileAccessPersist.m */; };
+		3216F7F72274FC3E00E11EBD /* AppSandboxFileAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216F7F12274FC3E00E11EBD /* AppSandboxFileAccess.m */; };
+		3216F7F82274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216F7F32274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m */; };
 		321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C32235FE650038C8FB /* Caption.xcdatamodeld */; };
 		321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */; };
 		321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C92236037C0038C8FB /* SamplesExtractor.swift */; };
@@ -75,6 +78,12 @@
 		32047521223DA6100027218F /* NSObject+KVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVO.h"; sourceTree = "<group>"; };
 		32047522223DA6100027218F /* NSObject+KVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVO.m"; sourceTree = "<group>"; };
 		32047524223DA7910027218F /* NSString+Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Drawing.swift"; sourceTree = "<group>"; };
+		3216F7EE2274FC3E00E11EBD /* AppSandboxFileAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSandboxFileAccess.h; sourceTree = "<group>"; };
+		3216F7EF2274FC3E00E11EBD /* AppSandboxFileAccessPersist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSandboxFileAccessPersist.m; sourceTree = "<group>"; };
+		3216F7F02274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSandboxFileAccessOpenSavePanelDelegate.h; sourceTree = "<group>"; };
+		3216F7F12274FC3E00E11EBD /* AppSandboxFileAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSandboxFileAccess.m; sourceTree = "<group>"; };
+		3216F7F22274FC3E00E11EBD /* AppSandboxFileAccessPersist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSandboxFileAccessPersist.h; sourceTree = "<group>"; };
+		3216F7F32274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSandboxFileAccessOpenSavePanelDelegate.m; sourceTree = "<group>"; };
 		321DC3C42235FE650038C8FB /* Caption.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Caption.xcdatamodel; sourceTree = "<group>"; };
 		321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveFormDrawer.swift; sourceTree = "<group>"; };
 		321DC3C92236037C0038C8FB /* SamplesExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesExtractor.swift; sourceTree = "<group>"; };
@@ -147,6 +156,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3216F7EC2274FC3E00E11EBD /* AppSandboxFileAccess */ = {
+			isa = PBXGroup;
+			children = (
+				3216F7EE2274FC3E00E11EBD /* AppSandboxFileAccess.h */,
+				3216F7EF2274FC3E00E11EBD /* AppSandboxFileAccessPersist.m */,
+				3216F7F02274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.h */,
+				3216F7F12274FC3E00E11EBD /* AppSandboxFileAccess.m */,
+				3216F7F22274FC3E00E11EBD /* AppSandboxFileAccessPersist.h */,
+				3216F7F32274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m */,
+			);
+			path = AppSandboxFileAccess;
+			sourceTree = "<group>";
+		};
 		321DC3C6223603740038C8FB /* Waveform */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +289,7 @@
 		562A68831F2D4F5E000E6B16 /* Caption */ = {
 			isa = PBXGroup;
 			children = (
+				3216F7EC2274FC3E00E11EBD /* AppSandboxFileAccess */,
 				32F53CCD223762E2007B66E1 /* AppKit */,
 				321DC3C6223603740038C8FB /* Waveform */,
 				321DC3F22236157D0038C8FB /* Model */,
@@ -377,6 +400,8 @@
 				32047525223DA7910027218F /* NSString+Drawing.swift in Sources */,
 				32F53CDF22376C4D007B66E1 /* EpisodeProject+CoreDataProperties.swift in Sources */,
 				326A090E223E3482009A8313 /* SwiftHEXColors.swift in Sources */,
+				3216F7F72274FC3E00E11EBD /* AppSandboxFileAccess.m in Sources */,
+				3216F7F62274FC3E00E11EBD /* AppSandboxFileAccessPersist.m in Sources */,
 				32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */,
 				3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */,
 				321DC3F722361E3D0038C8FB /* CaptionExportViewController.swift in Sources */,
@@ -411,6 +436,7 @@
 				321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */,
 				322F4482223F367700427898 /* WaveformPreviewContainerView.swift in Sources */,
 				321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */,
+				3216F7F82274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m in Sources */,
 				324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */,
 				322F4495223F720F00427898 /* QuickCaptionScrollView.m in Sources */,
 				32F53CE522377262007B66E1 /* CaptionLine+CoreDataProperties.swift in Sources */,
