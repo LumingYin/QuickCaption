@@ -13,6 +13,8 @@
 		3216F7F62274FC3E00E11EBD /* AppSandboxFileAccessPersist.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216F7EF2274FC3E00E11EBD /* AppSandboxFileAccessPersist.m */; };
 		3216F7F72274FC3E00E11EBD /* AppSandboxFileAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216F7F12274FC3E00E11EBD /* AppSandboxFileAccess.m */; };
 		3216F7F82274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216F7F32274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m */; };
+		3216F828227501F200E11EBD /* ComboColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3216F826227501F200E11EBD /* ComboColorWell.swift */; };
+		3216F829227501F200E11EBD /* ComboColorWellImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3216F827227501F200E11EBD /* ComboColorWellImages.xcassets */; };
 		321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C32235FE650038C8FB /* Caption.xcdatamodeld */; };
 		321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */; };
 		321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C92236037C0038C8FB /* SamplesExtractor.swift */; };
@@ -84,6 +86,8 @@
 		3216F7F12274FC3E00E11EBD /* AppSandboxFileAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSandboxFileAccess.m; sourceTree = "<group>"; };
 		3216F7F22274FC3E00E11EBD /* AppSandboxFileAccessPersist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSandboxFileAccessPersist.h; sourceTree = "<group>"; };
 		3216F7F32274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSandboxFileAccessOpenSavePanelDelegate.m; sourceTree = "<group>"; };
+		3216F826227501F200E11EBD /* ComboColorWell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComboColorWell.swift; sourceTree = "<group>"; };
+		3216F827227501F200E11EBD /* ComboColorWellImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ComboColorWellImages.xcassets; sourceTree = "<group>"; };
 		321DC3C42235FE650038C8FB /* Caption.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Caption.xcdatamodel; sourceTree = "<group>"; };
 		321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveFormDrawer.swift; sourceTree = "<group>"; };
 		321DC3C92236037C0038C8FB /* SamplesExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesExtractor.swift; sourceTree = "<group>"; };
@@ -169,6 +173,15 @@
 			path = AppSandboxFileAccess;
 			sourceTree = "<group>";
 		};
+		3216F825227501F200E11EBD /* ComboColorWell */ = {
+			isa = PBXGroup;
+			children = (
+				3216F826227501F200E11EBD /* ComboColorWell.swift */,
+				3216F827227501F200E11EBD /* ComboColorWellImages.xcassets */,
+			);
+			path = ComboColorWell;
+			sourceTree = "<group>";
+		};
 		321DC3C6223603740038C8FB /* Waveform */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +237,9 @@
 		321DC3F3223615840038C8FB /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				3216F825227501F200E11EBD /* ComboColorWell */,
+				3216F7EC2274FC3E00E11EBD /* AppSandboxFileAccess */,
+				321DC3C6223603740038C8FB /* Waveform */,
 				322F4483223F4CC500427898 /* GBDeviceInfo */,
 				326A0913223F0CFF009A8313 /* Caption */,
 				32047521223DA6100027218F /* NSObject+KVO.h */,
@@ -289,9 +305,7 @@
 		562A68831F2D4F5E000E6B16 /* Caption */ = {
 			isa = PBXGroup;
 			children = (
-				3216F7EC2274FC3E00E11EBD /* AppSandboxFileAccess */,
 				32F53CCD223762E2007B66E1 /* AppKit */,
-				321DC3C6223603740038C8FB /* Waveform */,
 				321DC3F22236157D0038C8FB /* Model */,
 				321DC3F12236156F0038C8FB /* Views */,
 				321DC3F3223615840038C8FB /* Others */,
@@ -382,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3216F829227501F200E11EBD /* ComboColorWellImages.xcassets in Resources */,
 				3C43B6942068A7A000219EF6 /* film.icns in Resources */,
 				326A0914223F0CFF009A8313 /* Caption in Resources */,
 				562A68891F2D4F5E000E6B16 /* Assets.xcassets in Resources */,
@@ -413,6 +428,7 @@
 				32047523223DA6100027218F /* NSObject+KVO.m in Sources */,
 				322F448E223F4CC500427898 /* GBDeviceInfo_Common.m in Sources */,
 				32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */,
+				3216F828227501F200E11EBD /* ComboColorWell.swift in Sources */,
 				321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */,
 				321DC3F5223615E90038C8FB /* MainSplitViewController.swift in Sources */,
 				322F4497223F818F00427898 /* CaptionWaveformBox.swift in Sources */,
