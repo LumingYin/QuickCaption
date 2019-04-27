@@ -44,6 +44,19 @@ class Saver {
             return
         }
 
+        if type == .fcpXML {
+            if !Helper.fcpxTemplateAlreadyInstalled() {
+                Helper.displayInteractiveSheet(title: "Install Final Cut Pro X Caption Template", text: "For Final Cut Pro X to correctly import your FCPXML, Final Cut Pro X Caption Template must be installed first.", firstButtonText: "Continue", secondButtonText: "Cancel") { (confirm) in
+                    if confirm {
+                        Helper.installFCPXCaptionFiles(callback: {
+                            Saver.writeFileToDisk(type: type, text: text, episode: episode)
+                        })
+                    }
+                }
+                return
+            }
+        }
+
         guard let origonalVideoName = episode.videoURL?.lastPathComponent else {
             return
         }
@@ -60,7 +73,7 @@ class Saver {
         guard let directoryPath = episode.videoURL?.deletingLastPathComponent() else {
             return
         }
-        
+
         let newPath = directoryPath.appendingPathComponent(newSubtitleName)
 
         Helper.displaySaveFileDialog(newSubtitleName, directoryPath: directoryPath, callback: { (success, url, string) in

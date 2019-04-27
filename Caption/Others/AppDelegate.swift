@@ -97,7 +97,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func installFCPXExtras(_ sender: Any) {
-        Helper.installFCPXCaptionFiles()
+        Helper.installFCPXCaptionFiles(callback: nil)
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
