@@ -61,27 +61,27 @@ class Saver {
             return
         }
 
-        do {
+//        do {
 //            try text.write(to: newPath, atomically: true, encoding: String.Encoding.utf8)
-            Helper.displaySaveFileDialog { (success, url, string) in
-                do {
-                    if success {
+        Helper.displaySaveFileDialog(newSubtitleName, callback: { (success, url, string) in
+                if success {
+                    do {
                         try text.write(to: url!, atomically: true, encoding: String.Encoding.utf8)
+                        Helper.displayInteractiveSheet(title: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).", firstButtonText: "Show in Finder", secondButtonText: "Dismiss") { (firstButtonReturn) in
+                            if firstButtonReturn == true {
+                                NSWorkspace.shared.activateFileViewerSelecting([newPath])
+                            }
+                        }
+                    } catch {
+                        Helper.displayInformationalSheet(title: "Save failed!", text: "Save has failed. \(error)")
                     }
-                } catch {
-                    Helper.displayInformationalSheet(title: "Save failed!", text: "Save has failed. \(error)")
                 }
-            }
-            Helper.displayInteractiveSheet(title: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).", firstButtonText: "Show in Finder", secondButtonText: "Dismiss") { (firstButtonReturn) in
-                if firstButtonReturn == true {
-                    NSWorkspace.shared.activateFileViewerSelecting([newPath])
-                }
-            }
+            })
         }
-        catch {
-            print("Error writing to file: \(error)")
-            Helper.displayInformationalSheet(title: "Save failed!", text: "Save has failed. \(error)")
-        }
-    }
+//        catch {
+//            print("Error writing to file: \(error)")
+//            Helper.displayInformationalSheet(title: "Save failed!", text: "Save has failed. \(error)")
+//        }
+//    }
 
 }

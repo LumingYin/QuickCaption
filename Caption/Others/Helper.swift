@@ -103,12 +103,14 @@ class Helper: NSObject {
         }
     }
 
-    static func displaySaveFileDialog(callback: @escaping ((_ selectedFile: Bool, _ fileURL: URL?, _ filePath: String?)-> ())) {
+    static func displaySaveFileDialog(_ fileName: String, callback: @escaping ((_ selectedFile: Bool, _ fileURL: URL?, _ filePath: String?)-> ())) {
         let dialog = NSSavePanel()
         dialog.title = "Save created caption file"
         dialog.showsResizeIndicator = true
         dialog.showsHiddenFiles = false
         dialog.canCreateDirectories = true
+        dialog.nameFieldStringValue = fileName
+
 //        dialog.allowedFileTypes = movieTypes
 
         dialog.beginSheetModal(for: NSApp.mainWindow!) { (result) in
