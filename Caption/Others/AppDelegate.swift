@@ -108,7 +108,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        UserDefaults.standard.set(true, forKey: "SUAutomaticallyUpdate")
+        // UserDefaults.standard.set(true, forKey: "SUAutomaticallyUpdate")
 
         do {
             let fetchRequest: NSFetchRequest<EpisodeProject> = EpisodeProject.fetchRequest()
