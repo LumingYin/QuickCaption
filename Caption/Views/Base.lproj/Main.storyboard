@@ -24,8 +24,8 @@
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem isSeparatorItem="YES" hidden="YES" id="VOq-y0-SEH"/>
+                                        <menuItem title="Preferences…" hidden="YES" keyEquivalent="," id="BOF-NM-1cW"/>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -783,6 +783,13 @@ CA
                                         <menuItem title="Check for Updates" keyEquivalent="U" id="fJE-Ke-bXl">
                                             <connections>
                                                 <action selector="checkForUpdates:" target="Voe-Tx-rLC" id="VBr-hI-CAn"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="3Kn-NL-z6v"/>
+                                        <menuItem title="Acknowledgements" id="j8L-eM-LSA">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="displayAcknowledgements:" target="Voe-Tx-rLC" id="pSB-dl-21z"/>
                                             </connections>
                                         </menuItem>
                                     </items>

@@ -15,6 +15,7 @@
 		3216F7F82274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216F7F32274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m */; };
 		3216F828227501F200E11EBD /* ComboColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3216F826227501F200E11EBD /* ComboColorWell.swift */; };
 		3216F829227501F200E11EBD /* ComboColorWellImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3216F827227501F200E11EBD /* ComboColorWellImages.xcassets */; };
+		3216F82E2275145700E11EBD /* QuickCaption_Acknowledgements.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3216F82C2275145700E11EBD /* QuickCaption_Acknowledgements.pdf */; };
 		321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C32235FE650038C8FB /* Caption.xcdatamodeld */; };
 		321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */; };
 		321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C92236037C0038C8FB /* SamplesExtractor.swift */; };
@@ -88,6 +89,8 @@
 		3216F7F32274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSandboxFileAccessOpenSavePanelDelegate.m; sourceTree = "<group>"; };
 		3216F826227501F200E11EBD /* ComboColorWell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComboColorWell.swift; sourceTree = "<group>"; };
 		3216F827227501F200E11EBD /* ComboColorWellImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ComboColorWellImages.xcassets; sourceTree = "<group>"; };
+		3216F82B2275145700E11EBD /* QuickCaption_Acknowledgements.pages */ = {isa = PBXFileReference; lastKnownFileType = file; path = QuickCaption_Acknowledgements.pages; sourceTree = "<group>"; };
+		3216F82C2275145700E11EBD /* QuickCaption_Acknowledgements.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = QuickCaption_Acknowledgements.pdf; sourceTree = "<group>"; };
 		321DC3C42235FE650038C8FB /* Caption.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Caption.xcdatamodel; sourceTree = "<group>"; };
 		321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveFormDrawer.swift; sourceTree = "<group>"; };
 		321DC3C92236037C0038C8FB /* SamplesExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesExtractor.swift; sourceTree = "<group>"; };
@@ -180,6 +183,15 @@
 				3216F827227501F200E11EBD /* ComboColorWellImages.xcassets */,
 			);
 			path = ComboColorWell;
+			sourceTree = "<group>";
+		};
+		3216F82A2275145700E11EBD /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+				3216F82B2275145700E11EBD /* QuickCaption_Acknowledgements.pages */,
+				3216F82C2275145700E11EBD /* QuickCaption_Acknowledgements.pdf */,
+			);
+			path = Credits;
 			sourceTree = "<group>";
 		};
 		321DC3C6223603740038C8FB /* Waveform */ = {
@@ -305,6 +317,7 @@
 		562A68831F2D4F5E000E6B16 /* Caption */ = {
 			isa = PBXGroup;
 			children = (
+				3216F82A2275145700E11EBD /* Credits */,
 				32F53CCD223762E2007B66E1 /* AppKit */,
 				321DC3F22236157D0038C8FB /* Model */,
 				321DC3F12236156F0038C8FB /* Views */,
@@ -398,6 +411,7 @@
 			files = (
 				3216F829227501F200E11EBD /* ComboColorWellImages.xcassets in Resources */,
 				3C43B6942068A7A000219EF6 /* film.icns in Resources */,
+				3216F82E2275145700E11EBD /* QuickCaption_Acknowledgements.pdf in Resources */,
 				326A0914223F0CFF009A8313 /* Caption in Resources */,
 				562A68891F2D4F5E000E6B16 /* Assets.xcassets in Resources */,
 				562A688C1F2D4F5E000E6B16 /* Main.storyboard in Resources */,

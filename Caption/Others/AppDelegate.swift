@@ -361,6 +361,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    @IBAction func displayAcknowledgements(_ sender: Any) {
+        if let bundleURL = Bundle.main.url(forResource: "QuickCaption_Acknowledgements", withExtension: "pdf") {
+            NSWorkspace.shared.open(bundleURL)
+        }
+    }
+
     @IBAction func projectNavigatorClicked(_ sender: Any) {
         AppDelegate.mainWindow()?.toggleSidebarList(self)
     }
