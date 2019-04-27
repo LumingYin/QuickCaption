@@ -23,23 +23,25 @@ class Helper: NSObject {
         }
     }
 
-    static func installFCPXCaptionFiles() -> Bool {
+    static func installFCPXCaptionFiles() {
+        let firstLevelPath = "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions"
+        let secondLevelPath = "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions/Caption"
         let fileMgr = FileManager.default
         // let userDocumentURL = fileMgr.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let urlForCreation = URL(fileURLWithPath: "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions", isDirectory: true)
-        let urlForCopy = URL(fileURLWithPath: "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions/Caption", isDirectory: true)
+        let urlForCreation = URL(fileURLWithPath: firstLevelPath, isDirectory: true)
+        let urlForCopy = URL(fileURLWithPath: secondLevelPath, isDirectory: true)
         if let bundleURL = Bundle.main.url(forResource: "Caption", withExtension: "") {
-            do {
-                try fileMgr.createDirectory(at: urlForCreation, withIntermediateDirectories: true, attributes: nil)
-                try fileMgr.copyItem(at: bundleURL, to: urlForCopy)
-                return true
-            } catch let error as NSError { // Handle the error
-                print("copy failed! Error:\(error.localizedDescription)")
-                return false
-            }
+            AppSandboxFileAccess()?.accessFileURL(urlForCopy, persistPermission: true, with: {
+                do {
+                    try fileMgr.createDirectory(at: urlForCreation, withIntermediateDirectories: true, attributes: nil)
+                    try fileMgr.copyItem(at: bundleURL, to: urlForCopy)
+
+                } catch let error as NSError { // Handle the error
+                    print("copy failed! Error:\(error.localizedDescription)")
+                }
+            })
         } else {
             print("Folder doesn't not exist in bundle folder")
-            return false
         }
     }
 
