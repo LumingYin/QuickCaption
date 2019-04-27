@@ -25,7 +25,7 @@ enum FileType {
                 srtString = srtString + "\(i+1)\n\(str)\n\n"
             }
         }
-        print(srtString)
+        // print(srtString)
         return srtString
     }
 
@@ -189,7 +189,7 @@ enum FileType {
                 }
             }
         }
-        print(txtString)
+        // print(txtString)
         return txtString
     }
 
