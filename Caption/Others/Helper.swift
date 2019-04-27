@@ -27,7 +27,6 @@ class Helper: NSObject {
         let firstLevelPath = "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions"
         let secondLevelPath = "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions/Caption"
         let fileMgr = FileManager.default
-        // let userDocumentURL = fileMgr.urls(for: .documentDirectory, in: .userDomainMask).first!
         let urlForCreation = URL(fileURLWithPath: firstLevelPath, isDirectory: true)
         let urlForCopy = URL(fileURLWithPath: secondLevelPath, isDirectory: true)
         if let bundleURL = Bundle.main.url(forResource: "Caption", withExtension: "") {

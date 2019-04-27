@@ -773,9 +773,9 @@ CA
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="nSn-O7-rnd"/>
-                                        <menuItem title="Check for Updates" keyEquivalent="u" id="fJE-Ke-bXl">
+                                        <menuItem title="Check for Updates" keyEquivalent="U" id="fJE-Ke-bXl">
                                             <connections>
-                                                <action selector="checkForUpdates:" target="Vsf-6z-eCN" id="Hzq-8u-5vL"/>
+                                                <action selector="checkForUpdates:" target="Voe-Tx-rLC" id="VBr-hI-CAn"/>
                                             </connections>
                                         </menuItem>
                                     </items>

@@ -375,6 +375,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func replaceCaptionsWithSRT(_ sender: Any) {
     }
+
+    @IBAction func checkForUpdates(_ sender: NSMenuItem) {
+        NSWorkspace.shared.open(URL(string: "macappstore://itunes.apple.com/us/app/quick-caption/id1363610340?mt=12")!)
+    }
+
 }
 
 
