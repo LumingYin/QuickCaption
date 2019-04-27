@@ -19,7 +19,7 @@ class FontViewController: NSViewController {
     @IBOutlet weak var fontWeightButton: NSPopUpButton!
     @IBOutlet weak var fontSizeButton: NSComboBox!
     @IBOutlet weak var fontShadowButton: NSPopUpButton!
-    @IBOutlet weak var fontColorButton: NSColorWell!
+    @IBOutlet weak var fontColorButton: ComboColorWell!
 
     let allFontNames = NSFontManager.shared.availableFontFamilies
     var fontPostScriptArray: [String] = []
@@ -123,7 +123,7 @@ class FontViewController: NSViewController {
         self.episode?.styleFontShadow = Int16(sender.indexOfSelectedItem)
     }
 
-    @IBAction func colorChanged(_ sender: NSColorWell) {
+    @IBAction func colorChanged(_ sender: ComboColorWell) {
         self.episode?.styleFontColor = sender.color.hexString
     }
 

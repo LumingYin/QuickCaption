@@ -10,6 +10,12 @@
 		3204751F223DA1A30027218F /* CaptionBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3204751E223DA1A30027218F /* CaptionBoxView.swift */; };
 		32047523223DA6100027218F /* NSObject+KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 32047522223DA6100027218F /* NSObject+KVO.m */; };
 		32047525223DA7910027218F /* NSString+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32047524223DA7910027218F /* NSString+Drawing.swift */; };
+		3216F7F62274FC3E00E11EBD /* AppSandboxFileAccessPersist.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216F7EF2274FC3E00E11EBD /* AppSandboxFileAccessPersist.m */; };
+		3216F7F72274FC3E00E11EBD /* AppSandboxFileAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216F7F12274FC3E00E11EBD /* AppSandboxFileAccess.m */; };
+		3216F7F82274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216F7F32274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m */; };
+		3216F828227501F200E11EBD /* ComboColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3216F826227501F200E11EBD /* ComboColorWell.swift */; };
+		3216F829227501F200E11EBD /* ComboColorWellImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3216F827227501F200E11EBD /* ComboColorWellImages.xcassets */; };
+		3216F82E2275145700E11EBD /* QuickCaption_Acknowledgements.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3216F82C2275145700E11EBD /* QuickCaption_Acknowledgements.pdf */; };
 		321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C32235FE650038C8FB /* Caption.xcdatamodeld */; };
 		321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */; };
 		321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3C92236037C0038C8FB /* SamplesExtractor.swift */; };
@@ -28,13 +34,6 @@
 		322F448E223F4CC500427898 /* GBDeviceInfo_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F448B223F4CC500427898 /* GBDeviceInfo_Common.m */; };
 		322F4495223F720F00427898 /* QuickCaptionScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F4494223F720F00427898 /* QuickCaptionScrollView.m */; };
 		322F4497223F818F00427898 /* CaptionWaveformBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F4496223F818F00427898 /* CaptionWaveformBox.swift */; };
-		323EE3BB2219439F00CC22B3 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B52219439F00CC22B3 /* AppCenter.framework */; };
-		323EE3BC2219439F00CC22B3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B62219439F00CC22B3 /* Sparkle.framework */; };
-		323EE3BD2219439F00CC22B3 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */; };
-		323EE3BE2219439F00CC22B3 /* AppCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3B82219439F00CC22B3 /* AppCenterAnalytics.framework */; };
-		323EE3C02219439F00CC22B3 /* LetsMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323EE3BA2219439F00CC22B3 /* LetsMove.framework */; };
-		323EE3C5221943AF00CC22B3 /* LetsMove.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 323EE3BA2219439F00CC22B3 /* LetsMove.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		323EE3C6221943B100CC22B3 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 323EE3B62219439F00CC22B3 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324971D122190D1C00562223 /* CaptionWindowController.swift */; };
 		324971DB221929C000562223 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 324971DA221929C000562223 /* Security.framework */; };
 		326A0906223DD62B009A8313 /* TimelineOverallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0905223DD62B009A8313 /* TimelineOverallView.swift */; };
@@ -71,8 +70,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				323EE3C5221943AF00CC22B3 /* LetsMove.framework in CopyFiles */,
-				323EE3C6221943B100CC22B3 /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +81,16 @@
 		32047521223DA6100027218F /* NSObject+KVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVO.h"; sourceTree = "<group>"; };
 		32047522223DA6100027218F /* NSObject+KVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVO.m"; sourceTree = "<group>"; };
 		32047524223DA7910027218F /* NSString+Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Drawing.swift"; sourceTree = "<group>"; };
+		3216F7EE2274FC3E00E11EBD /* AppSandboxFileAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSandboxFileAccess.h; sourceTree = "<group>"; };
+		3216F7EF2274FC3E00E11EBD /* AppSandboxFileAccessPersist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSandboxFileAccessPersist.m; sourceTree = "<group>"; };
+		3216F7F02274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSandboxFileAccessOpenSavePanelDelegate.h; sourceTree = "<group>"; };
+		3216F7F12274FC3E00E11EBD /* AppSandboxFileAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSandboxFileAccess.m; sourceTree = "<group>"; };
+		3216F7F22274FC3E00E11EBD /* AppSandboxFileAccessPersist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSandboxFileAccessPersist.h; sourceTree = "<group>"; };
+		3216F7F32274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSandboxFileAccessOpenSavePanelDelegate.m; sourceTree = "<group>"; };
+		3216F826227501F200E11EBD /* ComboColorWell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComboColorWell.swift; sourceTree = "<group>"; };
+		3216F827227501F200E11EBD /* ComboColorWellImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ComboColorWellImages.xcassets; sourceTree = "<group>"; };
+		3216F82B2275145700E11EBD /* QuickCaption_Acknowledgements.pages */ = {isa = PBXFileReference; lastKnownFileType = file; path = QuickCaption_Acknowledgements.pages; sourceTree = "<group>"; };
+		3216F82C2275145700E11EBD /* QuickCaption_Acknowledgements.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = QuickCaption_Acknowledgements.pdf; sourceTree = "<group>"; };
 		321DC3C42235FE650038C8FB /* Caption.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Caption.xcdatamodel; sourceTree = "<group>"; };
 		321DC3C82236037C0038C8FB /* WaveFormDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveFormDrawer.swift; sourceTree = "<group>"; };
 		321DC3C92236037C0038C8FB /* SamplesExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesExtractor.swift; sourceTree = "<group>"; };
@@ -110,11 +117,6 @@
 		322F4493223F720F00427898 /* QuickCaptionScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickCaptionScrollView.h; sourceTree = "<group>"; };
 		322F4494223F720F00427898 /* QuickCaptionScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickCaptionScrollView.m; sourceTree = "<group>"; };
 		322F4496223F818F00427898 /* CaptionWaveformBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionWaveformBox.swift; sourceTree = "<group>"; };
-		323EE3B52219439F00CC22B3 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Caption/Frameworks/AppCenter.framework; sourceTree = "<group>"; };
-		323EE3B62219439F00CC22B3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Caption/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
-		323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Caption/Frameworks/AppCenterCrashes.framework; sourceTree = "<group>"; };
-		323EE3B82219439F00CC22B3 /* AppCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterAnalytics.framework; path = Caption/Frameworks/AppCenterAnalytics.framework; sourceTree = "<group>"; };
-		323EE3BA2219439F00CC22B3 /* LetsMove.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LetsMove.framework; path = Caption/Frameworks/LetsMove.framework; sourceTree = "<group>"; };
 		324971D122190D1C00562223 /* CaptionWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionWindowController.swift; sourceTree = "<group>"; };
 		324971DA221929C000562223 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		326A0905223DD62B009A8313 /* TimelineOverallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineOverallView.swift; sourceTree = "<group>"; };
@@ -153,19 +155,45 @@
 			buildActionMask = 2147483647;
 			files = (
 				324971DB221929C000562223 /* Security.framework in Frameworks */,
-				323EE3BB2219439F00CC22B3 /* AppCenter.framework in Frameworks */,
-				323EE3C02219439F00CC22B3 /* LetsMove.framework in Frameworks */,
-				323EE3BC2219439F00CC22B3 /* Sparkle.framework in Frameworks */,
-				323EE3BE2219439F00CC22B3 /* AppCenterAnalytics.framework in Frameworks */,
 				562A68971F2D4FC1000E6B16 /* AVKit.framework in Frameworks */,
 				562A68951F2D4FBE000E6B16 /* AVFoundation.framework in Frameworks */,
-				323EE3BD2219439F00CC22B3 /* AppCenterCrashes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3216F7EC2274FC3E00E11EBD /* AppSandboxFileAccess */ = {
+			isa = PBXGroup;
+			children = (
+				3216F7EE2274FC3E00E11EBD /* AppSandboxFileAccess.h */,
+				3216F7EF2274FC3E00E11EBD /* AppSandboxFileAccessPersist.m */,
+				3216F7F02274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.h */,
+				3216F7F12274FC3E00E11EBD /* AppSandboxFileAccess.m */,
+				3216F7F22274FC3E00E11EBD /* AppSandboxFileAccessPersist.h */,
+				3216F7F32274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m */,
+			);
+			path = AppSandboxFileAccess;
+			sourceTree = "<group>";
+		};
+		3216F825227501F200E11EBD /* ComboColorWell */ = {
+			isa = PBXGroup;
+			children = (
+				3216F826227501F200E11EBD /* ComboColorWell.swift */,
+				3216F827227501F200E11EBD /* ComboColorWellImages.xcassets */,
+			);
+			path = ComboColorWell;
+			sourceTree = "<group>";
+		};
+		3216F82A2275145700E11EBD /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+				3216F82B2275145700E11EBD /* QuickCaption_Acknowledgements.pages */,
+				3216F82C2275145700E11EBD /* QuickCaption_Acknowledgements.pdf */,
+			);
+			path = Credits;
+			sourceTree = "<group>";
+		};
 		321DC3C6223603740038C8FB /* Waveform */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +249,9 @@
 		321DC3F3223615840038C8FB /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				3216F825227501F200E11EBD /* ComboColorWell */,
+				3216F7EC2274FC3E00E11EBD /* AppSandboxFileAccess */,
+				321DC3C6223603740038C8FB /* Waveform */,
 				322F4483223F4CC500427898 /* GBDeviceInfo */,
 				326A0913223F0CFF009A8313 /* Caption */,
 				32047521223DA6100027218F /* NSObject+KVO.h */,
@@ -286,8 +317,8 @@
 		562A68831F2D4F5E000E6B16 /* Caption */ = {
 			isa = PBXGroup;
 			children = (
+				3216F82A2275145700E11EBD /* Credits */,
 				32F53CCD223762E2007B66E1 /* AppKit */,
-				321DC3C6223603740038C8FB /* Waveform */,
 				321DC3F22236157D0038C8FB /* Model */,
 				321DC3F12236156F0038C8FB /* Views */,
 				321DC3F3223615840038C8FB /* Others */,
@@ -298,11 +329,6 @@
 		562A68931F2D4FBE000E6B16 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				323EE3B52219439F00CC22B3 /* AppCenter.framework */,
-				323EE3B82219439F00CC22B3 /* AppCenterAnalytics.framework */,
-				323EE3B72219439F00CC22B3 /* AppCenterCrashes.framework */,
-				323EE3BA2219439F00CC22B3 /* LetsMove.framework */,
-				323EE3B62219439F00CC22B3 /* Sparkle.framework */,
 				324971DA221929C000562223 /* Security.framework */,
 				562A68961F2D4FC1000E6B16 /* AVKit.framework */,
 				562A68941F2D4FBE000E6B16 /* AVFoundation.framework */,
@@ -354,7 +380,7 @@
 								enabled = 0;
 							};
 							com.apple.Sandbox = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -383,7 +409,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3216F829227501F200E11EBD /* ComboColorWellImages.xcassets in Resources */,
 				3C43B6942068A7A000219EF6 /* film.icns in Resources */,
+				3216F82E2275145700E11EBD /* QuickCaption_Acknowledgements.pdf in Resources */,
 				326A0914223F0CFF009A8313 /* Caption in Resources */,
 				562A68891F2D4F5E000E6B16 /* Assets.xcassets in Resources */,
 				562A688C1F2D4F5E000E6B16 /* Main.storyboard in Resources */,
@@ -401,6 +429,8 @@
 				32047525223DA7910027218F /* NSString+Drawing.swift in Sources */,
 				32F53CDF22376C4D007B66E1 /* EpisodeProject+CoreDataProperties.swift in Sources */,
 				326A090E223E3482009A8313 /* SwiftHEXColors.swift in Sources */,
+				3216F7F72274FC3E00E11EBD /* AppSandboxFileAccess.m in Sources */,
+				3216F7F62274FC3E00E11EBD /* AppSandboxFileAccessPersist.m in Sources */,
 				32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */,
 				3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */,
 				321DC3F722361E3D0038C8FB /* CaptionExportViewController.swift in Sources */,
@@ -412,6 +442,7 @@
 				32047523223DA6100027218F /* NSObject+KVO.m in Sources */,
 				322F448E223F4CC500427898 /* GBDeviceInfo_Common.m in Sources */,
 				32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */,
+				3216F828227501F200E11EBD /* ComboColorWell.swift in Sources */,
 				321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */,
 				321DC3F5223615E90038C8FB /* MainSplitViewController.swift in Sources */,
 				322F4497223F818F00427898 /* CaptionWaveformBox.swift in Sources */,
@@ -435,6 +466,7 @@
 				321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */,
 				322F4482223F367700427898 /* WaveformPreviewContainerView.swift in Sources */,
 				321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */,
+				3216F7F82274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m in Sources */,
 				324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */,
 				322F4495223F720F00427898 /* QuickCaptionScrollView.m in Sources */,
 				32F53CE522377262007B66E1 /* CaptionLine+CoreDataProperties.swift in Sources */,
@@ -569,6 +601,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Quick Caption.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3Q7XKEDZ36;
@@ -598,6 +631,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Quick Caption.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3Q7XKEDZ36;

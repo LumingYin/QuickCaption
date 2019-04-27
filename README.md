@@ -1,7 +1,7 @@
 ## Quick Caption
 Quick Caption is your one-stop solution to transcribe video or audio clips, then automatically apply timecode throughout the transcription process, and generate SRT (Subtitle Rip Text), FCPXML (Final Cut Pro XML), or TXT (Plain Text) transcription files.
 
-[Download Quick Caption](https://github.com/LumingYin/Caption/releases/latest)
+[Download Quick Caption](https://itunes.apple.com/app/quick-caption/id1363610340)
 
 ![](https://raw.githubusercontent.com/LumingYin/Caption/master/screenshot.jpg "Screenshot of Quick Caption")
 

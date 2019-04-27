@@ -44,6 +44,19 @@ class Saver {
             return
         }
 
+        if type == .fcpXML {
+            if !Helper.fcpxTemplateAlreadyInstalled() {
+                Helper.displayInteractiveSheet(title: "Install Final Cut Pro X Caption Template", text: "For Final Cut Pro X to correctly import your FCPXML, Final Cut Pro X Caption Template must be installed first.", firstButtonText: "Continue", secondButtonText: "Cancel") { (confirm) in
+                    if confirm {
+                        Helper.installFCPXCaptionFiles(callback: {
+                            Saver.writeFileToDisk(type: type, text: text, episode: episode)
+                        })
+                    }
+                }
+                return
+            }
+        }
+
         guard let origonalVideoName = episode.videoURL?.lastPathComponent else {
             return
         }
@@ -57,22 +70,26 @@ class Saver {
             newSubtitleName = "\(ogVN).fcpxml"
         }
 
-        guard let newPath = episode.videoURL?.deletingLastPathComponent().appendingPathComponent(newSubtitleName) else {
+        guard let directoryPath = episode.videoURL?.deletingLastPathComponent() else {
             return
         }
 
-        do {
-            try text.write(to: newPath, atomically: true, encoding: String.Encoding.utf8)
-            Helper.displayInteractiveSheet(title: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).", firstButtonText: "Show in Finder", secondButtonText: "Dismiss") { (firstButtonReturn) in
-                if firstButtonReturn == true {
-                    NSWorkspace.shared.activateFileViewerSelecting([newPath])
+        let newPath = directoryPath.appendingPathComponent(newSubtitleName)
+
+        Helper.displaySaveFileDialog(newSubtitleName, directoryPath: directoryPath, callback: { (success, url, string) in
+            if success {
+                do {
+                    try text.write(to: url!, atomically: true, encoding: String.Encoding.utf8)
+                    Helper.displayInteractiveSheet(title: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).", firstButtonText: "Show in Finder", secondButtonText: "Dismiss") { (firstButtonReturn) in
+                        if firstButtonReturn == true {
+                            NSWorkspace.shared.activateFileViewerSelecting([newPath])
+                        }
+                    }
+                } catch {
+                    Helper.displayInformationalSheet(title: "Save failed!", text: "Save has failed. \(error)")
                 }
             }
-        }
-        catch {
-            print("Error writing to file: \(error)")
-            Helper.displayInformationalSheet(title: "Saved failed!", text: "Save has failed. \(error)")
-        }
+        })
     }
 
 }

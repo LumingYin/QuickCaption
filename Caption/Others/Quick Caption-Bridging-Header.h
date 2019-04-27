@@ -4,3 +4,4 @@
 
 #import "NSObject+KVO.h"
 #import "GBDeviceInfo.h"
+#import "AppSandboxFileAccess.h"

@@ -23,9 +23,10 @@ class CaptionBoxView: NSView {
         super.draw(dirtyRect)
 
         if captionText.count == 0 {
-            NSColor(red: 24 / 255, green: 15 / 255, blue: 41 / 255, alpha: 1.0).setFill()
+            NSColor(calibratedRed: 24 / 255, green: 15 / 255, blue: 41 / 255, alpha: 1.0).setFill()
+//            NSColor(red: 24 / 255, green: 15 / 255, blue: 41 / 255, alpha: 1.0).setFill()
         } else {
-            NSColor(red: 63 / 255, green: 34 / 255, blue: 114 / 255, alpha: 1.0).setFill()
+            NSColor(calibratedRed: 63 / 255, green: 34 / 255, blue: 114 / 255, alpha: 1.0).setFill()
         }
         let path = NSBezierPath(roundedRect: self.bounds, xRadius: 6, yRadius: 6)
         path.fill()
@@ -49,7 +50,7 @@ class CaptionBoxView: NSView {
             smallPath.stroke()
         }
 
-        let textColor = NSColor(red: 179 / 255, green: 152 / 255, blue: 233 / 255, alpha: 1.0)
+        let textColor = NSColor(calibratedRed: 179 / 255, green: 152 / 255, blue: 233 / 255, alpha: 1.0)
         (captionText as NSString).drawLeftAligned(in: bounds, withAttributes: [.foregroundColor: textColor])
         // Drawing code here.
     }

@@ -96,26 +96,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    @IBAction func installFCPXExtras(_ sender: Any) {
+        Helper.installFCPXCaptionFiles(callback: nil)
+    }
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        #if DEBUG
-//        UserDefaults.standard.set(true, forKey: "NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints")
-        #else
-        PFMoveToApplicationsFolderIfNecessary()
-        #endif
-        SUUpdater.shared()?.checkForUpdatesInBackground()
-        UserDefaults.standard.set(true, forKey: "SUAutomaticallyUpdate")
-        MSAppCenter.start("c5be1193-d482-4d0e-99a9-b5901f40d6f3", withServices:[
-            MSAnalytics.self,
-            MSCrashes.self,
-            ])
-        Helper.installFCPXCaptionFiles()
+//        Helper.installFCPXCaptionFiles()
         Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { (_) in
             self.saveEverything(self)
         }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        UserDefaults.standard.set(true, forKey: "SUAutomaticallyUpdate")
+        // UserDefaults.standard.set(true, forKey: "SUAutomaticallyUpdate")
 
         do {
             let fetchRequest: NSFetchRequest<EpisodeProject> = EpisodeProject.fetchRequest()
@@ -368,6 +361,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    @IBAction func displayAcknowledgements(_ sender: Any) {
+        if let bundleURL = Bundle.main.url(forResource: "QuickCaption_Acknowledgements", withExtension: "pdf") {
+            NSWorkspace.shared.open(bundleURL)
+        }
+    }
+
     @IBAction func projectNavigatorClicked(_ sender: Any) {
         AppDelegate.mainWindow()?.toggleSidebarList(self)
     }
@@ -386,6 +385,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func replaceCaptionsWithSRT(_ sender: Any) {
     }
+
+    @IBAction func checkForUpdates(_ sender: NSMenuItem) {
+        NSWorkspace.shared.open(URL(string: "macappstore://itunes.apple.com/us/app/quick-caption/id1363610340?mt=12")!)
+    }
+
 }
 
 
