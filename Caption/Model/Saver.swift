@@ -57,31 +57,26 @@ class Saver {
             newSubtitleName = "\(ogVN).fcpxml"
         }
 
-        guard let newPath = episode.videoURL?.deletingLastPathComponent().appendingPathComponent(newSubtitleName) else {
+        guard let directoryPath = episode.videoURL?.deletingLastPathComponent() else {
             return
         }
+        
+        let newPath = directoryPath.appendingPathComponent(newSubtitleName)
 
-//        do {
-//            try text.write(to: newPath, atomically: true, encoding: String.Encoding.utf8)
-        Helper.displaySaveFileDialog(newSubtitleName, callback: { (success, url, string) in
-                if success {
-                    do {
-                        try text.write(to: url!, atomically: true, encoding: String.Encoding.utf8)
-                        Helper.displayInteractiveSheet(title: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).", firstButtonText: "Show in Finder", secondButtonText: "Dismiss") { (firstButtonReturn) in
-                            if firstButtonReturn == true {
-                                NSWorkspace.shared.activateFileViewerSelecting([newPath])
-                            }
+        Helper.displaySaveFileDialog(newSubtitleName, directoryPath: directoryPath, callback: { (success, url, string) in
+            if success {
+                do {
+                    try text.write(to: url!, atomically: true, encoding: String.Encoding.utf8)
+                    Helper.displayInteractiveSheet(title: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).", firstButtonText: "Show in Finder", secondButtonText: "Dismiss") { (firstButtonReturn) in
+                        if firstButtonReturn == true {
+                            NSWorkspace.shared.activateFileViewerSelecting([newPath])
                         }
-                    } catch {
-                        Helper.displayInformationalSheet(title: "Save failed!", text: "Save has failed. \(error)")
                     }
+                } catch {
+                    Helper.displayInformationalSheet(title: "Save failed!", text: "Save has failed. \(error)")
                 }
-            })
-        }
-//        catch {
-//            print("Error writing to file: \(error)")
-//            Helper.displayInformationalSheet(title: "Save failed!", text: "Save has failed. \(error)")
-//        }
-//    }
+            }
+        })
+    }
 
 }

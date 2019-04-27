@@ -96,8 +96,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    @IBAction func installFCPXExtras(_ sender: Any) {
         Helper.installFCPXCaptionFiles()
+    }
+
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+//        Helper.installFCPXCaptionFiles()
         Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { (_) in
             self.saveEverything(self)
         }

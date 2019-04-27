@@ -92,7 +92,7 @@ class Helper: NSObject {
         dialog.allowsMultipleSelection = false
         dialog.allowedFileTypes = movieTypes
 
-        dialog.beginSheetModal(for: NSApp.mainWindow!) { (result) in
+        dialog.beginSheetModal(for: Helper.appWindow()) { (result) in
             if result != .OK {
                 callback(false, nil, nil)
             } else {
@@ -104,8 +104,21 @@ class Helper: NSObject {
         }
     }
 
-    static func displaySaveFileDialog(_ fileName: String, callback: @escaping ((_ selectedFile: Bool, _ fileURL: URL?, _ filePath: String?)-> ())) {
+    static func appWindow() -> NSWindow {
+        if let mainWindow = NSApp.mainWindow {
+            return mainWindow
+        }
+        for window in NSApp.windows {
+            if let typed = window as? QuickCaptionWindow {
+                return typed
+            }
+        }
+        fatalError("Unable to find a window.")
+    }
+
+    static func displaySaveFileDialog(_ fileName: String, directoryPath: URL, callback: @escaping ((_ selectedFile: Bool, _ fileURL: URL?, _ filePath: String?)-> ())) {
         let dialog = NSSavePanel()
+        dialog.directoryURL = directoryPath
         dialog.title = "Save created caption file"
         dialog.showsResizeIndicator = true
         dialog.showsHiddenFiles = false
@@ -114,7 +127,7 @@ class Helper: NSObject {
 
 //        dialog.allowedFileTypes = movieTypes
 
-        dialog.beginSheetModal(for: NSApp.mainWindow!) { (result) in
+        dialog.beginSheetModal(for: Helper.appWindow()) { (result) in
             if result != .OK {
                 callback(false, nil, nil)
             } else {
