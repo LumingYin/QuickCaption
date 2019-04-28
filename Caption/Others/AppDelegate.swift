@@ -113,7 +113,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func installFCPXExtras(_ sender: Any) {
-        Helper.installFCPXCaptionFiles(callback: nil)
+//        Helper.installFCPXCaptionFiles(callback: nil)
     }
 
     @objc func saveAll() {

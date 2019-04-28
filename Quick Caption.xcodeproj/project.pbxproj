@@ -44,7 +44,6 @@
 		326A090E223E3482009A8313 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A090D223E3482009A8313 /* SwiftHEXColors.swift */; };
 		326A0910223F03BE009A8313 /* QuickCaptionApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A090F223F03BE009A8313 /* QuickCaptionApplication.swift */; };
 		326A0912223F0699009A8313 /* QuickCaptionWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0911223F0699009A8313 /* QuickCaptionWindow.swift */; };
-		326A0914223F0CFF009A8313 /* Caption in Resources */ = {isa = PBXBuildFile; fileRef = 326A0913223F0CFF009A8313 /* Caption */; };
 		326A0916223F131F009A8313 /* ShadowPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0915223F131F009A8313 /* ShadowPreferences.swift */; };
 		326A0918223F297C009A8313 /* Saver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0917223F297C009A8313 /* Saver.swift */; };
 		32D5731322756354007BBAB6 /* NonSmoothedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D5731222756354007BBAB6 /* NonSmoothedTextField.m */; };
@@ -424,7 +423,6 @@
 				3216F829227501F200E11EBD /* ComboColorWellImages.xcassets in Resources */,
 				3C43B6942068A7A000219EF6 /* film.icns in Resources */,
 				3216F82E2275145700E11EBD /* QuickCaption_Acknowledgements.pdf in Resources */,
-				326A0914223F0CFF009A8313 /* Caption in Resources */,
 				562A68891F2D4F5E000E6B16 /* Assets.xcassets in Resources */,
 				562A688C1F2D4F5E000E6B16 /* Main.storyboard in Resources */,
 			);
