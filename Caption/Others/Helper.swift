@@ -50,7 +50,21 @@ class Helper: NSObject {
                         callback?()
                     })
                 } catch let error as NSError { // Handle the error
-                    if error.code == 516 {
+                    print("Returned file access code: \(error.code)")
+                    if error.code == 513 {
+                        let command = #"sudo mkdir -p /Library/Application\ Support/Final\ Cut\ Pro/Templates.localized/Titles.localized;sudo chmod -R 777 /Library/Application\ Support/Final\ Cut\ Pro/Templates.localized/Titles.localized"#
+                        let text = """
+Unable to install template. \n\nYou need to install Final Cut Pro X and run it at least once before installing the caption template.\n\nIf you are still unable to install the template after installing Final Cut Pro X, manually paste the following command into the Terminal app and press return, then try to install the caption package again. You will be prompted to enter your login password, and it is normal that your password will not be visible as you type. Your password will not be sent to anywhere.\n\n\(command)
+"""
+                        Helper.displayInteractiveSheet(title: "You need to install Final Cut Pro X first", text: text, firstButtonText: "Copy Command and Open Terminal", secondButtonText: "Cancel", callback: { (allowed) in
+                            if (allowed) {
+                                NSWorkspace.shared.launchApplication("Terminal")
+                                let pb = NSPasteboard.general
+                                pb.declareTypes([.string], owner: nil)
+                                pb.setString(command, forType: .string)
+                            }
+                        })
+                    } else if error.code == 516 {
                         Helper.displayInteractiveSheet(title: "Template already successfully installed", text: "You have already installed Final Cut Pro X caption template on this Mac. Exported captions should now work correctly in Final Cut Pro X.\n\nIf Final Cut Pro X is unable to process your imported captions, please contact support with \"Contact → Contact Support\".\n\nTo import captions onto another Mac, install Quick Caption on your other Mac, and click on \"Help → Install Final Cut Pro X Caption Template\".", firstButtonText: "OK", secondButtonText: "", callback: { (clicked) in
                             callback?()
                         })
