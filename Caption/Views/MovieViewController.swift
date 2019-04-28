@@ -786,7 +786,7 @@ import AppCenterAnalytics
                     SamplesExtractor.samples(audioTrack: track, timeRange: timeRange, desiredNumberOfSamples: width, onSuccess: { s, sMax, _ in
                         // print("WE CARE \(i): [3] In SamplesExtractor block")
                         let sampling = (samples: s, sampleMax: sMax)
-                        let configuration = WaveformConfiguration(size: cachedBounds, color: WaveColor(red: 77 / 255, green: 103 / 255, blue: 143 / 255, alpha: 1), backgroundColor: WaveColor.clear, style: .gradient, position: .middle, scale: 1, borderWidth: 0, borderColor: WaveColor.clear)
+                        let configuration = WaveformConfiguration(size: cachedBounds, color: WaveColor(calibratedRed: 77 / 255, green: 103 / 255, blue: 143 / 255, alpha: 1), backgroundColor: WaveColor.clear, style: .gradient, position: .middle, scale: 1, borderWidth: 0, borderColor: WaveColor.clear)
                         if let imageDrawn = WaveFormDrawer.image(with: sampling, and: configuration) {
                             imageDrawn.saveAsFile(with: .png, withName: "\(waveTrackCacheFolder)/\(i).png")
 //                            print("WE CARE \(i): [4] WaveFormDrawer is drawn")
