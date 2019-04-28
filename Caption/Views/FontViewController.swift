@@ -49,8 +49,14 @@ class FontViewController: NSViewController {
     }
 
     func configureAllMetadata() {
-        self.videoName.stringValue = episode?.videoURL?.lastPathComponent ?? ""
-        self.videoPath.stringValue = episode?.videoURL?.absoluteString ?? ""
+        if let up = episode?.videoURL {
+            let url = URL(fileURLWithPath: up)
+            self.videoName.stringValue = url.lastPathComponent
+            self.videoPath.stringValue = url.path
+        } else {
+            self.videoName.stringValue = ""
+            self.videoPath.stringValue = ""
+        }
         self.videoDurationField.stringValue = "\(episode?.videoDuration ?? 0) seconds"
         self.videoFramerateField.stringValue = "\(episode?.framerate ?? 0) fps"
     }

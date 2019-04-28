@@ -84,7 +84,7 @@ import AppCenterAnalytics
             return
         }
         if self.episode.videoURL != nil {
-            if FileManager.default.fileExists(atPath: self.episode.videoURL!.path) {
+            if FileManager.default.fileExists(atPath: self.episode.videoURL!) {
                 Helper.displayInteractiveSheet(title: "Create new project?", text: "The current project already has an associated video. Would you like to create a new project instead?", firstButtonText: "Create New Project", secondButtonText: "Cancel", callback: { (firstButtonClicked) in
                     if (firstButtonClicked) {
                         AppDelegate.sourceListVC()?.addNewProject()
@@ -128,7 +128,7 @@ import AppCenterAnalytics
     }
 
     func playVideo(_ videoURL: URL) {
-        self.episode.videoURL = videoURL
+        self.episode.videoURL = videoURL.path
         AppSandboxFileAccess()?.accessFileURL(videoURL, persistPermission: true, with: {
             self.episode.player = AVPlayer(url: videoURL)
             self.customHintContainerView.isHidden = true
@@ -297,8 +297,8 @@ import AppCenterAnalytics
     func populateThumbnail() {
         if (self.episode.thumbnailURL == nil) {
             if isAudioOnly { return }
-            let sourceURL = self.episode!.videoURL
-            let asset = AVAsset(url: sourceURL!)
+            let sourceURL = self.episode!.videoURL!
+            let asset = AVAsset(url: URL(fileURLWithPath: sourceURL))
             let imageGenerator = AVAssetImageGenerator(asset: asset)
             let time = CMTimeMake(value: 1, timescale: 1)
             let imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
@@ -310,7 +310,7 @@ import AppCenterAnalytics
             let destinationURL = self.applicationDataDirectory().appendingPathComponent("thumbnails").appendingPathComponent("\(NSUUID().uuidString).png")
             let result = thumbnail.pngWrite(to: destinationURL)
             print("Writing thumbnail: \(result)")
-            self.episode.thumbnailURL = destinationURL
+            self.episode.thumbnailURL = destinationURL.path
         }
     }
 
@@ -408,7 +408,7 @@ import AppCenterAnalytics
             if (shouldRelink) {
                 Helper.displayOpenFileDialog(callback: { (hasSelected, fileURL, filePath) in
                     guard let newURL = fileURL else {return}
-                    self.episode.videoURL = newURL
+                    self.episode.videoURL = newURL.path
                     if FileManager.default.fileExists(atPath: newURL.path) {
                         self.playVideo(newURL)
                     } else {
@@ -429,8 +429,8 @@ import AppCenterAnalytics
         NotificationCenter.default.addObserver(self, selector: #selector(frameDidChangeNotification(_:)), name: NSView.frameDidChangeNotification, object: self.playerView)
 
         if let url = self.episode.videoURL {
-            if FileManager.default.fileExists(atPath: url.path) {
-                self.playVideo(url)
+            if FileManager.default.fileExists(atPath: url) {
+                self.playVideo(URL(fileURLWithPath: url))
             } else {
                 setupForRelinkVideo()
             }

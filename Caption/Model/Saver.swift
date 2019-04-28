@@ -57,9 +57,10 @@ class Saver {
             }
         }
 
-        guard let origonalVideoName = episode.videoURL?.lastPathComponent else {
+        guard let vu = episode.videoURL else {
             return
         }
+        let origonalVideoName = URL(fileURLWithPath: vu).lastPathComponent
         let ogVN = (origonalVideoName as NSString).deletingPathExtension
 
         var newSubtitleName = "\(ogVN).srt"
@@ -70,9 +71,7 @@ class Saver {
             newSubtitleName = "\(ogVN).fcpxml"
         }
 
-        guard let directoryPath = episode.videoURL?.deletingLastPathComponent() else {
-            return
-        }
+        let directoryPath = URL(fileURLWithPath: vu).deletingLastPathComponent()
 
         let newPath = directoryPath.appendingPathComponent(newSubtitleName)
 

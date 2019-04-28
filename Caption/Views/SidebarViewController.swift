@@ -113,7 +113,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     func showEpisodeInFinder(row: Int) {
         let episode = episodeProjects[row]
         if let url = episode.videoURL {
-            NSWorkspace.shared.activateFileViewerSelecting([url])
+            NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: url)])
         }
     }
 
@@ -183,7 +183,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             if let date = episode.modifiedDate as Date? {
                 view.lastModifiedDateTextField.stringValue = formatter.string(from: date)
             }
-            if let url = episode.thumbnailURL, let image = NSImage(contentsOf: url) {
+            if let url = episode.thumbnailURL, let image = NSImage(contentsOf: URL(fileURLWithPath: url)) {
                 view.episodePreview?.image = image
             } else {
                 view.episodePreview?.image = NSImage(named: "bunny")

@@ -20,6 +20,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var followSystemMenuItem: NSMenuItem!
     @IBOutlet weak var openOrRelinkMenuItem: NSMenuItem!
 
+    static func mainStoryboard() -> NSStoryboard? {
+        if #available(OSX 10.13, *) {
+            return NSStoryboard.main
+        } else {
+            return NSStoryboard(name: "Main", bundle: nil)
+        }
+    }
+
     static func openOrRelinkMenuItem() -> NSMenuItem? {
         if let delegate = NSApp.delegate as? AppDelegate {
             return delegate.openOrRelinkMenuItem
@@ -39,10 +47,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     static func rebuildMovieAndSubVC() {
         if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController,
-            let movieVC = NSStoryboard.main?.instantiateController(withIdentifier: "MovieViewController")  as? MovieViewController {
+            let movieVC = AppDelegate.mainStoryboard()?.instantiateController(withIdentifier: "MovieViewController")  as? MovieViewController {
             splitVC.splitViewItems[1].viewController = movieVC
         }
-        if let tabVC = AppDelegate.sideTabVC(), let subVC = NSStoryboard.main?.instantiateController(withIdentifier: "SubtitlesViewController") as? SubtitlesViewController {
+        if let tabVC = AppDelegate.sideTabVC(), let subVC = AppDelegate.mainStoryboard()?.instantiateController(withIdentifier: "SubtitlesViewController") as? SubtitlesViewController {
             tabVC.tabViewItems[0].viewController = subVC
         }
     }
