@@ -145,6 +145,9 @@ class Helper: NSObject {
         dialog.showsHiddenFiles = false
         dialog.canCreateDirectories = true
         dialog.nameFieldStringValue = fileName
+        dialog.isExtensionHidden = true
+        dialog.canSelectHiddenExtension = false
+        dialog.allowedFileTypes = [fileName.fileExtension]
 
 //        dialog.allowedFileTypes = movieTypes
 
@@ -270,6 +273,14 @@ extension String {
             guard components.count > 1 else { return self }
             components.removeLast()
             return components.joined(separator: ".")
+        }
+    }
+
+    var fileExtension: String {
+        get {
+            let components = self.components(separatedBy: ".")
+            guard components.count > 1 else { return "" }
+            return components.last ?? ""
         }
     }
 }
