@@ -54,10 +54,10 @@
     BOOL shouldPrint = YES;
     if ([arg1 isKindOfClass:[NSMutableOrderedSet class]]) {
         set = ((NSMutableOrderedSet *)arg1).set;
-    } else if ([arg1 isKindOfClass:[NSOrderedSet class]]) {
-        set = ((NSOrderedSet *)arg1).set;
     } else if ([arg1 isKindOfClass:[NSMutableSet class]]) {
         set = [((NSMutableSet *)arg1) copy];
+    } else if ([arg1 isKindOfClass:[NSOrderedSet class]]) {
+        set = ((NSOrderedSet *)arg1).set;
     } else if ([arg1 isKindOfClass:[NSSet class]]) {
         set = arg1;
     } else {
