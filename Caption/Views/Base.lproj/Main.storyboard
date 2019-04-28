@@ -1187,7 +1187,7 @@ CA
                                                 <color key="fillColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             </box>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2l-eq-tnu">
-                                                <rect key="frame" x="17.5" y="-1" width="20" height="23"/>
+                                                <rect key="frame" x="12" y="-1" width="22" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="j42-j3-dfi">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1198,7 +1198,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRi-bL-Mbk">
-                                                <rect key="frame" x="48.5" y="-1" width="20" height="23"/>
+                                                <rect key="frame" x="45" y="-1" width="22" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="1qS-ty-ctl">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1209,7 +1209,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TnG-Dw-kSw">
-                                                <rect key="frame" x="79.5" y="-1" width="20" height="23"/>
+                                                <rect key="frame" x="77" y="-1" width="22" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="fYG-vN-i1a">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1220,7 +1220,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kcM-MG-g0M">
-                                                <rect key="frame" x="110.5" y="-1" width="20" height="23"/>
+                                                <rect key="frame" x="108" y="-1" width="22" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="I0L-WU-dfI">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1231,7 +1231,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-fP-aGm">
-                                                <rect key="frame" x="139" y="-1" width="20" height="23"/>
+                                                <rect key="frame" x="138" y="-1" width="22" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="QYs-CB-WRe">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1242,27 +1242,27 @@ CA
                                                 </connections>
                                             </button>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FA1-Kt-fGw">
-                                                <rect key="frame" x="82" y="5" width="15" height="12"/>
+                                                <rect key="frame" x="80" y="5" width="15" height="12"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_play" id="mfa-5f-l54"/>
                                             </imageView>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TRN-rk-sxt">
-                                                <rect key="frame" x="19" y="0.0" width="16" height="22"/>
+                                                <rect key="frame" x="15" y="0.0" width="16" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_framePrev" id="JMp-Sc-QDn"/>
                                             </imageView>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8w-1Y-ajd">
-                                                <rect key="frame" x="48" y="5" width="20" height="12"/>
+                                                <rect key="frame" x="45" y="5" width="20" height="12"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_last" id="GN3-Yw-pTs"/>
                                             </imageView>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="36y-8A-Qbb">
-                                                <rect key="frame" x="111" y="5" width="20" height="12"/>
+                                                <rect key="frame" x="110" y="5" width="20" height="12"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_next" id="qye-9o-uN9"/>
                                             </imageView>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J02-2i-BCs">
-                                                <rect key="frame" x="141" y="0.0" width="16" height="22"/>
+                                                <rect key="frame" x="142" y="0.0" width="16" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_frameNext" id="SuH-wf-Sqy"/>
                                             </imageView>
