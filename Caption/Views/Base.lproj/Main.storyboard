@@ -989,11 +989,11 @@ CA
                                     <rect key="frame" x="0.0" y="0.0" width="286" height="342"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="66" rowSizeStyle="automatic" viewBased="YES" id="yfo-s7-Mnb">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="66" rowSizeStyle="automatic" viewBased="YES" id="yfo-s7-Mnb">
                                             <rect key="frame" x="0.0" y="0.0" width="286" height="342"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <tableColumns>
                                                 <tableColumn width="283" minWidth="40" maxWidth="1000" id="xzf-la-39z">
@@ -1022,7 +1022,7 @@ CA
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="A very long file name. A very long file name. " id="NbH-o3-CnA">
                                                                                 <font key="font" metaFont="systemMedium" size="14"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xoj-mN-yXG" customClass="NonSmoothedTextField" customModule="Quick_Caption" customModuleProvider="target">
@@ -1031,7 +1031,7 @@ CA
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Feb 12, 2019" id="xsh-bU-jEg">
                                                                                 <font key="font" metaFont="cellTitle"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                     </subviews>

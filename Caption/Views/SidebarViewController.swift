@@ -131,6 +131,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsEmptySelection = false
+        tableView.selectionHighlightStyle = .sourceList
     }
 
     func fetchDBData() {

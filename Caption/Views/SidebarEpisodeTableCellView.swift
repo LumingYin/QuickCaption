@@ -20,4 +20,17 @@ class SidebarEpisodeTableCellView: NSTableCellView {
         }
     }
 
+    override var backgroundStyle: NSView.BackgroundStyle {
+        willSet {
+            if newValue == .dark {
+                videoFileNameTextField.textColor = NSColor.white
+                lastModifiedDateTextField.textColor = NSColor.white
+            } else {
+                videoFileNameTextField.textColor = NSColor.labelColor
+                lastModifiedDateTextField.textColor = NSColor.labelColor
+            }
+        }
+    }
+
+
 }
