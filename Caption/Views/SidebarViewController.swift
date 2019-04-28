@@ -150,7 +150,9 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             episode.addObserver(self, forKeyPath: "thumbnailURL", options: [.new], context: nil)
             episode.addObserver(self, forKeyPath: "videoDescription", options: [.new], context: nil)
         }
+        #if DEBUG
         print("Fetch DB data has succeeded.")
+        #endif
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -166,7 +168,9 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             addNewProject()
         }
         if firstLaunch {
+            #if DEBUG
             print("Setting selected row to the first row on launch.")
+            #endif
             updateSelectRow(index: 0)
             firstLaunch = false
         }
@@ -210,12 +214,16 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 
     func updateSelectRow(index: Int) {
         Helper.appWindow().makeKeyAndOrderFront(self)
+        #if DEBUG
         print("The state of various VCs: \(String(describing: AppDelegate.movieVC())), \(String(describing: AppDelegate.subtitleVC())), \(String(describing: AppDelegate.fontVC()))")
+        #endif
 
         if (AppDelegate.movieVC() == nil || AppDelegate.subtitleVC() == nil || AppDelegate.fontVC() == nil) {
             Timer.scheduledTimer(withTimeInterval: 0.15, repeats: false) { (timer) in
+                #if DEBUG
                 print("We're giving loading the row a second try after the timer.")
                 self.updateSelectRow(index: index)
+                #endif
             }
             return
         }
@@ -248,7 +256,9 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         AppDelegate.fontVC()?.dismantleOldFontVC()
         AppDelegate.fontVC()?.episode = project
         AppDelegate.fontVC()?.configurateFontVC()
+        #if DEBUG
         print("Selected: \(project)")
+        #endif
     }
 
     func sortLocalArrayCache() {

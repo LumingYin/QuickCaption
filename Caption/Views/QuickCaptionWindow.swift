@@ -10,7 +10,9 @@ import Cocoa
 
 class QuickCaptionWindow: NSWindow {
     override func keyDown(with event: NSEvent) {
-//        print("Intercepted keyDown: \(event)")
+        #if DEBUG
+        print("Intercepted keyDown: \(event)")
+        #endif
         if event.keyCode == 49 && event.characters == " " {
             AppDelegate.movieVC()?.playPauseClicked(self)
         } else {

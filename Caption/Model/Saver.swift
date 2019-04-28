@@ -61,8 +61,9 @@ class Saver {
         let folderURL = URL(fileURLWithPath: vu).deletingLastPathComponent()
         let directoryPath = URL(fileURLWithPath: folderURL.path, isDirectory: false)
         let newPath = directoryPath.appendingPathComponent(newSubtitleName)
+        #if DEBUG
         print("directoryPath is: \(directoryPath)")
-
+        #endif
         Helper.displaySaveFileDialog(newSubtitleName, directoryPath: directoryPath, callback: { (success, url, string) in
             if success {
                 do {

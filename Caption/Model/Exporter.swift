@@ -25,7 +25,6 @@ enum FileType {
                 srtString = srtString + "\(i+1)\n\(str)\n\n"
             }
         }
-        // print(srtString)
         return srtString
     }
 
@@ -165,7 +164,9 @@ enum FileType {
             let dropdownOptions = ["23.976 fps", "24 fps", "25 fps", "29.97 fps", "30 fps", "50 fps", "59.94 fps", "60 fps"]
             Helper.displayInteractiveSheet(title: "Choose Framerate", text: "Before exporting, check the framerate of your Final Cut Pro X project. To view your project framerate in Final Cut Pro X, open the project and show inspector. The framerate will appear in the inspector.\n\nFCPXML export only supports videos with the following framerates: 23.976, 24, 25, 29.97, 30, 50, 59.94, and 60fps.\n\nAlternatively, you can export the caption into an SRT file. An SRT file can be directly imported into Final Cut Pro X. SRT files can also be \"burnt into\" your video clip using third party tools such as ffmpeg.", dropdownOptions: dropdownOptions, preferredIndex: winningIndex, firstButtonText: "Choose Framerate", secondButtonText: "Cancel") { (selectedOK, index) in
                 if selectedOK {
+                    #if DEBUG
                     print("selected:\(selectedOK), index:\(index)")
+                    #endif
                     let value = dropdownOptions[index].replacingOccurrences(of: " fps", with: "")
                     if let newFpsDouble = Double(value) {
                         generateTimedFCPXMLFromArray(episode: episode, arrayForCaption: arrayForCaption, fpsDouble: newFpsDouble, callback: callback)
@@ -188,7 +189,6 @@ enum FileType {
                 }
             }
         }
-        // print(txtString)
         return txtString
     }
 

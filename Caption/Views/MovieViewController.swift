@@ -21,7 +21,6 @@ import AppCenterAnalytics
 
     @IBOutlet weak var subtitleTrackContainerView: SubtitleTrackContainerView!
     @IBOutlet weak var videoPreviewContainerView: VideoPreviewContainerView!
-//    @IBOutlet weak var waveformImageView: NSImageView!
     @IBOutlet weak var waveformPreviewContainerBox: CaptionWaveformBox!
 
     @IBOutlet weak var timelineScrollView: NSScrollView!
@@ -45,8 +44,6 @@ import AppCenterAnalytics
             
         }
     }
-
-    var recentTimer: Timer?
 
     func removeCaptionFromTimeline(caption: CaptionLine) {
         if let capID = caption.guidIdentifier, let existing = self.cachedCaptionViews[capID] {
@@ -74,7 +71,9 @@ import AppCenterAnalytics
         captionPreviewLabel.wantsLayer = true
         customHintContainerView.layer?.zPosition = 1
         captionPreviewLabel.layer?.zPosition = 1
+        #if DEBUG
         print("customHintContainerView.layer is: \(String(describing: customHintContainerView.layer)), captionPreviewLabel.layer is: \(String(describing: captionPreviewLabel.layer))")
+        #endif
         AppDelegate.subtitleVC()?.dismantleSubtitleVC()
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
     }
@@ -131,18 +130,6 @@ import AppCenterAnalytics
         }
     }
 
-
-    
-    @IBAction func queryTime(_ sender: Any) {
-        if (episode == nil || episode.player == nil) {
-            return
-        }
-        let time = episode.player?.currentTime().value
-        let second = episode.player?.currentTime().seconds
-        let scale = episode.player?.currentTime().timescale
-        self.timeLabel.stringValue = "\(time ?? CMTime.zero.value), \(second ?? 0.0), \(scale ?? CMTimeScale(kCMTimeMaxTimescale))  \(self.episode.videoDescription ?? "")"
-    }
-
     func playVideo(_ videoURL: URL) {
         self.episode.videoURL = videoURL.path
         AppSandboxFileAccess()?.accessFileURL(videoURL, persistPermission: true, with: {
@@ -151,18 +138,10 @@ import AppCenterAnalytics
             self.episode.player?.addObserver(self, forKeyPath: "rate", options: [.new], context: &MovieViewController.playerPlayrateContext)
             self.playerView.player = self.episode.player
             self.episode.player?.addObserver(self, forKeyPath: "status", options: [.new], context: &MovieViewController.playerReadinessContext)
-            //        recentTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(updateLoadVideo), userInfo: nil, repeats: false)
         })
     }
 
-//    func windowDidResize(_ notification: Notification) {
-//        print("window resized!")
-//    }
-
     func updatePersistedFramerate() {
-//        if self.episode.player?.currentItem?.tracks == nil || (self.episode.player?.currentItem?.tracks.count)! <= 0 {
-//            return
-//        }
         if self.episode != nil {
             if let tracks = self.episode.player?.currentItem?.asset.tracks {
                 if !tracks.isEmpty {
@@ -186,12 +165,9 @@ import AppCenterAnalytics
             cap.endingTime = 0
 
             self.episode.addToArrayForCaption(cap)
-//            self.timeLabel.stringValue = "\(self.episode.framerate)fps  |  \(self.episode.videoDescription ?? "")"
             self.episode.creationDate = NSDate()
         }
-//        else {
-//            self.episode.modifiedDate = NSDate()
-//        }
+
         self.episode.videoDuration = Float(CMTimeGetSeconds((self.episode.player?.currentItem?.asset.duration)!))
         self.populateThumbnail()
         self.configureOverallScrollView()
@@ -320,7 +296,6 @@ import AppCenterAnalytics
             let time = CMTimeMake(value: 1, timescale: 1)
             let imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
             let thumbnail = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
-//            let desktopURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
             _ = self.applicationDataDirectory().appendingPathComponent("thumbnails")
             do {try FileManager.default.createDirectory(at: self.applicationDataDirectory().appendingPathComponent("thumbnails"), withIntermediateDirectories: true, attributes: nil)
             } catch {print(error)}
@@ -331,15 +306,15 @@ import AppCenterAnalytics
         }
     }
 
-    @IBAction func saveTXTToDisk(_ sender: Any) {
+    func saveTXTToDisk(_ sender: Any) {
         Saver.saveEpisodeToDisk(self.episode, type: .txt)
     }
     
-    @IBAction func saveSRTToDisk(_ sender: Any) {
+    func saveSRTToDisk(_ sender: Any) {
         Saver.saveEpisodeToDisk(self.episode, type: .srt)
     }
     
-    @IBAction func saveFCPXMLToDisk(_ sender: Any) {
+    func saveFCPXMLToDisk(_ sender: Any) {
         Saver.saveEpisodeToDisk(self.episode, type: .fcpXML)
     }
 
@@ -359,22 +334,21 @@ import AppCenterAnalytics
         captionBottomConstraint.constant = 14
         self.captionPreviewLabel.stringValue = ""
         self.playerView.player?.safelyRemoveObserver(self, forKeyPath: "status")
-        recentTimer?.invalidate()
         volumeSlider.floatValue = 1
         speedSlider.floatValue = 1
         self.videoPreviewContainerView.guid = nil
-//        if accumulatedMainQueueTasks != nil {
-//            for task in accumulatedMainQueueTasks {
-                //            print("Cancelling \(task)")
-                //            task.cancel()
-//            }
-//        }
-//        if accumulatedBackgroundQueueTasks != nil {
-//            for task in accumulatedBackgroundQueueTasks {
-                //            print("Cancelling \(task)")
-                //            task.cancel()
-//            }
-//        }
+        //        if accumulatedMainQueueTasks != nil {
+        //            for task in accumulatedMainQueueTasks {
+        //            print("Cancelling \(task)")
+        //            task.cancel()
+        //            }
+        //        }
+        //        if accumulatedBackgroundQueueTasks != nil {
+        //            for task in accumulatedBackgroundQueueTasks {
+        //            print("Cancelling \(task)")
+        //            task.cancel()
+        //            }
+        //        }
         NotificationCenter.default.removeObserver(self)
         self.playerView.player?.safelyRemoveObserver(self, forKeyPath: "rate")
         if (episode != nil) {
@@ -409,7 +383,7 @@ import AppCenterAnalytics
         self.cachedCaptionViews = [:]
         self.subtitleTrackContainerView.subviews = []
         self.videoPreviewContainerView.subviews = []
-//        self.waveformPreviewContainerBox.subviews = []
+        //        self.waveformPreviewContainerBox.subviews = []
         self.progressView.setFrameOrigin(NSPoint(x: 0, y: self.progressView.frame.origin.y))
     }
 
@@ -441,8 +415,6 @@ import AppCenterAnalytics
             return
         }
         self.episode.modifiedDate = NSDate()
-
-//        NotificationCenter.default.addObserver(self, selector: #selector(boundsDidChangeNotification(_:)), name: NSView.boundsDidChangeNotification, object: self.playerView)
         NotificationCenter.default.addObserver(self, selector: #selector(frameDidChangeNotification(_:)), name: NSView.frameDidChangeNotification, object: self.playerView)
 
         if let url = self.episode.videoURL {
@@ -468,7 +440,7 @@ import AppCenterAnalytics
     }
     var timeLineSegmentHeight: CGFloat {
         // 64 for now
-//        return timelineScrollView.frame.height / 3
+        // return timelineScrollView.frame.height / 3
         return 64
     }
 
@@ -484,13 +456,13 @@ import AppCenterAnalytics
 
     func configureTextTrack() {
         self.subtitleTrackContainerView.setFrameSize(NSSize(width: timelineLengthPixels, height: self.subtitleTrackContainerView.frame.size.height))
-//        self.subtitleTrackContainerView.layer?.backgroundColor = NSColor.purple.cgColor
+        // self.subtitleTrackContainerView.layer?.backgroundColor = NSColor.purple.cgColor
         if (episode == nil || episode!.arrayForCaption == nil) { return }
         for captionLine in (episode!.arrayForCaption?.array as! [CaptionLine]) {
             self.addObserverForCaptionLine(captionLine)
         }
         episode.addObserver(self, forKeyPath: "arrayForCaption", options: [.initial, .new], context: &MovieViewController.textTrackContext)
-//        print(self.subtitleTrackContainerView.bounds)
+        // print(self.subtitleTrackContainerView.bounds)
         self.subtitleTrackContainerView.startTracking()
         self.subtitleTrackContainerView.delegate = self
     }
@@ -524,7 +496,7 @@ import AppCenterAnalytics
 
     func correspondingTimeAtEvent(_ event: NSEvent) -> Float {
         let location = self.subtitleTrackContainerView.convert(event.locationInWindow, from: nil).x
-//        print(location)
+        //        print(location)
         let percentage = Float(location / self.timelineLengthPixels)
         let timePoint = percentage * self.calculatedDuration
         return timePoint
@@ -558,8 +530,8 @@ import AppCenterAnalytics
                     print(".resizeLeft, diffEnding:\(diffEnding)")
                     return (captionLine, nil, .resizeLeft)
                 } else {
-//                    return (captionLine, nil, .selection)
-//                    print(".passing, diffStarting:\(diffStarting), diffEnding: \(diffEnding)")
+                    // return (captionLine, nil, .selection)
+                    // print(".passing, diffStarting:\(diffStarting), diffEnding: \(diffEnding)")
                 }
             }
 
@@ -581,9 +553,9 @@ import AppCenterAnalytics
         case resizeLeftRight
         case resizeRight
         case resizeLeft
-//        case selection
         case moveTime
         case normal
+        // case selection
     }
 
     func trackingMouseUp(with event: NSEvent) {
@@ -703,7 +675,7 @@ import AppCenterAnalytics
             guard let player = self.playerView.player else {return}
             if player.status == .readyToPlay {
                 self.updateLoadVideo()
-//                episode.player?.play()
+                // episode.player?.play()
             }
         }
     }
@@ -714,9 +686,9 @@ import AppCenterAnalytics
 
     func observeMovieCaptionTextValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?) {
         for aChange in change ?? [:] {
-//            print("The change key: \(aChange.key), value: \(aChange.value)")
+            // print("The change key: \(aChange.key), value: \(aChange.value)")
             if let indexSet = aChange.value as? NSIndexSet {
-//                print("The NSIndexSet is: \(indexSet)")
+                // print("The NSIndexSet is: \(indexSet)")
                 for index in indexSet {
                     let indexInt: Int = index
                     if let captionLine = episode.arrayForCaption?.object(at: indexInt) as? CaptionLine {
@@ -752,7 +724,6 @@ import AppCenterAnalytics
     var videoThumbnailTrackCacheRoot = ("~/Library/Caches/com.dim.Caption/video_thumbnail" as NSString).expandingTildeInPath as String
 
     func configureWaveTrack() {
-//        return
         let waveTrackCacheFolder = "\(waveformTrackCacheRoot)/\(self.episode.guidIdentifier ?? "unknown")"
         let urlForCreation = URL(fileURLWithPath: waveTrackCacheFolder, isDirectory: true)
         do {
@@ -762,7 +733,6 @@ import AppCenterAnalytics
         }
         let asset = self.episode.player?.currentItem?.asset
         self.waveformPreviewContainerBox.setFrameSize(NSSize(width: self.timelineLengthPixels, height: timeLineSegmentHeight))
-        // self.waveformImageView.setFrameSize(NSSize(width: self.timelineLengthPixels, height: timeLineSegmentHeight))
         let audioTracks:[AVAssetTrack] = asset!.tracks(withMediaType: AVMediaType.audio)
         if isVideoOnly {
             return
@@ -799,30 +769,26 @@ import AppCenterAnalytics
                     let timeRange = CMTimeRangeMake(start: CMTime(seconds: Double(i) * self.audioImageSlicePerSeconds, preferredTimescale: timeScale), duration: CMTime(seconds: nudgedDuration, preferredTimescale: timeScale))
                     let cachedBounds = CGSize(width: pointWidth, height: self.timeLineSegmentHeight)
                     let width = Int(pointWidth)
-                    // print("WE CARE \(i): [2] Before SamplesExtractor block")
                     SamplesExtractor.samples(audioTrack: track, timeRange: timeRange, desiredNumberOfSamples: width, onSuccess: { s, sMax, _ in
-                        // print("WE CARE \(i): [3] In SamplesExtractor block")
                         let sampling = (samples: s, sampleMax: sMax)
                         let configuration = WaveformConfiguration(size: cachedBounds, color: WaveColor(calibratedRed: 77 / 255, green: 103 / 255, blue: 143 / 255, alpha: 1), backgroundColor: WaveColor.clear, style: .gradient, position: .middle, scale: 1, borderWidth: 0, borderColor: WaveColor.clear)
                         if let imageDrawn = WaveFormDrawer.image(with: sampling, and: configuration) {
                             imageDrawn.saveAsFile(with: .png, withName: "\(waveTrackCacheFolder)/\(i).png")
-//                            print("WE CARE \(i): [4] WaveFormDrawer is drawn")
                             let task = DispatchWorkItem {
-//                                print("WE CARE \(i): [5] In DispatchWorkItem block")
                                 let imageRect = NSRect(x: pointOffsetXStart, y: 0, width: pointWidth, height: self.timeLineSegmentHeight)
                                 let imageView = NSImageView(frame: imageRect)
                                 imageView.image = imageDrawn
                                 imageView.tag = 5
                                 self.waveformPreviewContainerBox.addSubWaveformView(capturedGUID: computedGUIDForTask, imageView: imageView)
                             }
-//                            self.accumulatedMainQueueTasks.append(task)
+                            // self.accumulatedMainQueueTasks.append(task)
                             DispatchQueue.main.async(execute: task)
                         }
                     }, onFailure: { error, id in
                         print("\(id ?? "") \(error)")
                     })
                 }
-//                accumulatedBackgroundQueueTasks.append(bgTask)
+                //                accumulatedBackgroundQueueTasks.append(bgTask)
                 DispatchQueue.global(qos: .userInteractive).async(execute: bgTask)
             }
 
@@ -832,8 +798,8 @@ import AppCenterAnalytics
 
     let thumbnailPerSeconds: Float64 = 2
 
-//    var accumulatedMainQueueTasks: [DispatchWorkItem] = []
-//    var accumulatedBackgroundQueueTasks: [DispatchWorkItem] = []
+    // var accumulatedMainQueueTasks: [DispatchWorkItem] = []
+    // var accumulatedBackgroundQueueTasks: [DispatchWorkItem] = []
 
     func configureVideoThumbnailTrack() {
         if isAudioOnly {
@@ -858,7 +824,6 @@ import AppCenterAnalytics
         }
         let numberOfThumbnails = Int(totalSeconds / self.thumbnailPerSeconds)
         let widthOfThumbnail = self.timelineLengthPixels / CGFloat(numberOfThumbnails)
-//        var generatedImages: [NSImage] = []
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.maximumSize = CGSize(width: 320, height: 240);
 
@@ -876,63 +841,46 @@ import AppCenterAnalytics
                         imageView.image = loadedImage
                         self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
                     }
-//                    if taskToPlaceIntoView != nil && self.accumulatedMainQueueTasks != nil {
-//                        self.accumulatedMainQueueTasks.append(taskToPlaceIntoView)
-//                    }
+                    // if taskToPlaceIntoView != nil && self.accumulatedMainQueueTasks != nil {
+                    //      self.accumulatedMainQueueTasks.append(taskToPlaceIntoView)
+                    // }
                     DispatchQueue.main.async(execute: taskToPlaceIntoView)
                 }
-//                self.accumulatedBackgroundQueueTasks.append(taskToLoadImage)
+                //                self.accumulatedBackgroundQueueTasks.append(taskToLoadImage)
                 DispatchQueue.global(qos: .userInitiated).async(execute: taskToLoadImage)
             } else {
-//                    let taskToGenerateImage = DispatchWorkItem {
                 DispatchQueue.global(qos: .userInitiated).async {
                     do {
-//                        print("WE CARE: [\(capturedIndex), 0]")
                         imageGenerator.generateCGImagesAsynchronously(forTimes: [NSValue(time: screenshotTime)], completionHandler: { (time1, image, time2, result, error) in
                             if result == .succeeded {
                                 let image = NSImage(cgImage: image!, size: NSSize(width: image!.width, height: image!.height))
-                                //                        generatedImages.append(image)
                                 let taskToSave = DispatchWorkItem {
-//                                    print("WE CARE: [\(capturedIndex), 1]")
                                     image.saveAsFile(with: .jpeg, withName: tentativePath)
                                 }
-//                                self.accumulatedBackgroundQueueTasks.append(taskToSave)
+                                //                                self.accumulatedBackgroundQueueTasks.append(taskToSave)
                                 DispatchQueue.global(qos: .userInitiated).async(execute: taskToSave)
                                 let task = DispatchWorkItem {
-//                                    print("WE CARE: [\(capturedIndex), 2]")
-
                                     let imageView = VideoPreviewImageView(frame: NSRect(x: widthOfThumbnail * CGFloat(capturedIndex), y: 0, width: widthOfThumbnail, height: self.timeLineSegmentHeight))
                                     imageView.imageScaling = .scaleProportionallyUpOrDown
                                     imageView.imageFrameStyle = .grayBezel
                                     imageView.image = image
                                     self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
                                 }
-//                                self.accumulatedMainQueueTasks.append(task)
+                                //                                self.accumulatedMainQueueTasks.append(task)
                                 DispatchQueue.main.async(execute: task)
                             } else {
                                 print("Failed with: \(String(describing: error))")
                             }
                         })
-//                        let imageRef = try imageGenerator.copyCGImage(at: screenshotTime, actualTime: nil)
                     } catch {print("Error: \(error)")}
 
                 }
-//                    self.accumulatedBackgroundQueueTasks.append(taskToGenerateImage)
-//                    DispatchQueue.global(qos: .userInitiated).async(execute: taskToGenerateImage)
+                // self.accumulatedBackgroundQueueTasks.append(taskToGenerateImage)
+                // DispatchQueue.global(qos: .userInitiated).async(execute: taskToGenerateImage)
             }
             secondIndex += self.thumbnailPerSeconds
             imageIndex += 1
         }
-
-
-//        var imageGenerator = AVAssetImageGenerator(asset: asset!)
-//            let value = Float64(percent) * totalSeconds
-//            let seekTime = CMTime(seconds: Double(value), preferredTimescale: 1)
-//        }
-//        var time = CMTimeMake(1, 1)
-//        var imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
-//        var thumbnail = UIImage(cgImage:imageRef)
-
     }
 
 
@@ -973,18 +921,18 @@ import AppCenterAnalytics
                 self.captionPreviewLabel.stringValue = ""
             }
 
-//            if !(self.timelineScrollView.bounds.contains(self.progressView.frame)) {
-//                print("Not matching up, self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame)")
-//                // time to scroll to make the new timestamp visible!
-//                var targetFrame = self.progressView.frame
-//                targetFrame.size.width = self.timelineScrollView.frame.width
-//                targetFrame.origin.x -= self.offsetPixelInScrollView
-////                var newPoint = NSPoint(x: self.progressView.frame.origin.x, y: self.timelineScrollView.contentView.frame.origin.y)
-//                self.timelineScrollView.contentView.scrollToVisible(targetFrame)
-////                self.timelineScrollView.contentView.scroll(to: newPoint)
-//            } else {
-//                print("matching up, self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame)")
-//            }
+            //            if !(self.timelineScrollView.bounds.contains(self.progressView.frame)) {
+            //                print("Not matching up, self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame)")
+            //                // time to scroll to make the new timestamp visible!
+            //                var targetFrame = self.progressView.frame
+            //                targetFrame.size.width = self.timelineScrollView.frame.width
+            //                targetFrame.origin.x -= self.offsetPixelInScrollView
+            ////                var newPoint = NSPoint(x: self.progressView.frame.origin.x, y: self.timelineScrollView.contentView.frame.origin.y)
+            //                self.timelineScrollView.contentView.scrollToVisible(targetFrame)
+            ////                self.timelineScrollView.contentView.scroll(to: newPoint)
+            //            } else {
+            //                print("matching up, self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame)")
+            //            }
         })
     }
 
@@ -1059,13 +1007,10 @@ import AppCenterAnalytics
 
     func movePlayheadBySeconds(_ seconds: Double) {
         if let _ = self.episode.player?.currentItem?.duration, let currentTime = self.episode.player?.currentTime().seconds {
-//            let totalSeconds = CMTimeGetSeconds(duration)
             let value = currentTime + seconds
-//            if value >= 0 && value <= totalSeconds {
-                let timeScale = self.episode.player?.currentItem?.asset.duration.timescale ?? 1
-                let exactTime = CMTime(seconds: value, preferredTimescale: timeScale)
-                self.episode.player!.seek(to: exactTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
-//            }
+            let timeScale = self.episode.player?.currentItem?.asset.duration.timescale ?? 1
+            let exactTime = CMTime(seconds: value, preferredTimescale: timeScale)
+            self.episode.player!.seek(to: exactTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         }
     }
 
