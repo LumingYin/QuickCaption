@@ -1231,7 +1231,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-fP-aGm">
-                                                <rect key="frame" x="141.5" y="-1" width="20" height="23"/>
+                                                <rect key="frame" x="139" y="-1" width="20" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="QYs-CB-WRe">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1242,22 +1242,22 @@ CA
                                                 </connections>
                                             </button>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FA1-Kt-fGw">
-                                                <rect key="frame" x="80" y="5" width="15" height="12"/>
+                                                <rect key="frame" x="82" y="5" width="15" height="12"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_play" id="mfa-5f-l54"/>
                                             </imageView>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TRN-rk-sxt">
-                                                <rect key="frame" x="17" y="0.0" width="16" height="22"/>
+                                                <rect key="frame" x="19" y="0.0" width="16" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_framePrev" id="JMp-Sc-QDn"/>
                                             </imageView>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8w-1Y-ajd">
-                                                <rect key="frame" x="46" y="5" width="20" height="12"/>
+                                                <rect key="frame" x="48" y="5" width="20" height="12"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_last" id="GN3-Yw-pTs"/>
                                             </imageView>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="36y-8A-Qbb">
-                                                <rect key="frame" x="109" y="5" width="20" height="12"/>
+                                                <rect key="frame" x="111" y="5" width="20" height="12"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_next" id="qye-9o-uN9"/>
                                             </imageView>
@@ -1454,13 +1454,14 @@ CA
                                                     <rect key="frame" x="8" y="147" width="521" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
-                                                <box fixedFrame="YES" boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="fCx-cJ-p9f" customClass="CaptionWaveformBox" customModule="Quick_Caption" customModuleProvider="target">
+                                                <box fixedFrame="YES" boxType="custom" borderType="line" cornerRadius="5" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="fCx-cJ-p9f" customClass="CaptionWaveformBox" customModule="Quick_Caption" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="75" width="0.0" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <view key="contentView" ambiguous="YES" id="oVo-bP-cpU">
                                                         <rect key="frame" x="0.0" y="1" width="0.0" height="62"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     </view>
+                                                    <color key="borderColor" red="0.59591972827911377" green="0.61521989107131958" blue="0.66270661354064941" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <color key="fillColor" name="audioTrackBG"/>
                                                 </box>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K5C-Y2-cNb">
@@ -1504,7 +1505,7 @@ CA
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="V95-Hy-NGv"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.11764705882352941" horizontal="YES" id="wxD-Wq-Vsv">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.11764705882352941" horizontal="YES" id="wxD-Wq-Vsv" customClass="OpaqueNSScroller" customModule="Quick_Caption" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="215" width="648" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>

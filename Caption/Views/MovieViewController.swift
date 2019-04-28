@@ -67,7 +67,7 @@ import AppCenterAnalytics
             timelineScrollView.appearance = NSAppearance.init(named: .darkAqua)
             timelineScrollView.backgroundColor = .controlBackgroundColor
         } else {
-            timelineScrollView.backgroundColor = NSColor.init(calibratedRed: 45/255, green: 45/255, blue: 45/255, alpha: 1)
+            timelineScrollView.backgroundColor = NSColor.init(calibratedRed: 20/255, green: 20/255, blue: 20/255, alpha: 1)
         }
         customHintContainerView.layer?.zPosition = 1
         captionPreviewLabel.layer?.zPosition = 1
@@ -991,7 +991,6 @@ import AppCenterAnalytics
     var shouldResumePlayingAfterPanEnds = false
 
     @IBAction func pannedToNewTimelineIndex(_ sender: NSPanGestureRecognizer) {
-        print("Panned: sender.state = \(sender.state.rawValue)")
         if sender.state == .began {
             if let player = playerView.player {
                 if player.rate > 0 {
