@@ -1012,7 +1012,7 @@ CA
                                                                                 <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             </textFieldCell>
                                                                         </textField>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xoj-mN-yXG" customClass="NonSmoothedTextField" customModule="Quick_Caption" customModuleProvider="target">
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xoj-mN-yXG" customClass="NonSmoothedTextField">
                                                                             <rect key="frame" x="-2" y="2" width="112" height="16"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Feb 12, 2019" id="xsh-bU-jEg">
