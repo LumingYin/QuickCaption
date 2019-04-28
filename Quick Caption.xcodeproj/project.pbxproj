@@ -128,7 +128,6 @@
 		326A090D223E3482009A8313 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHEXColors.swift; sourceTree = "<group>"; };
 		326A090F223F03BE009A8313 /* QuickCaptionApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuickCaptionApplication.swift; path = Caption/Views/QuickCaptionApplication.swift; sourceTree = SOURCE_ROOT; };
 		326A0911223F0699009A8313 /* QuickCaptionWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickCaptionWindow.swift; sourceTree = "<group>"; };
-		326A0913223F0CFF009A8313 /* Caption */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Caption; sourceTree = "<group>"; };
 		326A0915223F131F009A8313 /* ShadowPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowPreferences.swift; sourceTree = "<group>"; };
 		326A0917223F297C009A8313 /* Saver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saver.swift; sourceTree = "<group>"; };
 		32D5730E22755C1A007BBAB6 /* NSSet+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSSet+Additions.h"; sourceTree = "<group>"; };
@@ -264,7 +263,6 @@
 				3216F7EC2274FC3E00E11EBD /* AppSandboxFileAccess */,
 				321DC3C6223603740038C8FB /* Waveform */,
 				322F4483223F4CC500427898 /* GBDeviceInfo */,
-				326A0913223F0CFF009A8313 /* Caption */,
 				32047521223DA6100027218F /* NSObject+KVO.h */,
 				32047522223DA6100027218F /* NSObject+KVO.m */,
 				562A68841F2D4F5E000E6B16 /* AppDelegate.swift */,

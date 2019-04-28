@@ -112,10 +112,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    @IBAction func installFCPXExtras(_ sender: Any) {
-//        Helper.installFCPXCaptionFiles(callback: nil)
-    }
-
     @objc func saveAll() {
         self.saveEverything(self)
     }
@@ -125,8 +121,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // UserDefaults.standard.set(true, forKey: "SUAutomaticallyUpdate")
-
         do {
             let fetchRequest: NSFetchRequest<EpisodeProject> = EpisodeProject.fetchRequest()
             let episodeProjects = try Helper.context!.fetch(fetchRequest)

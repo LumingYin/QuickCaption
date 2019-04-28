@@ -23,62 +23,6 @@ class Helper: NSObject {
         }
     }
 
-    static func fcpxTemplateAlreadyInstalled() -> Bool {
-        let path = "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions/Caption/Caption.moti"
-        let pathB = "/Library/Application Support/Final Cut Pro/Templates.localized/Titles/Captions/Caption/Caption.moti"
-        let pathC = "/Library/Application Support/Final Cut Pro/Templates/Titles/Captions/Caption/Caption.moti"
-        let pathD = "/Library/Application Support/Final Cut Pro/Templates/Titles.localized/Captions/Caption/Caption.moti"
-
-        if FileManager.default.fileExists(atPath: path) || FileManager.default.fileExists(atPath: pathB) || FileManager.default.fileExists(atPath: pathC) || FileManager.default.fileExists(atPath: pathD) {
-            return true
-        }
-        return false
-    }
-
-//    static func installFCPXCaptionFiles(callback: (()->Void)?) {
-//        let firstLevelPath = "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions"
-//        let secondLevelPath = "/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions/Caption"
-//        let fileMgr = FileManager.default
-//        let urlForCreation = URL(fileURLWithPath: firstLevelPath, isDirectory: true)
-//        let urlForCopy = URL(fileURLWithPath: secondLevelPath, isDirectory: true)
-//        if let bundleURL = Bundle.main.url(forResource: "Caption", withExtension: "") {
-//            AppSandboxFileAccess()?.accessFileURL(urlForCopy, persistPermission: true, with: {
-//                do {
-//                    try fileMgr.createDirectory(at: urlForCreation, withIntermediateDirectories: true, attributes: nil)
-//                    try fileMgr.copyItem(at: bundleURL, to: urlForCopy)
-//                    Helper.displayInteractiveSheet(title: "Template successfully installed", text: "You have successfully installed Final Cut Pro X caption template on this Mac. Exported captions should now work correctly in Final Cut Pro X.\n\nIf Final Cut Pro X is unable to process your imported captions, please contact support with \"Contact → Contact Support\".\n\nTo import captions onto another Mac, install Quick Caption on your other Mac, and click on \"Help → Install Final Cut Pro X Caption Template\".", firstButtonText: "OK", secondButtonText: "", callback: { (clicked) in
-//                        callback?()
-//                    })
-//                } catch let error as NSError { // Handle the error
-//                    print("Returned file access code: \(error.code)")
-//                    if error.code == 513 {
-//                        let command = #"sudo mkdir -p /Library/Application\ Support/Final\ Cut\ Pro/Templates.localized/Titles.localized;sudo chmod -R 777 /Library/Application\ Support/Final\ Cut\ Pro/Templates.localized/Titles.localized"#
-//                        let text = """
-//Unable to install template. \n\nYou need to install Final Cut Pro X and run it at least once before installing the caption template.\n\nIf you are still unable to install the template after installing Final Cut Pro X, manually paste the following command into the Terminal app and press return, then try to install the caption package again. You will be prompted to enter your login password, and it is normal that your password will not be visible as you type. Your password will not be sent to anywhere.\n\n\(command)
-//"""
-//                        Helper.displayInteractiveSheet(title: "You need to install Final Cut Pro X first", text: text, firstButtonText: "Copy Command and Open Terminal", secondButtonText: "Cancel", callback: { (allowed) in
-//                            if (allowed) {
-//                                NSWorkspace.shared.launchApplication("Terminal")
-//                                let pb = NSPasteboard.general
-//                                pb.declareTypes([.string], owner: nil)
-//                                pb.setString(command, forType: .string)
-//                            }
-//                        })
-//                    } else if error.code == 516 {
-//                        Helper.displayInteractiveSheet(title: "Template already successfully installed", text: "You have already installed Final Cut Pro X caption template on this Mac. Exported captions should now work correctly in Final Cut Pro X.\n\nIf Final Cut Pro X is unable to process your imported captions, please contact support with \"Contact → Contact Support\".\n\nTo import captions onto another Mac, install Quick Caption on your other Mac, and click on \"Help → Install Final Cut Pro X Caption Template\".", firstButtonText: "OK", secondButtonText: "", callback: { (clicked) in
-//                            callback?()
-//                        })
-//                    } else {
-//                        Helper.displayInformationalSheet(title: "Failed to install template", text: "Unable to install template. \n\n\(error.localizedDescription).\n\nPlease contact support with Contact → Contact Support.\n\n")
-//                        print("Copy failed! Error: \(error.localizedDescription)")
-//                    }
-//                }
-//            })
-//        } else {
-//            print("Folder doesn't not exist in bundle folder")
-//        }
-//    }
-
     static func secondFloatToString(float: Float64) -> String {
         if float.isNaN {
             return ""
@@ -162,8 +106,6 @@ class Helper: NSObject {
         dialog.isExtensionHidden = true
         dialog.canSelectHiddenExtension = false
         dialog.allowedFileTypes = [fileName.fileExtension]
-
-//        dialog.allowedFileTypes = movieTypes
 
         dialog.beginSheetModal(for: Helper.appWindow()) { (result) in
             if result != .OK {
