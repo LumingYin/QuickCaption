@@ -80,7 +80,7 @@ enum FileType {
             <project name="\(projectName)" uid="\(headerUUID)">
                 <resources>
                     <format id="r1" name="\(templateName)" frameDuration="\(fpsFCPXValue)s" width="1920" height="1080"></format>
-                    <effect id="fx2" name="Caption" uid="/Library/Application Support/Final Cut Pro/Templates.localized/Titles.localized/Captions/Caption/Caption.moti"></effect>
+                    <effect id="r2" name="Basic Title" uid=".../Titles.localized/Bumper:Opener.localized/Basic Title.localized/Basic Title.moti"/>
                 </resources>
                 <sequence duration="\(durationString)" format="r1" tcStart="0s" tcFormat="\(tcFormat)" audioLayout="stereo" audioRate="48k">
                     <spine>
@@ -101,15 +101,14 @@ enum FileType {
 
                     templateB += """
                                     <!--Title No. \(i + 1) +++++++++++++++++++++-->
-                                    <title name="\(str) - Caption" lane="1" offset="\(conformedTitleOffset.value)/\(conformedTitleOffset.timescale)s" duration="\(conformedTitleDuration.value)/\(conformedTitleDuration.timescale)s" ref="fx2" role="titles.English_en">
-                                        <param name="Background Color" key="9999/24742/24860/24776/3/24789/2" value="0 0 0 1"></param>
-                                        <param name="Background Opacity" key="9999/24742/24860/1/200/202" value="0"></param>
-                                        <param name="Padding" key="9999/24999/100/25000/2/100" value="0.066666666667"></param>
-                                        <param name="Title Safe" key="9999/25169/100/25170/2/100" value="0 (Standard 80% 80%)"></param>
+                                    <title name="\(str) - Caption" lane="1" offset="\(conformedTitleOffset.value)/\(conformedTitleOffset.timescale)s" duration="\(conformedTitleDuration.value)/\(conformedTitleDuration.timescale)s" ref="r2" role="titles.English_en">
+                                        <param name="Position" key="9999/999166631/999166633/1/100/101" value="1.0188 -436.431"/>
+                                        <param name="Flatten" key="9999/999166631/999166633/2/351" value="1"/>
+                                        <param name="Alignment" key="9999/999166631/999166633/2/354/999169573/401" value="1 (Center)"/>
                                         <text>
-                                            <text-style ref="xs\(i + 1)-1">\(str)</text-style>
+                                            <text-style ref="ts\(i + 1)-1">\(str)</text-style>
                                         </text>
-                                        <text-style-def id="xs\(i + 1)-1">
+                                        <text-style-def id="ts\(i + 1)-1">
                                             <text-style font="\(fontFamilyName)" fontSize="\(fontSize)" fontFace="\(fontFace)" fontColor="\(fontColor)" shadowColor="\(shadowColor)" shadowOffset="\(shadowOffset)" shadowBlurRadius="\(shadowBlurRadius)" alignment="\(fontAlignment)"/>
                                         </text-style-def>
                                         <note>en - \(noteUUID)</note>

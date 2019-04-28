@@ -773,19 +773,19 @@ CA
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="zaz-Uc-Q0J"/>
-                                        <menuItem title="Install Final Cut Pro X Caption Template" id="Q0N-FX-pp7">
+                                        <menuItem title="Install Final Cut Pro X Caption Template" hidden="YES" id="Q0N-FX-pp7">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="installFCPXExtras:" target="Voe-Tx-rLC" id="Eda-F1-NdH"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="nSn-O7-rnd"/>
-                                        <menuItem title="Check for Updates" keyEquivalent="U" id="fJE-Ke-bXl">
+                                        <menuItem isSeparatorItem="YES" hidden="YES" id="nSn-O7-rnd"/>
+                                        <menuItem title="Check for Updates" hidden="YES" keyEquivalent="U" id="fJE-Ke-bXl">
                                             <connections>
                                                 <action selector="checkForUpdates:" target="Voe-Tx-rLC" id="VBr-hI-CAn"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="3Kn-NL-z6v"/>
+                                        <menuItem isSeparatorItem="YES" hidden="YES" id="3Kn-NL-z6v"/>
                                         <menuItem title="Acknowledgements" id="j8L-eM-LSA">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
