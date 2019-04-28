@@ -1242,7 +1242,7 @@ CA
                                                 </connections>
                                             </button>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FA1-Kt-fGw">
-                                                <rect key="frame" x="80" y="5" width="15" height="12"/>
+                                                <rect key="frame" x="81" y="5" width="15" height="12"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tb_play" id="mfa-5f-l54"/>
                                             </imageView>
