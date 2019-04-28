@@ -63,11 +63,14 @@ import AppCenterAnalytics
         } else {
             timeLabel.font = NSFont.systemFont(ofSize: 15)
         }
-//        if #available(OSX 10.14, *) {
-//        } else {
+        if #available(OSX 10.14, *) {
+            timelineScrollView.appearance = NSAppearance.init(named: .darkAqua)
+            timelineScrollView.backgroundColor = .controlBackgroundColor
+        } else {
+            timelineScrollView.backgroundColor = NSColor.init(calibratedRed: 45/255, green: 45/255, blue: 45/255, alpha: 1)
+        }
         customHintContainerView.layer?.zPosition = 1
         captionPreviewLabel.layer?.zPosition = 1
-//        }
         AppDelegate.subtitleVC()?.dismantleSubtitleVC()
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
     }
