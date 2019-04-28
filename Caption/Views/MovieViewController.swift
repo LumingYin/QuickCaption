@@ -58,7 +58,11 @@ import AppCenterAnalytics
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        timeLabel.font = NSFont.monospacedDigitSystemFont(ofSize: 15, weight: .regular)
+        if #available(OSX 10.11, *) {
+            timeLabel.font = NSFont.monospacedDigitSystemFont(ofSize: 15, weight: .regular)
+        } else {
+            timeLabel.font = NSFont(name: "Menlo", size: 15)
+        }
         AppDelegate.subtitleVC()?.dismantleSubtitleVC()
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
     }

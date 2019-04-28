@@ -34,6 +34,7 @@ class FontViewController: NSViewController {
             fontColorButton = button
             button.target = self
             button.action = #selector(colorChanged(_:))
+            button.allowClearColor = false
             self.colorContainerView.addSubview(button)
         } else {
             let well = NSColorWell(frame: NSRect(x: 0, y: 0, width: 80, height: 23))

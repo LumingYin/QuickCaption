@@ -7,11 +7,11 @@
 //
 
 import Cocoa
-import LetsMove
-import Sparkle
-import AppCenter
-import AppCenterAnalytics
-import AppCenterCrashes
+//import LetsMove
+//import Sparkle
+//import AppCenter
+//import AppCenterAnalytics
+//import AppCenterCrashes
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
