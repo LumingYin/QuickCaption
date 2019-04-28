@@ -72,7 +72,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     static func removeFilesUnderURL(urlPath: String) {
         let cacheURL = (urlPath as NSString).expandingTildeInPath as String
 
-        guard let url = URL(string: cacheURL) else {return}
+        guard URL(string: cacheURL) != nil else {return}
         let fileManager = FileManager.default
         do {
             try fileManager.removeItem(atPath: cacheURL)

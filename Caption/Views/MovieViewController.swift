@@ -124,7 +124,7 @@ import AppCenterAnalytics
         let time = episode.player?.currentTime().value
         let second = episode.player?.currentTime().seconds
         let scale = episode.player?.currentTime().timescale
-        self.timeLabel.stringValue = "\(time ?? CMTime.zero.value), \(second ?? 0.0), \(scale ?? CMTimeScale(kCMTimeMaxTimescale))  \(self.episode.videoDescription)"
+        self.timeLabel.stringValue = "\(time ?? CMTime.zero.value), \(second ?? 0.0), \(scale ?? CMTimeScale(kCMTimeMaxTimescale))  \(self.episode.videoDescription ?? "")"
     }
 
     func playVideo(_ videoURL: URL) {
@@ -206,7 +206,6 @@ import AppCenterAnalytics
 
         guard let arrayofSubs = NSFontManager.shared.availableMembers(ofFontFamily: self.episode.styleFontFamily ?? "Helvetica"),
             let floatSize = Float(size) else { return }
-        var resultingSub:[String] = []
         for i in 0..<arrayofSubs.count {
             if let nameOfSubFamily = arrayofSubs[i][1] as? String {
                 if nameOfSubFamily == self.episode.styleFontWeight {
@@ -305,7 +304,7 @@ import AppCenterAnalytics
             let imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
             let thumbnail = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
 //            let desktopURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-            let dir = self.applicationDataDirectory().appendingPathComponent("thumbnails")
+            _ = self.applicationDataDirectory().appendingPathComponent("thumbnails")
             do {try FileManager.default.createDirectory(at: self.applicationDataDirectory().appendingPathComponent("thumbnails"), withIntermediateDirectories: true, attributes: nil)
             } catch {print(error)}
             let destinationURL = self.applicationDataDirectory().appendingPathComponent("thumbnails").appendingPathComponent("\(NSUUID().uuidString).png")
@@ -347,18 +346,18 @@ import AppCenterAnalytics
         volumeSlider.floatValue = 1
         speedSlider.floatValue = 1
         self.videoPreviewContainerView.guid = nil
-        if accumulatedMainQueueTasks != nil {
-            for task in accumulatedMainQueueTasks {
+//        if accumulatedMainQueueTasks != nil {
+//            for task in accumulatedMainQueueTasks {
                 //            print("Cancelling \(task)")
                 //            task.cancel()
-            }
-        }
-        if accumulatedBackgroundQueueTasks != nil {
-            for task in accumulatedBackgroundQueueTasks {
+//            }
+//        }
+//        if accumulatedBackgroundQueueTasks != nil {
+//            for task in accumulatedBackgroundQueueTasks {
                 //            print("Cancelling \(task)")
                 //            task.cancel()
-            }
-        }
+//            }
+//        }
         NotificationCenter.default.removeObserver(self)
         self.playerView.player?.safelyRemoveObserver(self, forKeyPath: "rate")
         if (episode != nil) {
@@ -529,7 +528,7 @@ import AppCenterAnalytics
                 let diffEnding = timePoint - captionLine.endingTime
                 let diffThisNext = abs(captionLineNext.startingTime - captionLine.endingTime)
 
-                let diffNextStartThisEnd = (captionLineNext.startingTime - captionLine.endingTime)
+                // let diffNextStartThisEnd = (captionLineNext.startingTime - captionLine.endingTime)
 
                 if diffThisNext < 0.1 && abs(diffEnding) < 0.1 {
                     return (captionLine, captionLineNext, .resizeLeftRight)
@@ -1040,7 +1039,7 @@ import AppCenterAnalytics
     }
 
     func movePlayheadBySeconds(_ seconds: Double) {
-        if let duration = self.episode.player?.currentItem?.duration, let currentTime = self.episode.player?.currentTime().seconds {
+        if let _ = self.episode.player?.currentItem?.duration, let currentTime = self.episode.player?.currentTime().seconds {
 //            let totalSeconds = CMTimeGetSeconds(duration)
             let value = currentTime + seconds
 //            if value >= 0 && value <= totalSeconds {

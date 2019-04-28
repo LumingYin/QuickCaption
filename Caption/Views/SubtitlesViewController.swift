@@ -54,7 +54,7 @@ import AVKit
                 }
             })
         }
-        if let index = matchedIndex {
+        if matchedIndex != nil {
             self.resultTableView.reloadData()
 //            self.resultTableView.reloadData(forRowIndexes: IndexSet(integer: index), columnIndexes: IndexSet(integer: 0))
         }

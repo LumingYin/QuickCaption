@@ -862,7 +862,7 @@ class ColorGridView: NSGridView {
      */
     private func colorView(for color: NSColor) -> ColorView? {
         for (columnIndex, colorArray) in colorArrays.enumerated() {
-            if let rowIndex = colorArray.index(of: color) {
+            if let rowIndex = colorArray.firstIndex(of: color) {
                 return column(at: columnIndex).cell(at: rowIndex).contentView as? ColorView
             }
         }
