@@ -63,6 +63,11 @@ import AppCenterAnalytics
         } else {
             timeLabel.font = NSFont.systemFont(ofSize: 15)
         }
+//        if #available(OSX 10.14, *) {
+//        } else {
+        customHintContainerView.layer?.zPosition = 1
+        captionPreviewLabel.layer?.zPosition = 1
+//        }
         AppDelegate.subtitleVC()?.dismantleSubtitleVC()
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
     }
@@ -803,14 +808,14 @@ import AppCenterAnalytics
                                 imageView.tag = 5
                                 self.waveformPreviewContainerBox.addSubWaveformView(capturedGUID: computedGUIDForTask, imageView: imageView)
                             }
-                            self.accumulatedMainQueueTasks.append(task)
+//                            self.accumulatedMainQueueTasks.append(task)
                             DispatchQueue.main.async(execute: task)
                         }
                     }, onFailure: { error, id in
                         print("\(id ?? "") \(error)")
                     })
                 }
-                accumulatedBackgroundQueueTasks.append(bgTask)
+//                accumulatedBackgroundQueueTasks.append(bgTask)
                 DispatchQueue.global(qos: .userInteractive).async(execute: bgTask)
             }
 
@@ -820,8 +825,8 @@ import AppCenterAnalytics
 
     let thumbnailPerSeconds: Float64 = 2
 
-    var accumulatedMainQueueTasks: [DispatchWorkItem] = []
-    var accumulatedBackgroundQueueTasks: [DispatchWorkItem] = []
+//    var accumulatedMainQueueTasks: [DispatchWorkItem] = []
+//    var accumulatedBackgroundQueueTasks: [DispatchWorkItem] = []
 
     func configureVideoThumbnailTrack() {
         if isAudioOnly {
@@ -864,12 +869,12 @@ import AppCenterAnalytics
                         imageView.image = loadedImage
                         self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
                     }
-                    if taskToPlaceIntoView != nil && self.accumulatedMainQueueTasks != nil {
-                        self.accumulatedMainQueueTasks.append(taskToPlaceIntoView)
-                    }
+//                    if taskToPlaceIntoView != nil && self.accumulatedMainQueueTasks != nil {
+//                        self.accumulatedMainQueueTasks.append(taskToPlaceIntoView)
+//                    }
                     DispatchQueue.main.async(execute: taskToPlaceIntoView)
                 }
-                self.accumulatedBackgroundQueueTasks.append(taskToLoadImage)
+//                self.accumulatedBackgroundQueueTasks.append(taskToLoadImage)
                 DispatchQueue.global(qos: .userInitiated).async(execute: taskToLoadImage)
             } else {
 //                    let taskToGenerateImage = DispatchWorkItem {
@@ -884,7 +889,7 @@ import AppCenterAnalytics
 //                                    print("WE CARE: [\(capturedIndex), 1]")
                                     image.saveAsFile(with: .jpeg, withName: tentativePath)
                                 }
-                                self.accumulatedBackgroundQueueTasks.append(taskToSave)
+//                                self.accumulatedBackgroundQueueTasks.append(taskToSave)
                                 DispatchQueue.global(qos: .userInitiated).async(execute: taskToSave)
                                 let task = DispatchWorkItem {
 //                                    print("WE CARE: [\(capturedIndex), 2]")
@@ -895,7 +900,7 @@ import AppCenterAnalytics
                                     imageView.image = image
                                     self.videoPreviewContainerView.addSubImageView(capturedGUID: computedGUIDForTask, imageView: imageView)
                                 }
-                                self.accumulatedMainQueueTasks.append(task)
+//                                self.accumulatedMainQueueTasks.append(task)
                                 DispatchQueue.main.async(execute: task)
                             } else {
                                 print("Failed with: \(String(describing: error))")
@@ -983,6 +988,7 @@ import AppCenterAnalytics
     var shouldResumePlayingAfterPanEnds = false
 
     @IBAction func pannedToNewTimelineIndex(_ sender: NSPanGestureRecognizer) {
+        print("Panned: sender.state = \(sender.state.rawValue)")
         if sender.state == .began {
             if let player = playerView.player {
                 if player.rate > 0 {
@@ -999,8 +1005,10 @@ import AppCenterAnalytics
         }
         if sender.state == .began || sender.state == .changed {
             progressViewColorLineBox.fillColor = NSColor.yellow
+            progressViewColorLineBox.needsDisplay = true
         } else {
             progressViewColorLineBox.fillColor = NSColor.red
+            progressViewColorLineBox.needsDisplay = true
         }
         handleNewTimelineLocation(sender: sender)
     }

@@ -90,17 +90,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return nil
     }
 
+    @IBOutlet weak var dividerAboveAppearance: NSMenuItem!
+    @IBOutlet weak var appearanceSubmenu: NSMenuItem!
+
     func applicationWillFinishLaunching(_ notification: Notification) {
-        if let pref = UserDefaults.standard.value(forKey: "AppearancePreference") as? Int {
-            if pref == 0 {
+        if #available(OSX 10.14, *) {
+            if let pref = UserDefaults.standard.value(forKey: "AppearancePreference") as? Int {
+                if pref == 0 {
+                    useDarkAppearance(self)
+                } else if pref == 1 {
+                    useLightAppearance(self)
+                } else if pref == 2 {
+                    followSystemAppearance(self)
+                }
+            } else {
                 useDarkAppearance(self)
-            } else if pref == 1 {
-                useLightAppearance(self)
-            } else if pref == 2 {
-                followSystemAppearance(self)
             }
         } else {
-            useDarkAppearance(self)
+            dividerAboveAppearance.isHidden = true
+            appearanceSubmenu.isHidden = true
         }
     }
 
