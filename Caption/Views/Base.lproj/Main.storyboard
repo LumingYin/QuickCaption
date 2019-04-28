@@ -974,7 +974,7 @@ CA
                         <rect key="frame" x="0.0" y="0.0" width="286" height="342"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="u0T-gr-JWT">
+                            <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="behindWindow" material="light" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="u0T-gr-JWT">
                                 <rect key="frame" x="0.0" y="0.0" width="286" height="342"/>
                                 <subviews>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="68" horizontalPageScroll="10" verticalLineScroll="68" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXF-sl-roP">
@@ -1093,6 +1093,7 @@ CA
                     <connections>
                         <outlet property="contextMenu" destination="t5b-P1-LuO" id="lDO-pm-U5E"/>
                         <outlet property="tableView" destination="yfo-s7-Mnb" id="pqR-JP-3JT"/>
+                        <outlet property="visualEffectsView" destination="u0T-gr-JWT" id="pg0-ak-LvT"/>
                     </connections>
                 </viewController>
                 <customObject id="u43-FF-6D2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

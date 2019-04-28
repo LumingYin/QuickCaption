@@ -12,6 +12,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     @IBOutlet weak var tableView: NSTableView!
     var episodeProjects: [EpisodeProject] = []
     @IBOutlet var contextMenu: NSMenu!
+    @IBOutlet weak var visualEffectsView: NSVisualEffectView!
 
 
     @IBAction func duplicateClicked(_ sender: Any) {
@@ -120,6 +121,11 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     @IBOutlet weak var duplicateClicked: NSMenuItem!
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(OSX 10.11, *) {
+            self.visualEffectsView.material = .sidebar
+        } else {
+            self.visualEffectsView.material = .light
+        }
         fetchDBData()
         tableView.delegate = self
         tableView.dataSource = self
