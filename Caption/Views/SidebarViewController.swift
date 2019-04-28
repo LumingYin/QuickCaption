@@ -150,6 +150,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             episode.addObserver(self, forKeyPath: "thumbnailURL", options: [.new], context: nil)
             episode.addObserver(self, forKeyPath: "videoDescription", options: [.new], context: nil)
         }
+        print("Fetch DB data has succeeded.")
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -165,6 +166,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             addNewProject()
         }
         if firstLaunch {
+            print("Setting selected row to the first row on launch.")
             updateSelectRow(index: 0)
             firstLaunch = false
         }
@@ -207,6 +209,17 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
 
     func updateSelectRow(index: Int) {
+        Helper.appWindow().makeKeyAndOrderFront(self)
+        print("The state of various VCs: \(String(describing: AppDelegate.movieVC())), \(String(describing: AppDelegate.subtitleVC())), \(String(describing: AppDelegate.fontVC()))")
+
+        if (AppDelegate.movieVC() == nil || AppDelegate.subtitleVC() == nil || AppDelegate.fontVC() == nil) {
+            Timer.scheduledTimer(withTimeInterval: 0.15, repeats: false) { (timer) in
+                print("We're giving loading the row a second try after the timer.")
+                self.updateSelectRow(index: index)
+            }
+            return
+        }
+
         tableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
 
         if index < 0 {
@@ -220,6 +233,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
 //        AppDelegate.rebuildMovieAndSubVC()
         AppDelegate.subtitleVC()?.dismantleSubtitleVC()
         let project = episodeProjects[index]
+//        print("Loading project: \(project)")
         AppDelegate.movieVC()?.dismantleOldMovieVC()
         AppDelegate.movieVC()?.episode = project
         AppDelegate.movieVC()?.configurateMovieVC()

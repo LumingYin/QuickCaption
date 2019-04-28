@@ -69,8 +69,12 @@ import AppCenterAnalytics
         } else {
             timelineScrollView.backgroundColor = NSColor.init(calibratedRed: 20/255, green: 20/255, blue: 20/255, alpha: 1)
         }
+        playerView.wantsLayer = true
+        customHintContainerView.wantsLayer = true
+        captionPreviewLabel.wantsLayer = true
         customHintContainerView.layer?.zPosition = 1
         captionPreviewLabel.layer?.zPosition = 1
+        print("customHintContainerView.layer is: \(String(describing: customHintContainerView.layer)), captionPreviewLabel.layer is: \(String(describing: captionPreviewLabel.layer))")
         AppDelegate.subtitleVC()?.dismantleSubtitleVC()
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
     }
