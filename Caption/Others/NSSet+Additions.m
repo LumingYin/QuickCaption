@@ -45,9 +45,22 @@
 }
 
 - (void)swz_intersectsSet:(id)arg1 {
-    NSLog(@"swz_intersectsSet: %@, arg: %@", self, arg1);
+    NSString *argType = NSStringFromClass([arg1 class]);
+    NSSet *set;
+    BOOL shouldPrint = YES;
+    if ([arg1 isKindOfClass:[NSMutableSet class]]) {
+        set = ((NSOrderedSet *)arg1).set;
+        shouldPrint = NO;
+    } else if ([arg1 isKindOfClass:[NSSet class]]) {
+        set = arg1;
+    } else {
+        set = [[NSSet alloc] initWithObjects:arg1, nil];
+    }
+    if (shouldPrint) {
+        NSLog(@"swz_intersectsSet: %@, arg: %@ of type %@, converted: %@", self, arg1, argType, set);
+    }
     @try {
-        [self swz_intersectsSet:arg1];
+        [self swz_intersectsSet:set];
     } @catch (NSException *e) {
         NSLog(@"Caught exception: %@", e);
     }

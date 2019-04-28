@@ -64,6 +64,9 @@ extension EpisodeProject {
     @objc(addArrayForCaption:)
     @NSManaged public func addToArrayForCaption(_ values: NSOrderedSet)
 
+//    @objc(addArrayForCaption:)
+//    @NSManaged public func addToArrayForCaption(_ values: NSSet)
+
     @objc(removeArrayForCaption:)
     @NSManaged public func removeFromArrayForCaption(_ values: NSOrderedSet)
 

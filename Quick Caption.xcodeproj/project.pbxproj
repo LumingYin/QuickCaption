@@ -35,6 +35,8 @@
 		322F4495223F720F00427898 /* QuickCaptionScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F4494223F720F00427898 /* QuickCaptionScrollView.m */; };
 		322F4497223F818F00427898 /* CaptionWaveformBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F4496223F818F00427898 /* CaptionWaveformBox.swift */; };
 		3238E9412275E5F1005A0145 /* OpaqueNSScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3238E9402275E5F1005A0145 /* OpaqueNSScroller.swift */; };
+		3238E9422275F761005A0145 /* NSSet+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D5730F22755C1A007BBAB6 /* NSSet+Additions.m */; };
+		3238E9452276005A005A0145 /* NSMutableSet+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3238E9442276005A005A0145 /* NSMutableSet+Additions.m */; };
 		324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324971D122190D1C00562223 /* CaptionWindowController.swift */; };
 		324971DB221929C000562223 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 324971DA221929C000562223 /* Security.framework */; };
 		326A0906223DD62B009A8313 /* TimelineOverallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0905223DD62B009A8313 /* TimelineOverallView.swift */; };
@@ -120,6 +122,8 @@
 		322F4494223F720F00427898 /* QuickCaptionScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickCaptionScrollView.m; sourceTree = "<group>"; };
 		322F4496223F818F00427898 /* CaptionWaveformBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionWaveformBox.swift; sourceTree = "<group>"; };
 		3238E9402275E5F1005A0145 /* OpaqueNSScroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpaqueNSScroller.swift; sourceTree = "<group>"; };
+		3238E9432276005A005A0145 /* NSMutableSet+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableSet+Additions.h"; sourceTree = "<group>"; };
+		3238E9442276005A005A0145 /* NSMutableSet+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableSet+Additions.m"; sourceTree = "<group>"; };
 		324971D122190D1C00562223 /* CaptionWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionWindowController.swift; sourceTree = "<group>"; };
 		324971DA221929C000562223 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		326A0905223DD62B009A8313 /* TimelineOverallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineOverallView.swift; sourceTree = "<group>"; };
@@ -237,8 +241,6 @@
 				321DC3D122360F410038C8FB /* FontViewController.swift */,
 				321DC3D3223610750038C8FB /* SideTabViewController.swift */,
 				321DC3EF223611F00038C8FB /* ResizableInputContainerView.swift */,
-				32D5730E22755C1A007BBAB6 /* NSSet+Additions.h */,
-				32D5730F22755C1A007BBAB6 /* NSSet+Additions.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -268,6 +270,10 @@
 				326A0913223F0CFF009A8313 /* Caption */,
 				32047521223DA6100027218F /* NSObject+KVO.h */,
 				32047522223DA6100027218F /* NSObject+KVO.m */,
+				32D5730E22755C1A007BBAB6 /* NSSet+Additions.h */,
+				32D5730F22755C1A007BBAB6 /* NSSet+Additions.m */,
+				3238E9432276005A005A0145 /* NSMutableSet+Additions.h */,
+				3238E9442276005A005A0145 /* NSMutableSet+Additions.m */,
 				562A68841F2D4F5E000E6B16 /* AppDelegate.swift */,
 				326A090F223F03BE009A8313 /* QuickCaptionApplication.swift */,
 				321DC3F82236216B0038C8FB /* Helper.swift */,
@@ -450,12 +456,14 @@
 				32F53CE022376C4D007B66E1 /* CaptionLine+CoreDataClass.swift in Sources */,
 				321DC401223629030038C8FB /* SidebarEpisodeTableCellView.swift in Sources */,
 				326A0908223DD7E9009A8313 /* SubtitleTrackContainerView.swift in Sources */,
+				3238E9452276005A005A0145 /* NSMutableSet+Additions.m in Sources */,
 				321DC3D222360F410038C8FB /* FontViewController.swift in Sources */,
 				562A68871F2D4F5E000E6B16 /* MovieViewController.swift in Sources */,
 				32047523223DA6100027218F /* NSObject+KVO.m in Sources */,
 				322F448E223F4CC500427898 /* GBDeviceInfo_Common.m in Sources */,
 				32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */,
 				3216F828227501F200E11EBD /* ComboColorWell.swift in Sources */,
+				3238E9422275F761005A0145 /* NSSet+Additions.m in Sources */,
 				321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */,
 				321DC3F5223615E90038C8FB /* MainSplitViewController.swift in Sources */,
 				322F4497223F818F00427898 /* CaptionWaveformBox.swift in Sources */,

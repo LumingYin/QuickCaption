@@ -178,14 +178,18 @@ import AppCenterAnalytics
         self.updatePersistedFramerate()
 
         if self.episode.arrayForCaption?.count ?? 0 <= 0 {
+            print("WE CARE: 181")
             let description = NSEntityDescription.entity(forEntityName: "CaptionLine", in: Helper.context!)
+            print("WE CARE: 182")
             let cap = CaptionLine(entity: description!, insertInto: Helper.context!)
+            print("WE CARE: 184")
             cap.guidIdentifier = NSUUID().uuidString
             cap.caption = ""
             cap.startingTime = Float(CMTimeGetSeconds((episode.player?.currentTime())!))
             cap.endingTime = 0
-
+            print("WE CARE: 190")
             self.episode.addToArrayForCaption(cap)
+            print("WE CARE: 192")
 //            self.timeLabel.stringValue = "\(self.episode.framerate)fps  |  \(self.episode.videoDescription ?? "")"
             self.episode.creationDate = NSDate()
         }
