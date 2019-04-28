@@ -19,8 +19,8 @@ extension EpisodeProject {
 
     @NSManaged public var guidIdentifier: String?
     @NSManaged public var videoDescription: String?
-    @NSManaged public var videoURL: URL?
-    @NSManaged public var thumbnailURL: URL?
+    @NSManaged public var videoURL: String?
+    @NSManaged public var thumbnailURL: String?
     @NSManaged public var creationDate: NSDate?
     @NSManaged public var modifiedDate: NSDate?
     @NSManaged public var styleFontFamily: String?

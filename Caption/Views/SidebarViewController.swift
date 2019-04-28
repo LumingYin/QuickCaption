@@ -12,6 +12,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     @IBOutlet weak var tableView: NSTableView!
     var episodeProjects: [EpisodeProject] = []
     @IBOutlet var contextMenu: NSMenu!
+    @IBOutlet weak var visualEffectsView: NSVisualEffectView!
 
 
     @IBAction func duplicateClicked(_ sender: Any) {
@@ -113,13 +114,19 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     func showEpisodeInFinder(row: Int) {
         let episode = episodeProjects[row]
         if let url = episode.videoURL {
-            NSWorkspace.shared.activateFileViewerSelecting([url])
+            NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: url)])
         }
     }
 
     @IBOutlet weak var duplicateClicked: NSMenuItem!
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(OSX 10.14, *) {
+            self.visualEffectsView.material = .sidebar
+        } else {
+//            self.visualEffectsView.state = .inactive
+            self.visualEffectsView.material = .light
+        }
         fetchDBData()
         tableView.delegate = self
         tableView.dataSource = self
@@ -163,7 +170,8 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
 
     func addNewProject() {
-        let episode = EpisodeProject(context: Helper.context!)
+        let description = NSEntityDescription.entity(forEntityName: "EpisodeProject", in: Helper.context!)
+        let episode = EpisodeProject(entity: description!, insertInto: Helper.context!)
         episode.guidIdentifier = NSUUID().uuidString
         episode.creationDate = NSDate()
         episode.modifiedDate = NSDate()
@@ -183,7 +191,7 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
             if let date = episode.modifiedDate as Date? {
                 view.lastModifiedDateTextField.stringValue = formatter.string(from: date)
             }
-            if let url = episode.thumbnailURL, let image = NSImage(contentsOf: url) {
+            if let url = episode.thumbnailURL, let image = NSImage(contentsOf: URL(fileURLWithPath: url)) {
                 view.episodePreview?.image = image
             } else {
                 view.episodePreview?.image = NSImage(named: "bunny")

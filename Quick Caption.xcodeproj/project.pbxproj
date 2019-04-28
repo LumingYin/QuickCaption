@@ -46,6 +46,7 @@
 		326A0914223F0CFF009A8313 /* Caption in Resources */ = {isa = PBXBuildFile; fileRef = 326A0913223F0CFF009A8313 /* Caption */; };
 		326A0916223F131F009A8313 /* ShadowPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0915223F131F009A8313 /* ShadowPreferences.swift */; };
 		326A0918223F297C009A8313 /* Saver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0917223F297C009A8313 /* Saver.swift */; };
+		32D5731322756354007BBAB6 /* NonSmoothedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D5731222756354007BBAB6 /* NonSmoothedTextField.m */; };
 		32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */; };
 		32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */; };
 		32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */; };
@@ -129,6 +130,10 @@
 		326A0913223F0CFF009A8313 /* Caption */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Caption; sourceTree = "<group>"; };
 		326A0915223F131F009A8313 /* ShadowPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowPreferences.swift; sourceTree = "<group>"; };
 		326A0917223F297C009A8313 /* Saver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saver.swift; sourceTree = "<group>"; };
+		32D5730E22755C1A007BBAB6 /* NSSet+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSSet+Additions.h"; sourceTree = "<group>"; };
+		32D5730F22755C1A007BBAB6 /* NSSet+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSSet+Additions.m"; sourceTree = "<group>"; };
+		32D5731122756354007BBAB6 /* NonSmoothedTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NonSmoothedTextField.h; sourceTree = "<group>"; };
+		32D5731222756354007BBAB6 /* NonSmoothedTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NonSmoothedTextField.m; sourceTree = "<group>"; };
 		32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionDetailTableCellView.swift; sourceTree = "<group>"; };
 		32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextFieldCell.swift; sourceTree = "<group>"; };
 		32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnscrollableScrollView.swift; sourceTree = "<group>"; };
@@ -207,6 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				562A688A1F2D4F5E000E6B16 /* Main.storyboard */,
+				32D5731122756354007BBAB6 /* NonSmoothedTextField.h */,
+				32D5731222756354007BBAB6 /* NonSmoothedTextField.m */,
 				322F4496223F818F00427898 /* CaptionWaveformBox.swift */,
 				322F4493223F720F00427898 /* QuickCaptionScrollView.h */,
 				322F4494223F720F00427898 /* QuickCaptionScrollView.m */,
@@ -227,6 +234,8 @@
 				321DC3D122360F410038C8FB /* FontViewController.swift */,
 				321DC3D3223610750038C8FB /* SideTabViewController.swift */,
 				321DC3EF223611F00038C8FB /* ResizableInputContainerView.swift */,
+				32D5730E22755C1A007BBAB6 /* NSSet+Additions.h */,
+				32D5730F22755C1A007BBAB6 /* NSSet+Additions.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -469,6 +478,7 @@
 				3216F7F82274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m in Sources */,
 				324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */,
 				322F4495223F720F00427898 /* QuickCaptionScrollView.m in Sources */,
+				32D5731322756354007BBAB6 /* NonSmoothedTextField.m in Sources */,
 				32F53CE522377262007B66E1 /* CaptionLine+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -617,7 +627,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dim.Caption;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Caption/Others/Quick Caption-Bridging-Header.h";
@@ -647,7 +657,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dim.Caption;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Caption/Others/Quick Caption-Bridging-Header.h";

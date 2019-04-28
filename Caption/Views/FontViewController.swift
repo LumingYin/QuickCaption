@@ -19,7 +19,9 @@ class FontViewController: NSViewController {
     @IBOutlet weak var fontWeightButton: NSPopUpButton!
     @IBOutlet weak var fontSizeButton: NSComboBox!
     @IBOutlet weak var fontShadowButton: NSPopUpButton!
-    @IBOutlet weak var fontColorButton: ComboColorWell!
+    var fontColorButton: Any?
+//    @IBOutlet weak var fontColorButton: ComboColorWell!
+    @IBOutlet weak var colorContainerView: NSView!
 
     let allFontNames = NSFontManager.shared.availableFontFamilies
     var fontPostScriptArray: [String] = []
@@ -27,6 +29,20 @@ class FontViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(OSX 10.12, *) {
+            let button = ComboColorWell(frame: NSRect(x: 0, y: 0, width: 80, height: 23))
+            fontColorButton = button
+            button.target = self
+            button.action = #selector(colorChanged(_:))
+            button.allowClearColor = false
+            self.colorContainerView.addSubview(button)
+        } else {
+            let well = NSColorWell(frame: NSRect(x: 0, y: 0, width: 80, height: 23))
+            fontColorButton = well
+            well.target = self
+            well.action = #selector(colorChanged(_:))
+            self.colorContainerView.addSubview(well)
+        }
         configurateAllFonts()
     }
 
@@ -49,8 +65,14 @@ class FontViewController: NSViewController {
     }
 
     func configureAllMetadata() {
-        self.videoName.stringValue = episode?.videoURL?.lastPathComponent ?? ""
-        self.videoPath.stringValue = episode?.videoURL?.absoluteString ?? ""
+        if let up = episode?.videoURL {
+            let url = URL(fileURLWithPath: up)
+            self.videoName.stringValue = url.lastPathComponent
+            self.videoPath.stringValue = url.path
+        } else {
+            self.videoName.stringValue = ""
+            self.videoPath.stringValue = ""
+        }
         self.videoDurationField.stringValue = "\(episode?.videoDuration ?? 0) seconds"
         self.videoFramerateField.stringValue = "\(episode?.framerate ?? 0) fps"
     }
@@ -103,7 +125,15 @@ class FontViewController: NSViewController {
         fontWeightButton.selectItem(withTitle: self.episode?.styleFontWeight ?? "Regular")
         fontSizeButton.stringValue = self.episode?.styleFontSize ?? "53"
         fontShadowButton.selectItem(at: Int(self.episode?.styleFontShadow ?? 1))
-        fontColorButton.color = NSColor(hexString: self.episode?.styleFontColor ?? "#ffffff") ?? NSColor.white
+        if #available(OSX 10.12, *) {
+            if let well = fontColorButton as? ComboColorWell {
+                well.color = NSColor(hexString: self.episode?.styleFontColor ?? "#ffffff") ?? NSColor.white
+            }
+        } else {
+            if let well = fontColorButton as? NSColorWell {
+                well.color = NSColor(hexString: self.episode?.styleFontColor ?? "#ffffff") ?? NSColor.white
+            }
+        }
     }
 
     @IBAction func fontNameChanged(_ sender: NSPopUpButton) {
@@ -123,8 +153,16 @@ class FontViewController: NSViewController {
         self.episode?.styleFontShadow = Int16(sender.indexOfSelectedItem)
     }
 
-    @IBAction func colorChanged(_ sender: ComboColorWell) {
-        self.episode?.styleFontColor = sender.color.hexString
+    @IBAction func colorChanged(_ sender: Any) {
+        if #available(OSX 10.12, *) {
+            if let well = sender as? ComboColorWell {
+                self.episode?.styleFontColor = well.color.hexString
+            }
+        } else {
+            if let well = sender as? NSColorWell {
+                self.episode?.styleFontColor = well.color.hexString
+            }
+        }
     }
 
 }

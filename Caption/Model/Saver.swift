@@ -57,10 +57,11 @@ class Saver {
             }
         }
 
-        guard let origonalVideoName = episode.videoURL?.lastPathComponent else {
+        guard let vu = episode.videoURL else {
             return
         }
-        let ogVN = (origonalVideoName as NSString).deletingPathExtension
+        let originalVideoName = URL(fileURLWithPath: vu).lastPathComponent
+        let ogVN = (originalVideoName as NSString).deletingPathExtension
 
         var newSubtitleName = "\(ogVN).srt"
         if (type == .txt) {
@@ -70,15 +71,15 @@ class Saver {
             newSubtitleName = "\(ogVN).fcpxml"
         }
 
-        guard let directoryPath = episode.videoURL?.deletingLastPathComponent() else {
-            return
-        }
-
+        let folderURL = URL(fileURLWithPath: vu).deletingLastPathComponent()
+        let directoryPath = URL(fileURLWithPath: folderURL.path, isDirectory: false)
         let newPath = directoryPath.appendingPathComponent(newSubtitleName)
+        print("directoryPath is: \(directoryPath)")
 
         Helper.displaySaveFileDialog(newSubtitleName, directoryPath: directoryPath, callback: { (success, url, string) in
             if success {
                 do {
+                    AppSandboxFileAccess().persistPermissionURL(url)
                     try text.write(to: url!, atomically: true, encoding: String.Encoding.utf8)
                     Helper.displayInteractiveSheet(title: "Saved successfully!", text: "Subtitle saved as \(newSubtitleName) under \(newPath.deletingLastPathComponent()).", firstButtonText: "Show in Finder", secondButtonText: "Dismiss") { (firstButtonReturn) in
                         if firstButtonReturn == true {

@@ -127,14 +127,16 @@ import AVKit
                 sender.stringValue = ""
                 var new: CaptionLine!
                 if let lastEndingTime = (episode.arrayForCaption?.lastObject as? CaptionLine)?.endingTime {
-                    new = CaptionLine(context: Helper.context!)
+                    let description = NSEntityDescription.entity(forEntityName: "CaptionLine", in: Helper.context!)
+                    new = CaptionLine(entity: description!, insertInto: Helper.context!)
                     new.guidIdentifier = NSUUID().uuidString
                     new.caption = ""
                     new.startingTime = lastEndingTime
                     new.endingTime = lastEndingTime // this is likely wrong, although better than 0 for integrity
                     self.addObserverForCaptionLine(line: new)
                 } else {
-                    new = CaptionLine(context: Helper.context!)
+                    let description = NSEntityDescription.entity(forEntityName: "CaptionLine", in: Helper.context!)
+                    new = CaptionLine(entity: description!, insertInto: Helper.context!)
                     new.guidIdentifier = NSUUID().uuidString
                     new.caption = ""
                     new.startingTime = Float(CMTimeGetSeconds((episode.player?.currentTime())!))
