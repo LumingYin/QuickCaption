@@ -208,15 +208,19 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         updateSelectRow(index: tableView.selectedRow)
     }
 
+    @objc func timerRetrySelector(timer: Timer) {
+        if let index = timer.userInfo as? Int {
+            print("We're giving loading the row a second try after the timer.")
+            self.updateSelectRow(index: index)
+        }
+    }
+
     func updateSelectRow(index: Int) {
         Helper.appWindow().makeKeyAndOrderFront(self)
         print("The state of various VCs: \(String(describing: AppDelegate.movieVC())), \(String(describing: AppDelegate.subtitleVC())), \(String(describing: AppDelegate.fontVC()))")
 
         if (AppDelegate.movieVC() == nil || AppDelegate.subtitleVC() == nil || AppDelegate.fontVC() == nil) {
-            Timer.scheduledTimer(withTimeInterval: 0.15, repeats: false) { (timer) in
-                print("We're giving loading the row a second try after the timer.")
-                self.updateSelectRow(index: index)
-            }
+            Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(timerRetrySelector(timer:)), userInfo: index, repeats: false)
             return
         }
 
