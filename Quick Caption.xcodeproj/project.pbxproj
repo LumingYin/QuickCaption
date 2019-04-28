@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3204751F223DA1A30027218F /* CaptionBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3204751E223DA1A30027218F /* CaptionBoxView.swift */; };
-		32047523223DA6100027218F /* NSObject+KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 32047522223DA6100027218F /* NSObject+KVO.m */; };
 		32047525223DA7910027218F /* NSString+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32047524223DA7910027218F /* NSString+Drawing.swift */; };
 		3216F7F62274FC3E00E11EBD /* AppSandboxFileAccessPersist.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216F7EF2274FC3E00E11EBD /* AppSandboxFileAccessPersist.m */; };
 		3216F7F72274FC3E00E11EBD /* AppSandboxFileAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216F7F12274FC3E00E11EBD /* AppSandboxFileAccess.m */; };
@@ -35,8 +34,7 @@
 		322F4495223F720F00427898 /* QuickCaptionScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F4494223F720F00427898 /* QuickCaptionScrollView.m */; };
 		322F4497223F818F00427898 /* CaptionWaveformBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F4496223F818F00427898 /* CaptionWaveformBox.swift */; };
 		3238E9412275E5F1005A0145 /* OpaqueNSScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3238E9402275E5F1005A0145 /* OpaqueNSScroller.swift */; };
-		3238E9422275F761005A0145 /* NSSet+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D5730F22755C1A007BBAB6 /* NSSet+Additions.m */; };
-		3238E9452276005A005A0145 /* NSMutableSet+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3238E9442276005A005A0145 /* NSMutableSet+Additions.m */; };
+		3238E9472276080E005A0145 /* NSObject+KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 32047522223DA6100027218F /* NSObject+KVO.m */; };
 		324971D222190D1C00562223 /* CaptionWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324971D122190D1C00562223 /* CaptionWindowController.swift */; };
 		324971DB221929C000562223 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 324971DA221929C000562223 /* Security.framework */; };
 		326A0906223DD62B009A8313 /* TimelineOverallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0905223DD62B009A8313 /* TimelineOverallView.swift */; };
@@ -53,10 +51,12 @@
 		32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */; };
 		32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */; };
 		32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */; };
-		32F53CDE22376C4D007B66E1 /* EpisodeProject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CDA22376C4D007B66E1 /* EpisodeProject+CoreDataClass.swift */; };
-		32F53CDF22376C4D007B66E1 /* EpisodeProject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CDB22376C4D007B66E1 /* EpisodeProject+CoreDataProperties.swift */; };
 		32F53CE022376C4D007B66E1 /* CaptionLine+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CDC22376C4D007B66E1 /* CaptionLine+CoreDataClass.swift */; };
 		32F53CE522377262007B66E1 /* CaptionLine+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CE422377262007B66E1 /* CaptionLine+CoreDataProperties.swift */; };
+		32FEC1542276314600487C9D /* EpisodeProject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FEC1522276314600487C9D /* EpisodeProject+CoreDataClass.swift */; };
+		32FEC1552276314600487C9D /* EpisodeProject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FEC1532276314600487C9D /* EpisodeProject+CoreDataProperties.swift */; };
+		32FEC1562276324400487C9D /* NSMutableSet+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3238E9442276005A005A0145 /* NSMutableSet+Additions.m */; };
+		32FEC1572276324700487C9D /* NSSet+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D5730F22755C1A007BBAB6 /* NSSet+Additions.m */; };
 		3C43B6942068A7A000219EF6 /* film.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3C43B6932068A7A000219EF6 /* film.icns */; };
 		3C7D2E592066F96100F5B22F /* FileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7D2E582066F96100F5B22F /* FileCoordinator.swift */; };
 		562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A68841F2D4F5E000E6B16 /* AppDelegate.swift */; };
@@ -143,10 +143,10 @@
 		32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionDetailTableCellView.swift; sourceTree = "<group>"; };
 		32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextFieldCell.swift; sourceTree = "<group>"; };
 		32F53CD022376314007B66E1 /* UnscrollableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnscrollableScrollView.swift; sourceTree = "<group>"; };
-		32F53CDA22376C4D007B66E1 /* EpisodeProject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EpisodeProject+CoreDataClass.swift"; sourceTree = "<group>"; };
-		32F53CDB22376C4D007B66E1 /* EpisodeProject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EpisodeProject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		32F53CDC22376C4D007B66E1 /* CaptionLine+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CaptionLine+CoreDataClass.swift"; sourceTree = "<group>"; };
 		32F53CE422377262007B66E1 /* CaptionLine+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CaptionLine+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		32FEC1522276314600487C9D /* EpisodeProject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EpisodeProject+CoreDataClass.swift"; sourceTree = "<group>"; };
+		32FEC1532276314600487C9D /* EpisodeProject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EpisodeProject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3C43B6932068A7A000219EF6 /* film.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = film.icns; sourceTree = "<group>"; };
 		3C7D2E572066F7F600F5B22F /* Quick Caption.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Quick Caption.entitlements"; sourceTree = "<group>"; };
 		3C7D2E582066F96100F5B22F /* FileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCoordinator.swift; sourceTree = "<group>"; };
@@ -248,8 +248,8 @@
 		321DC3F22236157D0038C8FB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				32F53CDA22376C4D007B66E1 /* EpisodeProject+CoreDataClass.swift */,
-				32F53CDB22376C4D007B66E1 /* EpisodeProject+CoreDataProperties.swift */,
+				32FEC1522276314600487C9D /* EpisodeProject+CoreDataClass.swift */,
+				32FEC1532276314600487C9D /* EpisodeProject+CoreDataProperties.swift */,
 				32F53CDC22376C4D007B66E1 /* CaptionLine+CoreDataClass.swift */,
 				32F53CE422377262007B66E1 /* CaptionLine+CoreDataProperties.swift */,
 				3C7D2E582066F96100F5B22F /* FileCoordinator.swift */,
@@ -446,7 +446,6 @@
 				326A0906223DD62B009A8313 /* TimelineOverallView.swift in Sources */,
 				3238E9412275E5F1005A0145 /* OpaqueNSScroller.swift in Sources */,
 				32047525223DA7910027218F /* NSString+Drawing.swift in Sources */,
-				32F53CDF22376C4D007B66E1 /* EpisodeProject+CoreDataProperties.swift in Sources */,
 				326A090E223E3482009A8313 /* SwiftHEXColors.swift in Sources */,
 				3216F7F72274FC3E00E11EBD /* AppSandboxFileAccess.m in Sources */,
 				3216F7F62274FC3E00E11EBD /* AppSandboxFileAccessPersist.m in Sources */,
@@ -456,16 +455,15 @@
 				32F53CE022376C4D007B66E1 /* CaptionLine+CoreDataClass.swift in Sources */,
 				321DC401223629030038C8FB /* SidebarEpisodeTableCellView.swift in Sources */,
 				326A0908223DD7E9009A8313 /* SubtitleTrackContainerView.swift in Sources */,
-				3238E9452276005A005A0145 /* NSMutableSet+Additions.m in Sources */,
 				321DC3D222360F410038C8FB /* FontViewController.swift in Sources */,
 				562A68871F2D4F5E000E6B16 /* MovieViewController.swift in Sources */,
-				32047523223DA6100027218F /* NSObject+KVO.m in Sources */,
 				322F448E223F4CC500427898 /* GBDeviceInfo_Common.m in Sources */,
+				32FEC1542276314600487C9D /* EpisodeProject+CoreDataClass.swift in Sources */,
 				32F53CD122376314007B66E1 /* UnscrollableScrollView.swift in Sources */,
 				3216F828227501F200E11EBD /* ComboColorWell.swift in Sources */,
-				3238E9422275F761005A0145 /* NSSet+Additions.m in Sources */,
 				321DC3CB2236037C0038C8FB /* WaveFormDrawer.swift in Sources */,
 				321DC3F5223615E90038C8FB /* MainSplitViewController.swift in Sources */,
+				32FEC1562276324400487C9D /* NSMutableSet+Additions.m in Sources */,
 				322F4497223F818F00427898 /* CaptionWaveformBox.swift in Sources */,
 				321DC3F0223611F00038C8FB /* ResizableInputContainerView.swift in Sources */,
 				321DC3F92236216B0038C8FB /* Helper.swift in Sources */,
@@ -473,10 +471,11 @@
 				326A0910223F03BE009A8313 /* QuickCaptionApplication.swift in Sources */,
 				326A090C223E0CD2009A8313 /* VideoPreviewContainerView.swift in Sources */,
 				326A0918223F297C009A8313 /* Saver.swift in Sources */,
+				32FEC1572276324700487C9D /* NSSet+Additions.m in Sources */,
 				562A68851F2D4F5E000E6B16 /* AppDelegate.swift in Sources */,
 				321DC3FD223623500038C8FB /* Exporter.swift in Sources */,
 				3204751F223DA1A30027218F /* CaptionBoxView.swift in Sources */,
-				32F53CDE22376C4D007B66E1 /* EpisodeProject+CoreDataClass.swift in Sources */,
+				3238E9472276080E005A0145 /* NSObject+KVO.m in Sources */,
 				321DC3CE22360ADC0038C8FB /* SidebarViewController.swift in Sources */,
 				32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */,
 				321DC3D022360F310038C8FB /* SubtitlesViewController.swift in Sources */,
@@ -485,6 +484,7 @@
 				326A0912223F0699009A8313 /* QuickCaptionWindow.swift in Sources */,
 				326A090A223E0C48009A8313 /* NSView+Extensions.swift in Sources */,
 				321DC3C52235FE650038C8FB /* Caption.xcdatamodeld in Sources */,
+				32FEC1552276314600487C9D /* EpisodeProject+CoreDataProperties.swift in Sources */,
 				322F4482223F367700427898 /* WaveformPreviewContainerView.swift in Sources */,
 				321DC3CC2236037C0038C8FB /* SamplesExtractor.swift in Sources */,
 				3216F7F82274FC3E00E11EBD /* AppSandboxFileAccessOpenSavePanelDelegate.m in Sources */,
