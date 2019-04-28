@@ -2033,15 +2033,12 @@ CA
                                                     <action selector="fontSizeChanged:" target="Lpo-yO-LUY" id="0Ib-lT-ghk"/>
                                                 </connections>
                                             </comboBox>
-                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PrX-Ea-Kp4" customClass="ComboColorWell" customModule="Quick_Caption" customModuleProvider="target">
+                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PrX-Ea-Kp4">
                                                 <rect key="frame" x="126" y="93" width="263" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="allowClearColor" value="NO"/>
                                                 </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="colorChanged:" target="Lpo-yO-LUY" id="CGB-Xl-2ba"/>
-                                                </connections>
                                             </customView>
                                         </subviews>
                                     </customView>
@@ -2152,7 +2149,7 @@ CA
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="fontColorButton" destination="PrX-Ea-Kp4" id="AA4-hZ-SVc"/>
+                        <outlet property="colorContainerView" destination="PrX-Ea-Kp4" id="hXZ-fA-xdK"/>
                         <outlet property="fontFamilyButton" destination="oOc-o6-Q9x" id="ZCE-SJ-iaw"/>
                         <outlet property="fontShadowButton" destination="pZb-KP-UuS" id="hbO-mg-gaB"/>
                         <outlet property="fontSizeButton" destination="SwU-WR-Q55" id="y05-lF-maE"/>

@@ -162,7 +162,8 @@ import AppCenterAnalytics
         self.updatePersistedFramerate()
 
         if self.episode.arrayForCaption?.count ?? 0 <= 0 {
-            let cap = CaptionLine(context: Helper.context!)
+            let description = NSEntityDescription.entity(forEntityName: "CaptionLine", in: Helper.context!)
+            let cap = CaptionLine(entity: description!, insertInto: Helper.context!)
             cap.guidIdentifier = NSUUID().uuidString
             cap.caption = ""
             cap.startingTime = Float(CMTimeGetSeconds((episode.player?.currentTime())!))

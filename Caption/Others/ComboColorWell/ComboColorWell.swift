@@ -12,6 +12,9 @@ import Cocoa
  A control to pick a color.
  It has the look & feel of the color control of Apple apps like Pages, Numbers etc.
  */
+@available(OSX 10.12, *)
+@available(OSX 10.12, *)
+@available(OSX 10.12, *)
 class ComboColorWell: NSControl {
     
     // MARK: - public vars
@@ -75,6 +78,7 @@ class ComboColorWell: NSControl {
     
 }
 
+@available(OSX 10.12, *)
 extension ComboColorWell: NSColorChanging {
     func changeColor(_ sender: NSColorPanel?) {
         if let sender = sender {
@@ -86,6 +90,7 @@ extension ComboColorWell: NSColorChanging {
 /**
  The action cell that will do the heavy lifting for the ComboColorWell control.
  */
+@available(OSX 10.12, *)
 class ComboColorWellCell: NSActionCell {
     /**
      Enumerate sensible areas of the control cell.
@@ -534,6 +539,7 @@ class ComboColorWellCell: NSActionCell {
 }
 
 // handle Color panel delegate events here.
+@available(OSX 10.12, *)
 extension ComboColorWellCell: NSWindowDelegate {
     func windowWillClose(_ notification: Notification) {
         state = .off
@@ -542,6 +548,7 @@ extension ComboColorWellCell: NSWindowDelegate {
 }
 
 // handle Color popover delegate events here.
+@available(OSX 10.12, *)
 extension ComboColorWellCell: NSPopoverDelegate {
     func popoverWillClose(_ notification: Notification) {
         colorsPopoverVisible = false
@@ -598,6 +605,7 @@ class MouseTracker: NSResponder {
 /**
  A controller for a grid view to show and select colors.
  */
+@available(OSX 10.12, *)
 class ColorGridController: NSViewController {
     
     // MARK: - public vars
@@ -673,6 +681,7 @@ class ColorGridController: NSViewController {
 }
 
 // conform to the ColorGridViewDelegate protocol.
+@available(OSX 10.12, *)
 extension ColorGridController: ColorGridViewDelegate {
     /**
      Handle the color choice.
@@ -691,11 +700,13 @@ extension ColorGridController: ColorGridViewDelegate {
 /**
  Add ColorProvider conformance to NSPanel
  */
+@available(OSX 10.12, *)
 extension ColorGridController: ColorProvider {}
 
 /**
  The protocol for a delegate to handle color choice.
  */
+@available(OSX 10.12, *)
 protocol ColorGridViewDelegate: AnyObject {
     func colorGridView(_ colorGridView: ColorGridView, didChoose color: NSColor)
 }
@@ -703,6 +714,7 @@ protocol ColorGridViewDelegate: AnyObject {
 /**
  A grid of selectable color view objects.
  */
+@available(OSX 10.12, *)
 class ColorGridView: NSGridView {
     // MARK: - public vars
 
@@ -881,6 +893,7 @@ class ColorGridView: NSGridView {
 /**
  A view to represent a color in a grid.
  */
+@available(OSX 10.12, *)
 class ColorView: NSView {
     
     // MARK: - public vars
@@ -971,6 +984,7 @@ extension NSColorPanel: ColorProvider {}
 /**
  Add equatable conformance to MouseState enum
  */
+@available(OSX 10.12, *)
 extension ComboColorWellCell.MouseState: Equatable {
     static func == (lhs: ComboColorWellCell.MouseState, rhs: ComboColorWellCell.MouseState) -> Bool {
         switch lhs {

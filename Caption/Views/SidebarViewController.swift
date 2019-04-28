@@ -163,7 +163,8 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
 
     func addNewProject() {
-        let episode = EpisodeProject(context: Helper.context!)
+        let description = NSEntityDescription.entity(forEntityName: "EpisodeProject", in: Helper.context!)
+        let episode = EpisodeProject(entity: description!, insertInto: Helper.context!)
         episode.guidIdentifier = NSUUID().uuidString
         episode.creationDate = NSDate()
         episode.modifiedDate = NSDate()

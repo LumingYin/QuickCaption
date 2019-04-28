@@ -219,7 +219,7 @@ class Helper: NSObject {
 
     static var context: NSManagedObjectContext? {
         get {
-            if let context = (NSApp.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            if let context = (NSApp.delegate as? AppDelegate)?.managedObjectContext {
                 return context
             } else {
                 return nil
