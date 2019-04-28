@@ -121,9 +121,10 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     @IBOutlet weak var duplicateClicked: NSMenuItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(OSX 10.11, *) {
+        if #available(OSX 10.14, *) {
             self.visualEffectsView.material = .sidebar
         } else {
+//            self.visualEffectsView.state = .inactive
             self.visualEffectsView.material = .light
         }
         fetchDBData()

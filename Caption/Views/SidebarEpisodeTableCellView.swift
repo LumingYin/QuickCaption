@@ -13,4 +13,11 @@ class SidebarEpisodeTableCellView: NSTableCellView {
     @IBOutlet weak var videoFileNameTextField: NSTextField!
     @IBOutlet weak var lastModifiedDateTextField: NSTextField!
 
+    override func awakeFromNib() {
+        if #available(macOS 10.14, *) {
+        } else {
+            videoFileNameTextField.font = NSFont.systemFont(ofSize: 14, weight: .bold)
+        }
+    }
+
 }
