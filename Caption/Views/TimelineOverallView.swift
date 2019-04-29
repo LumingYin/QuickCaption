@@ -17,6 +17,7 @@ class TimelineOverallView: NSView {
     }
 
     var scrollViewIsScrolling = false
+    var lastEndManualScrollTime: TimeInterval?
 
     @objc func scrollViewWillStartLiveScroll(notification: Notification){
         scrollViewIsScrolling = true
@@ -34,6 +35,7 @@ class TimelineOverallView: NSView {
 
     @objc func scrollViewDidEndLiveScroll(notification: Notification){
         scrollViewIsScrolling = false
+        lastEndManualScrollTime = Date().timeIntervalSince1970
         #if DEBUG
         print("scrollViewDidEndLiveScroll: \(#function) ")
         #endif

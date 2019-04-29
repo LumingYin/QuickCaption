@@ -917,6 +917,17 @@ import AppCenterAnalytics
             let rightHandSideInView = self.progressView.frame.origin.x > self.timelineScrollView.contentView.bounds.origin.x + self.timelineScrollView.contentView.bounds.size.width
             let leftHandSideInView = self.progressView.frame.origin.x < self.timelineScrollView.contentView.bounds.origin.x
 
+            if let stopTime = self.timelineOverallView.lastEndManualScrollTime {
+                let differenceBetweenScrollerEndtimeAndCurrentTime = Date().timeIntervalSince1970 - stopTime
+                if differenceBetweenScrollerEndtimeAndCurrentTime < 3 {
+                    // Bailing auto-scrolling since user just initiated manual scroll gesture. This gives them an opportunity to manually change the playhead position.
+                    return
+                } else {
+                    // Once the 3 second grace period expires, we re-enable auto scrolling.
+                    self.timelineOverallView.lastEndManualScrollTime = nil
+                }
+            }
+
             if !self.timelineOverallView.scrollViewIsScrolling && (rightHandSideInView || leftHandSideInView) {
                 #if DEBUG
 //                print("The playhead is no longer in view. self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame), self.timelineScrollView.contentView.bounds: \(self.timelineScrollView.contentView.bounds)")
@@ -926,12 +937,14 @@ import AppCenterAnalytics
                 if (self.progressBarPanGestureRecongnizer.state == .began || self.progressBarPanGestureRecongnizer.state == .changed) {
                     // We only scrub a little to make the playhead visible if the user is manually dragging the playhead
                     targetFrame.size.width = 2 * (self.progressView.frame.size.width)
+                    targetFrame.origin.x -= self.offsetPixelInScrollView
+                    self.timelineScrollView.contentView.scrollToVisible(targetFrame)
                 } else {
                     // We scrub to populate more of the timeline when video playback naturally led the playhead to progress
                     targetFrame.size.width = self.timelineScrollView.frame.width
+                    targetFrame.origin.x -= self.offsetPixelInScrollView
+                    self.timelineScrollView.scroll(to: targetFrame.origin, animationDuration: 0.15)
                 }
-                targetFrame.origin.x -= self.offsetPixelInScrollView
-                self.timelineScrollView.contentView.scrollToVisible(targetFrame)
             } else {
                  // print("The playhead is in view. self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame), self.timelineScrollView.contentView.bounds: \(self.timelineScrollView.contentView.bounds)")
             }

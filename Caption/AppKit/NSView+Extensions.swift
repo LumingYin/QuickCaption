@@ -15,3 +15,13 @@ extension NSView {
         superlayer?.addSublayer(self.layer!)
     }
 }
+
+extension NSScrollView {
+    func scroll(to point: NSPoint, animationDuration: Double) {
+        NSAnimationContext.beginGrouping()
+        NSAnimationContext.current.duration = animationDuration
+        contentView.animator().setBoundsOrigin(point)
+        reflectScrolledClipView(contentView)
+        NSAnimationContext.endGrouping()
+    }
+}
