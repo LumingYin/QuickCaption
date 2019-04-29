@@ -288,15 +288,18 @@ import AppCenterAnalytics
             let asset = AVAsset(url: URL(fileURLWithPath: sourceURL))
             let imageGenerator = AVAssetImageGenerator(asset: asset)
             let time = CMTimeMake(value: 1, timescale: 1)
-            let imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
-            let thumbnail = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
-            _ = self.applicationDataDirectory().appendingPathComponent("thumbnails")
-            do {try FileManager.default.createDirectory(at: self.applicationDataDirectory().appendingPathComponent("thumbnails"), withIntermediateDirectories: true, attributes: nil)
-            } catch {print(error)}
-            let destinationURL = self.applicationDataDirectory().appendingPathComponent("thumbnails").appendingPathComponent("\(NSUUID().uuidString).png")
-            let result = thumbnail.pngWrite(to: destinationURL)
-            print("Writing thumbnail: \(result)")
-            self.episode.thumbnailURL = destinationURL.path
+            do {
+                let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+                let thumbnail = NSImage(cgImage: imageRef, size: NSSize(width: imageRef.width, height: imageRef.height))
+                _ = self.applicationDataDirectory().appendingPathComponent("thumbnails")
+                try FileManager.default.createDirectory(at: self.applicationDataDirectory().appendingPathComponent("thumbnails"), withIntermediateDirectories: true, attributes: nil)
+                let destinationURL = self.applicationDataDirectory().appendingPathComponent("thumbnails").appendingPathComponent("\(NSUUID().uuidString).png")
+                let result = thumbnail.pngWrite(to: destinationURL)
+                print("Writing thumbnail: \(result)")
+                self.episode.thumbnailURL = destinationURL.path
+            } catch {
+                print(error)
+            }
         }
     }
 
