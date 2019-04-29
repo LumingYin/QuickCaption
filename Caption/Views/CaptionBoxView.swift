@@ -28,7 +28,7 @@ class CaptionBoxView: NSView {
     func renderText(_ string:String, x: CGFloat, y: CGFloat, numberOfLines: Int, withColor color:NSColor) -> CGFloat {
         let font = NSFont.systemFont(ofSize: 11)
         let textHeight = layoutManager.defaultLineHeight(for: font) * CGFloat(numberOfLines)
-        let textRect = CGRect(x: x, y: y, width: self.bounds.width - 2 * CaptionBoxView.horizontalPadding, height: textHeight - 2 * CaptionBoxView.verticalPadding)
+        let textRect = CGRect(x: x, y: y, width: self.bounds.width - 2 * CaptionBoxView.horizontalPadding, height: textHeight)
         string.draw(in: textRect, withAttributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color])
         return textHeight
     }
@@ -68,7 +68,7 @@ class CaptionBoxView: NSView {
         }
 
         let textColor = NSColor(calibratedRed: 179 / 255, green: 152 / 255, blue: 233 / 255, alpha: 1.0)
-        _ = renderText(captionText, x: CaptionBoxView.horizontalPadding, y: CaptionBoxView.verticalPadding, numberOfLines: 5, withColor: textColor)
+        _ = renderText(captionText, x: CaptionBoxView.horizontalPadding, y: 10, numberOfLines: 3, withColor: textColor)
 //        (captionText as NSString).drawLeftAligned(in: bounds, withAttributes: [.foregroundColor: textColor])
         // Drawing code here.
     }

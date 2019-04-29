@@ -1608,6 +1608,7 @@ CA
                             <constraint firstItem="2qy-J0-ats" firstAttribute="leading" secondItem="MMG-zt-4ZZ" secondAttribute="leading" id="Th1-Qy-JOH"/>
                             <constraint firstItem="2qy-J0-ats" firstAttribute="top" secondItem="MMG-zt-4ZZ" secondAttribute="top" id="bz4-hW-x8T"/>
                             <constraint firstItem="jiy-T2-5Ml" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="cCG-qp-0Pc"/>
+                            <constraint firstItem="jiy-T2-5Ml" firstAttribute="width" relation="lessThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="width" id="epx-IA-2Ry"/>
                             <constraint firstAttribute="bottom" secondItem="QEG-SY-Hn2" secondAttribute="bottom" id="kXL-CT-f4r"/>
                             <constraint firstItem="2qy-J0-ats" firstAttribute="trailing" secondItem="MMG-zt-4ZZ" secondAttribute="trailing" id="ptZ-Ey-TYz"/>
                             <constraint firstAttribute="trailing" secondItem="QEG-SY-Hn2" secondAttribute="trailing" id="qoH-Dm-TQ1"/>

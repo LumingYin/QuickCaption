@@ -919,7 +919,7 @@ import AppCenterAnalytics
 
             if !self.timelineOverallView.scrollViewIsScrolling && (rightHandSideInView || leftHandSideInView) {
                 #if DEBUG
-//                print("The playhead is no longer in view. self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame), self.timelineScrollView.contentView.bounds: \(self.timelineScrollView.contentView.bounds)")
+                // print("The playhead is no longer in view. self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame), self.timelineScrollView.contentView.bounds: \(self.timelineScrollView.contentView.bounds)")
                 #endif
                 // Time to scroll to make the new timestamp visible!
                 var targetFrame = self.progressView.frame
