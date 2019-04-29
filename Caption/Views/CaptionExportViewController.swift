@@ -15,16 +15,19 @@ class CaptionExportViewController: NSViewController {
         // Do view setup here.
     }
 
+    @IBAction func exportASSClicked(_ sender: NSButton) {
+        AppDelegate.movieVC()?.saveASSToDisk(self)
+    }
 
-    @IBAction func exportSRTClicked(_ sender: Any) {
+    @IBAction func exportSRTClicked(_ sender: NSButton) {
         AppDelegate.movieVC()?.saveSRTToDisk(self)
     }
 
-    @IBAction func exportFCPXMLClicked(_ sender: Any) {
+    @IBAction func exportFCPXMLClicked(_ sender: NSButton) {
         AppDelegate.movieVC()?.saveFCPXMLToDisk(self)
     }
 
-    @IBAction func exportTXTClicked(_ sender: Any) {
+    @IBAction func exportTXTClicked(_ sender: NSButton) {
         AppDelegate.movieVC()?.saveTXTToDisk(self)
     }
 

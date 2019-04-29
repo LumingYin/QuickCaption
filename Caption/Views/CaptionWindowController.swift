@@ -14,6 +14,7 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var contentSettingsSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var importToolbarItem: NSToolbarItem!
     @IBOutlet weak var importToolbarButton: NSButton!
+    @IBOutlet weak var shareResultsButton: NSButton!
 
     var relinkMode: Bool = false {
         didSet {

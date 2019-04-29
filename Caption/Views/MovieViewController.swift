@@ -128,6 +128,7 @@ import AppCenterAnalytics
         AppSandboxFileAccess()?.accessFileURL(videoURL, persistPermission: true, with: {
             self.episode.player = AVPlayer(url: videoURL)
             self.customHintContainerView.isHidden = true
+            AppDelegate.mainWindow()?.shareResultsButton.isEnabled = true
             self.episode.player?.addObserver(self, forKeyPath: "rate", options: [.new], context: &MovieViewController.playerPlayrateContext)
             self.playerView.player = self.episode.player
             self.episode.player?.addObserver(self, forKeyPath: "status", options: [.new], context: &MovieViewController.playerReadinessContext)
@@ -326,6 +327,7 @@ import AppCenterAnalytics
         dismantleSetTimelineLengthToZero()
         openFileOrRelinkButton.image = NSImage(named: "import")
         customHintContainerView.isHidden = false
+        AppDelegate.mainWindow()?.shareResultsButton.isEnabled = false
         AppDelegate.setCurrentEpisodeTitle(nil)
         AppDelegate.mainWindow()?.relinkMode = false
         captionBottomConstraint.constant = 14

@@ -933,6 +933,7 @@ CA
                         <outlet property="currentTitle" destination="qOr-R3-Q9F" id="FEu-Vv-m7Y"/>
                         <outlet property="importToolbarButton" destination="mbM-67-SOf" id="al7-Fx-pw0"/>
                         <outlet property="importToolbarItem" destination="P2Q-Yv-86Y" id="xgw-P0-YxB"/>
+                        <outlet property="shareResultsButton" destination="BA9-ky-ggI" id="RdI-ee-56g"/>
                         <segue destination="GXO-oy-cs0" kind="relationship" relationship="window.shadowedContentViewController" id="PLB-ki-g7I"/>
                     </connections>
                 </windowController>
@@ -2193,20 +2194,20 @@ CA
             <objects>
                 <viewController storyboardIdentifier="ExportCaptions" id="7s3-zm-Yf4" customClass="CaptionExportViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ibe-WU-kvv">
-                        <rect key="frame" x="0.0" y="0.0" width="361" height="205"/>
+                        <rect key="frame" x="0.0" y="0.0" width="361" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MXK-LU-jc9">
-                                <rect key="frame" x="0.0" y="8" width="361" height="190"/>
+                                <rect key="frame" x="0.0" y="11" width="361" height="247"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YsV-pu-Gaj">
-                                        <rect key="frame" x="20" y="137" width="48" height="48"/>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YsV-pu-Gaj" userLabel="1_srt_imageView">
+                                        <rect key="frame" x="20" y="195" width="48" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="file_srt" id="cWh-tO-gix"/>
                                     </imageView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22y-BE-hvT">
-                                        <rect key="frame" x="73" y="167" width="271" height="18"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22y-BE-hvT" userLabel="1_srt_header">
+                                        <rect key="frame" x="73" y="227" width="271" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SRT (Subtitle Rip Text)" id="EEI-oy-arV">
                                             <font key="font" metaFont="systemSemibold" size="14"/>
@@ -2214,8 +2215,8 @@ CA
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="06z-10-BKr">
-                                        <rect key="frame" x="73" y="132" width="271" height="34"/>
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="06z-10-BKr" userLabel="1_srt_hint">
+                                        <rect key="frame" x="73" y="192" width="271" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Suitable for importing into X-Title Importer, Youtube Studio, ArcTime, or playack with IINA." id="TNB-Jz-jXe">
                                             <font key="font" metaFont="cellTitle"/>
@@ -2223,31 +2224,8 @@ CA
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMT-66-0Wy">
-                                        <rect key="frame" x="18" y="5" width="48" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="file_txt" id="1m0-hh-55i"/>
-                                    </imageView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9iX-hR-zAA">
-                                        <rect key="frame" x="73" y="35" width="271" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TXT (Plain Text)" id="2Ec-fl-mmk">
-                                            <font key="font" metaFont="systemSemibold" size="14"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tnX-FM-LyD">
-                                        <rect key="frame" x="73" y="0.0" width="271" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Export a plain text transcript of the video. Timecode will be discarded." id="gGP-ZR-L45">
-                                            <font key="font" metaFont="cellTitle"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KfV-MY-9xa">
-                                        <rect key="frame" x="0.0" y="132" width="361" height="58"/>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KfV-MY-9xa" userLabel="1_srt_button">
+                                        <rect key="frame" x="0.0" y="190" width="361" height="58"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="left" inset="2" id="eJn-Mf-GfB">
                                             <behavior key="behavior" lightByContents="YES"/>
@@ -2257,23 +2235,46 @@ CA
                                             <action selector="exportSRTClicked:" target="7s3-zm-Yf4" id="D8k-5V-JzA"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="43V-0N-nOS">
-                                        <rect key="frame" x="0.0" y="1" width="361" height="56"/>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h2k-BX-kWp" userLabel="2_ass_image">
+                                        <rect key="frame" x="20" y="133" width="48" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="left" inset="2" id="9t6-r7-oFz">
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="file_ass" id="uT9-A2-Us8"/>
+                                    </imageView>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cce-zH-waE" userLabel="2_ass_header">
+                                        <rect key="frame" x="73" y="160" width="271" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ASS (Sub Station Alpha)" id="WZ7-5F-x51">
+                                            <font key="font" metaFont="systemSemibold" size="14"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fWD-gi-lzg" userLabel="2_ass_hint">
+                                        <rect key="frame" x="73" y="130" width="271" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Retains all custom styles, suitable to be used as ffmpeg input or playack with IINA." id="eA1-RN-2Fq">
+                                            <font key="font" metaFont="cellTitle"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IgL-EZ-YCA" userLabel="2_ass_button">
+                                        <rect key="frame" x="0.0" y="128" width="361" height="58"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="left" inset="2" id="7hI-VS-nR4">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="exportTXTClicked:" target="7s3-zm-Yf4" id="zUg-PC-lfO"/>
+                                            <action selector="exportASSClicked:" target="7s3-zm-Yf4" id="a6x-CK-AMF"/>
                                         </connections>
                                     </button>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rtf-rI-W3o">
-                                        <rect key="frame" x="18" y="70" width="48" height="48"/>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rtf-rI-W3o" userLabel="3_fcp_button">
+                                        <rect key="frame" x="18" y="69" width="48" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="file_fcpxml" id="xQn-CL-z9T"/>
                                     </imageView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wWH-Sr-Ry2">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wWH-Sr-Ry2" userLabel="3_fcp_header">
                                         <rect key="frame" x="73" y="102" width="271" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FCPXML (Final Cut Pro X XML)" id="rAL-io-8Sn">
@@ -2282,7 +2283,7 @@ CA
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x0k-yO-Sxf">
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x0k-yO-Sxf" userLabel="3_fcp_hint">
                                         <rect key="frame" x="73" y="65" width="271" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Export the title to be re-imported into Final Cut Pro X. Recommended for burning in subtitles." id="Pmu-E6-RM3">
@@ -2291,7 +2292,7 @@ CA
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oqR-pB-IkI">
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oqR-pB-IkI" userLabel="3_fcp_button">
                                         <rect key="frame" x="0.0" y="63" width="361" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="left" inset="2" id="341-DS-t68">
@@ -2302,6 +2303,40 @@ CA
                                             <action selector="exportFCPXMLClicked:" target="7s3-zm-Yf4" id="Uqn-kn-bUm"/>
                                         </connections>
                                     </button>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMT-66-0Wy" userLabel="4_txt_imageView">
+                                        <rect key="frame" x="18" y="6" width="48" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="file_txt" id="1m0-hh-55i"/>
+                                    </imageView>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9iX-hR-zAA" userLabel="4_txt_header">
+                                        <rect key="frame" x="73" y="36" width="271" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TXT (Plain Text)" id="2Ec-fl-mmk">
+                                            <font key="font" metaFont="systemSemibold" size="14"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tnX-FM-LyD" userLabel="4_txt_hint">
+                                        <rect key="frame" x="73" y="1" width="271" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Export a plain text transcript of the video. Timecode will be discarded." id="gGP-ZR-L45">
+                                            <font key="font" metaFont="cellTitle"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="43V-0N-nOS" userLabel="4_txt_button">
+                                        <rect key="frame" x="0.0" y="2" width="361" height="56"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="left" inset="2" id="9t6-r7-oFz">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="exportTXTClicked:" target="7s3-zm-Yf4" id="zUg-PC-lfO"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </customView>
                         </subviews>
@@ -2309,7 +2344,7 @@ CA
                 </viewController>
                 <customObject id="Tc8-l0-Sca" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-329.5" y="-206.5"/>
+            <point key="canvasLocation" x="-329.5" y="-174"/>
         </scene>
     </scenes>
     <resources>
@@ -2319,6 +2354,7 @@ CA
         <image name="NSShareTemplate" width="11" height="16"/>
         <image name="Volume4" width="21" height="16"/>
         <image name="bunny" width="322" height="180"/>
+        <image name="file_ass" width="175" height="184"/>
         <image name="file_fcpxml" width="174" height="185"/>
         <image name="file_srt" width="175" height="184"/>
         <image name="file_txt" width="175" height="184"/>
