@@ -917,17 +917,6 @@ import AppCenterAnalytics
             let rightHandSideInView = self.progressView.frame.origin.x > self.timelineScrollView.contentView.bounds.origin.x + self.timelineScrollView.contentView.bounds.size.width
             let leftHandSideInView = self.progressView.frame.origin.x < self.timelineScrollView.contentView.bounds.origin.x
 
-            if let stopTime = self.timelineOverallView.lastEndManualScrollTime {
-                let differenceBetweenScrollerEndtimeAndCurrentTime = Date().timeIntervalSince1970 - stopTime
-                if differenceBetweenScrollerEndtimeAndCurrentTime < 3 {
-                    // Bailing auto-scrolling since user just initiated manual scroll gesture. This gives them an opportunity to manually change the playhead position.
-                    return
-                } else {
-                    // Once the 3 second grace period expires, we re-enable auto scrolling.
-                    self.timelineOverallView.lastEndManualScrollTime = nil
-                }
-            }
-
             if !self.timelineOverallView.scrollViewIsScrolling && (rightHandSideInView || leftHandSideInView) {
                 #if DEBUG
 //                print("The playhead is no longer in view. self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame), self.timelineScrollView.contentView.bounds: \(self.timelineScrollView.contentView.bounds)")
@@ -940,6 +929,16 @@ import AppCenterAnalytics
                     targetFrame.origin.x -= self.offsetPixelInScrollView
                     self.timelineScrollView.contentView.scrollToVisible(targetFrame)
                 } else {
+                    if let stopTime = self.timelineOverallView.lastEndManualScrollTime {
+                        let differenceBetweenScrollerEndtimeAndCurrentTime = Date().timeIntervalSince1970 - stopTime
+                        if differenceBetweenScrollerEndtimeAndCurrentTime < 3 {
+                            // Bailing auto-scrolling since user just initiated manual scroll gesture. This gives them an opportunity to manually change the playhead position.
+                            return
+                        } else {
+                            // Once the 3 second grace period expires, we re-enable auto scrolling.
+                            self.timelineOverallView.lastEndManualScrollTime = nil
+                        }
+                    }
                     // We scrub to populate more of the timeline when video playback naturally led the playhead to progress
                     targetFrame.size.width = self.timelineScrollView.frame.width
                     targetFrame.origin.x -= self.offsetPixelInScrollView
