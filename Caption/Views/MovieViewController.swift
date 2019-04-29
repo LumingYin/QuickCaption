@@ -24,7 +24,7 @@ import AppCenterAnalytics
     @IBOutlet weak var waveformPreviewContainerBox: CaptionWaveformBox!
 
     @IBOutlet weak var timelineScrollView: NSScrollView!
-    @IBOutlet weak var timelineOverallView: NSView!
+    @IBOutlet weak var timelineOverallView: TimelineOverallView!
     @IBOutlet weak var captionPreviewLabel: NSTextField!
     @IBOutlet weak var volumeSlider: NSSlider!
     @IBOutlet weak var speedSlider: NSSlider!
@@ -68,6 +68,7 @@ import AppCenterAnalytics
         #endif
         AppDelegate.subtitleVC()?.dismantleSubtitleVC()
         AppDelegate.subtitleVC()?.configurateSubtitleVC()
+
     }
 
     override func viewDidAppear() {
@@ -916,9 +917,9 @@ import AppCenterAnalytics
             let rightHandSideInView = self.progressView.frame.origin.x > self.timelineScrollView.contentView.bounds.origin.x + self.timelineScrollView.contentView.bounds.size.width
             let leftHandSideInView = self.progressView.frame.origin.x < self.timelineScrollView.contentView.bounds.origin.x
 
-            if (rightHandSideInView || leftHandSideInView) {
+            if !self.timelineOverallView.scrollViewIsScrolling && (rightHandSideInView || leftHandSideInView) {
                 #if DEBUG
-                print("The playhead is no longer in view. self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame), self.timelineScrollView.contentView.bounds: \(self.timelineScrollView.contentView.bounds)")
+//                print("The playhead is no longer in view. self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame), self.timelineScrollView.contentView.bounds: \(self.timelineScrollView.contentView.bounds)")
                 #endif
                 // Time to scroll to make the new timestamp visible!
                 var targetFrame = self.progressView.frame
