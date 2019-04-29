@@ -1,5 +1,5 @@
 ## Quick Caption
-Quick Caption is your one-stop solution to transcribe video or audio clips, then automatically apply timecode throughout the transcription process, and generate SRT (Subtitle Rip Text), FCPXML (Final Cut Pro XML), or TXT (Plain Text) transcription files.
+Quick Caption is your one-stop solution to transcribe video or audio clips, then automatically apply timecode throughout the transcription process, and generate SRT (Subtitle Rip Text), FCPXML (Final Cut Pro XML), ASS (Sub Station Alpha), or TXT (Plain Text) transcription files.
 
 [Download Quick Caption](https://itunes.apple.com/app/quick-caption/id1363610340)
 
@@ -18,9 +18,10 @@ Quickly transcribe your video:
 
 Customize the appearance of subtitles:
 - Customize the font family, style, size, shadow, and face color of subtitles in the Style Editor
-- Customized appearance is visible in the preview and for FCPXML exports
+- Customized appearance is visible in the preview and for FCPXML and ASS exports
 
 Export:
 - Export into .FCPXML format to re-import caption information back into Final Cut Pro X for round-trip workflows
 - Export into .SRT format to distribute your created caption alongside with your video or through the web
+- Export into .ASS format to use in conjunction with third party tools such as ffmpeg, mpv or IINA
 - Export into .TXT format for a plain-text transcript
