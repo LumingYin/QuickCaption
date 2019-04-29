@@ -92,6 +92,11 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
         Saver.saveEpisodeToDisk(episode, type: .srt)
     }
 
+    @IBAction func exportASSClicked(_ sender: Any) {
+        let episode = episodeProjects[tableView.clickedRow]
+        Saver.saveEpisodeToDisk(episode, type: .ass)
+    }
+
     @IBAction func exportTXTClicked(_ sender: Any) {
         let episode = episodeProjects[tableView.clickedRow]
         Saver.saveEpisodeToDisk(episode, type: .txt)

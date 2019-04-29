@@ -34,6 +34,9 @@ class Saver {
                 text = resultingText
                 writeFileToDisk(type: type, text: resultingText, episode: episode)
             })
+        } else if type == .ass {
+            text = Exporter.generateASSFromArray(arrayForCaption: copiedArray, episode: episode)
+            writeFileToDisk(type: .ass, text: text, episode: episode)
         }
 
 
@@ -56,6 +59,9 @@ class Saver {
         }
         if (type == .fcpXML) {
             newSubtitleName = "\(ogVN).fcpxml"
+        }
+        if (type == .ass) {
+            newSubtitleName = "\(ogVN).ass"
         }
 
         let folderURL = URL(fileURLWithPath: vu).deletingLastPathComponent()

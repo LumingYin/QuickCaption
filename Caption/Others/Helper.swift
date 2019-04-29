@@ -23,7 +23,7 @@ class Helper: NSObject {
         }
     }
 
-    static func secondFloatToString(float: Float64) -> String {
+    static func secondFloatToString(useASS: Bool, float: Float64) -> String {
         if float.isNaN {
             return ""
         }
@@ -44,12 +44,22 @@ class Helper: NSObject {
         seconds = Int(second)
         second = second - Float64(seconds)
 
-        milliseconds = Int(second * 1000)
-
-        let string = NSString(format:"%.2d:%.2d:%.2d,%.3d", hours, minutes, seconds, milliseconds)
-        return string as String
+        if useASS {
+            milliseconds = Int(second * 100)
+            return (NSString(format:"%.1d:%.2d:%.2d.%.2d", hours, minutes, seconds, milliseconds)) as String
+        } else {
+            milliseconds = Int(second * 1000)
+            return (NSString(format:"%.2d:%.2d:%.2d,%.3d", hours, minutes, seconds, milliseconds)) as String
+        }
     }
 
+    static func secondFloatToString(float: Float64) -> String {
+        return secondFloatToString(useASS: false, float: float)
+    }
+
+    static func secondFloatToASSString(float: Float64) -> String {
+        return secondFloatToString(useASS: true, float: float)
+    }
 
     static func conform(time: Double, toFrameDuration frameDuration: CMTime) -> CMTime {
         let numberOfFrames = time / frameDuration.seconds

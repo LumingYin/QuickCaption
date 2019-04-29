@@ -93,19 +93,25 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Export To" id="2Pg-4i-meh">
                                                 <items>
-                                                    <menuItem title="FCPXML" allowsKeyEquivalentWhenHidden="YES" id="zcr-Xv-Pbz">
+                                                    <menuItem title="FCPXML..." allowsKeyEquivalentWhenHidden="YES" id="zcr-Xv-Pbz">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="saveFCPXMLFile:" target="Voe-Tx-rLC" id="rkT-UU-8B1"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="SRT" allowsKeyEquivalentWhenHidden="YES" id="pxx-59-PXV">
+                                                    <menuItem title="SRT..." allowsKeyEquivalentWhenHidden="YES" id="pxx-59-PXV">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="saveSRTFile:" target="Voe-Tx-rLC" id="jwM-0q-cGw"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="TXT" allowsKeyEquivalentWhenHidden="YES" id="HAT-IQ-Cm1">
+                                                    <menuItem title="ASS..." allowsKeyEquivalentWhenHidden="YES" id="BsH-W6-Dyk">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="saveASSFile:" target="Voe-Tx-rLC" id="AoW-YC-Dc6"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="TXT..." allowsKeyEquivalentWhenHidden="YES" id="HAT-IQ-Cm1">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="saveTXTFile:" target="Voe-Tx-rLC" id="gM2-j9-f9C"/>
@@ -710,19 +716,25 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Share" id="ou4-Xq-sm1">
                                     <items>
-                                        <menuItem title="FCPXML" keyEquivalent="l" allowsKeyEquivalentWhenHidden="YES" id="L8E-c7-BJZ">
+                                        <menuItem title="FCPXML..." keyEquivalent="l" allowsKeyEquivalentWhenHidden="YES" id="L8E-c7-BJZ">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="saveFCPXMLFile:" target="Voe-Tx-rLC" id="wlT-Qg-lsj"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="SRT" keyEquivalent="s" allowsKeyEquivalentWhenHidden="YES" id="dYy-2j-h68">
+                                        <menuItem title="SRT..." keyEquivalent="s" allowsKeyEquivalentWhenHidden="YES" id="dYy-2j-h68">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="saveSRTFile:" target="Voe-Tx-rLC" id="L4G-t1-LNR"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="TXT" keyEquivalent="t" allowsKeyEquivalentWhenHidden="YES" id="JwG-bC-h3v">
+                                        <menuItem title="ASS..." keyEquivalent="a" allowsKeyEquivalentWhenHidden="YES" id="Vrc-QJ-pgC">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="saveASSFile:" target="Voe-Tx-rLC" id="jvV-9C-HLn"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="TXT..." keyEquivalent="t" allowsKeyEquivalentWhenHidden="YES" id="JwG-bC-h3v">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="saveTXTFile:" target="Voe-Tx-rLC" id="vWA-1w-2Mg"/>
@@ -1124,6 +1136,12 @@ CA
                                             <action selector="exportSRTClicked:" target="S31-PW-wUx" id="7dD-qF-9HQ"/>
                                         </connections>
                                     </menuItem>
+                                    <menuItem title="ASS..." id="48U-Qf-2l2">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="exportASSClicked:" target="S31-PW-wUx" id="pT0-mH-BPZ"/>
+                                        </connections>
+                                    </menuItem>
                                     <menuItem title="TXT..." id="uBg-o2-b6n">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                         <connections>
@@ -1174,7 +1192,7 @@ CA
                                                 <color key="fillColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             </box>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2l-eq-tnu">
-                                                <rect key="frame" x="12.5" y="-1" width="22" height="23"/>
+                                                <rect key="frame" x="13" y="-1" width="21" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="j42-j3-dfi">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1185,7 +1203,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRi-bL-Mbk">
-                                                <rect key="frame" x="45.5" y="-1" width="22" height="23"/>
+                                                <rect key="frame" x="46" y="-1" width="21" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="1qS-ty-ctl">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1196,7 +1214,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TnG-Dw-kSw">
-                                                <rect key="frame" x="77.5" y="-1" width="22" height="23"/>
+                                                <rect key="frame" x="78" y="-1" width="21" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="fYG-vN-i1a">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1207,7 +1225,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kcM-MG-g0M">
-                                                <rect key="frame" x="108.5" y="-1" width="22" height="23"/>
+                                                <rect key="frame" x="109" y="-1" width="21" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="I0L-WU-dfI">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1218,7 +1236,7 @@ CA
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-fP-aGm">
-                                                <rect key="frame" x="138.5" y="-1" width="22" height="23"/>
+                                                <rect key="frame" x="139" y="-1" width="21" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" title="    " bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="QYs-CB-WRe">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1546,7 +1564,7 @@ CA
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-6x-qHr">
-                                                <rect key="frame" x="214.5" y="34" width="44" height="23"/>
+                                                <rect key="frame" x="215" y="34" width="43" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="import" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U19-4e-upa">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

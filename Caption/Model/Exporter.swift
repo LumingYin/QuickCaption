@@ -11,6 +11,7 @@ import AVKit
 
 enum FileType {
     case srt
+    case ass
     case txt
     case fcpXML
 }
@@ -26,6 +27,34 @@ enum FileType {
             }
         }
         return srtString
+    }
+
+    static func generateASSFromArray(arrayForCaption: [CaptionLine], episode: EpisodeProject) -> String {
+        var assString = """
+        [Script Info]
+        Collisions: Normal
+        ScaledBorderAndShadow: no
+        ScriptType: v4.00+
+        Synch Point: 1
+
+        [V4+ Styles]
+        Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+        Style: Default,Helvetica,20,&H00FFFFFF,&HF0000000,&H00000000,&H32000000,0,0,0,0,100,100,0,0.00,1,0,4,2,5,5,15,1
+
+        [Events]
+        Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+        """
+        for i in 0..<arrayForCaption.count {
+            let startEndTime = arrayForCaption[i].assStartEndTime
+            if let content = arrayForCaption[i].caption {
+                if content.count > 0 {
+                    assString = assString + """
+                    \nDialogue: 0,\(startEndTime),Default,,0,0,0,,{\\rDefault}\(content)
+                    """
+                }
+            }
+        }
+        return assString
     }
 
     static let fpsToTemplateName: [Double : String] =  [23.976: "FFVideoFormat1080p2398",

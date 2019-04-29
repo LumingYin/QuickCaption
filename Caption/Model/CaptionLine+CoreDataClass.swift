@@ -55,6 +55,13 @@ public class CaptionLine: NSManagedObject {
         return "\(stringStart) --> \(stringEnd)\n\(cap)"
     }
 
+    public var assStartEndTime: String {
+        let stringStart = Helper.secondFloatToASSString(float: Float64(startingTime))
+        let stringEnd = Helper.secondFloatToASSString(float: Float64(endingTime))
+
+        return "\(stringStart),\(stringEnd)"
+    }
+
     func secondFloatToString(float: Float64) -> String {
         return Helper.secondFloatToString(float: float)
     }

@@ -311,6 +311,10 @@ import AppCenterAnalytics
         Saver.saveEpisodeToDisk(self.episode, type: .fcpXML)
     }
 
+    func saveASSToDisk(_ sender: Any) {
+        Saver.saveEpisodeToDisk(self.episode, type: .ass)
+    }
+
     func dismantleSetTimelineLengthToZero() {
         self.timelineOverallView.setFrameSize(NSSize(width: 0, height: self.timelineOverallView.frame.size.height))
     }
