@@ -1622,11 +1622,13 @@ CA
                         <outlet property="openFileOrRelinkButton" destination="g4s-6x-qHr" id="EEG-xL-xye"/>
                         <outlet property="playPauseImageView" destination="FA1-Kt-fGw" id="Thf-LV-b8j"/>
                         <outlet property="playerView" destination="MMG-zt-4ZZ" id="XyH-Jq-kz1"/>
+                        <outlet property="progressBarPanGestureRecongnizer" destination="wVZ-2Z-mjZ" id="DwA-Fh-x5g"/>
                         <outlet property="progressView" destination="K5C-Y2-cNb" id="ShI-fX-AJ7"/>
                         <outlet property="progressViewColorLineBox" destination="gTd-tF-LlQ" id="afY-66-pxp"/>
                         <outlet property="speedSlider" destination="30m-Cb-1NW" id="3F9-jC-Afu"/>
                         <outlet property="subtitleTrackContainerView" destination="CWy-l4-FlO" id="V5b-Tp-AlF"/>
                         <outlet property="timeLabel" destination="ihC-TU-2C9" id="cjb-ah-MFg"/>
+                        <outlet property="timelineClickGestureRecongnizer" destination="5T5-nT-ofk" id="Q4n-4q-ngt"/>
                         <outlet property="timelineOverallView" destination="mHu-9K-0O1" id="KNa-wG-e6N"/>
                         <outlet property="timelineScrollView" destination="QEG-SY-Hn2" id="6Bt-BF-igB"/>
                         <outlet property="videoPreviewContainerView" destination="K4d-N4-mRe" id="O3j-UH-f7o"/>

@@ -34,16 +34,8 @@ import AppCenterAnalytics
     @IBOutlet weak var welcomingLabel: NSTextField!
     @IBOutlet weak var guidanceLabel: NSTextField!
     @IBOutlet weak var openFileOrRelinkButton: NSButton!
-
-
     var cachedCaptionViews: [String: CaptionBoxView] = [:]
-
-
-    var episode: EpisodeProject! {
-        didSet {
-            
-        }
-    }
+    var episode: EpisodeProject!
 
     func removeCaptionFromTimeline(caption: CaptionLine) {
         if let capID = caption.guidIdentifier, let existing = self.cachedCaptionViews[capID] {
@@ -921,18 +913,27 @@ import AppCenterAnalytics
                 self.captionPreviewLabel.stringValue = ""
             }
 
-            //            if !(self.timelineScrollView.bounds.contains(self.progressView.frame)) {
-            //                print("Not matching up, self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame)")
-            //                // time to scroll to make the new timestamp visible!
-            //                var targetFrame = self.progressView.frame
-            //                targetFrame.size.width = self.timelineScrollView.frame.width
-            //                targetFrame.origin.x -= self.offsetPixelInScrollView
-            ////                var newPoint = NSPoint(x: self.progressView.frame.origin.x, y: self.timelineScrollView.contentView.frame.origin.y)
-            //                self.timelineScrollView.contentView.scrollToVisible(targetFrame)
-            ////                self.timelineScrollView.contentView.scroll(to: newPoint)
-            //            } else {
-            //                print("matching up, self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame)")
-            //            }
+            let rightHandSideInView = self.progressView.frame.origin.x > self.timelineScrollView.contentView.bounds.origin.x + self.timelineScrollView.contentView.bounds.size.width
+            let leftHandSideInView = self.progressView.frame.origin.x < self.timelineScrollView.contentView.bounds.origin.x
+
+            if (rightHandSideInView || leftHandSideInView) {
+                #if DEBUG
+                print("The playhead is no longer in view. self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame), self.timelineScrollView.contentView.bounds: \(self.timelineScrollView.contentView.bounds)")
+                #endif
+                // Time to scroll to make the new timestamp visible!
+                var targetFrame = self.progressView.frame
+                if (self.progressBarPanGestureRecongnizer.state == .began || self.progressBarPanGestureRecongnizer.state == .changed) {
+                    // We only scrub a little to make the playhead visible if the user is manually dragging the playhead
+                    targetFrame.size.width = 2 * (self.progressView.frame.size.width)
+                } else {
+                    // We scrub to populate more of the timeline when video playback naturally led the playhead to progress
+                    targetFrame.size.width = self.timelineScrollView.frame.width
+                }
+                targetFrame.origin.x -= self.offsetPixelInScrollView
+                self.timelineScrollView.contentView.scrollToVisible(targetFrame)
+            } else {
+                 // print("The playhead is in view. self.timelineScrollView.bounds:\(self.timelineScrollView.bounds), self.progressView.frame:\(self.progressView.frame), self.timelineScrollView.contentView.bounds: \(self.timelineScrollView.contentView.bounds)")
+            }
         })
     }
 
@@ -941,6 +942,9 @@ import AppCenterAnalytics
     }
 
     var shouldResumePlayingAfterPanEnds = false
+
+    @IBOutlet weak var progressBarPanGestureRecongnizer: NSPanGestureRecognizer!
+    @IBOutlet weak var timelineClickGestureRecongnizer: NSClickGestureRecognizer!
 
     @IBAction func pannedToNewTimelineIndex(_ sender: NSPanGestureRecognizer) {
         if sender.state == .began {
