@@ -30,6 +30,22 @@ enum FileType {
     }
 
     static func generateASSFromArray(arrayForCaption: [CaptionLine], episode: EpisodeProject) -> String {
+        let fontFamilyName = episode.styleFontFamily ?? "Helvetica"
+        var isBold = "0"
+        var isItalic = "0"
+        let fontFace = episode.styleFontWeight?.lowercased() ?? ""
+        if fontFace.contains("bold") {
+            isBold = "1"
+        }
+        if fontFace.contains("italic") || fontFace.contains("oblique") {
+            isItalic = "1"
+        }
+
+        let fontSize = Float(episode.styleFontSize ?? "53") ?? 53
+        let scaledResultingSize = "\(Int((20.0 / 53.0) * fontSize))"
+        let fontColor = (episode.styleFontColor ?? "ffffff").replacingOccurrences(of: "#", with: "").uppercased()
+        let shadow = episode.styleFontShadow == 1 ? "4" : "0"
+
         var assString = """
         [Script Info]
         Collisions: Normal
@@ -39,7 +55,7 @@ enum FileType {
 
         [V4+ Styles]
         Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-        Style: Default,Helvetica,20,&H00FFFFFF,&HF0000000,&H00000000,&H32000000,0,0,0,0,100,100,0,0.00,1,0,4,2,5,5,15,1
+        Style: Default,\(fontFamilyName),\(scaledResultingSize),&H00\(fontColor),&HF0000000,&H00000000,&H32000000,\(isBold),\(isItalic),0,0,100,100,0,0.00,1,0,\(shadow),2,5,5,15,1
 
         [Events]
         Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
