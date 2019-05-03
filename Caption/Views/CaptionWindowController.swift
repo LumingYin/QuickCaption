@@ -9,7 +9,7 @@
 import Cocoa
 
 class CaptionWindowController: NSWindowController, NSWindowDelegate {
-    weak var splitViewController: MainSplitViewController!
+    weak var splitViewController: QCSplitContainerViewController!
     @IBOutlet weak var currentTitle: NSTextField!
     @IBOutlet weak var contentSettingsSegmentedControl: NSSegmentedControl!
     @IBOutlet weak var importToolbarItem: NSToolbarItem!
@@ -45,7 +45,7 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
         window?.titleVisibility = .hidden
         self.window?.delegate = self
         shouldCascadeWindows = true
-        if let svc = contentViewController as? MainSplitViewController {
+        if let svc = contentViewController as? QCSplitContainerViewController {
             self.splitViewController = svc
         }
     }
@@ -55,7 +55,8 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
 //    }
 
     @IBAction func toggleSidebarList(_ sender: Any) {
-        splitViewController.splitViewItems[0].isCollapsed = !splitViewController.splitViewItems[0].isCollapsed
+        splitViewController.collapseExpandSubview(subVC: splitViewController.sidebarVC, dividerIndex: 0)
+//        splitViewController.splitViewItems[0].isCollapsed = !splitViewController.splitViewItems[0].isCollapsed
     }
 
     @IBAction func addNewProjectClicked(_ sender: Any) {
@@ -63,8 +64,9 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
     }
 
     @IBAction func importVideoFootageClicked(_ sender: Any) {
-        let movieVC = splitViewController.splitViewItems[1].viewController as! MovieViewController
-        movieVC.openFile(self)
+        if let movieVC = splitViewController.movieVC {
+            movieVC.openFile(self)
+        }
     }
 
     @IBAction func shareResultsButtonClicked(_ sender: NSButton) {
@@ -82,8 +84,10 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
             if let tabView = AppDelegate.sideTabVC()?.tabView, let selected = tabView.selectedTabViewItem {
                 if tabView.indexOfTabViewItem(selected) == index {
                     // collapse sidebar
-                    splitViewController.splitViewItems[2].isCollapsed = !splitViewController.splitViewItems[2].isCollapsed
-                    if (splitViewController.splitViewItems[2].isCollapsed) {
+                    splitViewController.collapseExpandSubview(subVC: splitViewController.fontVC, dividerIndex: 1)
+                    let isFontVCCollapsed = splitViewController.splitView.isSubviewCollapsed(splitViewController.fontVC.view)
+//                    splitViewController.splitViewItems[2].isCollapsed = !splitViewController.splitViewItems[2].isCollapsed
+                    if (isFontVCCollapsed) {
                         contentSettingsSegmentedControl.setSelected(false, forSegment: 0)
                         contentSettingsSegmentedControl.setSelected(false, forSegment: 1)
                     } else {
@@ -91,7 +95,8 @@ class CaptionWindowController: NSWindowController, NSWindowDelegate {
                     }
                 } else {
                     AppDelegate.sideTabVC()?.tabView.selectTabViewItem(at: index)
-                    splitViewController.splitViewItems[2].isCollapsed = false
+                    splitViewController.collapseSubview(subVC: splitViewController.fontVC, dividerIndex: 1)
+//                    splitViewController.splitViewItems[2].isCollapsed = false
                     contentSettingsSegmentedControl.setSelected(true, forSegment: index)
                 }
             }

@@ -934,54 +934,50 @@ CA
                         <outlet property="importToolbarButton" destination="mbM-67-SOf" id="al7-Fx-pw0"/>
                         <outlet property="importToolbarItem" destination="P2Q-Yv-86Y" id="xgw-P0-YxB"/>
                         <outlet property="shareResultsButton" destination="BA9-ky-ggI" id="RdI-ee-56g"/>
-                        <segue destination="GXO-oy-cs0" kind="relationship" relationship="window.shadowedContentViewController" id="PLB-ki-g7I"/>
+                        <segue destination="MXf-pr-WK2" kind="relationship" relationship="window.shadowedContentViewController" id="gSe-sa-eZV"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-220" y="277"/>
         </scene>
-        <!--Main Split View Controller-->
-        <scene sceneID="juI-4K-n0t">
+        <!--Split Container View Controller-->
+        <scene sceneID="1z9-CB-mcP">
             <objects>
-                <splitViewController id="GXO-oy-cs0" customClass="MainSplitViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
-                    <splitViewItems>
-                        <splitViewItem id="6Aa-V3-BNa"/>
-                        <splitViewItem id="vXI-NT-ZF4"/>
-                        <splitViewItem id="xFj-bz-WIF"/>
-                    </splitViewItems>
-                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="12k-kJ-ENw">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="300"/>
+                <viewController id="MXf-pr-WK2" customClass="QCSplitContainerViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="cd9-Xp-6jG">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <outlet property="delegate" destination="GXO-oy-cs0" id="sSg-xM-E9v"/>
-                        </connections>
-                    </splitView>
+                        <subviews>
+                            <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1EP-EV-ZBa">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                            </splitView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="1EP-EV-ZBa" secondAttribute="bottom" id="Aeg-mT-ouF"/>
+                            <constraint firstItem="1EP-EV-ZBa" firstAttribute="top" secondItem="cd9-Xp-6jG" secondAttribute="top" id="COb-vO-cR5"/>
+                            <constraint firstItem="1EP-EV-ZBa" firstAttribute="leading" secondItem="cd9-Xp-6jG" secondAttribute="leading" id="ac7-Fi-pQP"/>
+                            <constraint firstAttribute="trailing" secondItem="1EP-EV-ZBa" secondAttribute="trailing" id="qRT-ad-8Yd"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <outlet property="splitView" destination="12k-kJ-ENw" id="Pni-xS-MaE"/>
-                        <segue destination="S31-PW-wUx" kind="relationship" relationship="splitItems" id="b6Y-tW-4cE"/>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="splitItems" id="Z86-ms-9JK"/>
-                        <segue destination="yk7-24-Pcf" kind="relationship" relationship="splitItems" id="Kwp-LG-OKF"/>
+                        <outlet property="splitView" destination="1EP-EV-ZBa" id="H87-cb-O2h"/>
                     </connections>
-                </splitViewController>
-                <customObject id="SEQ-Nw-dh0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <customObject id="awB-wu-6W8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="665" y="292"/>
+            <point key="canvasLocation" x="672" y="206"/>
         </scene>
         <!--Sidebar View Controller-->
         <scene sceneID="W6C-d8-F59">
             <objects>
-                <viewController id="S31-PW-wUx" customClass="SidebarViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SidebarViewController" id="S31-PW-wUx" customClass="SidebarViewController" customModule="Quick_Caption" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="AUM-Ze-UGz">
                         <rect key="frame" x="0.0" y="0.0" width="286" height="342"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="behindWindow" material="light" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="u0T-gr-JWT">
                                 <rect key="frame" x="0.0" y="0.0" width="286" height="342"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="HXi-ZQ-jzk"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="zeO-YB-1Ip"/>
-                                </constraints>
                             </visualEffectView>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="68" horizontalPageScroll="10" verticalLineScroll="68" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXF-sl-roP">
                                 <rect key="frame" x="0.0" y="0.0" width="286" height="342"/>
@@ -1515,7 +1511,7 @@ CA
                                     <rect key="frame" x="0.0" y="214" width="648" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Ilf-GR-hhe">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Ilf-GR-hhe">
                                     <rect key="frame" x="-100" y="-100" width="15" height="213"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1879,8 +1875,6 @@ CA
                                     <constraint firstItem="fbY-ui-ed3" firstAttribute="centerY" secondItem="KIc-rW-E5T" secondAttribute="centerY" id="3aB-sP-S9U"/>
                                     <constraint firstAttribute="bottom" secondItem="KIc-rW-E5T" secondAttribute="bottom" constant="20" symbolic="YES" id="8RO-Yy-wdp"/>
                                     <constraint firstItem="JyG-MX-P3Y" firstAttribute="leading" secondItem="KIc-rW-E5T" secondAttribute="leading" id="BaZ-AQ-c9b"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="GfS-Hl-69W"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="293" id="HBh-hf-TgU"/>
                                     <constraint firstItem="JyG-MX-P3Y" firstAttribute="leading" secondItem="b2l-Cd-ncK" secondAttribute="leading" constant="20" symbolic="YES" id="Lzk-PM-sPc"/>
                                     <constraint firstItem="KIc-rW-E5T" firstAttribute="top" secondItem="JyG-MX-P3Y" secondAttribute="bottom" constant="18" id="U1R-Of-4K8"/>
                                     <constraint firstAttribute="trailing" secondItem="KIc-rW-E5T" secondAttribute="trailing" constant="89" id="Vhk-Tk-DyO"/>
@@ -2152,7 +2146,6 @@ CA
                                     <constraint firstItem="0pa-r6-i4k" firstAttribute="leading" secondItem="UOl-JH-0lN" secondAttribute="leading" id="AFo-WE-dyS"/>
                                     <constraint firstItem="0pa-r6-i4k" firstAttribute="top" secondItem="cik-8b-JN7" secondAttribute="top" constant="20" id="FMu-ml-Nta"/>
                                     <constraint firstItem="hW4-L0-zzx" firstAttribute="leading" secondItem="M0w-Qf-utE" secondAttribute="leading" id="HFy-pR-jAx"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="293" id="L8t-eH-x1K"/>
                                     <constraint firstAttribute="bottom" secondItem="M0w-Qf-utE" secondAttribute="bottom" constant="20" id="SVQ-St-cmf"/>
                                     <constraint firstItem="B7h-9g-97J" firstAttribute="centerX" secondItem="UOl-JH-0lN" secondAttribute="centerX" id="UcI-RW-b8I"/>
                                     <constraint firstItem="B7h-9g-97J" firstAttribute="centerX" secondItem="M0w-Qf-utE" secondAttribute="centerX" id="Zwb-kB-i1e"/>
@@ -2160,7 +2153,6 @@ CA
                                     <constraint firstItem="B7h-9g-97J" firstAttribute="leading" secondItem="hW4-L0-zzx" secondAttribute="leading" id="f8R-ij-44h"/>
                                     <constraint firstItem="UOl-JH-0lN" firstAttribute="top" secondItem="cik-8b-JN7" secondAttribute="top" constant="168" id="fER-yD-ccm"/>
                                     <constraint firstItem="B7h-9g-97J" firstAttribute="top" secondItem="0pa-r6-i4k" secondAttribute="bottom" constant="9" id="iDe-hv-QOR"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="omp-pY-0bI"/>
                                     <constraint firstItem="M0w-Qf-utE" firstAttribute="top" secondItem="hW4-L0-zzx" secondAttribute="bottom" constant="8" symbolic="YES" id="xim-1R-9lm"/>
                                     <constraint firstAttribute="trailing" secondItem="UOl-JH-0lN" secondAttribute="trailing" constant="20" symbolic="YES" id="yFo-IU-yfW"/>
                                 </constraints>
@@ -2216,7 +2208,7 @@ CA
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="06z-10-BKr" userLabel="1_srt_hint">
-                                        <rect key="frame" x="73" y="192" width="271" height="34"/>
+                                        <rect key="frame" x="73" y="189" width="271" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Suitable for importing into X-Title Importer, Youtube Studio, ArcTime, or playack with IINA." id="TNB-Jz-jXe">
                                             <font key="font" metaFont="cellTitle"/>

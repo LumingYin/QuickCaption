@@ -45,32 +45,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return NSApp.mainWindow?.windowController as? CaptionWindowController
     }
 
-    static func rebuildMovieAndSubVC() {
-        if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController,
-            let movieVC = AppDelegate.mainStoryboard()?.instantiateController(withIdentifier: "MovieViewController")  as? MovieViewController {
-            splitVC.splitViewItems[1].viewController = movieVC
-        }
-        if let tabVC = AppDelegate.sideTabVC(), let subVC = AppDelegate.mainStoryboard()?.instantiateController(withIdentifier: "SubtitlesViewController") as? SubtitlesViewController {
-            tabVC.tabViewItems[0].viewController = subVC
-        }
-    }
+//    static func rebuildMovieAndSubVC() {
+//        if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController,
+//            let movieVC = AppDelegate.mainStoryboard()?.instantiateController(withIdentifier: "MovieViewController")  as? MovieViewController {
+//            splitVC.splitViewItems[1].viewController = movieVC
+//        }
+//        if let tabVC = AppDelegate.sideTabVC(), let subVC = AppDelegate.mainStoryboard()?.instantiateController(withIdentifier: "SubtitlesViewController") as? SubtitlesViewController {
+//            tabVC.tabViewItems[0].viewController = subVC
+//        }
+//    }
 
     static func sourceListVC() -> SidebarViewController? {
-        if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController, let sourceListVC = splitVC.splitViewItems[0].viewController as? SidebarViewController {
+        if let splitVC = NSApp.mainWindow?.contentViewController as? QCSplitContainerViewController, let sourceListVC = splitVC.sidebarVC {
             return sourceListVC
         }
         return nil
     }
 
     static func movieVC() -> MovieViewController? {
-        if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController, let movieVC = splitVC.splitViewItems[1].viewController as? MovieViewController {
+        if let splitVC = NSApp.mainWindow?.contentViewController as? QCSplitContainerViewController, let movieVC = splitVC.movieVC {
             return movieVC
         }
         return nil
     }
 
     static func sideTabVC() -> SideTabViewController? {
-        if let splitVC = NSApp.mainWindow?.contentViewController as? MainSplitViewController, let tabVC = splitVC.splitViewItems[2].viewController as? SideTabViewController {
+        if let splitVC = NSApp.mainWindow?.contentViewController as? QCSplitContainerViewController, let tabVC = splitVC.fontVC {
             return tabVC
         }
         return nil

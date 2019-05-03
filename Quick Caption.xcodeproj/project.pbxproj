@@ -46,6 +46,7 @@
 		326A0912223F0699009A8313 /* QuickCaptionWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0911223F0699009A8313 /* QuickCaptionWindow.swift */; };
 		326A0916223F131F009A8313 /* ShadowPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0915223F131F009A8313 /* ShadowPreferences.swift */; };
 		326A0918223F297C009A8313 /* Saver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326A0917223F297C009A8313 /* Saver.swift */; };
+		32A85876227BC3CD0073FE34 /* QCSplitContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A85875227BC3CD0073FE34 /* QCSplitContainerViewController.swift */; };
 		32D5731322756354007BBAB6 /* NonSmoothedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D5731222756354007BBAB6 /* NonSmoothedTextField.m */; };
 		32F53CCC22376052007B66E1 /* CaptionDetailTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCB22376052007B66E1 /* CaptionDetailTableCellView.swift */; };
 		32F53CCF223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F53CCE223762F7007B66E1 /* VerticallyCenteredTextFieldCell.swift */; };
@@ -130,6 +131,7 @@
 		326A0911223F0699009A8313 /* QuickCaptionWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickCaptionWindow.swift; sourceTree = "<group>"; };
 		326A0915223F131F009A8313 /* ShadowPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowPreferences.swift; sourceTree = "<group>"; };
 		326A0917223F297C009A8313 /* Saver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saver.swift; sourceTree = "<group>"; };
+		32A85875227BC3CD0073FE34 /* QCSplitContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCSplitContainerViewController.swift; sourceTree = "<group>"; };
 		32D5730E22755C1A007BBAB6 /* NSSet+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSSet+Additions.h"; sourceTree = "<group>"; };
 		32D5730F22755C1A007BBAB6 /* NSSet+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSSet+Additions.m"; sourceTree = "<group>"; };
 		32D5731122756354007BBAB6 /* NonSmoothedTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NonSmoothedTextField.h; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				326A090B223E0CD2009A8313 /* VideoPreviewContainerView.swift */,
 				326A0905223DD62B009A8313 /* TimelineOverallView.swift */,
 				321DC400223629030038C8FB /* SidebarEpisodeTableCellView.swift */,
+				32A85875227BC3CD0073FE34 /* QCSplitContainerViewController.swift */,
 				321DC3F622361E3D0038C8FB /* CaptionExportViewController.swift */,
 				321DC3F4223615E90038C8FB /* MainSplitViewController.swift */,
 				562A68861F2D4F5E000E6B16 /* MovieViewController.swift */,
@@ -434,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				326A0906223DD62B009A8313 /* TimelineOverallView.swift in Sources */,
+				32A85876227BC3CD0073FE34 /* QCSplitContainerViewController.swift in Sources */,
 				3238E9412275E5F1005A0145 /* OpaqueNSScroller.swift in Sources */,
 				32047525223DA7910027218F /* NSString+Drawing.swift in Sources */,
 				32F53CDF22376C4D007B66E1 /* EpisodeProject+CoreDataProperties.swift in Sources */,
