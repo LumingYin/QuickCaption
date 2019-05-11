@@ -37,7 +37,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     static func setCurrentEpisodeTitle(_ title: String?) {
         if let window = NSApp.mainWindow?.windowController as? CaptionWindowController {
+//            window.currentTitle.translatesAutoresizingMaskIntoConstraints = false
             window.currentTitle.stringValue = title ?? "Quick Caption"
+//            var capturedFrame = window.currentTitle.frame
+//            capturedFrame.size.width = window.currentTitle.attributedStringValue.size().width + 8
+//            window.currentTitle.frame = capturedFrame
+//            print("window.currentTitle.attributedStringValue.size().width: \(window.currentTitle.attributedStringValue.size().width), window.currentTitle.frame: \(window.currentTitle.frame)")
+//            window.currentTitle.setNeedsDisplay()
         }
     }
 

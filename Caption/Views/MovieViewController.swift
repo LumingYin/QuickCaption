@@ -913,7 +913,13 @@ import AppCenterAnalytics
                     if let s = self.episode.player?.currentTime().seconds {
                         let sec = Float(s)
                         if sec > captionLine.startingTime && sec < captionLine.endingTime {
-                            self.captionPreviewLabel.stringValue = captionLine.caption ?? ""
+                            let pendingCaption = captionLine.caption ?? ""
+//                            NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil];
+//                            return [[[NSAttributedString alloc] initWithString:string attributes:attributes] size].width;
+                            let width = NSAttributedString(string: pendingCaption, attributes: [.font: self.captionPreviewLabel.font]).size().width
+                            if width <= self.captionPreviewLabel.frame.width {
+                                self.captionPreviewLabel.stringValue = captionLine.caption ?? ""
+                            }
                             matched = true
                         }
                     }
