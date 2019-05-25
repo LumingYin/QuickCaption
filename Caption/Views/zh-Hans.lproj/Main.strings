@@ -66,7 +66,7 @@
 "4J7-dP-txa.title" = "Enter Full Screen";
 
 /* Class = "NSMenuItem"; title = "Quit Quick Caption"; ObjectID = "4sb-4s-VLi"; */
-"4sb-4s-VLi.title" = "Quit Quick Caption";
+"4sb-4s-VLi.title" = "退出快速字幕";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "5QF-Oa-p0T"; */
 "5QF-Oa-p0T.title" = "编辑";
@@ -75,10 +75,10 @@
 "5U7-YS-Hgo.title" = "Box";
 
 /* Class = "NSMenuItem"; title = "Copy Style"; ObjectID = "5Vv-lz-BsD"; */
-"5Vv-lz-BsD.title" = "Copy Style";
+"5Vv-lz-BsD.title" = "复制样式";
 
 /* Class = "NSMenuItem"; title = "About Quick Caption"; ObjectID = "5kV-Vb-QxS"; */
-"5kV-Vb-QxS.title" = "About Quick Caption";
+"5kV-Vb-QxS.title" = "关于快速字幕";
 
 /* Class = "NSMenuItem"; title = "Reveal Caption In Timeline"; ObjectID = "5ox-EO-1Uc"; */
 "5ox-EO-1Uc.title" = "Reveal Caption In Timeline";
@@ -93,13 +93,13 @@
 "6WG-6U-uJ5.title" = "Caption";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam"; */
-"6dh-zS-Vam.title" = "Redo";
+"6dh-zS-Vam.title" = "重做";
 
 /* Class = "NSMenu"; title = "Export"; ObjectID = "6ja-z3-Hv4"; */
-"6ja-z3-Hv4.title" = "Export";
+"6ja-z3-Hv4.title" = "导出";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "78Y-hA-62v"; */
-"78Y-hA-62v.title" = "Correct Spelling Automatically";
+"78Y-hA-62v.title" = "自动纠正拼写";
 
 /* Class = "NSMenuItem"; title = "FCPXML..."; ObjectID = "8Zz-Yc-CCf"; */
 "8Zz-Yc-CCf.title" = "FCPXML...";
@@ -123,10 +123,10 @@
 "AYu-sK-qS6.title" = "Main Menu";
 
 /* Class = "NSTextFieldCell"; title = "Font Family"; ObjectID = "BCD-Zb-KOv"; */
-"BCD-Zb-KOv.title" = "Font Family";
+"BCD-Zb-KOv.title" = "字体";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
-"BOF-NM-1cW.title" = "Preferences…";
+"BOF-NM-1cW.title" = "偏好设置…";
 
 /* Class = "NSMenuItem"; title = "\tLeft to Right"; ObjectID = "BgM-ve-c93"; */
 "BgM-ve-c93.title" = "\tLeft to Right";
@@ -138,7 +138,7 @@
 "DVo-aG-piG.title" = "Close";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Video Name"; ObjectID = "DeM-Sp-wYt"; */
-"DeM-Sp-wYt.placeholderString" = "Video Name";
+"DeM-Sp-wYt.placeholderString" = "视频文件名";
 
 /* Class = "NSMenuItem"; title = "Style Editor"; ObjectID = "DjC-r3-2Qd"; */
 "DjC-r3-2Qd.title" = "Style Editor";
@@ -201,7 +201,7 @@
 "HKt-ep-OH3.title" = "     ";
 
 /* Class = "NSTextFieldCell"; title = "Framerate"; ObjectID = "Hpr-Sa-lWJ"; */
-"Hpr-Sa-lWJ.title" = "Framerate";
+"Hpr-Sa-lWJ.title" = "帧率";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "HyV-fh-RgO"; */
 "HyV-fh-RgO.title" = "View";
@@ -375,19 +375,19 @@
 "Teo-ie-Uak.title" = "     ";
 
 /* Class = "NSTextFieldCell"; title = "Video Metadata"; ObjectID = "U6N-RX-t0h"; */
-"U6N-RX-t0h.title" = "Video Metadata";
+"U6N-RX-t0h.title" = "视频简介";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "UEZ-Bs-lqG"; */
 "UEZ-Bs-lqG.title" = "Capitalize";
 
 /* Class = "NSTextFieldCell"; title = "Video Name"; ObjectID = "VAB-0C-U5f"; */
-"VAB-0C-U5f.title" = "Video Name";
+"VAB-0C-U5f.title" = "视频文件名";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "VIY-Ag-zcb"; */
 "VIY-Ag-zcb.title" = "Center";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Total Duration"; ObjectID = "VW6-q2-l7V"; */
-"VW6-q2-l7V.placeholderString" = "Total Duration";
+"VW6-q2-l7V.placeholderString" = "总时长";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
 "Vdr-fp-XzO.title" = "Hide Others";
@@ -525,7 +525,7 @@
 "fCx-cJ-p9f.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "Total Duration"; ObjectID = "fQO-Nr-KIY"; */
-"fQO-Nr-KIY.title" = "Total Duration";
+"fQO-Nr-KIY.title" = "总时长";
 
 /* Class = "NSButtonCell"; title = "    "; ObjectID = "fYG-vN-i1a"; */
 "fYG-vN-i1a.title" = "    ";
@@ -555,7 +555,7 @@
 "hW4-L0-zzx.ibShadowedToolTip" = "Custom appearance applies to video preview and exported FCPXML documents.";
 
 /* Class = "NSTextFieldCell"; title = "Video File Path"; ObjectID = "hvd-hu-UHQ"; */
-"hvd-hu-UHQ.title" = "Video File Path";
+"hvd-hu-UHQ.title" = "视频文件路径";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "hz2-CU-CR7"; */
 "hz2-CU-CR7.title" = "Check Document Now";
@@ -615,7 +615,7 @@
 "oCS-UV-IXf.title" = "Contact Support";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Framerate"; ObjectID = "oU0-5c-C3h"; */
-"oU0-5c-C3h.placeholderString" = "Framerate";
+"oU0-5c-C3h.placeholderString" = "帧率";
 
 /* Class = "NSMenuItem"; title = "Loosen"; ObjectID = "ogc-rX-tC1"; */
 "ogc-rX-tC1.title" = "Loosen";
