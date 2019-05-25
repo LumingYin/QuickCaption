@@ -123,7 +123,7 @@
 "AYu-sK-qS6.title" = "Main Menu";
 
 /* Class = "NSTextFieldCell"; title = "Font Family"; ObjectID = "BCD-Zb-KOv"; */
-"BCD-Zb-KOv.title" = "字体";
+"BCD-Zb-KOv.title" = "字体系列";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
 "BOF-NM-1cW.title" = "偏好设置…";
@@ -147,7 +147,7 @@
 "Dv1-io-Yv7.title" = "Spelling and Grammar";
 
 /* Class = "NSTextFieldCell"; title = "SRT (Subtitle Rip Text)"; ObjectID = "EEI-oy-arV"; */
-"EEI-oy-arV.title" = "SRT (Subtitle Rip Text)";
+"EEI-oy-arV.title" = "SRT (不含样式)";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
 "F2S-fz-NVQ.title" = "Help";
@@ -162,7 +162,7 @@
 "FeM-D8-WVr.title" = "Substitutions";
 
 /* Class = "NSTextFieldCell"; title = "Font Style"; ObjectID = "FuA-AQ-fSC"; */
-"FuA-AQ-fSC.title" = "Font Style";
+"FuA-AQ-fSC.title" = "字体样式";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "Fvw-0f-e43"; */
 "Fvw-0f-e43.title" = "Delete";
@@ -321,7 +321,7 @@
 "PcZ-In-Mr1.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "Export the title to be re-imported into Final Cut Pro X. Recommended for burning in subtitles."; ObjectID = "Pmu-E6-RM3"; */
-"Pmu-E6-RM3.title" = "Export the title to be re-imported into Final Cut Pro X. Recommended for burning in subtitles.";
+"Pmu-E6-RM3.title" = "导出的 FCPXML 可以直接导入 Final Cut Pro X 项目，适合免二次压制内嵌字幕。";
 
 /* Class = "NSMenuItem"; title = "Bigger"; ObjectID = "Ptp-SP-VEL"; */
 "Ptp-SP-VEL.title" = "Bigger";
@@ -333,10 +333,10 @@
 "QYs-CB-WRe.title" = "    ";
 
 /* Class = "NSMenuItem"; title = "No Shadow"; ObjectID = "Qpq-Bz-05T"; */
-"Qpq-Bz-05T.title" = "No Shadow";
+"Qpq-Bz-05T.title" = "无投影";
 
 /* Class = "NSMenuItem"; title = "Drop Shadow"; ObjectID = "Qwq-jg-2Id"; */
-"Qwq-jg-2Id.title" = "Drop Shadow";
+"Qwq-jg-2Id.title" = "阴影投影";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
 "R4o-n2-Eq4.title" = "Zoom";
@@ -363,10 +363,10 @@
 "SRd-gp-fOx.title" = "Appearance";
 
 /* Class = "NSTextFieldCell"; title = "Caption Appearance"; ObjectID = "TD0-hk-2H6"; */
-"TD0-hk-2H6.title" = "Caption Appearance";
+"TD0-hk-2H6.title" = "字幕样式";
 
 /* Class = "NSTextFieldCell"; title = "Suitable for importing into X-Title Importer, Youtube Studio, ArcTime, or playack with IINA."; ObjectID = "TNB-Jz-jXe"; */
-"TNB-Jz-jXe.title" = "Suitable for importing into X-Title Importer, Youtube Studio, ArcTime, or playack with IINA.";
+"TNB-Jz-jXe.title" = "适合导入到 X-Title Importer、Youtube Studio、ArcTime，或直接通过 IINA 播放。";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
 "Td7-aD-5lo.title" = "Window";
@@ -408,7 +408,7 @@
 "WRG-CD-K1S.title" = "Underline";
 
 /* Class = "NSTextFieldCell"; title = "ASS (Sub Station Alpha)"; ObjectID = "WZ7-5F-x51"; */
-"WZ7-5F-x51.title" = "ASS (Sub Station Alpha)";
+"WZ7-5F-x51.title" = "ASS (含样式)";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "WeT-3V-zwk"; */
 "WeT-3V-zwk.title" = "Paste and Match Style";
@@ -441,7 +441,7 @@
 "ZvO-Gk-QUH.title" = "Paragraph";
 
 /* Class = "NSTextFieldCell"; title = "Shadow"; ObjectID = "Zx8-Xf-3Pi"; */
-"Zx8-Xf-3Pi.title" = "Shadow";
+"Zx8-Xf-3Pi.title" = "投影";
 
 /* Class = "NSMenuItem"; title = "New Project"; ObjectID = "aH0-E0-9kc"; */
 "aH0-E0-9kc.title" = "New Project";
@@ -483,7 +483,7 @@
 "cDB-IK-hbR.title" = "Use None";
 
 /* Class = "NSTextFieldCell"; title = "Color"; ObjectID = "cb1-sD-Wiy"; */
-"cb1-sD-Wiy.title" = "Color";
+"cb1-sD-Wiy.title" = "颜色";
 
 /* Class = "NSMenuItem"; title = "Selection"; ObjectID = "cqv-fj-IhA"; */
 "cqv-fj-IhA.title" = "Selection";
@@ -537,10 +537,10 @@
 "fiX-jh-luV.title" = "Delete Caption";
 
 /* Class = "NSButtonCell"; title = "Done"; ObjectID = "gE4-KY-0tg"; */
-"gE4-KY-0tg.title" = "Done";
+"gE4-KY-0tg.title" = "完成";
 
 /* Class = "NSTextFieldCell"; title = "Export a plain text transcript of the video. Timecode will be discarded."; ObjectID = "gGP-ZR-L45"; */
-"gGP-ZR-L45.title" = "Export a plain text transcript of the video. Timecode will be discarded.";
+"gGP-ZR-L45.title" = "导出不包含任何时间轴信息的纯文本视频转录稿。";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "gTd-tF-LlQ"; */
 "gTd-tF-LlQ.title" = "Box";
@@ -588,7 +588,7 @@
 "jxT-CU-nIS.title" = "Format";
 
 /* Class = "NSTextFieldCell"; title = "Font Size"; ObjectID = "kiK-eZ-4He"; */
-"kiK-eZ-4He.title" = "Font Size";
+"kiK-eZ-4He.title" = "字体大小";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "kpD-Lb-CyE"; */
 "kpD-Lb-CyE.title" = "Delete";
